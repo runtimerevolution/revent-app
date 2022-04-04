@@ -1,29 +1,35 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+# Prerequisites #
+# Installation #
 
-### What is this repository for? ###
+Install the following:
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+<code>nvm</code>
+```shell
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+```
 
-### How do I get set up? ###
+<code>next.js</code>
+```shell
+npm install next react react-dom
+```
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+<code>jotai</code>
+```shell
+npm install jotai
+```
 
-### Contribution guidelines ###
+<code>react-hook-form</code>
+```shell
+npm install react-hook-form
+```
 
-* Writing tests
-* Code review
-* Other guidelines
+<code>npm i react-query</code>
+```shell
+npm i react-query
+```
+In this step, if there are any errors, you might need to downgrade your react version to 17.0.2. To do this go to your `package.json` file and on the dependencies change react and react-dom value to `"17.0.2"`
 
-### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+
