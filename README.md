@@ -1,6 +1,7 @@
 # README #
 
 # Prerequisites #
+[node.js](https://nodejs.org/en/)
 # Installation #
 
 Install the following:
