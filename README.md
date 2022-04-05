@@ -32,4 +32,7 @@ npm i react-query
 In this step, if there are any errors, you might need to downgrade your react version to 17.0.2. To do this go to your `package.json` file and on the dependencies change react and react-dom value to `"17.0.2"`
 
 
-
+<code>jestjs</code>
+```shell
+npm install --save-dev jest
+```
