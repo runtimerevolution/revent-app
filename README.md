@@ -6,8 +6,6 @@
 
 ## Local Setup
 
-[Clone the project](https://bitbucket.org/runtimerevolution/photo-contest/src/main/)
-
 Run:
 
 ```shell
@@ -20,7 +18,7 @@ and
 npm run dev
 ```
 
-## How the projetct was created
+## How the project was created
 
 Install the following:
 
