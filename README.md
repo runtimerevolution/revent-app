@@ -1,10 +1,13 @@
-# README
+# REVENT APP
+
+In order to be able to support our monthly photo contest, Runtime decided to build an app that allows users to submit and vote on photos.
+Since this will be an open source project, it also gives everyone a new free option to support this type on initiatives.
 
 ## Prerequisites
 
 [node.js](https://nodejs.org/en/)
 
-## Local Setup
+## How to Install and Run the Project
 
 Run:
 
