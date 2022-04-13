@@ -1,0 +1,5 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/runtime/revent-app'
+npm run dev
+make: Leaving directory `/Users/runtime/revent-app'
+ 
