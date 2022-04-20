@@ -4,51 +4,58 @@ import { gql } from '@apollo/client'
 // Falta associar as fotos ao concurso atual, para apenas pertencerem ao concurso que está a decorrer atualmente
 export const GET_CURRENT_PHOTOS = gql`
   {
-    queryName { 
-      parametros que preciso
+    queryName {
+      parametros
+      que
+      preciso
     }
   }
 `
 
 export const GET_CURRENT_CONTEST = gql`
-{
-  queryName { 
-    date_start
-    date_end
-    name
-    description
+  {
+    contests {
+      name
+    }
   }
-}
 `
 
 export const GET_VOTES = gql`
-{
-    queryName { 
-      parametros que preciso
+  {
+    queryName {
+      parametros
+      que
+      preciso
+    }
   }
-}
 `
 
 export const GET_COMMENTS = gql`
-{
-    queryName { 
-      parametros que preciso
+  {
+    queryName {
+      parametros
+      que
+      preciso
+    }
   }
-}
 `
 
 export const VOTE_PHOTO = gql`
-  mutation queryName(){
-    queryName() { 
-      parametros que preciso de receber
+  mutation queryName($description: String) {
+    queryName(description: $description) {
+      parametros
+      que
+      preciso
+      de
+      receber
+    }
   }
-}
 `
 // Por enquanto só tem o content para a descriçao da foto
 // o id e description é o que quero que me retorne
 export const ADD_PHOTO = gql`
-  mutation queryName($description: String){
-    queryName(description: $description){
+  mutation queryName($description: String) {
+    queryName(description: $description) {
       id
       description
     }
@@ -56,10 +63,19 @@ export const ADD_PHOTO = gql`
 `
 
 export const COMMENT_PHOTO = gql`
-mutation queryName($description: String){
-    queryName(description: $description){ 
+  mutation queryName($description: String) {
+    queryName(description: $description) {
       id
       description
+    }
   }
-}
+`
+
+export const EDIT_PHOTO = gql`
+  mutation queryName($description: String) {
+    queryName(description: $description) {
+      id
+      description
+    }
+  }
 `
