@@ -65,3 +65,17 @@ After the installation is complete:
 - Run `npm run dev` to start the development server
 - Visit  `http://localhost:3000` to view the application
 - Start coding! :)
+
+## How to setup graphql Client
+
+- Install all the necessary packages ( @apollo/client )
+
+- Create a new ApolloClient and wrap the app with it using ApolloProvider.
+
+- Now we just need useQuery or useMutation to apply our Queries and Mutations, making a request to our API.
+
+Example for Mutation:
+`const [addPhoto] = useMutation(ADD_PHOTO)`
+
+Example for Query:
+`const { loading, error, data } = useQuery(GET_CURRENT_PHOTOS)`
