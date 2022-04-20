@@ -62,6 +62,27 @@ export const ADD_PHOTO = gql`
   }
 `
 
+export const ADD_CONTEST = gql`
+  mutation queryName(
+    $dateStart: Date
+    $dateEnd: Date
+    $name: String
+    $description: String
+  ) {
+    queryName(
+      date_start: $dateStart
+      date_end: $dateEnd
+      name: $name
+      description: $description
+    ) {
+      date_start
+      date_end
+      name
+      description
+    }
+  }
+`
+
 export const COMMENT_PHOTO = gql`
   mutation queryName($description: String) {
     queryName(description: $description) {

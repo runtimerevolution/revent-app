@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Contest from '../components/Contest'
 import CurrentPhotos from '../components/CurrentPhotos'
+import SubmitContest from '../components/SubmitContest'
 import SubmitPhoto from '../components/SubmitPhoto'
 import styles from '../styles/Home.module.css'
 
@@ -25,11 +26,11 @@ export default function Home() {
           }}
         >
           <div style={{ marginRight: '10px' }}>
-            <p> Submit photo: </p>
-            <SubmitPhoto />
+            <p> Submit Contest: </p>
+            <SubmitContest />
           </div>
           <div style={{ marginRight: '10px' }}>
-            <p> Submit photo: </p>
+            <p> Submit Photo: </p>
             <SubmitPhoto />
           </div>
           <div style={{ marginRight: '10px' }}>
