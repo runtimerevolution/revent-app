@@ -1,8 +1,10 @@
 import Head from 'next/head'
+import CommentsOnPhoto from '../components/CommentsOnPhoto'
 import Contest from '../components/Contest'
 import CurrentPhotos from '../components/CurrentPhotos'
 import SubmitContest from '../components/SubmitContest'
 import SubmitPhoto from '../components/SubmitPhoto'
+import VotesOnPhoto from '../components/VotesOnPhoto'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
@@ -14,10 +16,6 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Welcome to Revent!</h1>
-        <p> Current contest: </p>
-        <Contest />
-        <p> Current photos: </p>
-        <CurrentPhotos />
         <div
           style={{
             display: 'flex',
@@ -25,20 +23,36 @@ export default function Home() {
             flex: 1,
           }}
         >
-          <div style={{ marginRight: '10px' }}>
+          <div style={{ marginRight: '100px' }}>
+            <p> Current contest: </p>
+            <Contest />
+          </div>
+          <div>
+            <p> Current photos: </p>
+            <CurrentPhotos />
+          </div>
+          <div>
+            <p> Comments on photo: </p>
+            <CommentsOnPhoto photoContent={'qualquercoisa'} />
+          </div>
+          <div>
+            <p> Votes on photo: </p>
+            <VotesOnPhoto photoContent={'qualquercoisa'} />
+          </div>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            flex: 1,
+          }}
+        >
+          <div style={{ marginRight: '100px' }}>
             <p> Submit Contest: </p>
             <SubmitContest />
           </div>
-          <div style={{ marginRight: '10px' }}>
-            <p> Submit Photo: </p>
-            <SubmitPhoto />
-          </div>
-          <div style={{ marginRight: '10px' }}>
-            <p> Submit photo: </p>
-            <SubmitPhoto />
-          </div>
           <div>
-            <p> Submit photo: </p>
+            <p> Submit Photo: </p>
             <SubmitPhoto />
           </div>
         </div>

@@ -18,17 +18,24 @@ const SubmitContest = () => {
   const parseDateForBackend = (date) => moment(date).format('Y-m-d H:M:S')
 
   const onSubmit = (e) => {
-    let newDateStart = parseDateForBackend(dateStart)
-    let newDateEnd = parseDateForBackend(dateEnd)
+    // let newDateStart = parseDateForBackend(dateStart)
+    // let newDateEnd = parseDateForBackend(dateEnd)
     e.preventDefault()
     console.log(
       'description',
       e.target.description.value,
       e.target.name.value,
-      newDateStart,
-      newDateEnd,
+      dateStart,
+      dateEnd,
     )
-    // addContest({ variables: { dateStart: newDateStart, dateEnd: newDateEnd, name: e.target.name.value, description: e.target.description.value } })
+    addContest({
+      variables: {
+        dateStart: dateStart,
+        dateEnd: dateEnd,
+        name: e.target.name.value,
+        description: e.target.description.value,
+      },
+    })
   }
 
   return (
@@ -36,14 +43,12 @@ const SubmitContest = () => {
       <DatePicker
         placeholder="Pick start date"
         label="Event start date"
-        required
         value={dateStart}
         onChange={setDateStart}
       />
       <DatePicker
         placeholder="Pick end date"
         label="Event end date"
-        required
         value={dateEnd}
         onChange={setDateEnd}
       />

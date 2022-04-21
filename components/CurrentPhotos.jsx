@@ -1,13 +1,8 @@
 import { useQuery } from '@apollo/client'
-import {
-  Badge,
-  Button,
-  Card,
-  Group,
-  Text,
-  useMantineTheme,
-} from '@mantine/core'
+import { Card, Group, Text, useMantineTheme } from '@mantine/core'
 import { GET_CURRENT_PHOTOS } from '../graphql/queries'
+import SubmitCommentPhoto from './SubmitCommentPhoto'
+import SubmitVotePhoto from './SubmitVotePhoto'
 
 const PhotoCard = ({ photoData }) => {
   const theme = useMantineTheme()
@@ -21,6 +16,7 @@ const PhotoCard = ({ photoData }) => {
         <Card shadow="sm" p="lg">
           <Card.Section>
             {/* <Image src="./image.png" height={160} alt="Norway" /> */}
+            {photoData.content}
           </Card.Section>
 
           <Group
@@ -28,23 +24,13 @@ const PhotoCard = ({ photoData }) => {
             style={{ marginBottom: 5, marginTop: theme.spacing.sm }}
           >
             <Text weight={500}>Titulo da foto</Text>
-            <Badge color="pink" variant="light">
-              Votar na foto
-            </Badge>
+            <SubmitVotePhoto id={photoData.id} />
           </Group>
 
           <Text size="sm" style={{ color: secondaryColor, lineHeight: 1.5 }}>
-            Descrição da foto
+            {photoData.description}
           </Text>
-
-          <Button
-            variant="light"
-            color="blue"
-            fullWidth
-            style={{ marginTop: 14 }}
-          >
-            Visualizar foto
-          </Button>
+          <SubmitCommentPhoto id={photoData.id} />
         </Card>
       </div>
     )
@@ -60,8 +46,8 @@ const CurrentPhotos = () => {
   console.log('Photos', data)
 
   // Substituir queryName depois quando souber
-  return data?.queryName.map((photoData) => (
-    <PhotoCard key={data.photoData.id} {...photoData} />
+  return data.submissions.map((photoData) => (
+    <PhotoCard key={data.photoData.id} photoData={photoData} />
   ))
 }
 
