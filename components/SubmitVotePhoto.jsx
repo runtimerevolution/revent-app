@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { Badge } from '@mantine/core'
+import { Button } from '@mantine/core'
 import { useState } from 'react'
 import { VOTE_PHOTO } from '../graphql/queries'
 
@@ -19,9 +19,9 @@ const SubmitVotePhoto = ({ id }) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <Badge color="pink" variant="light">
+      <Button variant="light" radius="md" type="submit">
         Vote in this photo
-      </Badge>
+      </Button>
     </form>
   )
 }

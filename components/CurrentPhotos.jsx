@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { Card, Group, Text, useMantineTheme } from '@mantine/core'
-import { GET_CURRENT_PHOTOS } from '../graphql/queries'
+import { GET_CURRENT_PHOTOS_BY_ID } from '../graphql/queries'
 import EditSubmission from './EditSubmission'
 import SubmitCommentPhoto from './SubmitCommentPhoto'
 import SubmitVotePhoto from './SubmitVotePhoto'
@@ -39,14 +39,17 @@ const PhotoCard = ({ photoData }) => {
   return <div>{mantineCard(photoData)}</div>
 }
 
-const CurrentPhotos = () => {
-  const { loading, error, data } = useQuery(GET_CURRENT_PHOTOS)
+const CurrentPhotos = ({ contestID }) => {
+  const { loading, error, data } = useQuery(GET_CURRENT_PHOTOS_BY_ID, {
+    variables: {
+      id: contestID,
+    },
+  })
   if (loading) return <p>Loading...</p>
   if (error) return <p>Something went wrong {error.message}</p>
   console.log('Photos', data)
 
-  // Substituir queryName depois quando souber
-  return data.submissions.map((photoData) => (
+  return data.getSubmissionsByContestId.map((photoData) => (
     <PhotoCard key={photoData.id} photoData={photoData} />
   ))
 }

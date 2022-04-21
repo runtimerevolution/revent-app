@@ -1,26 +1,26 @@
 import { useQuery } from '@apollo/client'
-import { GET_COMMENTS } from '../graphql/queries'
+import { GET_COMMENTS_BY_SUBMISSION_ID } from '../graphql/queries'
 
-const Comment = ({ data, photoContent }) => {
+const Comment = ({ data, photoID }) => {
   return (
     <div>
-      <p>{data.text}</p>
-      <p>{photoContent}</p>
+      <p>Text do comment: {data.text}</p>
+      <p>Submission: {photoID}</p>
     </div>
   )
 }
 
-const CommentsOnPhoto = ({ photoContent }) => {
-  const { loading, error, data } = useQuery(GET_COMMENTS, {
+const CommentsOnPhoto = ({ photoID }) => {
+  const { loading, error, data } = useQuery(GET_COMMENTS_BY_SUBMISSION_ID, {
     variables: {
-      content: photoContent,
+      id: photoID,
     },
   })
   if (loading) return <p>Loading...</p>
   if (error) return <p>Something went wrong {error.message}</p>
 
-  return data.comments.map((commentData) => (
-    <Comment key={comment.id} data={commentData} photoContent={photoContent} />
+  return data.getCommentsBySubmissionId.map((commentData) => (
+    <Comment key={commentData.id} data={commentData} photoID={photoID} />
   ))
 }
 

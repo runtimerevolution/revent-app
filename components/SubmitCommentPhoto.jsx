@@ -10,7 +10,7 @@ const SubmitCommentPhoto = ({ id }) => {
     submitComment({
       variables: {
         comment: e.target.comment.value,
-        // id: id,
+        id: id,
       },
     })
   }

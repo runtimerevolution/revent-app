@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client'
 import { Button, Textarea, TextInput } from '@mantine/core'
 import { ADD_PHOTO } from '../graphql/queries'
 
-const SubmitPhoto = () => {
+const SubmitPhoto = ({ idContest, idUser }) => {
   const [addPhoto] = useMutation(ADD_PHOTO, {
     onCompleted: (data) => {
       window.location.reload()
@@ -16,7 +16,14 @@ const SubmitPhoto = () => {
       e.target.text.value,
       e.target.content.value,
     )
-    // addPhoto({ variables: { description: e.target.text.value, content: e.target.content.value } })
+    addPhoto({
+      variables: {
+        description: e.target.text.value,
+        content: e.target.content.value,
+        userID: idUser,
+        contestID: idContest,
+      },
+    })
   }
 
   return (

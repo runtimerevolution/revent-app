@@ -14,7 +14,8 @@ const EditSubmission = ({ id }) => {
     editContent({
       variables: {
         content: e.target.editContent.value,
-        // id: id,
+        description: 'kekw',
+        id: id,
       },
     })
   }

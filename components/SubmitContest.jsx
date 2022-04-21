@@ -1,7 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { Button, Textarea, TextInput } from '@mantine/core'
 import { DatePicker } from '@mantine/dates'
-import moment from 'moment'
 import { useState } from 'react'
 import { ADD_CONTEST } from '../graphql/queries'
 
@@ -15,18 +14,14 @@ const SubmitContest = () => {
   const [dateStart, setDateStart] = useState(new Date())
   const [dateEnd, setDateEnd] = useState(new Date())
 
-  const parseDateForBackend = (date) => moment(date).format('Y-m-d H:M:S')
-
   const onSubmit = (e) => {
-    let newDateStart = parseDateForBackend(dateStart)
-    let newDateEnd = parseDateForBackend(dateEnd)
     e.preventDefault()
     console.log(
       'description',
       e.target.description.value,
       e.target.name.value,
       dateStart,
-      newDateEnd,
+      dateEnd,
     )
     addContest({
       variables: {
@@ -50,6 +45,7 @@ const SubmitContest = () => {
         placeholder="Pick end date"
         label="Event end date"
         value={dateEnd}
+        required
         onChange={setDateEnd}
       />
       <TextInput

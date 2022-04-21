@@ -27,17 +27,17 @@ export default function Home() {
             <p> Current contest: </p>
             <Contest />
           </div>
-          <div>
+          <div style={{ marginRight: '100px' }}>
             <p> Current photos: </p>
-            <CurrentPhotos />
+            <CurrentPhotos contestID={'d52d3bbf-b458-4581-a468-907902dccb77'} />
           </div>
-          <div>
+          <div style={{ marginRight: '100px' }}>
             <p> Comments on photo: </p>
-            <CommentsOnPhoto photoContent={'qualquercoisa'} />
+            <CommentsOnPhoto photoID={'0246c1ec-30b2-44f1-9fe9-bc934ff5f281'} />
           </div>
           <div>
             <p> Votes on photo: </p>
-            <VotesOnPhoto photoContent={'qualquercoisa'} />
+            <VotesOnPhoto photoID={'0246c1ec-30b2-44f1-9fe9-bc934ff5f281'} />
           </div>
         </div>
         <div
@@ -53,7 +53,10 @@ export default function Home() {
           </div>
           <div>
             <p> Submit Photo: </p>
-            <SubmitPhoto />
+            <SubmitPhoto
+              idContest={'d52d3bbf-b458-4581-a468-907902dccb77'}
+              idUser={'791c77ea-426a-4d12-bf4f-611ba3e67b09'}
+            />
           </div>
         </div>
       </main>

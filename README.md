@@ -78,4 +78,4 @@ Example for Mutation:
 `const [addPhoto] = useMutation(ADD_PHOTO)`
 
 Example for Query:
-`const { loading, error, data } = useQuery(GET_CURRENT_PHOTOS)`
+`const { loading, error, data } = useQuery(GET_CURRENT_PHOTOS_BY_ID)`

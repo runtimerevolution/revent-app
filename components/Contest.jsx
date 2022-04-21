@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { GET_CURRENT_CONTEST } from '../graphql/queries'
+import { GET_ALL_CURRENT_CONTESTS } from '../graphql/queries'
 
 const CurrentContest = ({ data }) => {
   // Here, i already have access to all the data (description...) associated with the contest
@@ -15,11 +15,11 @@ const CurrentContest = ({ data }) => {
 }
 
 const Contest = () => {
-  const { loading, error, data } = useQuery(GET_CURRENT_CONTEST)
+  const { loading, error, data } = useQuery(GET_ALL_CURRENT_CONTESTS)
   if (loading) return <p>Loading...</p>
   if (error) return <p>Something went wrong {error.message}</p>
 
-  return data.contests.map((contestData) => (
+  return data.getCurrentContests.map((contestData) => (
     <CurrentContest key={contestData.id} data={contestData} />
   ))
 }

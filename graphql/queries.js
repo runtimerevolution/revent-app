@@ -1,8 +1,9 @@
 import { gql } from '@apollo/client'
 
-export const GET_CURRENT_PHOTOS = gql`
-  {
-    submissions {
+// ------------------------------------------------- QUERIES ------------------------------------------------- //
+export const GET_CURRENT_PHOTOS_BY_ID = gql`
+  query getSubmissionsByContestId($id: ID!) {
+    getSubmissionsByContestId(id: $id) {
       id
       content
       description
@@ -10,9 +11,9 @@ export const GET_CURRENT_PHOTOS = gql`
   }
 `
 
-export const GET_CURRENT_CONTEST = gql`
+export const GET_ALL_CURRENT_CONTESTS = gql`
   {
-    contests {
+    getCurrentContests {
       id
       dateStart
       dateEnd
@@ -22,44 +23,40 @@ export const GET_CURRENT_CONTEST = gql`
   }
 `
 
-export const GET_VOTES = gql`
-  query votes($content: String!) {
-    votes(content: $content) {
+export const GET_VOTES_BY_SUBMISSION_ID = gql`
+  query getVotesBySubmissionId($id: ID!) {
+    getVotesBySubmissionId(id: $id) {
+      id
       value
-      Submission {
-        content
-      }
     }
   }
 `
 
-export const GET_COMMENTS = gql`
-  query comments($content: String!) {
-    comments(content: $content) {
+export const GET_COMMENTS_BY_SUBMISSION_ID = gql`
+  query getCommentsBySubmissionId($id: ID!) {
+    getCommentsBySubmissionId(id: $id) {
+      id
       text
-      Submission {
-        content
-      }
     }
   }
 `
 
+// ------------------------------------------------- MUTATIONS ------------------------------------------------- //
 export const ADD_PHOTO = gql`
   mutation addSubmission(
     $content: String!
     $description: String!
-    $user: user!
-    $contest: String!
+    $userID: ID!
+    $contestID: ID!
   ) {
-    add_submission(
+    addSubmission(
       content: $content
       description: $description
-      contest: $contest
+      contestId: $contestID
+      userId: $userID
     ) {
-      id
       content
       description
-      contest
     }
   }
 `
@@ -77,6 +74,7 @@ export const ADD_CONTEST = gql`
       dateStart: $dateStart
       dateEnd: $dateEnd
     ) {
+      id
       name
       description
       dateStart
@@ -95,15 +93,23 @@ export const VOTE_PHOTO = gql`
 
 export const COMMENT_PHOTO = gql`
   mutation submitComment($text: String) {
-    add_comment(text: $text) {
+    addComment(id: $id, text: $text) {
       text
+      submission {
+        id
+      }
     }
   }
 `
 
 export const EDIT_PHOTO = gql`
-  mutation updateSubmission($content: String, $description: String) {
-    updateSubmission(content: $content, description: $description) {
+  mutation updateSubmission(
+    $id: ID!
+    $content: String!
+    $description: String!
+  ) {
+    updateSubmission(id: $id, content: $content, description: $description) {
+      id
       content
       description
     }
