@@ -1,5 +1,6 @@
+import { useMutation } from '@apollo/client'
 import { Button, Textarea } from '@mantine/core'
-import COMMENT_PHOTO from '../graphql/queries'
+import { COMMENT_PHOTO } from '../graphql/queries'
 
 const SubmitCommentPhoto = ({ id }) => {
   const [submitComment] = useMutation(COMMENT_PHOTO)

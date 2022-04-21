@@ -1,6 +1,7 @@
+import { useMutation } from '@apollo/client'
 import { Badge } from '@mantine/core'
 import { useState } from 'react'
-import VOTE_PHOTO from '../graphql/queries'
+import { VOTE_PHOTO } from '../graphql/queries'
 
 const SubmitVotePhoto = ({ id }) => {
   const [submitVote] = useMutation(VOTE_PHOTO)

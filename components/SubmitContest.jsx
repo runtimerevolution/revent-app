@@ -18,15 +18,15 @@ const SubmitContest = () => {
   const parseDateForBackend = (date) => moment(date).format('Y-m-d H:M:S')
 
   const onSubmit = (e) => {
-    // let newDateStart = parseDateForBackend(dateStart)
-    // let newDateEnd = parseDateForBackend(dateEnd)
+    let newDateStart = parseDateForBackend(dateStart)
+    let newDateEnd = parseDateForBackend(dateEnd)
     e.preventDefault()
     console.log(
       'description',
       e.target.description.value,
       e.target.name.value,
       dateStart,
-      dateEnd,
+      newDateEnd,
     )
     addContest({
       variables: {

@@ -1,10 +1,9 @@
 import { gql } from '@apollo/client'
 
-// Substituir queryName depois quando souber e os respetivos parametros
-// Falta associar as fotos ao concurso atual, para apenas pertencerem ao concurso que está a decorrer atualmente
 export const GET_CURRENT_PHOTOS = gql`
   {
     submissions {
+      id
       content
       description
     }
@@ -45,8 +44,6 @@ export const GET_COMMENTS = gql`
   }
 `
 
-// Por enquanto só tem o content para a descriçao da foto
-// o id e description é o que quero que me retorne
 export const ADD_PHOTO = gql`
   mutation addSubmission(
     $content: String!
@@ -74,7 +71,7 @@ export const ADD_CONTEST = gql`
     $dateStart: DateTime!
     $dateEnd: DateTime!
   ) {
-    add_contest(
+    addContest(
       name: $name
       description: $description
       dateStart: $dateStart
@@ -104,11 +101,11 @@ export const COMMENT_PHOTO = gql`
   }
 `
 
-// export const EDIT_PHOTO = gql`
-//   mutation queryName($description: String) {
-//     queryName(description: $description) {
-//       id
-//       description
-//     }
-//   }
-// `
+export const EDIT_PHOTO = gql`
+  mutation updateSubmission($content: String, $description: String) {
+    updateSubmission(content: $content, description: $description) {
+      content
+      description
+    }
+  }
+`

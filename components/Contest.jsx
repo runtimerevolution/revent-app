@@ -5,11 +5,10 @@ const CurrentContest = ({ data }) => {
   // Here, i already have access to all the data (description...) associated with the contest
   return (
     <div>
-      <p>{data.id}</p>
-      <p>{data.name}</p>
-      <p>{data.description}</p>
-      <p>{data.dateStart}</p>
-      <p>{data.dateEnd}</p>
+      <p>Name: {data.name}</p>
+      <p>Description: {data.description}</p>
+      <p>Start: {data.dateStart}</p>
+      <p>End: {data.dateEnd}</p>
       <br />
     </div>
   )

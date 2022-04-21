@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { Card, Group, Text, useMantineTheme } from '@mantine/core'
 import { GET_CURRENT_PHOTOS } from '../graphql/queries'
+import EditSubmission from './EditSubmission'
 import SubmitCommentPhoto from './SubmitCommentPhoto'
 import SubmitVotePhoto from './SubmitVotePhoto'
 
@@ -14,10 +15,7 @@ const PhotoCard = ({ photoData }) => {
     return (
       <div style={{ width: 340, margin: 'auto' }}>
         <Card shadow="sm" p="lg">
-          <Card.Section>
-            {/* <Image src="./image.png" height={160} alt="Norway" /> */}
-            {photoData.content}
-          </Card.Section>
+          <Card.Section>{photoData.content}</Card.Section>
 
           <Group
             position="apart"
@@ -31,6 +29,8 @@ const PhotoCard = ({ photoData }) => {
             {photoData.description}
           </Text>
           <SubmitCommentPhoto id={photoData.id} />
+
+          <EditSubmission id={photoData.id} />
         </Card>
       </div>
     )
@@ -47,7 +47,7 @@ const CurrentPhotos = () => {
 
   // Substituir queryName depois quando souber
   return data.submissions.map((photoData) => (
-    <PhotoCard key={data.photoData.id} photoData={photoData} />
+    <PhotoCard key={photoData.id} photoData={photoData} />
   ))
 }
 
