@@ -2,21 +2,22 @@ import { useMutation } from '@apollo/client'
 import { Button, Textarea } from '@mantine/core'
 import { COMMENT_PHOTO } from '../graphql/queries'
 
-const SubmitCommentPhoto = ({ id }) => {
+const SubmitCommentPhoto = ({ submissionID, userID }) => {
   const [submitComment] = useMutation(COMMENT_PHOTO)
 
   const onSubmit = (e) => {
     e.preventDefault()
     submitComment({
       variables: {
-        comment: e.target.comment.value,
-        id: id,
+        text: e.target.comment.value,
+        submissionID: submissionID,
+        userID: userID,
       },
     })
   }
 
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <Textarea
         placeholder="Comment"
         label="Comment this photo"

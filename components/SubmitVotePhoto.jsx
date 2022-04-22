@@ -3,7 +3,7 @@ import { Button } from '@mantine/core'
 import { useState } from 'react'
 import { VOTE_PHOTO } from '../graphql/queries'
 
-const SubmitVotePhoto = ({ id }) => {
+const SubmitVotePhoto = ({ submissionID, userID }) => {
   const [submitVote] = useMutation(VOTE_PHOTO)
   const [value, setValue] = useState('1')
 
@@ -12,7 +12,8 @@ const SubmitVotePhoto = ({ id }) => {
     submitVote({
       variables: {
         value: value,
-        // id: id,
+        submissionID: submissionID,
+        userID: userID,
       },
     })
   }

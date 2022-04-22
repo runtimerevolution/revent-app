@@ -84,20 +84,17 @@ export const ADD_CONTEST = gql`
 `
 
 export const VOTE_PHOTO = gql`
-  mutation submitVote($value: String) {
-    addVote(value: $value) {
+  mutation submitVote($value: String!, $userID: ID!, $submissionID: ID!) {
+    addVote(userId: $userID, submissionId: $submissionID, value: $value) {
       value
     }
   }
 `
 
 export const COMMENT_PHOTO = gql`
-  mutation submitComment($text: String) {
-    addComment(id: $id, text: $text) {
+  mutation submitComment($text: String!, $userID: ID!, $submissionID: ID!) {
+    addComment(userId: $userID, submissionId: $submissionID, text: $text) {
       text
-      submission {
-        id
-      }
     }
   }
 `

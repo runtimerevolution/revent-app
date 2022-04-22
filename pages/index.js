@@ -29,7 +29,10 @@ export default function Home() {
           </div>
           <div style={{ marginRight: '100px' }}>
             <p> Current photos: </p>
-            <CurrentPhotos contestID={'d52d3bbf-b458-4581-a468-907902dccb77'} />
+            <CurrentPhotos
+              contestID={'d52d3bbf-b458-4581-a468-907902dccb77'}
+              userID={'791c77ea-426a-4d12-bf4f-611ba3e67b09'}
+            />
           </div>
           <div style={{ marginRight: '100px' }}>
             <p> Comments on photo: </p>
