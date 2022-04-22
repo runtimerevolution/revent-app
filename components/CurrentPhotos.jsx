@@ -1,15 +1,11 @@
 import { useQuery } from '@apollo/client'
-import {
-  Badge,
-  Button,
-  Card,
-  Group,
-  Text,
-  useMantineTheme,
-} from '@mantine/core'
-import { GET_CURRENT_PHOTOS } from '../graphql/queries'
+import { Card, Group, Text, useMantineTheme } from '@mantine/core'
+import { GET_CURRENT_PHOTOS_BY_ID } from '../graphql/queries'
+import EditSubmission from './EditSubmission'
+import SubmitCommentPhoto from './SubmitCommentPhoto'
+import SubmitVotePhoto from './SubmitVotePhoto'
 
-const PhotoCard = ({ photoData }) => {
+const PhotoCard = ({ photoData, userID }) => {
   const theme = useMantineTheme()
 
   const secondaryColor =
@@ -19,49 +15,45 @@ const PhotoCard = ({ photoData }) => {
     return (
       <div style={{ width: 340, margin: 'auto' }}>
         <Card shadow="sm" p="lg">
-          <Card.Section>
-            {/* <Image src="./image.png" height={160} alt="Norway" /> */}
-          </Card.Section>
+          <Card.Section>{photoData.content}</Card.Section>
 
           <Group
             position="apart"
             style={{ marginBottom: 5, marginTop: theme.spacing.sm }}
           >
             <Text weight={500}>Titulo da foto</Text>
-            <Badge color="pink" variant="light">
-              Votar na foto
-            </Badge>
+            <SubmitVotePhoto submissionID={photoData.id} userID={userID} />
           </Group>
 
           <Text size="sm" style={{ color: secondaryColor, lineHeight: 1.5 }}>
-            Descrição da foto
+            {photoData.description}
           </Text>
+          <SubmitCommentPhoto submissionID={photoData.id} userID={userID} />
 
-          <Button
-            variant="light"
-            color="blue"
-            fullWidth
-            style={{ marginTop: 14 }}
-          >
-            Visualizar foto
-          </Button>
+          <EditSubmission id={photoData.id} />
         </Card>
       </div>
     )
   }
-  // Here, i already have access to all the data (description...) associated with the photo
   return <div>{mantineCard(photoData)}</div>
 }
 
-const CurrentPhotos = () => {
-  const { loading, error, data } = useQuery(GET_CURRENT_PHOTOS)
+const CurrentPhotos = ({ contestID }) => {
+  const { loading, error, data } = useQuery(GET_CURRENT_PHOTOS_BY_ID, {
+    variables: {
+      id: contestID,
+    },
+  })
   if (loading) return <p>Loading...</p>
   if (error) return <p>Something went wrong {error.message}</p>
   console.log('Photos', data)
 
-  // Substituir queryName depois quando souber
-  return data?.queryName.map((photoData) => (
-    <PhotoCard key={data.photoData.id} {...photoData} />
+  return data.getSubmissionsByContestId.map((photoData) => (
+    <PhotoCard
+      key={photoData.id}
+      photoData={photoData}
+      userID={'791c77ea-426a-4d12-bf4f-611ba3e67b09'}
+    /> // userID will in the future be aquired by getSubmissionsByContestId return params and used like photoData.userID
   ))
 }
 
