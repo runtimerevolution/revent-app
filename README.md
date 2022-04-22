@@ -18,7 +18,7 @@ and
 npm run dev
 ```
 
-## How to setup graphql with Apollo Client
+### How to setup graphql with Apollo Client
 
 - Install all the necessary packages ( @apollo/client ).
 
