@@ -66,16 +66,16 @@ After the installation is complete:
 - Visit  `http://localhost:3000` to view the application
 - Start coding! :)
 
-## How to setup graphql Client
+## How to setup graphql with Apollo Client
 
-- Install all the necessary packages ( @apollo/client )
+- Install all the necessary packages ( @apollo/client ).
 
 - Create a new ApolloClient and wrap the app with it using ApolloProvider.
 
-- Now we just need useQuery or useMutation to apply our Queries and Mutations, making a request to our API.
+- Now we just need useQuery or useMutation to apply our [Queries](https://www.apollographql.com/docs/react/data/queries) and [Mutations](https://www.apollographql.com/docs/react/data/mutations/), making a request to our API.
 
-Example for Mutation:
+Example for useMutation:
 `const [addPhoto] = useMutation(ADD_PHOTO)`
 
-Example for Query:
+Example for useQuery:
 `const { loading, error, data } = useQuery(GET_CURRENT_PHOTOS_BY_ID)`
