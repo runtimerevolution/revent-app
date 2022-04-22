@@ -11,11 +11,6 @@ const SubmitPhoto = ({ idContest, idUser }) => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    console.log(
-      'description and content',
-      e.target.text.value,
-      e.target.content.value,
-    )
     addPhoto({
       variables: {
         description: e.target.text.value,

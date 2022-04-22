@@ -16,13 +16,6 @@ const SubmitContest = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    console.log(
-      'description',
-      e.target.description.value,
-      e.target.name.value,
-      dateStart,
-      dateEnd,
-    )
     addContest({
       variables: {
         dateStart: dateStart,

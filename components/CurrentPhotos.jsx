@@ -35,11 +35,10 @@ const PhotoCard = ({ photoData, userID }) => {
       </div>
     )
   }
-  // Here, i already have access to all the data (description...) associated with the photo
   return <div>{mantineCard(photoData)}</div>
 }
 
-const CurrentPhotos = ({ contestID, userID }) => {
+const CurrentPhotos = ({ contestID }) => {
   const { loading, error, data } = useQuery(GET_CURRENT_PHOTOS_BY_ID, {
     variables: {
       id: contestID,
@@ -50,7 +49,11 @@ const CurrentPhotos = ({ contestID, userID }) => {
   console.log('Photos', data)
 
   return data.getSubmissionsByContestId.map((photoData) => (
-    <PhotoCard key={photoData.id} photoData={photoData} userID={userID} />
+    <PhotoCard
+      key={photoData.id}
+      photoData={photoData}
+      userID={'791c77ea-426a-4d12-bf4f-611ba3e67b09'}
+    /> // userID will in the future be aquired by getSubmissionsByContestId return params and used like photoData.userID
   ))
 }
 
