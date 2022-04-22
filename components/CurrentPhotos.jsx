@@ -46,7 +46,6 @@ const CurrentPhotos = ({ contestID }) => {
   })
   if (loading) return <p>Loading...</p>
   if (error) return <p>Something went wrong {error.message}</p>
-  console.log('Photos', data)
 
   return data.getSubmissionsByContestId.map((photoData) => (
     <PhotoCard
