@@ -1,27 +1,19 @@
 import Head from "next/head";
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import { useState } from "react";
+import styles from "../styles/Home.module.css";
+const { GET, POST } = process.env;
+
+import { fetchEndpoint } from "./utils.js";
 
 const DECODE_PREFIX = "data:image/png;base64,";
-const API = "http://127.0.0.1:8000/photo/";
 
 async function getSubmissionListWithContest() {
-  return fetch(API + "submissions/", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then((data) => data.json());
+  return fetchEndpoint("submissions/", GET);
 }
 
 async function getUserList() {
-  return fetch(API + "users/", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then((data) => data.json());
+  return fetchEndpoint("users/", GET);
 }
 
 export async function getStaticProps() {
@@ -37,7 +29,8 @@ export async function getStaticProps() {
 
 function BlurImage({ url, user, description }) {
   const [isLoading, setLoading] = useState(true);
-  if (!url.includes("data:image") && !url.includes("blob")) url = DECODE_PREFIX + url;
+  if (!url.includes("data:image") && !url.includes("blob"))
+    url = DECODE_PREFIX + url;
 
   return (
     <a href="#" className="group">
@@ -64,8 +57,8 @@ function BlurImage({ url, user, description }) {
 }
 
 function getUserName(userUUID, userList) {
-  const result = userList.find(user => user.id === userUUID)
-  return result.first_name + ' ' + result.last_name
+  const result = userList.find((user) => user.id === userUUID);
+  return result.first_name + " " + result.last_name;
 }
 
 export default function Home({ submissionList, userList }) {
@@ -90,11 +83,7 @@ export default function Home({ submissionList, userList }) {
     body.append("contest", "29fd2e40-978a-4a5e-b2c6-901878489623");
     body.append("content", createObjectURL);
     body.append("description", "Submission POSTed");
-    return fetch(API + "submissions/", {
-      method: "POST",
-      mode: "cors",
-      body,
-    }).then((data) => data.json());
+    return fetchEndpoint("submissions/", POST, body);
   }
 
   return (
@@ -107,7 +96,12 @@ export default function Home({ submissionList, userList }) {
         <h1 className={styles.title}>Welcome to Revent!</h1>
         <div className="grid grid-cols-4 gap-4">
           {submissionList.map(({ id, user, contest, content, description }) => (
-            <BlurImage key={id} user={getUserName(user, userList)} url={content} description={description} />
+            <BlurImage
+              key={id}
+              user={getUserName(user, userList)}
+              url={content}
+              description={description}
+            />
           ))}
         </div>
         <div>
