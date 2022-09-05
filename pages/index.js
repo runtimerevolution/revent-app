@@ -2,22 +2,22 @@ import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import styles from "../styles/Home.module.css";
-const { GET, POST } = process.env;
+const { NEXT_PUBLIC_GET, NEXT_PUBLIC_POST } = process.env;
 
 import { fetchEndpoint } from "./utils.js";
 
 const DECODE_PREFIX = "data:image/png;base64,";
 
-async function getSubmissionListWithContest() {
-  return fetchEndpoint("submissions/", GET);
+async function getSubmissionList() {
+  return fetchEndpoint("submissions/", NEXT_PUBLIC_GET);
 }
 
 async function getUserList() {
-  return fetchEndpoint("users/", GET);
+  return fetchEndpoint("users/", NEXT_PUBLIC_GET);
 }
 
 export async function getStaticProps() {
-  const submissionList = await getSubmissionListWithContest();
+  const submissionList = await getSubmissionList();
   const userList = await getUserList();
   return {
     props: {
@@ -83,7 +83,7 @@ export default function Home({ submissionList, userList }) {
     body.append("contest", "29fd2e40-978a-4a5e-b2c6-901878489623");
     body.append("content", createObjectURL);
     body.append("description", "Submission POSTed");
-    return fetchEndpoint("submissions/", POST, body);
+    return fetchEndpoint("submissions/", NEXT_PUBLIC_POST, body);
   }
 
   return (
