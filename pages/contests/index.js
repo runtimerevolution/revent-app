@@ -7,7 +7,8 @@ function RenderContest({ contest }) {
     return (
         <>
             <div class="max-w-sm rounded overflow-hidden shadow-lg">
-                <img class="w-full" src="https://www.jquery-az.com/html/images/banana.jpg" alt="" />
+                <img class="w-full" src="https://www.thoughtco.com/thmb/LIkTVpCr3NAa7qJW7D57BXgRiJA=/3396x2547/smart/filters:no_upscale()/film-photography-592347645-59e4d0609abed500119e7b14.jpg" alt="" />
+
                 <div class="px-6 py-4 text-center">
                     <div class="font-bold text-xl mb-2">{contest.name}</div>
                     <p class="text-gray-700 text-base">
@@ -27,22 +28,24 @@ function RenderContest({ contest }) {
 export default function Home({ contestList }) {
 
     return (
-        <div className={styles.container}>
-            <Head>
-                <title>Revent</title>
-                <h1 className={styles.title}>Contest List!</h1>
-            </Head>
+        <div class="p-8 bg-gray-300">
+            <div className={styles.container}>
+                <Head>
+                    <title>Revent</title>
+                    <h1 className={styles.title}>Contest List</h1>
+                </Head>
 
-            <main className={styles.contest_container}>
+                <main className={styles.contest_container}>
 
-                <div className="grid grid-cols-4 gap-4">
-                    {contestList.map((contest) => (
-                        <RenderContest contest={contest} />
-                    ))}
-                </div>
-            </main>
-            <footer className={styles.footer}></footer>
-        </div>
+                    <div className="grid grid-cols-4 gap-4">
+                        {contestList.map((contest) => (
+                            <RenderContest contest={contest} />
+                        ))}
+                    </div>
+                </main>
+                <footer className={styles.footer}></footer>
+            </div>
+        </div >
     );
 }
 
