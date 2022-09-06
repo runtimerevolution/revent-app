@@ -31,28 +31,19 @@ export default function Home(props) {
     const { contestList } = props
     return (
         <div class="p-8 bg-gray-300">
-            <div className={styles.container}>
-                <Head>
-                    <title>Revent</title>
-                    <h1 className={styles.title}>Contest List</h1>
-                </Head>
-
-                <main className={styles.contest_container}>
-
+            <div className="px-8">
+                <main className="min-h-screen py-8 px-20 flex-1 flex flex-col">
                     <div className="grid grid-cols-4 gap-4">
                         {contestList.map((contest) => (
                             <RenderContest contest={contest} />
                         ))}
                     </div>
                 </main>
-                <footer className={styles.footer}></footer>
             </div>
         </div >
     );
 }
 
-
-// const API = "http://127.0.0.1:8000/photo/";
 const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
 async function getContestList() {
     return fetch(NEXT_PUBLIC_API_URL + "contests/", {
