@@ -2,9 +2,13 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../../styles/Home.module.css";
 import { useState } from "react";
+import LoginComponent from "../../components/Login";
+import { useSession, signIn, signOut } from "next-auth/react"
 
 function RenderContest(props) {
     const { contest } = props
+    const { data } = useSession()
+    console.log("DATA SESSION!", data)
     return (
         <>
             <div class="max-w-sm rounded overflow-hidden shadow-lg">
@@ -14,6 +18,7 @@ function RenderContest(props) {
                     <div class="font-bold text-xl mb-2">{contest.name}</div>
                     <p class="text-gray-700 text-base">
                         {contest.description}
+
                     </p>
                     <p class="text-gray-700 text-base">
                         <a>End date: </a>
@@ -31,6 +36,7 @@ export default function Home(props) {
     const { contestList } = props
     return (
         <div class="p-8 bg-gray-300">
+            <LoginComponent />
             <div className="px-8">
                 <main className="min-h-screen py-8 px-20 flex-1 flex flex-col">
                     <div className="grid grid-cols-4 gap-4">
