@@ -4,7 +4,7 @@ import { useState } from "react";
 import styles from "../styles/Home.module.css";
 const { NEXT_PUBLIC_GET, NEXT_PUBLIC_POST } = process.env;
 
-import { fetchEndpoint } from "./utils.js";
+import { fetchEndpoint } from "../services/utils.js";
 
 const DECODE_PREFIX = "data:image/png;base64,";
 

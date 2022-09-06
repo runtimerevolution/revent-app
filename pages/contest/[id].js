@@ -3,12 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import Router from "next/router";
 import { useState } from "react";
-import styles from "../../styles/Home.module.css";
 import {
   getSubmissionsFromContest,
   getUserList,
   postSubmission,
-} from "../utils.js";
+} from "../../services/utils.js";
+import styles from "../../styles/Home.module.css";
 
 const DECODE_PREFIX = "data:image/png;base64,";
 
@@ -53,14 +53,16 @@ export default function contest({ contestId, submissions, userList }) {
         <h1 className={styles.title}>Welcome to Revent!</h1>
         <div className="grid grid-cols-3 gap-4">
           {submissions.map(({ id, user, content, description }) => (
-            <BlurImage
-              key={id}
-              contestId={contestId}
-              submissionId={id}
-              user={getUserName(user, userList)}
-              url={content}
-              description={description}
-            />
+            <div className="w-96 h-96 relative">
+              <BlurImage
+                key={id}
+                contestId={contestId}
+                submissionId={id}
+                user={getUserName(user, userList)}
+                url={content}
+                description={description}
+              />
+            </div>
           ))}
         </div>
         <div>
@@ -118,21 +120,16 @@ function BlurImage({ contestId, submissionId, url, user, description }) {
     url = DECODE_PREFIX + url;
 
   return (
-    <div>
+    <div className="w-full h-5/6">
       <Link href={`/contest/${contestId}/submission/${submissionId}`}>
-        <div className="w-96 aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-16 xl:aspect-h-13 relative">
+        <div className="w-full h-full bg-gray-200 rounded-lg overflow-hidden relative">
           <Image
             alt=""
             src={url}
             sizes="100%"
             layout="fill"
-            objectfit="cover"
-            className={
-              ("group-hover:opacity-75 duration-700 ease-in-out",
-              isLoading
-                ? "grayscale blur-2xl scale-110"
-                : "grayscale-0 blur-0 scale-100")
-            }
+            objectfit="contain"
+            className="object-contain"
             onLoadingComplete={() => setLoading(false)}
           />
         </div>
