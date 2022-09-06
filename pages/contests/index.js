@@ -3,7 +3,8 @@ import Image from "next/image";
 import styles from "../../styles/Home.module.css";
 import { useState } from "react";
 
-function RenderContest({ contest }) {
+function RenderContest(props) {
+    const { contest } = props
     return (
         <>
             <div class="max-w-sm rounded overflow-hidden shadow-lg">
@@ -25,8 +26,9 @@ function RenderContest({ contest }) {
 }
 
 
-export default function Home({ contestList }) {
+export default function Home(props) {
 
+    const { contestList } = props
     return (
         <div class="p-8 bg-gray-300">
             <div className={styles.container}>
@@ -50,9 +52,10 @@ export default function Home({ contestList }) {
 }
 
 
-const API = "http://127.0.0.1:8000/photo/";
+// const API = "http://127.0.0.1:8000/photo/";
+const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
 async function getContestList() {
-    return fetch(API + "contests/", {
+    return fetch(NEXT_PUBLIC_API_URL + "contests/", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
