@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Router from "next/router";
 import { useState } from "react";
 import BlurImage from "../../components/BlurImage.js";
@@ -8,7 +7,6 @@ import {
   getUserList,
   postSubmission,
 } from "../../services/reventService.js";
-import styles from "../../styles/Home.module.css";
 
 export default function contest({ contestId, submissions, userList }) {
   const [createObjectURL, setCreateObjectURL] = useState(null);
@@ -36,7 +34,7 @@ export default function contest({ contestId, submissions, userList }) {
   }
 
   return (
-    <Layout>
+    <div>
       <div className="grid grid-cols-3 gap-4">
         {submissions.map(({ id, user, content, description }) => (
           <div className="w-96 h-96 relative">
@@ -75,7 +73,7 @@ export default function contest({ contestId, submissions, userList }) {
           </div>
         )}
       </div>
-    </Layout>
+    </div>
   );
 }
 
