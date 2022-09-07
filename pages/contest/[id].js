@@ -5,10 +5,8 @@ import {
   getUserList,
   postSubmission,
 } from "@/services/reventService.js";
-import Head from "next/head";
 import Router from "next/router";
 import { useState } from "react";
-import styles from "../../styles/Home.module.css";
 
 export default function contest({ contestId, submissions, userList }) {
   const [createObjectURL, setCreateObjectURL] = useState(null);
@@ -53,7 +51,7 @@ export default function contest({ contestId, submissions, userList }) {
       </div>
       <div>
         <h4>Select Image</h4>
-        <input type="file" name="myImage" onChange={uploadToClient} />
+        <input type="file" name="myImage" onChange={loadImage} />
 
         {createObjectURL && (
           <div>
