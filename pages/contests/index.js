@@ -8,7 +8,7 @@ import { useSession, signIn, signOut } from "next-auth/react"
 function RenderContest(props) {
     const { contest } = props
     const { data } = useSession()
-    console.log("DATA SESSION!", data)
+    // console.log("DATA SESSION!", data)
     return (
         <>
             <div class="max-w-sm rounded overflow-hidden shadow-lg">
@@ -50,9 +50,10 @@ export default function Home(props) {
     );
 }
 
-const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API = process.env.NEXT_PUBLIC_API_URL;
 async function getContestList() {
-    return fetch(NEXT_PUBLIC_API_URL + "contests/", {
+    console.log("API", API + "contests/")
+    return fetch(API + "contests/", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

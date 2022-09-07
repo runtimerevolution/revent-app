@@ -12,6 +12,7 @@
   "dependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "autoprefixer": "^10.4.8",
+    "axios": "^0.27.2",
     "jotai": "^1.8.2",
     "next": "12.1.4",
     "next-auth": "^4.10.3",

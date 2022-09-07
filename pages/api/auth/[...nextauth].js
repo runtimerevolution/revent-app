@@ -22,7 +22,23 @@ export default NextAuth({
         },
         async signIn({ account, profile }) {
             if (account.provider === "google") {
-                return profile.email_verified
+                // return profile.email_verified
+                const zettlorService = new ZettlorService();
+                let tokenResponse = await zettlorService.exchangeToken(token);
+                if (!tokenResponse) {
+                    return null;
+                }
+                const zettlorUser = {
+                    id: tokenResponse.user?.uuid,
+                    name: tokenResponse.user?.firstName + ' ' + tokenResponse.user?.lastName,
+                    email: tokenResponse.user?.email,
+                    data: tokenResponse.user,
+                    apiToken: tokenResponse.access,
+                };
+                token.user = zettlorUser;
+                token.isExchanged = true;
+                delete token.account;
+                delete token.profile;
             }
             return true // Do different verification for other providers that don't have `email_verified`
         },
