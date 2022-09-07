@@ -1,13 +1,13 @@
-import Head from "next/head";
-import Router from "next/router";
-import { useState } from "react";
-import BlurImage from "../../components/BlurImage.js";
-import { imageToUrl } from "../../services/imageDecoderService.js";
+import BlurImage from "@/components/BlurImage";
+import { imageToUrl } from "@/services/imageDecoderService.js";
 import {
   getSubmissionsFromContest,
   getUserList,
   postSubmission,
-} from "../../services/reventService.js";
+} from "@/services/reventService.js";
+import Head from "next/head";
+import Router from "next/router";
+import { useState } from "react";
 import styles from "../../styles/Home.module.css";
 
 export default function contest({ contestId, submissions, userList }) {
