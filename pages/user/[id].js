@@ -1,17 +1,14 @@
-import Layout from "../../services/Layout.js";
-import { getUser } from "../../services/utils.js";
-
-const DECODE_PREFIX = "data:image/png;base64,";
+import { getUser } from "@/services/reventService.js";
 
 export default function contest({ user }) {
   return (
-    <Layout>
+    <div>
       <p>
         Name: {user.first_name} {user.last_name}
       </p>
       <p>Email: {user.email}</p>
       <p>Date joined: {user.date_joined}</p>
-    </Layout>
+    </div>
   );
 }
 

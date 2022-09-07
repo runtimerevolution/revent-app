@@ -35,7 +35,7 @@ export async function getUserList() {
 }
 
 export async function getUser(id) {
-  return fetchEndpoint("users/" + id, NEXT_PUBLIC_GET);
+  return fetchEndpoint("users/" + id, GET);
 }
 
 export async function getSubmissionsFromContest(id) {
