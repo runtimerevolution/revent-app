@@ -4,7 +4,7 @@ import styles from "../styles/Home.module.css";
 import { useState } from "react";
 
 const DECODE_PREFIX = "data:image/png;base64,";
-const API = "http://127.0.0.1:8000/photo/";
+const API = "http://127.0.0.1:8000/api/";
 
 async function getSubmissionListWithContest() {
   return fetch(API + "submissions/", {
