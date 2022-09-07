@@ -1,31 +1,23 @@
-import Image from "next/image";
-import Link from "next/link";
+import Head from "next/head";
 import Router from "next/router";
 import { useState } from "react";
-import Layout from "../../services/Layout.js";
+import BlurImage from "../../components/BlurImage.js";
+import { imageToUrl } from "../../services/imageDecoderService.js";
 import {
   getSubmissionsFromContest,
   getUserList,
   postSubmission,
-} from "../../services/utils.js";
-
-const DECODE_PREFIX = "data:image/png;base64,";
+} from "../../services/reventService.js";
+import styles from "../../styles/Home.module.css";
 
 export default function contest({ contestId, submissions, userList }) {
   const [createObjectURL, setCreateObjectURL] = useState(null);
   const [submissionDescription, setSubmissionDescription] = useState("");
 
   // Uploads photo to show before submitting to server
-  function uploadToClient(event) {
+  function loadImage(event) {
     if (event.target.files && event.target.files[0]) {
-      const i = event.target.files[0];
-      const reader = new FileReader();
-
-      reader.onloadend = () => {
-        setCreateObjectURL(reader.result);
-      };
-
-      reader.readAsDataURL(i);
+      imageToUrl(event.target.files[0], (result) => setCreateObjectURL(result));
     }
   }
 
@@ -35,6 +27,7 @@ export default function contest({ contestId, submissions, userList }) {
 
   async function uploadToServer() {
     const body = new FormData();
+    // TODO add when auth is done
     body.append("user", "5d2ee9f3-7f36-4861-ad59-4297aa96f932");
     body.append("contest", contestId);
     body.append("content", createObjectURL);
@@ -103,33 +96,6 @@ export async function getServerSideProps(context) {
       userList,
     },
   };
-}
-
-function BlurImage({ contestId, submissionId, url, user, description }) {
-  const [isLoading, setLoading] = useState(true);
-  if (!url.includes("data:image") && !url.includes("blob"))
-    url = DECODE_PREFIX + url;
-
-  return (
-    <div className="w-full h-5/6">
-      <Link href={`/contest/${contestId}/submission/${submissionId}`}>
-        <div className="w-full h-full bg-gray-200 rounded-lg overflow-hidden relative">
-          <Image
-            alt=""
-            src={url}
-            sizes="100%"
-            layout="fill"
-            objectfit="contain"
-            className="object-contain"
-            onLoadingComplete={() => setLoading(false)}
-          />
-        </div>
-      </Link>
-
-      <h3 className="mt-4 text-sm text-gray-700">{user}</h3>
-      <p className="mt-1 text-lg font-medium text-gray-900">{description}</p>
-    </div>
-  );
 }
 
 function getUserName(userUUID, userList) {
