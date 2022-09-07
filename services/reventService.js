@@ -1,21 +1,21 @@
-const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
-const NEXT_PUBLIC_GET = process.env.NEXT_PUBLIC_GET;
-const NEXT_PUBLIC_POST = process.env.NEXT_PUBLIC_POST;
+const { NEXT_PUBLIC_API_URL } = process.env;
+const GET = "GET";
+const POST = "POST";
 
 export async function fetchEndpoint(endpoint, method, ...args) {
-  if (method == NEXT_PUBLIC_GET) {
+  if (method == GET) {
     return fetch(NEXT_PUBLIC_API_URL + endpoint, {
-      method: NEXT_PUBLIC_GET,
+      method: GET,
       headers: {
         "Content-Type": "application/json",
       },
     }).then((data) => {
       return data.json();
     });
-  } else if (method == NEXT_PUBLIC_POST) {
+  } else if (method == POST) {
     const body = args[0];
     return fetch(NEXT_PUBLIC_API_URL + endpoint, {
-      method: NEXT_PUBLIC_POST,
+      method: POST,
       mode: "cors",
       body,
     }).then((data) => data.json());
@@ -23,17 +23,17 @@ export async function fetchEndpoint(endpoint, method, ...args) {
 }
 
 export async function getSubmissionList() {
-  return fetchEndpoint("submissions/", NEXT_PUBLIC_GET);
+  return fetchEndpoint("submissions/", GET);
 }
 
 export async function postSubmission(body) {
-  return fetchEndpoint("submissions/", NEXT_PUBLIC_POST, body);
+  return fetchEndpoint("submissions/", POST, body);
 }
 
 export async function getUserList() {
-  return fetchEndpoint("users/", NEXT_PUBLIC_GET);
+  return fetchEndpoint("users/", GET);
 }
 
 export async function getSubmissionsFromContest(id) {
-  return fetchEndpoint("contests/" + id, NEXT_PUBLIC_GET);
+  return fetchEndpoint("contests/" + id, GET);
 }
