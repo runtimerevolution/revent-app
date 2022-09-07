@@ -1,7 +1,6 @@
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../../styles/Home.module.css";
-import { useState } from "react";
+import {
+    getContestList,
+} from "@/services/reventService.js";
 
 function RenderContest(props) {
     const { contest } = props
@@ -44,19 +43,17 @@ export default function Home(props) {
     );
 }
 
-const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
-async function getContestList() {
-    return fetch(NEXT_PUBLIC_API_URL + "contests/", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    }).then((data) => data.json());
-}
 
+export async function getServerSideProps() {
 
-export async function getStaticProps() {
-    const contestList = await getContestList();
+    let contestList = null;
+
+    try {
+        contestList = await getContestList();
+    } catch (err) {
+        console.log("Error", err)
+    }
+
     return {
         props: {
             contestList,
