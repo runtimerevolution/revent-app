@@ -89,8 +89,8 @@ export default function contest({ contestId, submissions, userList }) {
 
 export async function getServerSideProps(context) {
   let contestId = context.params.id;
-  let submissions;
-  let userList;
+  let submissions = null;
+  let userList = null;
   try {
     submissions = await getSubmissionsFromContest(contestId);
     userList = await getUserList();
