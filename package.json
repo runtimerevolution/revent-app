@@ -1,41 +1,41 @@
 {
-	"name": "photo-contest",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"start": "next start",
-		"lint": "next lint",
-		"test": "jest",
-		"prepare": "husky install"
-	},
-	"dependencies": {
-		"jotai": "^1.6.2",
-		"next": "12.1.4",
-		"react": "17.0.2",
-		"react-dom": "17.0.2",
-		"react-hook-form": "^7.29.0",
-		"react-query": "^3.34.19"
-	},
-	"devDependencies": {
-		"eslint": "^8.23.0",
-		"eslint-config-next": "12.1.4",
-		"eslint-config-prettier": "8.5.0",
-		"eslint-config-standard": "^17.0.0",
-		"eslint-plugin-import": "^2.26.0",
-		"eslint-plugin-n": "^15.2.5",
-		"eslint-plugin-promise": "^6.0.1",
-		"eslint-plugin-react": "^7.31.7",
-		"husky": "^8.0.0",
-		"jest": "^27.5.1",
-		"lint-staged": "^13.0.3",
-		"prettier": "2.7.1"
-	},
-	"lint-staged": {
-		"**/*.{js,jsx,ts,tsx}": [
-			"npx prettier --write",
-			"npx eslint --fix"
-		]
-	}
+  "name": "photo-contest",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "jest",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "jotai": "^1.6.2",
+    "next": "12.1.4",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-hook-form": "^7.29.0",
+    "react-query": "^3.34.19"
+  },
+  "devDependencies": {
+    "eslint": "^8.23.0",
+    "eslint-config-next": "12.1.4",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.5",
+    "eslint-plugin-promise": "^6.0.1",
+    "eslint-plugin-react": "^7.31.7",
+    "husky": "^8.0.0",
+    "jest": "^27.5.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "2.7.1"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx}": [
+      "npx prettier --write",
+      "npx eslint --fix"
+    ]
+  }
 }
