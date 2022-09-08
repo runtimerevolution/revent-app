@@ -1,12 +1,12 @@
-import BlurImage from "@/components/BlurImage";
-import { imageToUrl } from "@/services/imageDecoderService.js";
+import BlurImage from "components/BlurImage";
+import Router from "next/router";
+import { useState } from "react";
+import { imageToUrl } from "services/imageDecoderService.js";
 import {
   getSubmissionsFromContest,
   getUserList,
   postSubmission,
-} from "@/services/reventService.js";
-import Router from "next/router";
-import { useState } from "react";
+} from "services/reventService.js";
 
 export default function contest({ contestId, submissions, userList }) {
   const [createObjectURL, setCreateObjectURL] = useState(null);
