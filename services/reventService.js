@@ -34,6 +34,10 @@ export async function getUserList() {
   return fetchEndpoint("users/", GET);
 }
 
+export async function getUser(id) {
+  return fetchEndpoint("users/" + id, GET);
+}
+
 export async function getSubmissionsFromContest(id) {
   return fetchEndpoint("contests/" + id, GET);
 }
