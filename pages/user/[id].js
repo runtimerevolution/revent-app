@@ -1,4 +1,4 @@
-import { getUser } from "services/reventService.js";
+import { getUser } from 'services/reventService.js'
 
 export default function contest({ user }) {
   return (
@@ -9,20 +9,20 @@ export default function contest({ user }) {
       <p>Email: {user.email}</p>
       <p>Date joined: {user.date_joined}</p>
     </div>
-  );
+  )
 }
 
 export async function getServerSideProps(context) {
-  let contestId = context.params.id;
-  let user;
+  let contestId = context.params.id
+  let user
   try {
-    user = await getUser(contestId);
+    user = await getUser(contestId)
   } catch (err) {
-    console.log(err);
+    console.log(err)
   }
   return {
     props: {
       user,
     },
-  };
+  }
 }

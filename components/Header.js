@@ -1,5 +1,5 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import Head from 'next/head'
+import styles from '../styles/Home.module.css'
 
 const Header = () => {
   return (
@@ -10,7 +10,7 @@ const Header = () => {
 
       <h1 className={styles.title}>Welcome to Revent!</h1>
     </div>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
