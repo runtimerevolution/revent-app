@@ -1,4 +1,4 @@
-import { getUser } from "@/services/reventService.js";
+import { getUser } from "services/reventService.js";
 
 export default function contest({ user }) {
   return (
