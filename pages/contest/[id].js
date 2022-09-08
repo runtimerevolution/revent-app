@@ -1,6 +1,4 @@
 import BlurImage from 'components/BlurImage'
-import Head from 'next/head'
-import Image from 'next/image'
 import Router from 'next/router'
 import PropTypes from 'prop-types'
 import { useState } from 'react'
@@ -10,7 +8,6 @@ import {
   getUserList,
   postSubmission,
 } from 'services/reventService.js'
-import styles from '../../styles/Home.module.css'
 
 export default function Contest({ contestId, submissions, userList }) {
   const [createObjectURL, setCreateObjectURL] = useState(null)
@@ -38,53 +35,45 @@ export default function Contest({ contestId, submissions, userList }) {
   }
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Revent</title>
-      </Head>
+    <div>
+      <div className='grid grid-cols-3 gap-4'>
+        {submissions.map(({ id, user, content, description }) => (
+          <div className='w-96 h-96 relative' key={id}>
+            <BlurImage
+              key={id}
+              contestId={contestId}
+              submissionId={id}
+              user={getUserName(user, userList)}
+              url={content}
+              description={description}
+            />
+          </div>
+        ))}
+      </div>
+      <div>
+        <h4>Select Image</h4>
+        <input type='file' name='myImage' onChange={loadImage} />
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>Welcome to Revent!</h1>
-        <div className='grid grid-cols-3 gap-4'>
-          {submissions.map(({ id, user, content, description }) => (
-            <div className='w-96 h-96 relative' key={id}>
-              <BlurImage
-                key={id}
-                contestId={contestId}
-                submissionId={id}
-                user={getUserName(user, userList)}
-                url={content}
-                description={description}
-              />
-            </div>
-          ))}
-        </div>
-        <div>
-          <h4>Select Image</h4>
-          <input type='file' name='myImage' onChange={loadImage} />
-
-          {createObjectURL && (
-            <div>
-              <p>Description:</p>
-              <input
-                type='text'
-                name='description'
-                className='w-96 border-2 border-b-black'
-                onChange={changeDescription}
-              />
-              <Image className='w-96 h-96' src={createObjectURL} />
-              <button
-                className='btn btn-primary w-96 border-2 border-black'
-                type='submit'
-                onClick={() => uploadToServer({ id: 'ID' })}
-              >
-                Send to server
-              </button>
-            </div>
-          )}
-        </div>
-      </main>
-      <footer className={styles.footer}></footer>
+        {createObjectURL && (
+          <div>
+            <p>Description:</p>
+            <input
+              type='text'
+              name='description'
+              className='w-96 border-2 border-b-black'
+              onChange={changeDescription}
+            />
+            <img className='w-96 h-96' src={createObjectURL} />
+            <button
+              className='btn btn-primary w-96 border-2 border-black'
+              type='submit'
+              onClick={() => uploadToServer({ id: 'ID' })}
+            >
+              Send to server
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
