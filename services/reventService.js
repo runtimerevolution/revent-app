@@ -41,3 +41,7 @@ export async function getUser(id) {
 export async function getSubmissionsFromContest(id) {
   return fetchEndpoint('contests/' + id, GET)
 }
+
+export async function getContestList() {
+  return fetchEndpoint("contests/", GET);
+}
