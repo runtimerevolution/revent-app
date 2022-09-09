@@ -1,6 +1,6 @@
 import {
     getContestList,
-} from "@/services/reventService.js";
+} from "/services/reventService.js";
 
 function RenderContest(props) {
     const { contest } = props

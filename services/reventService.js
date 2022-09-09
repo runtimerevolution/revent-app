@@ -42,15 +42,6 @@ export async function getSubmissionsFromContest(id) {
   return fetchEndpoint('contests/' + id, GET)
 }
 
-// export async function getContestList() {
-//   return fetchEndpoint("contests/", GET);
-// }
-
 export async function getContestList() {
-  return fetch(NEXT_PUBLIC_API_URL + "contests/", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then((data) => data.json());
+  return fetchEndpoint("contests/", GET);
 }
