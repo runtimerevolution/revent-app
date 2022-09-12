@@ -1,17 +1,14 @@
-import Layout from 'components/Layout'
+import React from 'react'
+//import Layout from 'components/Layout'
 import PropTypes from 'prop-types'
-import styles from 'styles/globals.css'
+//import styles from 'styles/globals.css'
 
-function MyApp({ Component, pageProps }) {
-  return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
-  )
+function MyApp() {
+  return <h1>Hello world React!</h1>
 }
 
 MyApp.propTypes = {
-  Component: PropTypes.elementType.isRequired,
+  Component: PropTypes.elementType,
   pageProps: PropTypes.shape({
     // your custom props here
   }),
