@@ -1,7 +1,9 @@
+import React from 'react'
+
 const Footer = () => {
   return (
     <div>
-      <footer /*className={styles.footer}*/></footer>
+      <footer /*className={styles.footer}*/>FOOTER</footer>
     </div>
   )
 }

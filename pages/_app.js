@@ -1,10 +1,15 @@
 import React from 'react'
-//import Layout from 'components/Layout'
+import Layout from 'components/Layout'
 import PropTypes from 'prop-types'
-//import styles from 'styles/globals.css'
+// eslint-disable-next-line
+import styles from 'styles/globals.css'
 
-function MyApp() {
-  return <h1>Hello world React!</h1>
+function MyApp({ Component, pageProps }) {
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  )
 }
 
 MyApp.propTypes = {
