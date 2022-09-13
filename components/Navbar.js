@@ -1,94 +1,200 @@
-import { useState } from 'react'
+import { Fragment } from 'react'
+import { Disclosure, Menu, Transition } from '@headlessui/react'
+import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { PlusIcon } from '@heroicons/react/20/solid'
 
-export default function Navbar() {
+const user = {
+  name: 'Tom Cook',
+  email: 'tom@example.com',
+  imageUrl:
+    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+}
+const navigation = [
+  { name: 'Photo Contests', href: '#', current: true },
+  { name: 'Challenges', href: '#', current: false },
+]
+const userNavigation = [
+  { name: 'Your Profile', href: '#' },
+  { name: 'Settings', href: '#' },
+  { name: 'Sign out', href: '#' },
+]
 
-    const [active, setActive] = useState(true);
-
-    const handleClick = () => {
-        setActive(!active);
-    };
-    return (
-
-        <nav className="relative bg-white shadow dark:bg-gray-800">
-            <div className="container px-6 py-4 mx-auto">
-                <div className="lg:flex lg:items-center lg:justify-between">
-                    <div className="flex items-center justify-between">
-                        <div className="text-xl font-semibold text-gray-700">
-                            <a className="text-2xl font-bold text-gray-800 transition-colors duration-300 transform dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300" href="#">Cleek</a>
-                        </div>
-
-                        {/* Mobile menu button */}
-                        <div className="flex lg:hidden">
-                            <button onClick={handleClick} type="button" className="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400" aria-label="toggle menu">
-                                <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
-                                    </svg>
-
-                                    <svg x-show="isOpen" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* Mobile Menu open: "block", Menu closed: "hidden" */}
-                    {/* className={active ? "active" : "null"} */}
-                    <div className="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center">
-
-                        <div className="invisible lg:visible flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
-                            <a href="#" className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Photo Contests</a>
-                            <a href="#" className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Challenges</a>
-                        </div>
-
-
-                        <div className="flex items-center mt-4 lg:mt-0">
-                            <button className="hidden mx-4 text-gray-600 transition-colors duration-300 transform lg:block dark:text-gray-200 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400 focus:outline-none" aria-label="show notifications">
-                                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15 17H20L18.5951 15.5951C18.2141 15.2141 18 14.6973 18 14.1585V11C18 8.38757 16.3304 6.16509 14 5.34142V5C14 3.89543 13.1046 3 12 3C10.8954 3 10 3.89543 10 5V5.34142C7.66962 6.16509 6 8.38757 6 11V14.1585C6 14.6973 5.78595 15.2141 5.40493 15.5951L4 17H9M15 17V18C15 19.6569 13.6569 21 12 21C10.3431 21 9 19.6569 9 18V17M15 17H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </button>
-
-                            <button type="button" className="flex items-center focus:outline-none" aria-label="toggle profile dropdown">
-                                <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
-                                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" classNameName="object-cover w-full h-full" alt="avatar" />
-                                </div>
-
-                                <h3 className="mx-2 text-gray-700 dark:text-gray-200 lg:hidden">Khatab wedaa</h3>
-                            </button>
-                        </div>
-
-                        <div className={active ? "visible" : "hidden"} >
-                            <div className="lg:hidden" >
-                                <div className="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
-                                    <a href="#" className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Photo Contests1</a>
-                                    <a href="#" className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Challenges</a>
-                                </div>
-
-
-                                <div className="flex items-center mt-4 lg:mt-0">
-                                    <button className="hidden mx-4 text-gray-600 transition-colors duration-300 transform lg:block dark:text-gray-200 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400 focus:outline-none" aria-label="show notifications">
-                                        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M15 17H20L18.5951 15.5951C18.2141 15.2141 18 14.6973 18 14.1585V11C18 8.38757 16.3304 6.16509 14 5.34142V5C14 3.89543 13.1046 3 12 3C10.8954 3 10 3.89543 10 5V5.34142C7.66962 6.16509 6 8.38757 6 11V14.1585C6 14.6973 5.78595 15.2141 5.40493 15.5951L4 17H9M15 17V18C15 19.6569 13.6569 21 12 21C10.3431 21 9 19.6569 9 18V17M15 17H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </button>
-
-                                    <button type="button" className="flex items-center focus:outline-none" aria-label="toggle profile dropdown">
-                                        <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
-                                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" classNameName="object-cover w-full h-full" alt="avatar" />
-                                        </div>
-
-                                        <h3 className="mx-2 text-gray-700 dark:text-gray-200 lg:hidden">Khatab wedaa</h3>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div >
-        </nav >
-    )
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
 }
 
-// export default Navbar
+export default function Navbar() {
+  return (
+    <Disclosure as='nav' className='bg-gray-100'>
+      {({ open }) => (
+        <>
+          <div className='mx-auto  px-4 sm:px-6 lg:px-8'>
+            <div className='flex h-16 justify-between'>
+              <div className='flex'>
+                <div className='-ml-2 mr-2 flex items-center md:hidden'>
+                  {/* Mobile menu button */}
+                  <Disclosure.Button className='inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white'>
+                    <span className='sr-only'>Open main menu</span>
+                    {open ? (
+                      <XMarkIcon className='block h-6 w-6' aria-hidden='true' />
+                    ) : (
+                      <Bars3Icon className='block h-6 w-6' aria-hidden='true' />
+                    )}
+                  </Disclosure.Button>
+                </div>
+                <div className='flex flex-shrink-0 items-center'>
+                  <a
+                    className='text-2xl font-bold text-orange-400  lg:text-3xl hover:text-orange-700 dark:hover:text-orange-500'
+                    href='#'
+                  >
+                    Cleek
+                  </a>
+                </div>
+                <div className='hidden md:ml-6 md:flex md:items-center md:space-x-4'>
+                  {navigation.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className={classNames(
+                        item.current
+                          ? 'bg-orange-400 text-white'
+                          : 'text-gray-500 hover:bg-orange-400',
+                        'px-3 py-2 rounded-md text-sm font-medium'
+                      )}
+                      aria-current={item.current ? 'page' : undefined}
+                    >
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <div className='flex items-center'>
+                {/* Profile dropdown */}
+                <Menu as='div' className='relative ml-4'>
+                  <div>
+                    <Menu.Button className='flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
+                      <span className='sr-only'>Open user menu</span>
+                      <img
+                        className='h-8 w-8 rounded-full'
+                        src={user.imageUrl}
+                        alt=''
+                      />
+                    </Menu.Button>
+                  </div>
+                  <Transition
+                    as={Fragment}
+                    enter='transition ease-out duration-200'
+                    enterFrom='transform opacity-0 scale-95'
+                    enterTo='transform opacity-100 scale-100'
+                    leave='transition ease-in duration-75'
+                    leaveFrom='transform opacity-100 scale-100'
+                    leaveTo='transform opacity-0 scale-95'
+                  >
+                    <Menu.Items className='absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+                      {userNavigation.map((item) => (
+                        <Menu.Item key={item.name}>
+                          {({ active }) => (
+                            <a
+                              href={item.href}
+                              className={classNames(
+                                active ? 'bg-gray-100' : '',
+                                'block px-4 py-2 text-sm text-gray-700'
+                              )}
+                            >
+                              {item.name}
+                            </a>
+                          )}
+                        </Menu.Item>
+                      ))}
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
+                <div className='hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center'>
+                  <button
+                    type='button'
+                    className='rounded-full p-1 text-orange-400 hover:text-orange-600 focus:outline-none'
+                  >
+                    <span className='sr-only'>View notifications</span>
+                    <BellIcon className='h-6 w-6' aria-hidden='true' />
+                  </button>
+                </div>
+                <div className='flex-shrink-0 ml-4 '>
+                  <button
+                    type='button'
+                    className='relative inline-flex items-center rounded-md border border-transparent bg-orange-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-800'
+                  >
+                    <PlusIcon
+                      className='-ml-1 mr-2 h-5 w-5'
+                      aria-hidden='true'
+                    />
+                    <span>Upload</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <Disclosure.Panel className='md:hidden'>
+            <div className='space-y-1 px-2 pt-2 pb-3 sm:px-3'>
+              {navigation.map((item) => (
+                <Disclosure.Button
+                  key={item.name}
+                  as='a'
+                  href={item.href}
+                  className={classNames(
+                    item.current
+                      ? 'bg-gray-900 text-white'
+                      : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                    'block px-3 py-2 rounded-md text-base font-medium'
+                  )}
+                  aria-current={item.current ? 'page' : undefined}
+                >
+                  {item.name}
+                </Disclosure.Button>
+              ))}
+            </div>
+            <div className='border-t border-gray-700 pt-4 pb-3'>
+              <div className='flex items-center px-5 sm:px-6'>
+                <div className='flex-shrink-0'>
+                  <img
+                    className='h-10 w-10 rounded-full'
+                    src={user.imageUrl}
+                    alt=''
+                  />
+                </div>
+                <div className='ml-3'>
+                  <div className='text-base font-medium text-white'>
+                    {user.name}
+                  </div>
+                  <div className='text-sm font-medium text-gray-400'>
+                    {user.email}
+                  </div>
+                </div>
+                <button
+                  type='button'
+                  className='ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'
+                >
+                  <span className='sr-only'>View notifications</span>
+                  <BellIcon className='h-6 w-6' aria-hidden='true' />
+                </button>
+              </div>
+              <div className='mt-3 space-y-1 px-2 sm:px-3'>
+                {userNavigation.map((item) => (
+                  <Disclosure.Button
+                    key={item.name}
+                    as='a'
+                    href={item.href}
+                    className='block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white'
+                  >
+                    {item.name}
+                  </Disclosure.Button>
+                ))}
+              </div>
+            </div>
+          </Disclosure.Panel>
+        </>
+      )}
+    </Disclosure>
+  )
+}
