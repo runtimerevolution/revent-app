@@ -5,9 +5,9 @@ import React from 'react'
 
 const Layout = ({ children }) => {
   return (
-    <div /*className={styles.container}*/>
+    <div>
       <Header />
-      <main /*className={styles.main}*/>{children}</main>
+      <main>{children}</main>
       <Footer />
     </div>
   )
