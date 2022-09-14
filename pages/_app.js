@@ -1,5 +1,8 @@
-import PropTypes from 'prop-types'
+import React from 'react'
 import Layout from 'components/Layout'
+import PropTypes from 'prop-types'
+// eslint-disable-next-line
+import styles from 'styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -10,7 +13,7 @@ function MyApp({ Component, pageProps }) {
 }
 
 MyApp.propTypes = {
-  Component: PropTypes.elementType.isRequired,
+  Component: PropTypes.elementType,
   pageProps: PropTypes.shape({
     // your custom props here
   }),

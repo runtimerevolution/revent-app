@@ -40,8 +40,8 @@ export default function BlurImage({
 }
 
 BlurImage.propTypes = {
-  contestId: PropTypes.number,
-  submissionId: PropTypes.number,
+  contestId: PropTypes.string,
+  submissionId: PropTypes.string,
   url: PropTypes.string,
   user: PropTypes.string,
   description: PropTypes.string,

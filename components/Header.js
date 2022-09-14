@@ -1,14 +1,9 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import React from 'react'
 
 const Header = () => {
   return (
     <div>
-      <Head>
-        <title>Revent</title>
-      </Head>
-
-      <h1 className={styles.title}>Welcome to Revent!</h1>
+      <h1>Welcome to Revent!</h1>
     </div>
   )
 }

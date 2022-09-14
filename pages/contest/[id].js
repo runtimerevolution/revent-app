@@ -103,7 +103,7 @@ function getUserName(userUUID, userList) {
 }
 
 Contest.propTypes = {
-  contestId: PropTypes.number,
-  submissions: PropTypes.object,
-  userList: PropTypes.object,
+  contestId: PropTypes.string,
+  submissions: PropTypes.array,
+  userList: PropTypes.array,
 }
