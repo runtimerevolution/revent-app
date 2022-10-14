@@ -37,7 +37,7 @@ export default function Contest({ contestId, submissions, userList }) {
   return (
     <div>
       <div className='grid grid-cols-3 gap-4'>
-        {submissions.map(({ id, user, content, description }) => (
+        {submissions?.map(({ id, user, content, description }) => (
           <div className='w-96 h-96 relative' key={id}>
             <BlurImage
               key={id}
