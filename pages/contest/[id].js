@@ -34,10 +34,12 @@ export default function Contest({ contestId, submissions, userList }) {
     postSubmission(body).then(() => Router.reload(window.location.pathname))
   }
 
+  if (!submissions) return <h2>No Contests Data</h2>
+
   return (
     <div>
       <div className='grid grid-cols-3 gap-4'>
-        {submissions.map(({ id, user, content, description }) => (
+        {submissions?.map(({ id, user, content, description }) => (
           <div className='w-96 h-96 relative' key={id}>
             <BlurImage
               key={id}
@@ -99,6 +101,7 @@ export async function getServerSideProps(context) {
 
 function getUserName(userUUID, userList) {
   const result = userList.find((user) => user.id === userUUID)
+  if (!result) return 'Name not found!'
   return result.first_name + ' ' + result.last_name
 }
 
