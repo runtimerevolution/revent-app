@@ -14,12 +14,12 @@ export default function BlurImage({
 }) {
   // TODO add loading image logic
   // const [isLoading, setLoading] = useState(true)
-  if (!url.includes('data:image') && !url.includes('blob'))
+  if (!url?.includes('data:image') && !url?.includes('blob'))
     url = NEXT_PUBLIC_DECODE_PREFIX + url
 
   return (
     <div className='w-full h-5/6'>
-      <Link href={`/contest/${contestId}/submission/${submissionId}`}>
+      <Link passHref href={`/contest/${contestId}/submission/${submissionId}`}>
         <div className='w-full h-full bg-gray-200 rounded-lg overflow-hidden relative'>
           <Image
             alt=''
