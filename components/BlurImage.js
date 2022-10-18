@@ -3,7 +3,7 @@ import Link from 'next/link'
 import PropTypes from 'prop-types'
 //import { useState } from 'react'
 
-const { NEXT_PUBLIC_DECODE_PREFIX } = process.env
+//const { NEXT_PUBLIC_DECODE_PREFIX } = process.env
 
 export default function BlurImage({
   contestId,
@@ -15,7 +15,7 @@ export default function BlurImage({
   // TODO add loading image logic
   // const [isLoading, setLoading] = useState(true)
   if (!url?.includes('data:image') && !url?.includes('blob'))
-    url = NEXT_PUBLIC_DECODE_PREFIX + url
+    url = 'data:image/png;base64,' + url // use instead of string NEXT_PUBLIC_DECODE_PREFIX
 
   return (
     <div className='w-full h-5/6'>
