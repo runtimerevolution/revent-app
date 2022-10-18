@@ -1,4 +1,3 @@
-
 ## Dockerfile setup
 
 ```shell
@@ -20,7 +19,7 @@ WORKDIR /app
 Set the working directory to /app
 
 ```shell
-COPY package.json package-lock.json ./ 
+COPY package.json package-lock.json ./
 ```
 
 Copies the `package.json` and `package-lock.json`.

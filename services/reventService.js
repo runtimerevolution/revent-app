@@ -43,5 +43,5 @@ export async function getSubmissionsFromContest(id) {
 }
 
 export async function getContestList() {
-  return fetchEndpoint("contests/", GET);
+  return fetchEndpoint('contests/', GET)
 }
