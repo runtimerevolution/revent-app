@@ -16,14 +16,18 @@ export default function BlurImage({
     <div className='w-full h-5/6'>
       <Link passHref href={`/contest/${contestId}/submission/${submissionId}`}>
         <div className='w-full h-full bg-gray-200 rounded-lg overflow-hidden relative'>
-          <Image
-            alt=''
-            src={url}
-            sizes='100%'
-            layout='fill'
-            objectfit='contain'
-            className='object-contain'
-          />
+          {url == process.env.NEXT_PUBLIC_DECODE_PREFIX + 'undefined' ? (
+            <p>Undefined image</p>
+          ) : (
+            <Image
+              alt=''
+              src={url}
+              sizes='100%'
+              layout='fill'
+              objectfit='contain'
+              className='object-contain'
+            />
+          )}
         </div>
       </Link>
 
