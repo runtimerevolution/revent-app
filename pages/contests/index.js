@@ -42,7 +42,6 @@ export default function Home(props) {
         </main>
       </div>
     </div>
-    // {/* </BrowserRouter> */}
   )
 }
 
