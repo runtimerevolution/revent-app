@@ -1,7 +1,5 @@
 import { getContestList } from '/services/reventService.js'
 import PropTypes from 'prop-types'
-// import {BrowserRouter as Link} from 'react-router-dom';
-// const Link = require("react-router-dom").Link;
 export default function Home() {
   return (
     <div className='p-8 bg-gray-300'>

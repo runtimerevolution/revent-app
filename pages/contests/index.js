@@ -1,6 +1,5 @@
 import { getContestList } from '/services/reventService.js'
 import PropTypes from 'prop-types'
-// import { BrowserRouter, Link } from 'react-router-dom'
 import Link from 'next/link'
 
 function RenderContest(props) {
@@ -32,7 +31,6 @@ function RenderContest(props) {
 export default function Home(props) {
   const { contestList } = props
   return (
-    // <BrowserRouter>
     <div className='p-8 bg-gray-300'>
       <div className='px-8'>
         <main className='min-h-screen py-8 px-20 flex-1 flex flex-col'>
