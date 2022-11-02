@@ -29,7 +29,7 @@ export default function Contest({ contestId, submissions, userList }) {
     // TODO add when auth is done
     body.append('user', '5d2ee9f3-7f36-4861-ad59-4297aa96f932')
     body.append('contest', contestId)
-    body.append('content', createObjectURL)
+    body.append('url', createObjectURL)
     body.append('description', submissionDescription)
     postSubmission(body).then(() => Router.reload(window.location.pathname))
   }
@@ -44,14 +44,14 @@ export default function Contest({ contestId, submissions, userList }) {
   return (
     <div>
       <div className='grid grid-cols-3 gap-4'>
-        {submissions?.map(({ id, user, content, description }) => (
+        {[submissions]?.map(({ id, user, url, description }) => (
           <div className='w-96 h-96 relative' key={id}>
             <BlurImage
               key={id}
               contestId={contestId}
               submissionId={id}
               user={getUserName(user, userList)}
-              url={content}
+              url={url}
               description={description}
             />
           </div>
