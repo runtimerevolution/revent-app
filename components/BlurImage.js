@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
-//import { useState } from 'react'
+import { useState } from 'react'
 
 const { NEXT_PUBLIC_DECODE_PREFIX } = process.env
 
@@ -12,10 +12,12 @@ export default function BlurImage({
   user,
   description,
 }) {
-  // TODO add loading image logic
-  // const [isLoading, setLoading] = useState(true)
   if (!url?.includes('data:image') && !url?.includes('blob'))
     url = NEXT_PUBLIC_DECODE_PREFIX + url
+  const [isLoading, setLoading] = useState(true)
+  const style = 'group-hover:opacity-75 duration-700 ease-in-out'.concat(
+    isLoading ? 'grayscale blur-2xl scale-110' : 'grayscale-0 blur-0 scale-100'
+  )
 
   return (
     <div className='w-full h-5/6'>
@@ -27,8 +29,8 @@ export default function BlurImage({
             sizes='100%'
             layout='fill'
             objectfit='contain'
-            className='object-contain'
-            //onLoadingComplete={() => setLoading(false)}
+            className={style}
+            onLoadingComplete={() => setLoading(false)}
           />
         </div>
       </Link>
