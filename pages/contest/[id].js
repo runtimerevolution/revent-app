@@ -41,13 +41,6 @@ export default function Contest({ contestId, submissions, userList }) {
   )
     return <h2>This Contests Was Not Found!</h2>
 
-  if (
-    !submissions ||
-    submissions.detail == 'Not found.' ||
-    submissions[0]?.detail == 'Not found.'
-  )
-    return <h2>This Contests Was Not Found!</h2>
-
   return (
     <div>
       <div className='grid grid-cols-3 gap-4'>
