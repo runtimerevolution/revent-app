@@ -39,7 +39,7 @@ export async function getUser(id) {
 }
 
 export async function getSubmissionsFromContest(id) {
-  return fetchEndpoint('contests/' + id, GET)
+  return fetchEndpoint('submissions/?contest=' + id, GET)
 }
 
 export async function getContestList() {
