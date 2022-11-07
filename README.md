@@ -62,6 +62,7 @@ npm install --save-dev jest
 
 After the installation is complete:
 
+- Create a new file named .env and copy the contents from the .env.sample file to it
 - Run `npm run dev` to start the development server
 - Visit `http://localhost:3000` to view the application
 - Start coding! :)
