@@ -17,6 +17,38 @@
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": false,
+    "printWidth": 80,
+    "semi": false,
+    "trailingComma": "es5",
+    "jsxSingleQuote": true,
+    "singleQuote": true
+  },
+  "eslintConfig": {
+    "env": {
+      "jest": true,
+      "browser": true,
+      "es2021": true,
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:prettier/recommended"
+    ],
+    "plugins": [
+      "@typescript-eslint",
+      "prettier"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "rules": {
+      "prettier/prettier": "error",
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off"
+    }
+  },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
