@@ -1,27 +1,24 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.0.1
+    rev: v3.2.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-added-large-files
-      - id: detect-private-key
-      - id: detect-aws-credentials
-      - id: detect-terraform-docs
-  - repo: https://github.com/antonk52/pre-commit-eslint
-    rev: v1.3.1
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: v8.4.0
     hooks:
       - id: eslint
-        stages: [commit]
-        files: .js$
+        name: eslint
+        files: .
         args:
-          - --quiet
-          - --fix
-  - repo: local
+          - '--ext=.ts,.tsx'
+          - '--cache'
+          - '--fix'
+          - '--quiet'
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v2.7.1
     hooks:
       - id: prettier
-        name: prettier
-        entry: pretty-quick --staged
-        language: system
-        types: [python]
+        name: Prettier formatting check
