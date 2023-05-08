@@ -5,8 +5,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint --ext .ts,.tsx",
-    "format": "prettier --write \"/*.{ts,tsx}\"",
-    "precommit": "pre-commit run --all-files"
+    "format": "prettier --write \"/*.{ts,tsx}\""
   },
   "dependencies": {
     "apollo-client": "^2.6.10",
