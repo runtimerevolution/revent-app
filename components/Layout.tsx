@@ -1,13 +1,13 @@
 // import Footer from 'components/Footer'
-// import Header from 'components/Header'
 import PropTypes from 'prop-types'
-import React from 'react'
+import styles from '../styles/Home.module.css'
+import Navbar from './Navbar/Navbar'
 
 const Layout = ({ children }) => {
   return (
     <div>
-      {/* <Header /> */}
-      <main>{children}</main>
+      <Navbar />
+      <main className={styles.main}>{children}</main>
       {/* <Footer /> */}
     </div>
   )
