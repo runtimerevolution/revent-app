@@ -2,7 +2,6 @@ import React from 'react'
 
 export default function Contest(props) {
   const { contest } = props
-  console.log('contest', contest)
   return (
     <>
       <div className='max-w-sm rounded overflow-hidden shadow-lg'>
