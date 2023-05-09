@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
-import Contest from '../components/Contest'
-import Layout from '../components/Layout'
-import { getContestList } from '../services/reventService'
+import Contest from '../../components/Contest'
+import Layout from '../../components/Layout'
+import { getContestList } from '../../services/reventService'
 
 export default function Home(props) {
   const { contestList } = props
