@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import Contest from '../components/Contest'
 import Layout from '../components/Layout'
 import { getContestList } from '../services/reventService'
@@ -19,6 +18,13 @@ export default function Home(props) {
     setStatusFilter(status)
   }
 
+  useEffect(() => {
+    // When hiding the filters, reset them
+    if (open == false) {
+      setStatusFilter('All')
+    }
+  }, [open])
+
   return (
     <Layout>
       <div className='p-8 bg-gray-100'>
@@ -26,12 +32,44 @@ export default function Home(props) {
           <button onClick={() => setOpen(!open)}>Filters</button>
           {open && (
             <div>
-              <button onClick={() => handleStatusFilter('All')}>All</button>
-              <button onClick={() => handleStatusFilter('Open')}>Open</button>
-              <button onClick={() => handleStatusFilter('Voting')}>
+              <button
+                className={
+                  statusFilter === 'All'
+                    ? 'text-orange-500 bg-orange-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
+                    : 'text-gray-700 bg-gray-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
+                }
+                onClick={() => handleStatusFilter('All')}
+              >
+                All
+              </button>
+              <button
+                className={
+                  statusFilter === 'Open'
+                    ? 'text-orange-500 bg-orange-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
+                    : 'text-gray-700 bg-gray-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
+                }
+                onClick={() => handleStatusFilter('Open')}
+              >
+                Open
+              </button>
+              <button
+                className={
+                  statusFilter === 'Voting'
+                    ? 'text-orange-500 bg-orange-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
+                    : 'text-gray-700 bg-gray-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
+                }
+                onClick={() => handleStatusFilter('Voting')}
+              >
                 Voting
               </button>
-              <button onClick={() => handleStatusFilter('Closed')}>
+              <button
+                className={
+                  statusFilter === 'Closed'
+                    ? 'text-orange-500 bg-orange-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
+                    : 'text-gray-700 bg-gray-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
+                }
+                onClick={() => handleStatusFilter('Closed')}
+              >
                 Closed
               </button>
             </div>
@@ -64,6 +102,3 @@ export async function getServerSideProps() {
     },
   }
 }
-
-// Home.propTypes = { contestList: PropTypes.array }
-// RenderContest.propTypes = { contest: PropTypes.object }

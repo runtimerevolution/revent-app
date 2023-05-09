@@ -1,5 +1,4 @@
 import React from 'react'
-import { getContestList } from '../services/reventService'
 
 export default function Contest(props) {
   const { contest } = props
