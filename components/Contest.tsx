@@ -1,7 +1,9 @@
 import React from 'react'
+import { getContestList } from '../services/reventService'
 
 export default function Contest(props) {
   const { contest } = props
+  console.log('contest', contest)
   return (
     <>
       <div className='max-w-sm rounded overflow-hidden shadow-lg'>
@@ -18,6 +20,7 @@ export default function Contest(props) {
             <a>End date: </a>
             {contest.date_end.slice(0, 10)}
           </p>
+          <p>{contest.status}</p>
         </div>
       </div>
     </>
