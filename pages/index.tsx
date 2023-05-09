@@ -44,8 +44,8 @@ export default function Home(props) {
                 <button
                   className={
                     statusFilter === 'All'
-                      ? 'text-orange-500 bg-orange-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
-                      : 'text-gray-700 bg-gray-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
+                      ? 'text-orange-500 bg-orange-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2'
+                      : 'text-gray-700 bg-gray-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2'
                   }
                   onClick={() => handleStatusFilter('All')}
                 >
@@ -54,8 +54,8 @@ export default function Home(props) {
                 <button
                   className={
                     statusFilter === 'Open'
-                      ? 'text-orange-500 bg-orange-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
-                      : 'text-gray-700 bg-gray-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
+                      ? 'text-orange-500 bg-orange-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2'
+                      : 'text-gray-700 bg-gray-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2'
                   }
                   onClick={() => handleStatusFilter('Open')}
                 >
@@ -64,8 +64,8 @@ export default function Home(props) {
                 <button
                   className={
                     statusFilter === 'Voting'
-                      ? 'text-orange-500 bg-orange-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
-                      : 'text-gray-700 bg-gray-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
+                      ? 'text-orange-500 bg-orange-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2'
+                      : 'text-gray-700 bg-gray-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2'
                   }
                   onClick={() => handleStatusFilter('Voting')}
                 >
@@ -74,8 +74,8 @@ export default function Home(props) {
                 <button
                   className={
                     statusFilter === 'Closed'
-                      ? 'text-orange-500 bg-orange-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
-                      : 'text-gray-700 bg-gray-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
+                      ? 'text-orange-500 bg-orange-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2'
+                      : 'text-gray-700 bg-gray-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2'
                   }
                   onClick={() => handleStatusFilter('Closed')}
                 >
