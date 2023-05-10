@@ -40,7 +40,7 @@ const Navbar = () => {
                   Photo Contests
                 </a>
                 <a
-                  onClick={() => handleNavigation('/#')}
+                  onClick={() => handleNavigation('/collections')}
                   className={
                     router.pathname === '/collections'
                       ? 'text-orange-500 hover:bg-orange-700 hover:text-white px-3 py-2 rounded-md font-medium cursor-pointer'
