@@ -6,8 +6,6 @@ const SearchInput = () => {
   const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value)
   }
-  console.log('query', query)
-
   return (
     <>
       <input
