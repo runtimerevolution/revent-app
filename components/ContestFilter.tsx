@@ -15,7 +15,6 @@ function ContestFilter(props) {
     return 'text-gray-700 bg-gray-700'
   }
 
-  console.log('statusFilter', statusFilter)
   return (
     <>
       <div className='flex-row'>

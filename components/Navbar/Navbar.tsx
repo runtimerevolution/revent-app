@@ -8,9 +8,6 @@ const Navbar = () => {
     router.push(path)
   }
 
-  const contestTextColor =
-    router.pathname === '/contests' ? 'text-orange-500' : 'text-gray-700'
-
   const collectionsTextColor =
     router.pathname === '/collections' ? 'text-orange-500' : 'text-gray-700'
 
@@ -35,16 +32,6 @@ const Navbar = () => {
 
             <div className='hidden md:block'>
               <div className='ml-10 flex items-center space-x-4'>
-                <a
-                  onClick={() => handleNavigation('/contests')}
-                  className={
-                    router.pathname === '/contests'
-                      ? `${contestTextColor} hover:bg-orange-700 hover:text-white px-3 py-2 rounded-md font-medium cursor-pointer`
-                      : `${contestTextColor} hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium cursor-pointer`
-                  }
-                >
-                  Photo Contests
-                </a>
                 <a
                   onClick={() => handleNavigation('/#')}
                   className={
