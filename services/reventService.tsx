@@ -4,21 +4,23 @@ const POST = 'POST'
 
 export async function fetchEndpoint(endpoint, method, ...args) {
   if (method == GET) {
-    return fetch(NEXT_PUBLIC_API_URL + endpoint, {
+    const response = await fetch(NEXT_PUBLIC_API_URL + endpoint, {
       method: GET,
       headers: {
         'Content-Type': 'application/json',
       },
-    }).then((data) => {
-      return data.json()
     })
+    const data = await response.json()
+    return data
   } else if (method == POST) {
     const body = args[0]
-    return fetch(NEXT_PUBLIC_API_URL + endpoint, {
+    const response = await fetch(NEXT_PUBLIC_API_URL + endpoint, {
       method: POST,
       mode: 'cors',
       body,
-    }).then((data) => data.json())
+    })
+    const data = await response.json()
+    return data
   }
 }
 

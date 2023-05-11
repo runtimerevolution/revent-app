@@ -1,59 +1,63 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import SearchInput from './SearchInput'
 
-export default function ContestFilter(props) {
-  const { open, statusFilter, setStatusFilter } = props
+function ContestFilter(props) {
+  const { open, setOpen, statusFilter, setStatusFilter } = props
 
   const handleStatusFilter = (status: string) => {
     setStatusFilter(status)
   }
 
-  useEffect(() => {
-    // When hiding the filters, reset them
-    if (open == false) {
-      setStatusFilter('All')
+  const selectedFilterCSS = (filter) => {
+    if (filter === statusFilter) {
+      return 'text-orange-500 bg-orange-700'
     }
-  }, [open])
+    return 'text-gray-700 bg-gray-700'
+  }
 
+  console.log('statusFilter', statusFilter)
   return (
     <>
+      <div className='flex-row'>
+        <button
+          className='text-gray-700 bg-gray-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
+          onClick={() => setOpen(!open)}
+        >
+          Filters
+        </button>
+
+        <SearchInput />
+      </div>
       {open && (
         <div>
           <button
-            className={
-              statusFilter === 'All'
-                ? 'text-orange-500 bg-orange-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2'
-                : 'text-gray-700 bg-gray-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2'
-            }
+            className={`${selectedFilterCSS(
+              'All'
+            )} text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2`}
             onClick={() => handleStatusFilter('All')}
           >
             All
           </button>
           <button
-            className={
-              statusFilter === 'Open'
-                ? 'text-orange-500 bg-orange-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2'
-                : 'text-gray-700 bg-gray-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2'
-            }
+            className={`${selectedFilterCSS(
+              'Open'
+            )} text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2`}
             onClick={() => handleStatusFilter('Open')}
           >
             Open
           </button>
           <button
-            className={
-              statusFilter === 'Voting'
-                ? 'text-orange-500 bg-orange-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2'
-                : 'text-gray-700 bg-gray-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2'
-            }
+            className={`${selectedFilterCSS(
+              'Voting'
+            )} text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2`}
             onClick={() => handleStatusFilter('Voting')}
           >
             Voting
           </button>
           <button
-            className={
-              statusFilter === 'Closed'
-                ? 'text-orange-500 bg-orange-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2'
-                : 'text-gray-700 bg-gray-700 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2'
-            }
+            className={`${selectedFilterCSS(
+              'Closed'
+            )} text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2`}
             onClick={() => handleStatusFilter('Closed')}
           >
             Closed
@@ -63,3 +67,5 @@ export default function ContestFilter(props) {
     </>
   )
 }
+
+export default ContestFilter

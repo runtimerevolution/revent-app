@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Contest from '../../components/Contest'
 import ContestFilter from '../../components/ContestFilter'
 import Layout from '../../components/Layout'
-import SearchInput from '../../components/SearchInput'
 import { getContestList } from '../../services/reventService'
 
 export default function Home(props) {
@@ -10,7 +9,7 @@ export default function Home(props) {
 
   const [statusFilter, setStatusFilter] = useState('All')
 
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState<boolean>(false)
 
   const filteredContestList = contestList.filter(
     (contest) => statusFilter === 'All' || contest.status === statusFilter
@@ -20,17 +19,10 @@ export default function Home(props) {
       <div className='p-8 bg-gray-100'>
         <div className='px-8'>
           <div className='flex-row'>
-            <button
-              className='text-gray-700 bg-gray-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
-              onClick={() => setOpen(!open)}
-            >
-              Filters
-            </button>
-
-            <SearchInput />
             <ContestFilter
               contestList={contestList}
               open={open}
+              setOpen={setOpen}
               statusFilter={statusFilter}
               setStatusFilter={setStatusFilter}
             />
@@ -63,6 +55,3 @@ export async function getServerSideProps() {
     },
   }
 }
-
-// Home.propTypes = { contestList: PropTypes.array }
-// RenderContest.propTypes = { contest: PropTypes.object }
