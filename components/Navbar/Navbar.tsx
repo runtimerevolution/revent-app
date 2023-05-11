@@ -8,6 +8,9 @@ const Navbar = () => {
     router.push(path)
   }
 
+  const collectionsTextColor =
+    router.pathname === '/collections' ? 'text-orange-500' : 'text-gray-700'
+
   return (
     <nav className='bg-white-800 w-full'>
       <div className='max-w-12xl mx-auto px-4 sm:px-6 lg:px-8'>
@@ -43,8 +46,8 @@ const Navbar = () => {
                   onClick={() => handleNavigation('/collections')}
                   className={
                     router.pathname === '/collections'
-                      ? 'text-orange-500 hover:bg-orange-700 hover:text-white px-3 py-2 rounded-md font-medium cursor-pointer'
-                      : 'text-gray-700 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium cursor-pointer'
+                      ? `${collectionsTextColor} hover:bg-orange-700 hover:text-white px-3 py-2 rounded-md font-medium cursor-pointer`
+                      : `${collectionsTextColor} hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium cursor-pointer`
                   }
                 >
                   Collections
