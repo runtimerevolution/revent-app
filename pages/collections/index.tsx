@@ -1,5 +1,7 @@
-import Collection from '../../components/Collection'
-import Layout from '../../components/Layout'
+// import Collection from '../../components/Collection'
+import Collection from '@components/Collection'
+import Layout from '@components/Layout'
+
 import { getCollectionList } from '../../services/reventService'
 
 export default function Collections(props) {
