@@ -1,17 +1,16 @@
 import Collection from '../../components/Collection'
+import { CollectionsProps } from '../../components/helpers/interfaces'
 import Layout from '../../components/Layout'
 import { getCollectionList } from '../../services/reventService'
 
-export default function Collections(props) {
-  const { collectionList } = props
-
+export default function Collections({ collectionList }: CollectionsProps) {
   return (
     <Layout>
       <div className='p-8 bg-gray-100'>
         <div className='px-8'>
           <main className='min-h-screen py-8 px-20 flex-1 flex flex-col'>
             <div className='grid grid-cols-4 gap-4'>
-              {collectionList?.map((collection) => (
+              {collectionList.map((collection) => (
                 <Collection collection={collection} key={collection.id} />
               ))}
             </div>
@@ -23,7 +22,7 @@ export default function Collections(props) {
 }
 
 export async function getServerSideProps() {
-  let collectionList = null
+  let collectionList = []
 
   try {
     collectionList = await getCollectionList()

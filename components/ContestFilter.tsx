@@ -1,19 +1,28 @@
 import React from 'react'
+import { IFilter } from './helpers/interfaces'
 import SearchInput from './SearchInput'
 
 function ContestFilter(props) {
   const { open, setOpen, statusFilter, setStatusFilter } = props
 
-  const handleStatusFilter = (status: string) => {
-    setStatusFilter(status)
+  const handleStatusFilter = (status: IFilter) => {
+    console.log('status', typeof status)
+    setStatusFilter({ status: status })
   }
 
-  const selectedFilterCSS = (filter) => {
-    if (filter === statusFilter) {
+  const selectedFilterCSS = (filter: IFilter) => {
+    if (filter.status === statusFilter.status) {
       return 'text-orange-500 bg-orange-700'
     }
     return 'text-gray-700 bg-gray-700'
   }
+
+  const filterList: IFilter[] = [
+    { status: 'Open' },
+    { status: 'All' },
+    { status: 'Voting' },
+    { status: 'Closed' },
+  ]
 
   return (
     <>
@@ -28,40 +37,70 @@ function ContestFilter(props) {
         <SearchInput />
       </div>
       {open && (
-        <div>
-          <button
-            className={`${selectedFilterCSS(
-              'All'
-            )} text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2`}
-            onClick={() => handleStatusFilter('All')}
-          >
-            All
-          </button>
-          <button
-            className={`${selectedFilterCSS(
-              'Open'
-            )} text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2`}
-            onClick={() => handleStatusFilter('Open')}
-          >
-            Open
-          </button>
-          <button
-            className={`${selectedFilterCSS(
-              'Voting'
-            )} text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2`}
-            onClick={() => handleStatusFilter('Voting')}
-          >
-            Voting
-          </button>
-          <button
-            className={`${selectedFilterCSS(
-              'Closed'
-            )} text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2`}
-            onClick={() => handleStatusFilter('Closed')}
-          >
-            Closed
-          </button>
-        </div>
+        <>
+          {filterList.map((filter) => (
+            <button
+              key={filter.status}
+              className={`${selectedFilterCSS({
+                status: filter.status,
+              })} text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2`}
+              onClick={() => handleStatusFilter(filter.status)}
+            >
+              {filter.status}
+            </button>
+          ))}
+        </>
+        // <div>
+        //   <button
+        //     className={`${selectedFilterCSS({
+        //       status: 'Open',
+        //     })} text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2`}
+        //     onClick={() =>
+        //       handleStatusFilter({
+        //         status: 'Open',
+        //       })
+        //     }
+        //   >
+        //     Open
+        //   </button>
+        //   <button
+        // className={`${selectedFilterCSS({
+        //   status: 'All',
+        // })} text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2`}
+        //     onClick={() =>
+        //       handleStatusFilter({
+        //         status: 'All',
+        //       })
+        //     }
+        //   >
+        //     All
+        //   </button>
+
+        //   <button
+        //     className={`${selectedFilterCSS({
+        //       status: 'Voting',
+        //     })} text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2`}
+        //     onClick={() =>
+        //       handleStatusFilter({
+        //         status: 'Voting',
+        //       })
+        //     }
+        //   >
+        //     Voting
+        //   </button>
+        //   <button
+        //     className={`${selectedFilterCSS({
+        //       status: 'Closed',
+        //     })} text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2`}
+        //     onClick={() =>
+        //       handleStatusFilter({
+        //         status: 'Closed',
+        //       })
+        //     }
+        //   >
+        //     Closed
+        //   </button>
+        // </div>
       )}
     </>
   )

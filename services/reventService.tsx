@@ -10,8 +10,6 @@ export async function fetchEndpoint(endpoint, method, ...args) {
         'Content-Type': 'application/json',
       },
     })
-    const data = await response.json()
-    return data
   } else if (method == POST) {
     const body = args[0]
     const response = await fetch(NEXT_PUBLIC_API_URL + endpoint, {
@@ -19,8 +17,7 @@ export async function fetchEndpoint(endpoint, method, ...args) {
       mode: 'cors',
       body,
     })
-    const data = await response.json()
-    return data
+    return response.json()
   }
 }
 

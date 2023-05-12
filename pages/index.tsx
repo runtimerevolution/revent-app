@@ -3,16 +3,18 @@ import Layout from '../components/Layout'
 import { getContestList } from '../services/reventService'
 import React, { useState } from 'react'
 import ContestFilter from '../components/ContestFilter'
+import { HomeProps, IFilter } from '../components/helpers/interfaces'
 
-export default function Home(props) {
-  const { contestList } = props
-
-  const [statusFilter, setStatusFilter] = useState('All')
+export default function Home({ contestList }: HomeProps) {
+  const [statusFilter, setStatusFilter] = useState<IFilter>({
+    status: 'Open',
+  })
 
   const [open, setOpen] = useState<boolean>(false)
 
-  const filteredContestList = contestList.filter(
-    (contest) => statusFilter === 'All' || contest.status === statusFilter
+  let filteredContestList = contestList.filter(
+    (contest) =>
+      statusFilter.status === 'All' || contest.status === statusFilter.status
   )
 
   return (
@@ -30,8 +32,8 @@ export default function Home(props) {
           </div>
           <main className='min-h-screen py-8 px-20 flex-1 flex flex-col'>
             <div className='grid grid-cols-4 gap-4'>
-              {filteredContestList?.map((contest) => (
-                <Contest contest={contest} key={contest.id} />
+              {filteredContestList.map((contest) => (
+                <Contest contest={contest} />
               ))}
             </div>
           </main>
@@ -42,15 +44,13 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps() {
-  let contestList = null
+  let contestList = []
 
   try {
     contestList = await getContestList()
   } catch (err) {
     console.log('Error', err)
   }
-
-  contestList = contestList || []
 
   return {
     props: {

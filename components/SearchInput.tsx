@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 const SearchInput = () => {
-  const [query, setQuery] = useState('')
+  const [query, setQuery] = useState<string>('')
 
   const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value)
