@@ -6,8 +6,8 @@ function ContestFilter(props) {
   const { open, setOpen, statusFilter, setStatusFilter } = props
 
   const handleStatusFilter = (status: IFilter) => {
-    console.log('status', typeof status)
-    setStatusFilter({ status: status })
+    console.log('status', status)
+    setStatusFilter({ status: status.status })
   }
 
   const selectedFilterCSS = (filter: IFilter) => {
@@ -44,7 +44,7 @@ function ContestFilter(props) {
               className={`${selectedFilterCSS({
                 status: filter.status,
               })} text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2`}
-              onClick={() => handleStatusFilter(filter.status)}
+              onClick={() => handleStatusFilter({ status: filter.status })}
             >
               {filter.status}
             </button>
