@@ -28,8 +28,8 @@ export default function Home({ contestList }: HomeProps) {
           </div>
           <main className='min-h-screen py-8 px-20 flex-1 flex flex-col'>
             <div className='grid grid-cols-4 gap-4'>
-              {filteredContestList.map((contest) => (
-                <Contest contest={contest} />
+              {filteredContestList.map((contest, index) => (
+                <Contest contest={contest} index={index} />
               ))}
             </div>
           </main>

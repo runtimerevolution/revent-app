@@ -8,11 +8,12 @@ interface Contest {
 }
 interface ContestProps {
   contest: Contest
+  index: number
 }
 
 export default function Contest({ contest }: ContestProps) {
   return (
-    <div className='max-w-sm rounded overflow-hidden shadow-lg'>
+    <div className='max-w-sm rounded overflow-hidden shadow-lg '>
       <img className='w-full' src='/images/contest.jpeg' alt='' />
 
       <div className='px-6 py-4 text-center'>
