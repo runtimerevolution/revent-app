@@ -10,9 +10,10 @@ export default function Home({ contestList }: HomeProps) {
 
   const [open, setOpen] = useState<boolean>(false)
 
-  const filteredContestList = contestList.filter(
-    (contest) => statusFilter === 'All' || contest.status === statusFilter
-  )
+  const filteredContestList =
+    statusFilter === 'All'
+      ? contestList
+      : contestList.filter((contest) => contest.status === statusFilter)
 
   return (
     <Layout>
