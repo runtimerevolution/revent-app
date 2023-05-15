@@ -10,11 +10,12 @@ repos:
     hooks:
       - id: eslint
         name: eslint
-        files: .
+        files: ./
         args:
           - '--ext=.ts,.tsx'
           - '--cache'
           - '--fix'
+          - '--quiet'
           - --rule=no-unused-vars:error
           - './'
   - repo: https://github.com/pre-commit/mirrors-prettier
