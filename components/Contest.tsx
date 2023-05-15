@@ -1,5 +1,3 @@
-import React from 'react'
-
 interface Contest {
   name: string
   description: string

@@ -1,8 +1,7 @@
 import React from 'react'
-import Image from 'next/image'
+import { CollectionProps } from './helpers/interfaces'
 
-export default function Collection(props) {
-  const { collection } = props
+export default function Collection({ collection }: CollectionProps) {
   return (
     <>
       <div className='max-w-sm rounded overflow-hidden shadow-lg'>

@@ -1,7 +1,6 @@
-export interface IFilter {
-  status: 'All' | 'Open' | 'Voting' | 'Closed'
-}
+import React from 'react'
 
+export type IFilter = 'All' | 'Open' | 'Voting' | 'Closed'
 export interface ContestType {
   name: string
   description: string
@@ -26,4 +25,15 @@ export interface Collection {
 }
 export interface CollectionsProps {
   collectionList: Collection[]
+}
+
+export interface ContestFilterProps {
+  open: boolean
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  statusFilter: IFilter
+  setStatusFilter: React.Dispatch<React.SetStateAction<IFilter>>
+}
+
+export interface CollectionProps {
+  collection: Collection
 }

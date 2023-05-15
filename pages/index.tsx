@@ -6,15 +6,12 @@ import ContestFilter from '../components/ContestFilter'
 import { HomeProps, IFilter } from '../components/helpers/interfaces'
 
 export default function Home({ contestList }: HomeProps) {
-  const [statusFilter, setStatusFilter] = useState<IFilter>({
-    status: 'Open',
-  })
+  const [statusFilter, setStatusFilter] = useState<IFilter>('Open')
 
   const [open, setOpen] = useState<boolean>(false)
 
-  let filteredContestList = contestList.filter(
-    (contest) =>
-      statusFilter.status === 'All' || contest.status === statusFilter.status
+  const filteredContestList = contestList.filter(
+    (contest) => statusFilter === 'All' || contest.status === statusFilter
   )
 
   return (
@@ -23,7 +20,6 @@ export default function Home({ contestList }: HomeProps) {
         <div className='px-8'>
           <div className='flex-row'>
             <ContestFilter
-              contestList={contestList}
               open={open}
               setOpen={setOpen}
               statusFilter={statusFilter}
