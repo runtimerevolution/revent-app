@@ -17,7 +17,7 @@ export default function Contest({ contest }: ContestProps) {
         <div className='font-bold text-xl mb-2'>{contest.name}</div>
         <p className='text-gray-700 text-base'>{contest.description}</p>
         <p className='text-gray-700 text-base'>
-          <a>End date: </a>
+          <a>End date123: </a>
           {contest.date_end.slice(0, 10)}
         </p>
         <p>{contest.status}</p>
