@@ -6,7 +6,7 @@ export interface ContestType {
   description: string
   date_start: string
   date_end: string
-  status: string
+  status: IFilter
 }
 export interface HomeProps {
   contestList: ContestType[]

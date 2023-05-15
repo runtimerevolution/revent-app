@@ -1,8 +1,10 @@
+import { IFilter } from './helpers/interfaces'
+
 interface Contest {
   name: string
   description: string
   date_end: string
-  status: string
+  status: IFilter
 }
 interface ContestProps {
   contest: Contest
