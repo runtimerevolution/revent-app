@@ -28,29 +28,25 @@ export default function Contest({ contest, index }: ContestProps) {
     // </div>
     <div
       key={index}
-      className='relative bg-white rounded-lg overflow-hidden shadow-md'
+      className='bg-white rounded-lg overflow-hidden shadow-md'
       style={{
-        maxHeight: '310px',
-        gridRowEnd: `span ${Math.ceil(Math.random() * 1.75)}`,
+        // maxHeight: '310px',
+        gridRowEnd: `span ${Math.ceil(Math.random() * 2)}`,
       }}
     >
-      <img src='/images/contest.jpeg' className='w-full h-48 object-cover' />
+      <img
+        src='/images/contest.jpeg'
+        className='h-4/6 w-full h-58 object-cover'
+      />
       <div className='px-4 py-3'>
         <h3 className='text-gray-900 font-medium text-lg mb-2'>
           {contest.name}
         </h3>
+        <h3 className='text-gray-900 font-medium text-lg mb-2'>
+          {contest.status}
+        </h3>
         <p className='text-gray-600 text-sm'>{contest.date_end}</p>
       </div>
     </div>
-
-    // <div className='flex flex-col bg-white rounded-lg overflow-hidden shadow-md'>
-    //   <img src='/images/contest.jpeg' className='object-cover w-full h-auto' />
-    //   <div className='flex-grow flex flex-col justify-between px-4 py-3'>
-    //     <h3 className='text-gray-900 font-medium text-lg mb-2'>
-    //       {contest.name}
-    //     </h3>
-    //     <p className='text-gray-600 text-sm'>{contest.description}</p>
-    //   </div>
-    // </div>
   )
 }
