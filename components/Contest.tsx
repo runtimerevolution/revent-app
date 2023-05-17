@@ -36,7 +36,7 @@ export default function Contest({ contest, index }: ContestProps) {
     >
       <img
         src='/images/contest.jpeg'
-        className='h-4/6 w-full h-58 object-cover'
+        className='h-4/6 w-full h-54 object-cover'
       />
       <div className='px-4 py-3'>
         <h3 className='text-gray-900 font-medium text-lg mb-2'>

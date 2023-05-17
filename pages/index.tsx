@@ -27,8 +27,8 @@ export default function Home({ contestList }: HomeProps) {
               setStatusFilter={setStatusFilter}
             />
           </div>
-          <main className='min-h-screen py-8 px-20 '>
-            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
+          <main className='min-h-screen py-8 px-20 flex-1 flex flex-col'>
+            <div className='grid grid-cols-4 gap-4'>
               {filteredContestList.map((contest, index) => (
                 <Contest contest={contest} index={index} />
               ))}
