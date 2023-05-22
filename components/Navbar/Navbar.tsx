@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import NotificationsList from '../Notifications/NotificationsList'
 
-const Navbar = () => {
+export default function Navbar({ notifications }) {
   const router = useRouter()
 
   const handleNavigation = (path: string) => {
@@ -56,7 +56,7 @@ const Navbar = () => {
             <div className='hidden md:block'>
               <div className='ml-10 flex items-center space-x-4'>
                 <a
-                  onClick={() => handleNavigation('/contests')}
+                  onClick={() => handleNavigation('/')}
                   className={`${contestsTextColor} ${contestsBackgroundColor} hover:text-white px-3 py-2 rounded-md font-medium cursor-pointer`}
                 >
                   Photo Contests
@@ -75,31 +75,22 @@ const Navbar = () => {
               className='relative text-white focus:outline-none rounded-full p-2'
               onClick={handleToggleNotifications}
             >
-              <svg
-                width='24'
-                height='24'
-                viewBox='0 0 24 24'
-                fill='none'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <path
-                  d='M9 17.5V18.5C9 20.1569 10.3431 21 12 21C13.6569 21 15 20.1569 15 18.5V17.5M5.99999 8.5C5.99999 5.18629 8.68628 3.5 12 3.5C15.3137 3.5 18 5.18629 18 8.5C18 10.4392 18.705 12.6133 19.4316 14.3389C20.0348 15.7717 19.0222 17.5 17.4676 17.5H6.53237C4.97778 17.5 3.96518 15.7717 4.56842 14.3389C5.29493 12.6133 5.99999 10.4392 5.99999 8.5Z'
-                  stroke='#001A72'
-                  stroke-width='1.5'
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                />
-              </svg>
+              <Image
+                src='/images/bell.svg'
+                alt='notifications'
+                width={40}
+                height={40}
+              />
               {hasNotifications && (
                 <span className='absolute top-0 right-0 bg-orange-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs'></span>
               )}
             </button>
-            {hasNotifications && showNotifications && <NotificationsList />}
+            {hasNotifications && showNotifications && (
+              <NotificationsList notifications={notifications} />
+            )}
           </div>
         </div>
       </div>
     </nav>
   )
 }
-
-export default Navbar

@@ -1,11 +1,17 @@
 import React from 'react'
 
-export default function Notification() {
+export default function Notification({ notification }) {
   return (
-    <div className='absolute right-0 mt-2 bg-white text-gray-800 rounded-lg shadow-lg p-4'>
-      <p>Notification 1</p>
-      <p>Notification 2</p>
-      <p>Notification 3</p>
+    <div className='mb-4 w-full'>
+      {!notification.opened && (
+        <>
+          <img className='w-6/12' src='/images/contest.jpeg' alt='' />
+          <a>{notification.message}</a>
+          {/* <a>{notification.message}</a> */}
+          <p>{notification.timestamp.slice(0, 10)}</p>
+        </>
+        // {contest.date_end.slice(0, 10)}
+      )}
     </div>
   )
 }

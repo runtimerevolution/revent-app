@@ -238,3 +238,31 @@ export async function getContestList() {
   return contests
   //   return fetchEndpoint('contests/', GET)
 }
+
+export async function getNotificationsList() {
+  const notifications = [
+    {
+      opened: false,
+      profile_picture: { id: 2, picture_path: '/images/collection.jpeg' },
+      message: '1 liked your photo',
+      timestamp: '2023-11-01T09:00:00Z',
+      picture: [{ id: 1, picture_path: '/images/collection.jpeg' }],
+    },
+    {
+      opened: false,
+      profile_picture: { id: 3, picture_path: '/images/collection.jpeg' },
+      message: '1 commented your photo',
+      timestamp: '2023-11-01T09:00:00Z',
+      picture: [{ id: 1, picture_path: '/images/collection.jpeg' }],
+    },
+    {
+      opened: false,
+      profile_picture: { id: 4, picture_path: '/images/collection.jpeg' },
+      message: '2 liked your photo',
+      timestamp: '2023-11-01T09:00:00Z',
+      picture: [{ id: 1, picture_path: '/images/collection.jpeg' }],
+    },
+  ]
+
+  return notifications
+}

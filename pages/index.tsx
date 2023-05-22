@@ -1,11 +1,11 @@
 import Contest from '../components/Contest'
 import Layout from '../components/Layout'
-import { getContestList } from '../services/reventService'
+import { getContestList, getNotificationsList } from '../services/reventService'
 import React, { useState } from 'react'
 import ContestFilter from '../components/ContestFilter'
 import { HomeProps, IFilter } from '../components/helpers/interfaces'
 
-export default function Home({ contestList }: HomeProps) {
+export default function Home({ contestList, notifications }: HomeProps) {
   const [statusFilter, setStatusFilter] = useState<IFilter>('Open')
 
   const [open, setOpen] = useState<boolean>(false)
@@ -16,7 +16,7 @@ export default function Home({ contestList }: HomeProps) {
       : contestList.filter((contest) => contest.status === statusFilter)
 
   return (
-    <Layout>
+    <Layout notifications={notifications}>
       <div className='p-8 bg-gray-100'>
         <div className='px-8'>
           <div className='flex-row'>
@@ -42,9 +42,11 @@ export default function Home({ contestList }: HomeProps) {
 
 export async function getServerSideProps() {
   let contestList = []
+  let notifications = []
 
   try {
     contestList = await getContestList()
+    notifications = await getNotificationsList()
   } catch (err) {
     console.log('Error', err)
   }
@@ -52,6 +54,7 @@ export async function getServerSideProps() {
   return {
     props: {
       contestList,
+      notifications,
     },
   }
 }
