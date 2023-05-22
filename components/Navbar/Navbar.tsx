@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { useState } from 'react'
+import NotificationsList from '../Notifications/NotificationsList'
 
 const Navbar = () => {
   const router = useRouter()
@@ -27,10 +28,10 @@ const Navbar = () => {
 
   const [showNotifications, setShowNotifications] = useState<boolean>(false)
 
-  const [hasNotifications, setHasNotifications] = useState<boolean>(false)
+  const [hasNotifications, setHasNotifications] = useState<boolean>(true)
 
   const handleToggleNotifications = () => {
-    setShowNotifications((prevShowNotifications) => !prevShowNotifications)
+    setShowNotifications((showNotifications) => !showNotifications)
   }
 
   return (
@@ -93,13 +94,7 @@ const Navbar = () => {
                 <span className='absolute top-0 right-0 bg-orange-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs'></span>
               )}
             </button>
-            {showNotifications && (
-              <div className='absolute right-0 mt-2 bg-white text-gray-800 rounded-lg shadow-lg p-4'>
-                <p>Notification 1</p>
-                <p>Notification 2</p>
-                <p>Notification 3</p>
-              </div>
-            )}
+            {hasNotifications && showNotifications && <NotificationsList />}
           </div>
         </div>
       </div>
