@@ -1,14 +1,29 @@
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import NotificationsList from '../Notifications/NotificationsList'
+import { getNotificationsList } from '../../services/reventService'
 
-export default function Navbar({ notifications }) {
+export default function Navbar() {
   const router = useRouter()
-
   const handleNavigation = (path: string) => {
     router.push(path)
   }
+
+  const [notifications, setNotifications] = useState([])
+
+  useEffect(() => {
+    async function fetchNotificationsData() {
+      try {
+        const data = await getNotificationsList()
+        setNotifications(data)
+      } catch (error) {
+        console.error('Failed to fetch notifications:', error)
+      }
+    }
+
+    fetchNotificationsData()
+  }, [])
 
   const collectionsTextColor =
     router.pathname === '/collections' ? 'text-orange-500' : 'text-gray-700'
@@ -33,6 +48,9 @@ export default function Navbar({ notifications }) {
   const handleToggleNotifications = () => {
     setShowNotifications((showNotifications) => !showNotifications)
   }
+
+  const [visibleNotifications, setVisibleNotifications] = useState<number>(10)
+  const [totalNotifications, setTotalNotifications] = useState<number>(0)
 
   return (
     <nav className='bg-white-800 w-full'>

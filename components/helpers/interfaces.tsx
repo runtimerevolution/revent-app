@@ -15,7 +15,6 @@ export interface HomeProps {
 }
 
 export interface LayoutProps {
-  notifications: any
   children: ReactNode
 }
 
