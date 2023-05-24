@@ -1,27 +1,15 @@
 import React from 'react'
 
 export default function Notification({ notification }) {
-  console.log('notification', notification)
   return (
     <div className='mb-4 w-80 gap-1 '>
       <div className='grid grid-cols-3 gap-5'>
         {/* {notification.opened && <span className='bg-gray-700'>123</span>} */}
         {notification.opened && (
-          <div className='bg-orange-500 h-1 w-2 absolute left-0 '></div>
+          <div className='bg-orange-500 h-1/6 w-1 absolute left-0 mt-6 rounded-full'></div>
         )}
-        {/* <a className='w-full relative'>
-          {notification.opened && (
-            <div
-              className='bg-orange-500 h-full absolute left-0 top-0'
-              style={{ width: '2px' }}
-            ></div>
-          )}
-          <div className={`pl-${notification.opened ? 2 : 0}`}>
-            {notification.message}
-          </div>
-        </a> */}
         <img
-          className='w-full'
+          className='w-full rounded-full'
           src={notification.profile_picture.picture_path}
           alt=''
         />
@@ -36,7 +24,7 @@ export default function Notification({ notification }) {
             </a>
           </div>
         </div>
-        <img className='w-full' src='/images/contest.jpeg' alt='' />
+        <img className='w-full rounded-lg' src='/images/contest.jpeg' alt='' />
       </div>
     </div>
   )

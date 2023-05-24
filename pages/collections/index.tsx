@@ -1,6 +1,5 @@
 import Collection from '../../components/Collection'
 import { CollectionsProps } from '../../components/helpers/interfaces'
-import Layout from '../../components/Layout'
 import { getCollectionList } from '../../services/reventService'
 
 export default function Collections({ collectionList }: CollectionsProps) {

@@ -87,9 +87,6 @@ export default function Navbar() {
     setShowNotifications((showNotifications) => !showNotifications)
   }
 
-  const [visibleNotifications, setVisibleNotifications] = useState<number>(10)
-  const [totalNotifications, setTotalNotifications] = useState<number>(0)
-
   return (
     <nav className='bg-white-800 w-full'>
       <div className='max-w-12xl mx-auto px-4 sm:px-6 lg:px-8'>
