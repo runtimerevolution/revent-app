@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
-import NotificationsList from '../Notifications/NotificationsList'
+import { useState, useEffect, useRef } from 'react'
 import { getNotificationsList } from '../../services/reventService'
+import Notification from '../Notifications/Notification'
 
 export default function Navbar() {
   const router = useRouter()
@@ -11,11 +11,16 @@ export default function Navbar() {
   }
 
   const [notifications, setNotifications] = useState([])
+  const [displayedNotifications, setDisplayedNotifications] = useState([])
+
+  const containerRef = useRef<HTMLDivElement>()
 
   useEffect(() => {
     async function fetchNotificationsData() {
       try {
         const data = await getNotificationsList()
+        const initialNotifications = data.slice(0, 3)
+        setDisplayedNotifications(initialNotifications)
         setNotifications(data)
       } catch (error) {
         console.error('Failed to fetch notifications:', error)
@@ -24,6 +29,39 @@ export default function Navbar() {
 
     fetchNotificationsData()
   }, [])
+
+  const handleScroll = () => {
+    const scrollableDiv = containerRef.current
+
+    if (scrollableDiv) {
+      const { scrollTop, clientHeight, scrollHeight } = scrollableDiv
+
+      if (scrollTop + clientHeight >= scrollHeight) {
+        const startIndex = displayedNotifications.length
+        const endIndex = startIndex + 3
+
+        const nextNotifications = notifications.slice(startIndex, endIndex)
+        setDisplayedNotifications((prevNotifications) => [
+          ...prevNotifications,
+          ...nextNotifications,
+        ])
+      }
+    }
+  }
+
+  useEffect(() => {
+    const container = containerRef.current
+
+    if (container) {
+      container.addEventListener('scroll', handleScroll)
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener('scroll', handleScroll)
+      }
+    }
+  })
 
   const collectionsTextColor =
     router.pathname === '/collections' ? 'text-orange-500' : 'text-gray-700'
@@ -104,7 +142,14 @@ export default function Navbar() {
               )}
             </button>
             {hasNotifications && showNotifications && (
-              <NotificationsList notifications={notifications} />
+              <div
+                ref={containerRef}
+                className='absolute right-0 mt-2 bg-white text-gray-800 rounded-lg shadow-lg p-4 max-h-60 overflow-y-auto '
+              >
+                {displayedNotifications?.map((notification) => (
+                  <Notification notification={notification} />
+                ))}
+              </div>
             )}
           </div>
         </div>
