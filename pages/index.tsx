@@ -28,8 +28,8 @@ export default function Home({ contestList }: HomeProps) {
             />
           </div>
           <div className='grid grid-cols-4 gap-4 px-20'>
-            {filteredContestList.map((contest, index) => (
-              <Contest contest={contest} index={index} />
+            {filteredContestList.map((contest) => (
+              <Contest contest={contest} index={contest.id} />
             ))}
           </div>
         </div>

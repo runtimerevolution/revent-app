@@ -3,7 +3,7 @@ import { IFilter } from './helpers/interfaces'
 interface Contest {
   name: string
   description: string
-  date_end: string
+  dateEnd: string
   status: IFilter
 }
 interface ContestProps {
@@ -31,7 +31,7 @@ export default function Contest({ contest, index }: ContestProps) {
         <h3 className='text-gray-900 font-medium text-lg mb-2'>
           {contest.status}
         </h3>
-        <p className='text-gray-600 text-sm'>{contest.date_end}</p>
+        <p className='text-gray-600 text-sm'>{contest.dateEnd}</p>
       </div>
     </div>
   )
