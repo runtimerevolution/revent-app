@@ -14,7 +14,6 @@ export default function Notification({ notification }) {
             <img
               className='w-full rounded-full'
               src={notification.profile_picture.picture_path}
-              alt=''
             />
             <div className='flex flex-col'>
               <a className='w-full text-orange-500'>{notification.user}</a>{' '}
@@ -25,11 +24,7 @@ export default function Notification({ notification }) {
                 </a>
               </div>
             </div>
-            <img
-              className='w-full rounded-lg'
-              src='/images/contest.jpeg'
-              alt=''
-            />
+            <img className='w-full rounded-lg' src='/images/contest.jpeg' />
           </div>
         </div>
       </a>

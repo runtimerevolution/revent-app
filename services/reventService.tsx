@@ -37,6 +37,17 @@ export async function getUser(id) {
   return fetchEndpoint('users/' + id, GET)
 }
 
+export async function getUserLocal() {
+  const user = {
+    id: 1,
+    name: 'User 1',
+    profile_picture: { id: 1, picture_path: '/images/profile.jpeg' },
+    status: 'Status',
+  }
+
+  return user
+}
+
 export async function getSubmissionsFromContest(id) {
   return fetchEndpoint('contests/' + id, GET)
 }

@@ -1,7 +1,10 @@
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
-import { getNotificationsList } from '../../services/reventService'
+import {
+  getNotificationsList,
+  getUserLocal,
+} from '../../services/reventService'
 import Notification from '../Notifications/Notification'
 
 export default function Navbar() {
@@ -12,8 +15,18 @@ export default function Navbar() {
 
   const [notifications, setNotifications] = useState([])
   const [displayedNotifications, setDisplayedNotifications] = useState([])
+  const [user, setUser] = useState(null)
 
   const containerRef = useRef<HTMLDivElement>()
+
+  useEffect(() => {
+    async function fetchUser() {
+      const user = await getUserLocal()
+      setUser(user)
+    }
+    fetchUser()
+    console.log('user', user)
+  }, user)
 
   useEffect(() => {
     async function fetchNotificationsData() {
@@ -51,11 +64,9 @@ export default function Navbar() {
 
   useEffect(() => {
     const container = containerRef.current
-
     if (container) {
       container.addEventListener('scroll', handleScroll)
     }
-
     return () => {
       if (container) {
         container.removeEventListener('scroll', handleScroll)
@@ -80,11 +91,15 @@ export default function Navbar() {
       : 'hover:bg-gray-700'
 
   const [showNotifications, setShowNotifications] = useState<boolean>(false)
+  const [showUserMenu, setShowUserMenu] = useState<boolean>(false)
 
   const [hasNotifications, setHasNotifications] = useState<boolean>(true)
 
   const handleToggleNotifications = () => {
     setShowNotifications((showNotifications) => !showNotifications)
+  }
+  const handleOpenUserMenu = () => {
+    setShowUserMenu((showUserMenu) => !showUserMenu)
   }
 
   return (
@@ -141,11 +156,56 @@ export default function Navbar() {
             {hasNotifications && showNotifications && (
               <div
                 ref={containerRef}
-                className='absolute right-0 mt-2 bg-white text-gray-800 rounded-lg shadow-lg p-4 max-h-60 overflow-y-auto '
+                className='absolute right-0 mt-2 bg-white text-gray-800 rounded-lg shadow-lg p-4 max-h-60 overflow-y-auto'
               >
                 {displayedNotifications?.map((notification) => (
                   <Notification notification={notification} />
                 ))}
+              </div>
+            )}
+            <button
+              className='relative text-white focus:outline-none rounded-full p-2'
+              onClick={handleOpenUserMenu}
+            >
+              <Image
+                src='/images/profile.jpeg'
+                alt='notifications'
+                width={40}
+                height={40}
+                className='rounded-full'
+              />
+            </button>
+            {showUserMenu && (
+              <div className='absolute right-0 mt-2 bg-white text-gray-800 rounded-lg shadow-lg p-4 max-h-60 overflow-y-auto'>
+                <ul>
+                  <button
+                    onClick={() => handleNavigation('/profile')}
+                    className='flex items-center'
+                  >
+                    <Image
+                      src='/images/profile.svg'
+                      alt='profile'
+                      width={40}
+                      height={40}
+                      className='mr-2'
+                    />
+                    <span>Profile</span>
+                  </button>
+
+                  <button
+                    onClick={() => handleNavigation('/settings')}
+                    className='flex items-center mt-2'
+                  >
+                    <Image
+                      src='/images/settings.svg'
+                      alt='profile'
+                      width={40}
+                      height={40}
+                      className='mr-2'
+                    />
+                    <span>Settings</span>
+                  </button>
+                </ul>
               </div>
             )}
           </div>
