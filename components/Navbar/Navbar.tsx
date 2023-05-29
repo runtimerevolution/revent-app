@@ -26,7 +26,6 @@ export default function Navbar() {
       setUser(user)
     }
     fetchUser()
-    console.log('user', user)
   }, user)
 
   useEffect(() => {
