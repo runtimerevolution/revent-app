@@ -10,6 +10,7 @@ import Notification from '../Notifications/Notification'
 export default function Navbar() {
   const router = useRouter()
   const handleNavigation = (path: string) => {
+    setShowUserMenu(false)
     router.push(path)
   }
 
@@ -192,7 +193,7 @@ export default function Navbar() {
                     <span>View Profile</span>
                   </button>
                   <button
-                    onClick={() => handleNavigation('/#')}
+                    onClick={() => handleNavigation('/myphotos')}
                     className='flex items-center mt-2'
                   >
                     <Image

@@ -29,8 +29,23 @@ export interface Collection {
   picture: Picture[]
   user: string
 }
+
+export interface MyPhoto {
+  id: number
+  name: string
+  picture: Picture[]
+  user: string
+}
 export interface CollectionsProps {
   collectionList: Collection[]
+}
+
+export interface MyPhotosProps {
+  myphotosList: MyPhoto[]
+}
+
+export interface MyPhotoProps {
+  myphoto: MyPhoto
 }
 
 export interface ContestFilterProps {
