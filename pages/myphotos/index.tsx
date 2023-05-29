@@ -1,4 +1,3 @@
-import Collection from '../../components/Collection'
 import { MyPhotosProps } from '../../components/helpers/interfaces'
 import MyPhoto from '../../components/MyPhoto'
 import { getMyPhotosList } from '../../services/reventService'
