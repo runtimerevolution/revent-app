@@ -1,17 +1,15 @@
 import React from 'react'
 
 export type IFilter = 'All' | 'Open' | 'Voting' | 'Closed'
-export interface ContestType {
+
+export interface Contest {
+  id: number
   name: string
   description: string
-  date_start: string
-  date_end: string
+  dateStart: string
+  dateEnd: string
   status: IFilter
 }
-export interface HomeProps {
-  contestList: ContestType[]
-}
-
 export interface Picture {
   id: number
   picture_path: string
