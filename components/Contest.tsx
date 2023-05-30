@@ -1,20 +1,13 @@
-import { IFilter } from './helpers/interfaces'
+import { Contest } from '../pages'
 
-interface Contest {
-  name: string
-  description: string
-  dateEnd: string
-  status: IFilter
-}
 interface ContestProps {
   contest: Contest
-  index: number
 }
 
-export default function Contest({ contest, index }: ContestProps) {
+export default function Contest({ contest }: ContestProps) {
   return (
     <div
-      key={index}
+      key={contest.id}
       className='bg-white rounded-lg overflow-hidden shadow-md'
       style={{
         gridRowEnd: `span ${Math.ceil(Math.random() * 2)}`,

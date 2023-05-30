@@ -3,8 +3,19 @@ import Layout from '../components/Layout'
 import { getContestList } from '../services/reventService'
 import React, { useState } from 'react'
 import ContestFilter from '../components/ContestFilter'
-import { HomeProps, IFilter } from '../components/helpers/interfaces'
+import { IFilter } from '../components/helpers/interfaces'
 
+export interface Contest {
+  id: number
+  name: string
+  description: string
+  dateStart: string
+  dateEnd: string
+  status: IFilter
+}
+export interface HomeProps {
+  contestList: Contest[]
+}
 export default function Home({ contestList }: HomeProps) {
   const [statusFilter, setStatusFilter] = useState<IFilter>('Open')
 
@@ -29,7 +40,7 @@ export default function Home({ contestList }: HomeProps) {
           </div>
           <div className='grid grid-cols-4 gap-4 px-20'>
             {filteredContestList.map((contest) => (
-              <Contest contest={contest} index={contest.id} />
+              <Contest contest={contest} />
             ))}
           </div>
         </div>
