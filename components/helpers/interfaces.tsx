@@ -2,6 +2,14 @@ import React from 'react'
 
 export type IFilter = 'All' | 'Open' | 'Voting' | 'Closed'
 
+export interface Contest {
+  id: number
+  name: string
+  description: string
+  dateStart: string
+  dateEnd: string
+  status: IFilter
+}
 export interface Picture {
   id: number
   picture_path: string

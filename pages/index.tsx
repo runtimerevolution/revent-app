@@ -3,18 +3,13 @@ import Layout from '../components/Layout'
 import { getContestList } from '../services/reventService'
 import React, { useState } from 'react'
 import ContestFilter from '../components/ContestFilter'
-import { IFilter } from '../components/helpers/interfaces'
+import {
+  Contest as ContestType,
+  IFilter,
+} from '../components/helpers/interfaces'
 
-export interface Contest {
-  id: number
-  name: string
-  description: string
-  dateStart: string
-  dateEnd: string
-  status: IFilter
-}
 export interface HomeProps {
-  contestList: Contest[]
+  contestList: ContestType[]
 }
 export default function Home({ contestList }: HomeProps) {
   const [statusFilter, setStatusFilter] = useState<IFilter>('Open')

@@ -1,4 +1,4 @@
-import { Contest } from '../pages'
+import { Contest } from './helpers/interfaces'
 
 interface ContestProps {
   contest: Contest
