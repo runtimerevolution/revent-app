@@ -2,7 +2,11 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
 import { getNotificationsList } from '../../services/reventService'
+import { NotificationsList as NotificationListType } from '../helpers/interfaces'
+
 import Notification from '../Notifications/Notification'
+import NotificationsList from '../NotificationsList'
+import NotificationMenu from '../NotificationMenu'
 
 export default function Navbar() {
   const router = useRouter()
@@ -10,17 +14,17 @@ export default function Navbar() {
     router.push(path)
   }
 
-  const [notifications, setNotifications] = useState([])
+  const [notifications, setNotifications] = useState<NotificationListType[]>([])
   const [displayedNotifications, setDisplayedNotifications] = useState([])
-
-  const containerRef = useRef<HTMLDivElement>()
 
   useEffect(() => {
     async function fetchNotificationsData() {
       try {
         const data = await getNotificationsList()
+
         const initialNotifications = data.slice(0, 3)
         setDisplayedNotifications(initialNotifications)
+        console.log('data', data)
         setNotifications(data)
       } catch (error) {
         console.error('Failed to fetch notifications:', error)
@@ -30,38 +34,9 @@ export default function Navbar() {
     fetchNotificationsData()
   }, [])
 
-  const handleScroll = () => {
-    const scrollableDiv = containerRef.current
-
-    if (scrollableDiv) {
-      const { scrollTop, clientHeight, scrollHeight } = scrollableDiv
-
-      if (scrollTop + clientHeight >= scrollHeight) {
-        const startIndex = displayedNotifications.length
-        const endIndex = startIndex + 3
-
-        const nextNotifications = notifications.slice(startIndex, endIndex)
-        setDisplayedNotifications((prevNotifications) => [
-          ...prevNotifications,
-          ...nextNotifications,
-        ])
-      }
-    }
-  }
-
   useEffect(() => {
-    const container = containerRef.current
-
-    if (container) {
-      container.addEventListener('scroll', handleScroll)
-    }
-
-    return () => {
-      if (container) {
-        container.removeEventListener('scroll', handleScroll)
-      }
-    }
-  })
+    // console.log('notifications', notifications)
+  }, [notifications])
 
   const collectionsTextColor =
     router.pathname === '/collections' ? 'text-orange-500' : 'text-gray-700'
@@ -83,7 +58,7 @@ export default function Navbar() {
 
   const [hasNotifications, setHasNotifications] = useState<boolean>(true)
 
-  const handleToggleNotifications = () => {
+  const toggleNotifications = () => {
     setShowNotifications((showNotifications) => !showNotifications)
   }
 
@@ -126,7 +101,7 @@ export default function Navbar() {
           <div className='relative'>
             <button
               className='relative text-white focus:outline-none rounded-full p-2'
-              onClick={handleToggleNotifications}
+              onClick={toggleNotifications}
             >
               <Image
                 src='/images/bell.svg'
@@ -139,14 +114,11 @@ export default function Navbar() {
               )}
             </button>
             {hasNotifications && showNotifications && (
-              <div
-                ref={containerRef}
-                className='absolute right-0 mt-2 bg-white text-gray-800 rounded-lg shadow-lg p-4 max-h-60 overflow-y-auto '
-              >
-                {displayedNotifications?.map((notification) => (
-                  <Notification notification={notification} />
-                ))}
-              </div>
+              <NotificationMenu
+                displayedNotifications={displayedNotifications}
+                setDisplayedNotifications={setDisplayedNotifications}
+                notifications={notifications}
+              />
             )}
           </div>
         </div>
