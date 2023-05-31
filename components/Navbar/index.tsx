@@ -5,6 +5,7 @@ import { getNotificationsList } from '../../services/reventService'
 import { Notification as NotificationType } from '../helpers/interfaces'
 
 import NotificationMenu from '../NotificationMenu'
+import { useRef } from 'react'
 
 export default function Navbar() {
   const router = useRouter()
@@ -51,6 +52,8 @@ export default function Navbar() {
       ? 'hover:bg-orange-700'
       : 'hover:bg-gray-700'
 
+  const wrapperRef = useRef(null)
+
   const [showNotifications, setShowNotifications] = useState<boolean>(false)
 
   const [hasNotifications, setHasNotifications] = useState<boolean>(true)
@@ -58,6 +61,19 @@ export default function Navbar() {
   const toggleNotifications = () => {
     setShowNotifications((showNotifications) => !showNotifications)
   }
+
+  const handleOutsideClick = (event) => {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      setShowNotifications(false)
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleOutsideClick)
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick)
+    }
+  }, [])
 
   return (
     <nav className='bg-white-800 w-full'>
@@ -110,13 +126,17 @@ export default function Navbar() {
                 <span className='absolute top-0 right-0 bg-orange-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs'></span>
               )}
             </button>
-            {hasNotifications && showNotifications && (
-              <NotificationMenu
-                displayedNotifications={displayedNotifications}
-                setDisplayedNotifications={setDisplayedNotifications}
-                notifications={notifications}
-              />
-            )}
+            <div id='ola' ref={wrapperRef}>
+              {hasNotifications && showNotifications && (
+                // <div id='ola'>
+                <NotificationMenu
+                  displayedNotifications={displayedNotifications}
+                  setDisplayedNotifications={setDisplayedNotifications}
+                  notifications={notifications}
+                />
+                // </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

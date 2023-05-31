@@ -47,10 +47,3 @@ export interface ContestFilterProps {
 export interface CollectionProps {
   collection: Collection
 }
-
-// export interface Notification {
-//   contest: string
-//   date: string
-//   description: string
-//   user: string
-// }
