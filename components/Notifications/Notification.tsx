@@ -2,7 +2,11 @@ import React from 'react'
 import { useState } from 'react'
 import { Notification as NotificationType } from '../helpers/interfaces'
 
-export default function Notification({ ...notification }: NotificationType) {
+interface NotificationInterface {
+  notification: NotificationType
+}
+
+export default function Notification({ notification }: NotificationInterface) {
   const [opened, setOpened] = useState(notification.opened)
   return (
     <>

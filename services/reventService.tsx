@@ -1,3 +1,5 @@
+import { Notification } from '../components/helpers/interfaces'
+
 const { NEXT_PUBLIC_API_URL } = process.env
 const GET = 'GET'
 const POST = 'POST'
@@ -341,7 +343,6 @@ export async function getContestList() {
   //   return fetchEndpoint('contests/', GET)
 }
 
-// export async function getNotificationsList() {
 export async function getNotificationsList(): Promise<Notification[]> {
   const notifications = [
     {
@@ -350,7 +351,7 @@ export async function getNotificationsList(): Promise<Notification[]> {
       profile_picture: { id: 3, picture_path: '/images/profile.jpeg' },
       message: 'liked your photo',
       timestamp: '2023-11-01T09:00:00Z',
-      picture: [{ id: 1, picture_path: '/images/collection.jpeg' }],
+      picture: { id: 1, picture_path: '/images/collection.jpeg' },
     },
     {
       user: 'User 2',
@@ -358,7 +359,7 @@ export async function getNotificationsList(): Promise<Notification[]> {
       profile_picture: { id: 3, picture_path: '/images/profile.jpeg' },
       message: 'commented your photo',
       timestamp: '2023-11-01T09:00:00Z',
-      picture: [{ id: 1, picture_path: '/images/collection.jpeg' }],
+      picture: { id: 1, picture_path: '/images/collection.jpeg' },
     },
     {
       user: 'User 3',
@@ -366,7 +367,7 @@ export async function getNotificationsList(): Promise<Notification[]> {
       profile_picture: { id: 3, picture_path: '/images/profile.jpeg' },
       message: 'liked your photo',
       timestamp: '2023-11-01T09:00:00Z',
-      picture: [{ id: 1, picture_path: '/images/collection.jpeg' }],
+      picture: { id: 1, picture_path: '/images/collection.jpeg' },
     },
     {
       user: 'User 4',
@@ -374,7 +375,7 @@ export async function getNotificationsList(): Promise<Notification[]> {
       profile_picture: { id: 3, picture_path: '/images/profile.jpeg' },
       message: 'liked your photo',
       timestamp: '2023-11-01T09:00:00Z',
-      picture: [{ id: 1, picture_path: '/images/collection.jpeg' }],
+      picture: { id: 1, picture_path: '/images/collection.jpeg' },
     },
     {
       user: 'User 5',
@@ -382,7 +383,7 @@ export async function getNotificationsList(): Promise<Notification[]> {
       profile_picture: { id: 3, picture_path: '/images/profile.jpeg' },
       message: 'commented your photo',
       timestamp: '2023-11-01T09:00:00Z',
-      picture: [{ id: 1, picture_path: '/images/collection.jpeg' }],
+      picture: { id: 1, picture_path: '/images/collection.jpeg' },
     },
     {
       user: 'User 6',
@@ -390,7 +391,7 @@ export async function getNotificationsList(): Promise<Notification[]> {
       profile_picture: { id: 3, picture_path: '/images/profile.jpeg' },
       message: 'liked your photo',
       timestamp: '2023-11-01T09:00:00Z',
-      picture: [{ id: 1, picture_path: '/images/collection.jpeg' }],
+      picture: { id: 1, picture_path: '/images/collection.jpeg' },
     },
     {
       user: 'User 7',
@@ -398,7 +399,7 @@ export async function getNotificationsList(): Promise<Notification[]> {
       profile_picture: { id: 3, picture_path: '/images/profile.jpeg' },
       message: 'liked your photo',
       timestamp: '2023-11-01T09:00:00Z',
-      picture: [{ id: 1, picture_path: '/images/collection.jpeg' }],
+      picture: { id: 1, picture_path: '/images/collection.jpeg' },
     },
     {
       user: 'User 8',
@@ -406,7 +407,7 @@ export async function getNotificationsList(): Promise<Notification[]> {
       profile_picture: { id: 3, picture_path: '/images/profile.jpeg' },
       message: 'commented your photo',
       timestamp: '2023-11-01T09:00:00Z',
-      picture: [{ id: 1, picture_path: '/images/collection.jpeg' }],
+      picture: { id: 1, picture_path: '/images/collection.jpeg' },
     },
     {
       user: 'User 9',
@@ -414,7 +415,7 @@ export async function getNotificationsList(): Promise<Notification[]> {
       profile_picture: { id: 3, picture_path: '/images/profile.jpeg' },
       message: 'liked your photo',
       timestamp: '2023-11-01T09:00:00Z',
-      picture: [{ id: 1, picture_path: '/images/collection.jpeg' }],
+      picture: { id: 1, picture_path: '/images/collection.jpeg' },
     },
     {
       user: 'User 10',
@@ -422,7 +423,7 @@ export async function getNotificationsList(): Promise<Notification[]> {
       profile_picture: { id: 3, picture_path: '/images/profile.jpeg' },
       message: 'liked your photo',
       timestamp: '2023-11-01T09:00:00Z',
-      picture: [{ id: 1, picture_path: '/images/collection.jpeg' }],
+      picture: { id: 1, picture_path: '/images/collection.jpeg' },
     },
     {
       user: 'User 11',
@@ -430,7 +431,7 @@ export async function getNotificationsList(): Promise<Notification[]> {
       profile_picture: { id: 3, picture_path: '/images/profile.jpeg' },
       message: 'liked your photo',
       timestamp: '2023-11-01T09:00:00Z',
-      picture: [{ id: 1, picture_path: '/images/collection.jpeg' }],
+      picture: { id: 1, picture_path: '/images/collection.jpeg' },
     },
     {
       user: 'User 12',
@@ -438,7 +439,7 @@ export async function getNotificationsList(): Promise<Notification[]> {
       profile_picture: { id: 3, picture_path: '/images/profile.jpeg' },
       message: 'liked your photo',
       timestamp: '2023-11-01T09:00:00Z',
-      picture: [{ id: 1, picture_path: '/images/collection.jpeg' }],
+      picture: { id: 1, picture_path: '/images/collection.jpeg' },
     },
   ]
 

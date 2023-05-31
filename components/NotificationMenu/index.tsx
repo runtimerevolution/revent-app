@@ -1,12 +1,22 @@
 import React from 'react'
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
+
 import NotificationsList from '../NotificationsList'
+import { Notification as NotificationType } from '../helpers/interfaces'
+
+interface NotificationMenu {
+  displayedNotifications: NotificationType[]
+  setDisplayedNotifications: React.Dispatch<
+    React.SetStateAction<NotificationType[]>
+  >
+  notifications: NotificationType[]
+}
 
 export default function NotificationMenu({
   displayedNotifications,
   setDisplayedNotifications,
   notifications,
-}) {
+}: NotificationMenu) {
   const containerRef = useRef<HTMLDivElement>()
   const handleScroll = () => {
     const scrollableDiv = containerRef.current

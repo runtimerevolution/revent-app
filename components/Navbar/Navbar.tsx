@@ -1,11 +1,9 @@
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { getNotificationsList } from '../../services/reventService'
-import { NotificationsList as NotificationListType } from '../helpers/interfaces'
+import { Notification as NotificationType } from '../helpers/interfaces'
 
-import Notification from '../Notifications/Notification'
-import NotificationsList from '../NotificationsList'
 import NotificationMenu from '../NotificationMenu'
 
 export default function Navbar() {
@@ -14,8 +12,10 @@ export default function Navbar() {
     router.push(path)
   }
 
-  const [notifications, setNotifications] = useState<NotificationListType[]>([])
-  const [displayedNotifications, setDisplayedNotifications] = useState([])
+  const [notifications, setNotifications] = useState<NotificationType[]>([])
+  const [displayedNotifications, setDisplayedNotifications] = useState<
+    NotificationType[]
+  >([])
 
   useEffect(() => {
     async function fetchNotificationsData() {
@@ -24,7 +24,6 @@ export default function Navbar() {
 
         const initialNotifications = data.slice(0, 3)
         setDisplayedNotifications(initialNotifications)
-        console.log('data', data)
         setNotifications(data)
       } catch (error) {
         console.error('Failed to fetch notifications:', error)
@@ -33,10 +32,6 @@ export default function Navbar() {
 
     fetchNotificationsData()
   }, [])
-
-  useEffect(() => {
-    // console.log('notifications', notifications)
-  }, [notifications])
 
   const collectionsTextColor =
     router.pathname === '/collections' ? 'text-orange-500' : 'text-gray-700'

@@ -1,10 +1,14 @@
 import React from 'react'
 import Notification from '../Notifications/Notification'
-import { NotificationsList } from '../helpers/interfaces'
+import { Notification as NotificationType } from '../helpers/interfaces'
+
+interface NotificationList {
+  displayedNotifications: NotificationType[]
+}
 
 export default function NotificationsList({
   displayedNotifications,
-}: NotificationsList) {
+}: NotificationList) {
   return (
     <>
       {displayedNotifications.map((notification) => (

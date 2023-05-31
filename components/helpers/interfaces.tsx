@@ -14,19 +14,10 @@ export interface Contest {
 export interface Notification {
   user: string
   opened: boolean
-  profile_picture: {
-    id: number
-    picture_path: string
-  }
+  profile_picture: Picture
   message: string
   timestamp: string
-  picture: {
-    id: number
-    picture_path: string
-  }[]
-  contest: string
-  date: string
-  description: string
+  picture: Picture
 }
 
 export interface NotificationsList {
