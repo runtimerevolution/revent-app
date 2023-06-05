@@ -24,7 +24,6 @@ export interface NotificationsList {
   displayedNotifications: Notification[]
 }
 export interface Picture {
-  id: number
   picture_path: string
 }
 export interface Collection {
