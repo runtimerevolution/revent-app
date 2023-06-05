@@ -126,15 +126,13 @@ export default function Navbar() {
                 <span className='absolute top-0 right-0 bg-orange-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs'></span>
               )}
             </button>
-            <div id='ola' ref={wrapperRef}>
+            <div ref={wrapperRef}>
               {hasNotifications && showNotifications && (
-                // <div id='ola'>
                 <NotificationMenu
                   displayedNotifications={displayedNotifications}
                   setDisplayedNotifications={setDisplayedNotifications}
                   notifications={notifications}
                 />
-                // </div>
               )}
             </div>
           </div>
