@@ -8,6 +8,7 @@
     "format": "prettier --write \"/*.{ts,tsx}\""
   },
   "dependencies": {
+    "@apollo/client": "^3.7.15",
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.17",
     "apollo-client": "^2.6.10",

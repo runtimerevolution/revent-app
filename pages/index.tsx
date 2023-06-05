@@ -6,11 +6,35 @@ import {
   Contest as ContestType,
   IFilter,
 } from '../components/helpers/interfaces'
+import { useQuery } from '@apollo/client'
+import { GET_USERS } from '../lib/graphql'
+import { useEffect } from 'react'
 
 export interface HomeProps {
   contestList: ContestType[]
 }
+
 export default function Home({ contestList }: HomeProps) {
+  // const { loading, error, data } = useQuery(GET_USERS)
+
+  const email = 'test@test.com'
+
+  const { loading, error, data } = useQuery(GET_USERS, {
+    variables: {
+      email: email || undefined,
+    },
+  })
+
+  console.log('data', data)
+
+  if (loading) {
+    console.log('loading', loading)
+  }
+
+  if (error) {
+    console.log('error', error)
+  }
+
   const [statusFilter, setStatusFilter] = useState<IFilter>('Open')
 
   const [open, setOpen] = useState<boolean>(false)
@@ -22,6 +46,11 @@ export default function Home({ contestList }: HomeProps) {
 
   return (
     <div className='p-8 bg-gray-100'>
+      {/* <ul>
+        {data?.users.map((user: any) => (
+          <li key={user.id}>{user.email}</li>
+        ))}
+      </ul> */}
       <div className='px-8'>
         <div className='flex-row'>
           <ContestFilter

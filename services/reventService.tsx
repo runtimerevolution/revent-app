@@ -1,5 +1,4 @@
 import { Notification } from '../components/helpers/interfaces'
-
 const { NEXT_PUBLIC_API_URL } = process.env
 const GET = 'GET'
 const POST = 'POST'
