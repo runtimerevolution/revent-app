@@ -1,3 +1,5 @@
+import { Notification } from '../components/helpers/interfaces'
+
 const { NEXT_PUBLIC_API_URL } = process.env
 const GET = 'GET'
 const POST = 'POST'
@@ -48,9 +50,9 @@ export async function getCollectionList() {
       name: 'Collection 1',
       user: 'User 1',
       pictures: [
-        { id: 1, picture_path: '/images/collection.jpeg' },
-        { id: 2, picture_path: '/images/collection.jpeg' },
-        { id: 3, picture_path: '/images/collection.jpeg' },
+        { picture_path: '/images/collection.jpeg' },
+        { picture_path: '/images/collection.jpeg' },
+        { picture_path: '/images/collection.jpeg' },
       ],
     },
     {
@@ -58,9 +60,9 @@ export async function getCollectionList() {
       name: 'Collection 2',
       user: 'User 2',
       pictures: [
-        { id: 4, picture_path: '/images/collection.jpeg' },
-        { id: 5, picture_path: '/images/collection.jpeg' },
-        { id: 6, picture_path: '/images/collection.jpeg' },
+        { picture_path: '/images/collection.jpeg' },
+        { picture_path: '/images/collection.jpeg' },
+        { picture_path: '/images/collection.jpeg' },
       ],
     },
     {
@@ -68,9 +70,9 @@ export async function getCollectionList() {
       name: 'Collection 3',
       user: 'User 3',
       pictures: [
-        { id: 7, picture_path: '/images/collection.jpeg' },
-        { id: 8, picture_path: '/images/collection.jpeg' },
-        { id: 9, picture_path: '/images/collection.jpeg' },
+        { picture_path: '/images/collection.jpeg' },
+        { picture_path: '/images/collection.jpeg' },
+        { picture_path: '/images/collection.jpeg' },
       ],
     },
     {
@@ -78,9 +80,9 @@ export async function getCollectionList() {
       name: 'Collection 4',
       user: 'User 4',
       pictures: [
-        { id: 10, picture_path: '/images/collection.jpeg' },
-        { id: 11, picture_path: '/images/collection.jpeg' },
-        { id: 12, picture_path: '/images/collection.jpeg' },
+        { ipicture_path: '/images/collection.jpeg' },
+        { ipicture_path: '/images/collection.jpeg' },
+        { ipicture_path: '/images/collection.jpeg' },
       ],
     },
     {
@@ -88,9 +90,9 @@ export async function getCollectionList() {
       name: 'Collection 5',
       user: 'User 5',
       pictures: [
-        { id: 13, picture_path: '/images/collection.jpeg' },
-        { id: 14, picture_path: '/images/collection.jpeg' },
-        { id: 15, picture_path: '/images/collection.jpeg' },
+        { ipicture_path: '/images/collection.jpeg' },
+        { ipicture_path: '/images/collection.jpeg' },
+        { ipicture_path: '/images/collection.jpeg' },
       ],
     },
   ]
@@ -339,4 +341,107 @@ export async function getContestList() {
 
   return contests
   //   return fetchEndpoint('contests/', GET)
+}
+
+export async function getNotificationsList(): Promise<Notification[]> {
+  const notifications = [
+    {
+      user: 'User 1',
+      opened: true,
+      profile_picture: { picture_path: '/images/profile.jpeg' },
+      message: 'liked your photo',
+      timestamp: '2023-11-01T09:00:00Z',
+      picture: { picture_path: '/images/collection.jpeg' },
+    },
+    {
+      user: 'User 2',
+      opened: false,
+      profile_picture: { picture_path: '/images/profile.jpeg' },
+      message: 'commented your photo',
+      timestamp: '2023-11-01T09:00:00Z',
+      picture: { picture_path: '/images/collection.jpeg' },
+    },
+    {
+      user: 'User 3',
+      opened: true,
+      profile_picture: { picture_path: '/images/profile.jpeg' },
+      message: 'liked your photo',
+      timestamp: '2023-11-01T09:00:00Z',
+      picture: { picture_path: '/images/collection.jpeg' },
+    },
+    {
+      user: 'User 4',
+      opened: false,
+      profile_picture: { picture_path: '/images/profile.jpeg' },
+      message: 'liked your photo',
+      timestamp: '2023-11-01T09:00:00Z',
+      picture: { picture_path: '/images/collection.jpeg' },
+    },
+    {
+      user: 'User 5',
+      opened: false,
+      profile_picture: { picture_path: '/images/profile.jpeg' },
+      message: 'commented your photo',
+      timestamp: '2023-11-01T09:00:00Z',
+      picture: { picture_path: '/images/collection.jpeg' },
+    },
+    {
+      user: 'User 6',
+      opened: true,
+      profile_picture: { picture_path: '/images/profile.jpeg' },
+      message: 'liked your photo',
+      timestamp: '2023-11-01T09:00:00Z',
+      picture: { picture_path: '/images/collection.jpeg' },
+    },
+    {
+      user: 'User 7',
+      opened: false,
+      profile_picture: { picture_path: '/images/profile.jpeg' },
+      message: 'liked your photo',
+      timestamp: '2023-11-01T09:00:00Z',
+      picture: { picture_path: '/images/collection.jpeg' },
+    },
+    {
+      user: 'User 8',
+      opened: false,
+      profile_picture: { picture_path: '/images/profile.jpeg' },
+      message: 'commented your photo',
+      timestamp: '2023-11-01T09:00:00Z',
+      picture: { picture_path: '/images/collection.jpeg' },
+    },
+    {
+      user: 'User 9',
+      opened: false,
+      profile_picture: { picture_path: '/images/profile.jpeg' },
+      message: 'liked your photo',
+      timestamp: '2023-11-01T09:00:00Z',
+      picture: { picture_path: '/images/collection.jpeg' },
+    },
+    {
+      user: 'User 10',
+      opened: false,
+      profile_picture: { picture_path: '/images/profile.jpeg' },
+      message: 'liked your photo',
+      timestamp: '2023-11-01T09:00:00Z',
+      picture: { picture_path: '/images/collection.jpeg' },
+    },
+    {
+      user: 'User 11',
+      opened: false,
+      profile_picture: { picture_path: '/images/profile.jpeg' },
+      message: 'liked your photo',
+      timestamp: '2023-11-01T09:00:00Z',
+      picture: { picture_path: '/images/collection.jpeg' },
+    },
+    {
+      user: 'User 12',
+      opened: false,
+      profile_picture: { picture_path: '/images/profile.jpeg' },
+      message: 'liked your photo',
+      timestamp: '2023-11-01T09:00:00Z',
+      picture: { picture_path: '/images/collection.jpeg' },
+    },
+  ]
+
+  return notifications
 }

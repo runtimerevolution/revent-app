@@ -1,5 +1,4 @@
 import Contest from '../components/Contest'
-import Layout from '../components/Layout'
 import { getContestList } from '../services/reventService'
 import React, { useState } from 'react'
 import ContestFilter from '../components/ContestFilter'
@@ -22,25 +21,25 @@ export default function Home({ contestList }: HomeProps) {
       : contestList.filter((contest) => contest.status === statusFilter)
 
   return (
-    <Layout>
-      <div className='p-8 bg-gray-100'>
-        <div className='px-8'>
-          <div className='flex-row'>
-            <ContestFilter
-              open={open}
-              setOpen={setOpen}
-              statusFilter={statusFilter}
-              setStatusFilter={setStatusFilter}
-            />
-          </div>
-          <div className='grid grid-cols-4 gap-4 px-20'>
+    <div className='p-8 bg-gray-100'>
+      <div className='px-8'>
+        <div className='flex-row'>
+          <ContestFilter
+            open={open}
+            setOpen={setOpen}
+            statusFilter={statusFilter}
+            setStatusFilter={setStatusFilter}
+          />
+        </div>
+        <main className='min-h-screen py-8 px-20 flex-1 flex flex-col'>
+          <div className='grid grid-cols-4 gap-4'>
             {filteredContestList.map((contest) => (
               <Contest contest={contest} />
             ))}
           </div>
-        </div>
+        </main>
       </div>
-    </Layout>
+    </div>
   )
 }
 

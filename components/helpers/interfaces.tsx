@@ -10,11 +10,22 @@ export interface Contest {
   dateEnd: string
   status: IFilter
 }
-export interface Picture {
-  id: number
-  picture_path: string
+
+export interface Notification {
+  user: string
+  opened: boolean
+  profile_picture: Picture
+  message: string
+  timestamp: string
+  picture: Picture
 }
 
+export interface NotificationsList {
+  displayedNotifications: Notification[]
+}
+export interface Picture {
+  picture_path: string
+}
 export interface Collection {
   id: number
   name: string
