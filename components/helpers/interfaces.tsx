@@ -2,27 +2,31 @@ import React from 'react'
 import { ReactNode } from 'react'
 
 export type IFilter = 'All' | 'Open' | 'Voting' | 'Closed'
-export interface ContestType {
+
+export interface Contest {
+  id: number
   name: string
   description: string
-  date_start: string
-  date_end: string
+  dateStart: string
+  dateEnd: string
   status: IFilter
 }
-export interface HomeProps {
-  contestList: ContestType[]
-  notifications: Notification[]
+
+export interface Notification {
+  user: string
+  opened: boolean
+  profile_picture: Picture
+  message: string
+  timestamp: string
+  picture: Picture
 }
 
-export interface LayoutProps {
-  children: ReactNode
+export interface NotificationsList {
+  displayedNotifications: Notification[]
 }
-
 export interface Picture {
-  id: number
   picture_path: string
 }
-
 export interface Collection {
   id: number
   name: string

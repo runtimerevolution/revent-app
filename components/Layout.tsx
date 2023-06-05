@@ -1,8 +1,9 @@
+import { PropsWithChildren } from 'react'
 import styles from '../styles/Home.module.css'
-import { LayoutProps } from './helpers/interfaces'
-import Navbar from './Navbar/Navbar'
 
-export default function Layout({ children }: LayoutProps) {
+import Navbar from './Navbar'
+
+export default function Layout({ children }: PropsWithChildren) {
   return (
     <div>
       <Navbar />
