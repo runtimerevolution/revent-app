@@ -36,6 +36,12 @@ export interface CollectionsProps {
   collectionList: Collection[]
 }
 
+export interface MyPhoto {
+  id: number
+  description: string
+  pictures: Picture[]
+  user: string
+}
 export interface ContestFilterProps {
   open: boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -45,4 +51,8 @@ export interface ContestFilterProps {
 
 export interface CollectionProps {
   collection: Collection
+}
+
+export interface NavbarProps {
+  notifications: Notification[]
 }

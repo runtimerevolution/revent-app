@@ -1,28 +1,38 @@
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
-import { getNotificationsList } from '../../services/reventService'
-import { Notification as NotificationType } from '../helpers/interfaces'
-
-import NotificationMenu from '../NotificationMenu'
-import { useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import {
+  getNotificationsList,
+  getUserLocal,
+} from '../../services/reventService'
+import Notification from '../Notifications/Notification'
+import UserMenu from './UserMenu'
 
 export default function Navbar() {
   const router = useRouter()
   const handleNavigation = (path: string) => {
+    setShowUserMenu(false)
     router.push(path)
   }
 
-  const [notifications, setNotifications] = useState<NotificationType[]>([])
-  const [displayedNotifications, setDisplayedNotifications] = useState<
-    NotificationType[]
-  >([])
+  const [notifications, setNotifications] = useState([])
+  const [displayedNotifications, setDisplayedNotifications] = useState([])
+  const [user, setUser] = useState(null)
+
+  const containerRef = useRef<HTMLDivElement>()
+
+  useEffect(() => {
+    async function fetchUser() {
+      const user = await getUserLocal()
+      setUser(user)
+    }
+    fetchUser()
+  }, [user])
 
   useEffect(() => {
     async function fetchNotificationsData() {
       try {
         const data = await getNotificationsList()
-
         const initialNotifications = data.slice(0, 3)
         setDisplayedNotifications(initialNotifications)
         setNotifications(data)
@@ -34,13 +44,42 @@ export default function Navbar() {
     fetchNotificationsData()
   }, [])
 
+  const handleScroll = () => {
+    const scrollableDiv = containerRef.current
+
+    if (scrollableDiv) {
+      const { scrollTop, clientHeight, scrollHeight } = scrollableDiv
+
+      if (scrollTop + clientHeight >= scrollHeight) {
+        const startIndex = displayedNotifications.length
+        const endIndex = startIndex + 3
+
+        const nextNotifications = notifications.slice(startIndex, endIndex)
+        setDisplayedNotifications((prevNotifications) => [
+          ...prevNotifications,
+          ...nextNotifications,
+        ])
+      }
+    }
+  }
+
+  useEffect(() => {
+    const container = containerRef.current
+    if (container) {
+      container.addEventListener('scroll', handleScroll)
+    }
+    return () => {
+      if (container) {
+        container.removeEventListener('scroll', handleScroll)
+      }
+    }
+  })
+
   const collectionsTextColor =
     router.pathname === '/collections' ? 'text-orange-500' : 'text-gray-700'
 
   const contestsTextColor =
-    router.pathname === '/contests' || router.pathname === '/'
-      ? 'text-orange-500'
-      : 'text-gray-700'
+    router.pathname === '/contests' ? 'text-orange-500' : 'text-gray-700'
 
   const collectionsBackgroundColor =
     router.pathname === '/collections'
@@ -48,32 +87,21 @@ export default function Navbar() {
       : 'hover:bg-gray-700'
 
   const contestsBackgroundColor =
-    router.pathname === '/contests' || router.pathname === '/'
+    router.pathname === '/contests'
       ? 'hover:bg-orange-700'
       : 'hover:bg-gray-700'
 
-  const wrapperRef = useRef(null)
-
   const [showNotifications, setShowNotifications] = useState<boolean>(false)
+  const [showUserMenu, setShowUserMenu] = useState<boolean>(false)
 
   const [hasNotifications, setHasNotifications] = useState<boolean>(true)
 
-  const toggleNotifications = () => {
+  const handleToggleNotifications = () => {
     setShowNotifications((showNotifications) => !showNotifications)
   }
-
-  const handleOutsideClick = (event) => {
-    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-      setShowNotifications(false)
-    }
+  const handleOpenUserMenu = () => {
+    setShowUserMenu((showUserMenu) => !showUserMenu)
   }
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClick)
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick)
-    }
-  }, [])
 
   return (
     <nav className='bg-white-800 w-full'>
@@ -114,7 +142,7 @@ export default function Navbar() {
           <div className='relative'>
             <button
               className='relative text-white focus:outline-none rounded-full p-2'
-              onClick={toggleNotifications}
+              onClick={handleToggleNotifications}
             >
               <Image
                 src='/images/bell.svg'
@@ -126,15 +154,29 @@ export default function Navbar() {
                 <span className='absolute top-0 right-0 bg-orange-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs'></span>
               )}
             </button>
-            <div ref={wrapperRef}>
-              {hasNotifications && showNotifications && (
-                <NotificationMenu
-                  displayedNotifications={displayedNotifications}
-                  setDisplayedNotifications={setDisplayedNotifications}
-                  notifications={notifications}
-                />
-              )}
-            </div>
+            {hasNotifications && showNotifications && (
+              <div
+                ref={containerRef}
+                className='absolute right-0 mt-2 bg-white text-gray-800 rounded-lg shadow-lg p-4 max-h-60 overflow-y-auto'
+              >
+                {displayedNotifications?.map((notification) => (
+                  <Notification notification={notification} />
+                ))}
+              </div>
+            )}
+            <button
+              className='relative text-white focus:outline-none rounded-full p-2'
+              onClick={handleOpenUserMenu}
+            >
+              <Image
+                src='/images/profile.jpeg'
+                alt='notifications'
+                width={40}
+                height={40}
+                className='rounded-full'
+              />
+            </button>
+            {showUserMenu && <UserMenu setShowUserMenu={setShowUserMenu} />}
           </div>
         </div>
       </div>

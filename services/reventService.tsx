@@ -39,6 +39,17 @@ export async function getUser(id) {
   return fetchEndpoint('users/' + id, GET)
 }
 
+export async function getUserLocal() {
+  const user = {
+    id: 1,
+    name: 'User 1',
+    profile_picture: { id: 1, picture_path: '/images/profile.jpeg' },
+    status: 'Status',
+  }
+
+  return user
+}
+
 export async function getSubmissionsFromContest(id) {
   return fetchEndpoint('contests/' + id, GET)
 }
@@ -98,6 +109,63 @@ export async function getCollectionList() {
   ]
   return collections
   // return fetchEndpoint('collections/', GET)
+}
+
+export async function getMyPhotosList() {
+  const myphotos = [
+    {
+      id: 1,
+      description: 'My Photo 1',
+      user: 'User 1',
+      pictures: [
+        { id: 1, picture_path: '/images/collection.jpeg' },
+        { id: 2, picture_path: '/images/collection.jpeg' },
+        { id: 3, picture_path: '/images/collection.jpeg' },
+      ],
+    },
+    {
+      id: 2,
+      description: 'My Photo 2',
+      user: 'User 2',
+      pictures: [
+        { id: 4, picture_path: '/images/collection.jpeg' },
+        { id: 5, picture_path: '/images/collection.jpeg' },
+        { id: 6, picture_path: '/images/collection.jpeg' },
+      ],
+    },
+    {
+      id: 3,
+      description: 'My Photo 3',
+      user: 'User 3',
+      pictures: [
+        { id: 7, picture_path: '/images/collection.jpeg' },
+        { id: 8, picture_path: '/images/collection.jpeg' },
+        { id: 9, picture_path: '/images/collection.jpeg' },
+      ],
+    },
+    {
+      id: 4,
+      description: 'My Photo 4',
+      user: 'User 4',
+      pictures: [
+        { id: 10, picture_path: '/images/collection.jpeg' },
+        { id: 11, picture_path: '/images/collection.jpeg' },
+        { id: 12, picture_path: '/images/collection.jpeg' },
+      ],
+    },
+    {
+      id: 5,
+      description: 'My Photo 5',
+      user: 'User 5',
+      pictures: [
+        { id: 13, picture_path: '/images/collection.jpeg' },
+        { id: 14, picture_path: '/images/collection.jpeg' },
+        { id: 15, picture_path: '/images/collection.jpeg' },
+      ],
+    },
+  ]
+  return myphotos
+  // return fetchEndpoint('myphotos/', GET)
 }
 
 export async function getContestList() {

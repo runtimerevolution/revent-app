@@ -1,12 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
-import { Notification as NotificationType } from '../helpers/interfaces'
 
-interface NotificationInterface {
-  notification: NotificationType
-}
-
-export default function Notification({ notification }: NotificationInterface) {
+export default function Notification({ notification }) {
   const [opened, setOpened] = useState(notification.opened)
   return (
     <>
@@ -19,7 +14,6 @@ export default function Notification({ notification }: NotificationInterface) {
             <img
               className='w-full rounded-full'
               src={notification.profile_picture.picture_path}
-              alt=''
             />
             <div className='flex flex-col'>
               <a className='w-full text-orange-500'>{notification.user}</a>{' '}
@@ -30,11 +24,7 @@ export default function Notification({ notification }: NotificationInterface) {
                 </a>
               </div>
             </div>
-            <img
-              className='w-full rounded-lg'
-              src='/images/contest.jpeg'
-              alt=''
-            />
+            <img className='w-full rounded-lg' src='/images/contest.jpeg' />
           </div>
         </div>
       </a>
