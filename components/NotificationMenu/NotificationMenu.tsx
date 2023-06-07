@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useRef } from 'react'
 
-import NotificationsList from '../NotificationsList'
+import NotificationsList from '../NotificationsList/NotificationsList'
 import { Notification as NotificationType } from '../helpers/interfaces'
 
 interface NotificationMenu {

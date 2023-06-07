@@ -115,7 +115,7 @@ export async function getMyPhotosList() {
   const myphotos = [
     {
       id: 1,
-      name: 'My Photo 1',
+      description: 'My Photo 1',
       user: 'User 1',
       pictures: [
         { id: 1, picture_path: '/images/collection.jpeg' },
@@ -125,7 +125,7 @@ export async function getMyPhotosList() {
     },
     {
       id: 2,
-      name: 'My Photo 2',
+      description: 'My Photo 2',
       user: 'User 2',
       pictures: [
         { id: 4, picture_path: '/images/collection.jpeg' },
@@ -135,7 +135,7 @@ export async function getMyPhotosList() {
     },
     {
       id: 3,
-      name: 'My Photo 3',
+      description: 'My Photo 3',
       user: 'User 3',
       pictures: [
         { id: 7, picture_path: '/images/collection.jpeg' },
@@ -145,7 +145,7 @@ export async function getMyPhotosList() {
     },
     {
       id: 4,
-      name: 'My Photo 4',
+      description: 'My Photo 4',
       user: 'User 4',
       pictures: [
         { id: 10, picture_path: '/images/collection.jpeg' },
@@ -155,7 +155,7 @@ export async function getMyPhotosList() {
     },
     {
       id: 5,
-      name: 'My Photo 5',
+      description: 'My Photo 5',
       user: 'User 5',
       pictures: [
         { id: 13, picture_path: '/images/collection.jpeg' },

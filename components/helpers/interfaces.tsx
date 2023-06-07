@@ -1,5 +1,4 @@
 import React from 'react'
-import { ReactNode } from 'react'
 
 export type IFilter = 'All' | 'Open' | 'Voting' | 'Closed'
 
@@ -33,25 +32,16 @@ export interface Collection {
   picture: Picture[]
   user: string
 }
-
-export interface MyPhoto {
-  id: number
-  name: string
-  picture: Picture[]
-  user: string
-}
 export interface CollectionsProps {
   collectionList: Collection[]
 }
 
-export interface MyPhotosProps {
-  myphotosList: MyPhoto[]
+export interface MyPhoto {
+  id: number
+  description: string
+  pictures: Picture[]
+  user: string
 }
-
-export interface MyPhotoProps {
-  myphoto: MyPhoto
-}
-
 export interface ContestFilterProps {
   open: boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>

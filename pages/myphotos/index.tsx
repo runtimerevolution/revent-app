@@ -1,6 +1,10 @@
-import { MyPhotosProps } from '../../components/helpers/interfaces'
-import MyPhoto from '../../components/MyPhoto'
+import { MyPhoto as MyPhotoType } from '../../components/helpers/interfaces'
+import MyPhoto from '../../components/MyPhotos'
 import { getMyPhotosList } from '../../services/reventService'
+
+export interface MyPhotosProps {
+  myphotosList: MyPhotoType[]
+}
 
 export default function MyPhotos({ myphotosList }: MyPhotosProps) {
   return (
