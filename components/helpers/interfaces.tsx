@@ -11,6 +11,9 @@ export interface Contest {
   title?: string
   upload_phase_end?: string
   cover_picture?: PicturePath
+  status?: string
+  name?: string
+  dateEnd?: string
 }
 
 export interface Notification {
