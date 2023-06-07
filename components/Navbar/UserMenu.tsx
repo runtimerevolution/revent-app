@@ -2,10 +2,10 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import Image from 'next/image'
 
-interface setShowUserMenu {
+interface UserMenuProps {
   setShowUserMenu: React.Dispatch<React.SetStateAction<boolean>>
 }
-export default function NavigationMenu({ setShowUserMenu }: setShowUserMenu) {
+export default function UserMenu({ setShowUserMenu }: UserMenuProps) {
   const router = useRouter()
   const handleNavigation = (path: string) => {
     setShowUserMenu(false)

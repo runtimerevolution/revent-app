@@ -6,7 +6,7 @@ import {
   getUserLocal,
 } from '../../services/reventService'
 import Notification from '../Notifications/Notification'
-import NavigationMenu from './NavigationMenu'
+import UserMenu from './UserMenu'
 
 export default function Navbar() {
   const router = useRouter()
@@ -176,9 +176,7 @@ export default function Navbar() {
                 className='rounded-full'
               />
             </button>
-            {showUserMenu && (
-              <NavigationMenu setShowUserMenu={setShowUserMenu} />
-            )}
+            {showUserMenu && <UserMenu setShowUserMenu={setShowUserMenu} />}
           </div>
         </div>
       </div>
