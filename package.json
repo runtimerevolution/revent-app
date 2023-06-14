@@ -12,11 +12,13 @@
     "@heroicons/react": "^2.0.17",
     "apollo-client": "^2.6.10",
     "apollo-server-micro": "^3.12.0",
+    "formik": "^2.4.1",
     "graphql": "^15.8.0",
     "isomorphic-fetch": "^3.0.0",
     "next": "latest",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "zod": "^3.21.4"
   },
   "prettier": {
     "tabWidth": 2,

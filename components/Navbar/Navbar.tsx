@@ -7,6 +7,7 @@ import {
 } from '../../services/reventService'
 import Notification from '../Notifications/Notification'
 import UserMenu from './UserMenu'
+import CreateContestForm from './CreateContestForm'
 
 export default function Navbar() {
   const router = useRouter()
@@ -94,6 +95,9 @@ export default function Navbar() {
   const [showNotifications, setShowNotifications] = useState<boolean>(false)
   const [showUserMenu, setShowUserMenu] = useState<boolean>(false)
 
+  const [showContestCreationModal, setshowContestCreationModal] =
+    useState<boolean>(false)
+
   const [hasNotifications, setHasNotifications] = useState<boolean>(true)
 
   const handleToggleNotifications = () => {
@@ -101,6 +105,12 @@ export default function Navbar() {
   }
   const handleOpenUserMenu = () => {
     setShowUserMenu((showUserMenu) => !showUserMenu)
+  }
+
+  const handleOpenCreateContestForm = () => {
+    setshowContestCreationModal(
+      (showContestCreationModal) => !showContestCreationModal
+    )
   }
 
   return (
@@ -176,7 +186,11 @@ export default function Navbar() {
                 className='rounded-full'
               />
             </button>
+            <button className='' onClick={handleOpenCreateContestForm}>
+              Create Contest
+            </button>
             {showUserMenu && <UserMenu setShowUserMenu={setShowUserMenu} />}
+            {showContestCreationModal && <CreateContestForm />}
           </div>
         </div>
       </div>
