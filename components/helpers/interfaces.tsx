@@ -25,9 +25,27 @@ export interface Notification {
   picture: Picture
 }
 
+export interface NotificationsList {
+  displayedNotifications: Notification[]
+}
 export interface Picture {
-  id: number
   picture_path: string
+}
+export interface Collection {
+  id: number
+  name: string
+  picture: Picture[]
+  user: string
+}
+export interface CollectionsProps {
+  collectionList: Collection[]
+}
+
+export interface MyPhoto {
+  id: number
+  description: string
+  pictures: Picture[]
+  user: string
 }
 export interface ContestFilterProps {
   open: boolean

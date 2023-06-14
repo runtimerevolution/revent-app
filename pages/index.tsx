@@ -28,7 +28,7 @@ export default function Home({ contestList }: HomeProps) {
 
   return (
     <div className='p-8 bg-gray-100'>
-      <div className='px-8 '>
+      <div className='px-8'>
         <div className='flex-row'>
           <ContestFilter
             open={open}
@@ -37,14 +37,7 @@ export default function Home({ contestList }: HomeProps) {
             setStatusFilter={setStatusFilter}
           />
         </div>
-        <main className='min-h-screen py-8 px-20 flex-1 flex flex-col '>
-          {loading && <p>LOADING</p>}
-          {error && <p>Error while retrieving the contests</p>}
-          {/* <div className='grid grid-cols-4 gap-4 	'>
-            {contestList?.map((contest) => (
-              <Contest contest={contest} />
-            ))}
-          </div> */}
+        <main className='min-h-screen py-8 px-20 flex-1 flex flex-col'>
           <div className='grid grid-cols-4 gap-4'>
             {filteredContestList.map((contest) => (
               <Contest contest={contest} />
