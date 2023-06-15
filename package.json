@@ -8,17 +8,25 @@
     "format": "prettier --write \"/*.{ts,tsx}\""
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/server": "^11.11.0",
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.17",
+    "@mantine/core": "^6.0.13",
+    "@mantine/dates": "^6.0.13",
+    "@mantine/hooks": "^6.0.13",
+    "@mantine/next": "^6.0.13",
     "apollo-client": "^2.6.10",
     "apollo-server-micro": "^3.12.0",
+    "dayjs": "^1.11.8",
     "formik": "^2.4.1",
     "graphql": "^15.8.0",
     "isomorphic-fetch": "^3.0.0",
     "next": "latest",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "zod": "^3.21.4"
+    "zod": "^3.21.4",
+    "zod-formik-adapter": "^1.2.0"
   },
   "prettier": {
     "tabWidth": 2,
