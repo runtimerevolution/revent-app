@@ -8,6 +8,8 @@ export default function CustomFileInput({ errors, label, ...props }) {
     helpers.setValue(file)
   }
 
+  console.log('errors?.cover_picture', errors?.cover_picture)
+
   return (
     <div>
       <label htmlFor={props.id}>{label}</label>
@@ -18,7 +20,9 @@ export default function CustomFileInput({ errors, label, ...props }) {
         onChange={handleChange}
         className='border border-black-500'
       />
-      {errors.cover_picture && <div>{String(errors.cover_picture.type)}</div>}
+      {errors?.cover_picture && (
+        <div>{String(errors?.cover_picture?.type)}</div>
+      )}
     </div>
   )
 }

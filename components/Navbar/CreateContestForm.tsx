@@ -12,7 +12,9 @@ interface CreateContestFormProps {
 export default function CreateContestForm({
   setshowContestCreationModal,
 }: CreateContestFormProps) {
-  const [dateOptions, setdateOptions] = useState('')
+  const [dateOptions, setdateOptions] = useState('manual')
+  const [uploadDate, setuUploadDate] = useState<Date | null>(null)
+  const [votingDate, setVotingDate] = useState<Date | null>(null)
 
   const allowedImageFormats = ['jpeg', 'png', 'jpg']
   const fileSchema = z.object({
@@ -50,8 +52,8 @@ export default function CreateContestForm({
     cover_picture: null,
     prize: '',
     datesOption: dateOptions,
-    uploadPhaseDate: null,
-    votingPhaseDate: null,
+    uploadPhaseDate: uploadDate,
+    votingPhaseDate: votingDate,
   }
 
   const handleSubmit = (values: typeof initialValues) => {
@@ -77,6 +79,11 @@ export default function CreateContestForm({
       document.removeEventListener('mousedown', handleClickOutsideModal)
     }
   }, [])
+
+  useEffect(() => {
+    setVotingDate(null)
+    setuUploadDate(null)
+  }, [dateOptions])
 
   return (
     <>
@@ -175,6 +182,7 @@ export default function CreateContestForm({
                         <DateInput
                           id='uploadPhaseDate'
                           onChange={(date) => {
+                            setuUploadDate(date)
                             setFieldValue('uploadPhaseDate', date)
                           }}
                           label='Date input'
@@ -188,6 +196,7 @@ export default function CreateContestForm({
                         <DateInput
                           id='votingPhaseDate'
                           onChange={(date) => {
+                            setVotingDate(date)
                             setFieldValue('votingPhaseDate', date)
                           }}
                           label='Date input'
