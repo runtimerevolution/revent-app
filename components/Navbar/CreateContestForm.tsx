@@ -1,5 +1,5 @@
 import React from 'react'
-import { Formik, Field, Form, ErrorMessage } from 'formik'
+import { Formik, Field, Form } from 'formik'
 import { z } from 'zod'
 import { toFormikValidationSchema } from 'zod-formik-adapter'
 
@@ -11,19 +11,48 @@ import { useRef } from 'react'
 interface CreateContestFormProps {
   setshowContestCreationModal: React.Dispatch<React.SetStateAction<boolean>>
 }
+import { useField } from 'formik'
+
+const CustomFileInput = ({ errors, label, ...props }) => {
+  const [, , helpers] = useField(props.name)
+
+  const handleChange = (event) => {
+    const file = event.currentTarget.files[0]
+    helpers.setValue(file)
+  }
+
+  return (
+    <div>
+      <label htmlFor={props.id}>{label}</label>
+      <input
+        id={props.id}
+        name={props.name}
+        type='file'
+        onChange={handleChange}
+        className='border border-black-500'
+      />
+      {errors.cover_picture && <div>{String(errors.cover_picture.type)}</div>}
+    </div>
+  )
+}
 
 export default function CreateContestForm({
   setshowContestCreationModal,
 }: CreateContestFormProps) {
   const [dateOptions, setdateOptions] = useState('')
 
-  const schema = z.object({
-    cover_picture: z.string().refine((value) => {
-      // Check if value is a valid image file
-      if (!value) return false // If value is empty, consider it invalid
-      const acceptedFormats = ['image/jpeg', 'image/png', 'image/gif'] // Define accepted image formats
-      return acceptedFormats.includes(value) // Check if value's type matches the accepted formats
+  const allowedImageFormats = ['jpeg', 'png', 'jpg']
+  const fileSchema = z.object({
+    name: z.string(),
+    size: z.number(),
+    type: z.string().refine((value) => {
+      const fileExtension = value.split('/').pop()
+      return allowedImageFormats.includes(fileExtension)
     }, 'Invalid image format'),
+  })
+
+  const schema = z.object({
+    cover_picture: fileSchema,
     title: z
       .string()
       .min(2, 'Title must be at least 2 characters')
@@ -39,6 +68,7 @@ export default function CreateContestForm({
     uploadPhaseDate: z.date(),
     votingPhaseDate: z.date(),
   })
+
   const initialValues = {
     title: '',
     description: '',
@@ -72,12 +102,13 @@ export default function CreateContestForm({
       document.removeEventListener('mousedown', handleClickOutsideModal)
     }
   }, [])
+
   return (
     <>
-      <div className='fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50'>
+      <div className='fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50 rounded-lg'>
         <div
           ref={modalRef}
-          className='w-2/3  bg-white text-gray-800 rounded-lg shadow-xl p-8 max-h-80 overflow-y-auto '
+          className='w-2/3  bg-white text-gray-800 rounded-lg shadow-xl p-8 overflow-y-auto '
         >
           <Formik
             initialValues={initialValues}
@@ -96,11 +127,7 @@ export default function CreateContestForm({
                       name='title'
                       className='border border-black-500'
                     />
-                    <ErrorMessage
-                      name='title'
-                      component='div'
-                      className='error'
-                    />
+                    {errors.title && <div>{errors.title}</div>}
                   </div>
                   <div>
                     <label htmlFor='description'>Description</label>
@@ -113,31 +140,15 @@ export default function CreateContestForm({
                       className='border border-black-500'
                       rows={2}
                     />
-                    <ErrorMessage
-                      name='description'
-                      component='div'
-                      className='error'
-                    />
+                    {errors.description && <div>{errors.description}</div>}
                   </div>
                   <div>
                     <label htmlFor='image'>Upload Image</label>
                     <br />
-                    <Field
-                      as='input'
-                      id='image'
-                      name='image'
-                      type='file'
-                      className='border border-black-500'
-                      onChange={(event) => {
-                        const file = event.target.files[0]
-                        setFieldValue('cover_picture', file)
-                        // setCoverPicture(file)
-                      }}
-                    />
-                    <ErrorMessage
+                    <CustomFileInput
+                      label='Cover Picture'
                       name='cover_picture'
-                      component='div'
-                      className='error'
+                      errors={errors}
                     />
                   </div>
                   <div className=''>
@@ -149,11 +160,7 @@ export default function CreateContestForm({
                       name='prize'
                       className='border border-black-500'
                     />
-                    <ErrorMessage
-                      name='prize'
-                      component='div'
-                      className='error'
-                    />
+                    {errors.prize && <div>{String(errors.prize)}</div>}
                   </div>
 
                   <div>
@@ -217,12 +224,14 @@ export default function CreateContestForm({
                     </>
                   )}
 
-                  <button
-                    className='mt-2 text-gray-700 bg-gray-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
-                    type='submit'
-                  >
-                    Submit
-                  </button>
+                  <div className=' flex items-center justify-center'>
+                    <button
+                      className='mt-2 text-gray-700 bg-gray-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
+                      type='submit'
+                    >
+                      Submit
+                    </button>
+                  </div>
                 </Form>
               </div>
             )}
