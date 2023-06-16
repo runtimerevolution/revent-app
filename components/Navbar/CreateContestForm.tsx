@@ -1,39 +1,12 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Formik, Field, Form } from 'formik'
 import { z } from 'zod'
 import { toFormikValidationSchema } from 'zod-formik-adapter'
-
-import { useState, useEffect } from 'react'
-
 import { DateInput } from '@mantine/dates'
-import { useRef } from 'react'
+import CustomFileInput from '../helpers/CustomFileInput'
 
 interface CreateContestFormProps {
   setshowContestCreationModal: React.Dispatch<React.SetStateAction<boolean>>
-}
-import { useField } from 'formik'
-
-const CustomFileInput = ({ errors, label, ...props }) => {
-  const [, , helpers] = useField(props.name)
-
-  const handleChange = (event) => {
-    const file = event.currentTarget.files[0]
-    helpers.setValue(file)
-  }
-
-  return (
-    <div>
-      <label htmlFor={props.id}>{label}</label>
-      <input
-        id={props.id}
-        name={props.name}
-        type='file'
-        onChange={handleChange}
-        className='border border-black-500'
-      />
-      {errors.cover_picture && <div>{String(errors.cover_picture.type)}</div>}
-    </div>
-  )
 }
 
 export default function CreateContestForm({
@@ -60,13 +33,15 @@ export default function CreateContestForm({
     description: z
       .string()
       .min(10, 'Description must be at least 10 characters')
-      .max(200, 'Description must be less than 200 characters'),
+      .max(200, 'Description must be less than 200 characters')
+      .optional(),
     prize: z
       .string()
       .min(2, 'Prize must be at least 2 characters')
-      .max(100, 'Prize must be less than 100 characters'),
-    uploadPhaseDate: z.date(),
-    votingPhaseDate: z.date(),
+      .max(100, 'Prize must be less than 100 characters')
+      .optional(),
+    uploadPhaseDate: z.date().optional(),
+    votingPhaseDate: z.date().optional(),
   })
 
   const initialValues = {
