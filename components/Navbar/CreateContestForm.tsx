@@ -4,6 +4,7 @@ import { z } from 'zod'
 import { toFormikValidationSchema } from 'zod-formik-adapter'
 import { DateInput } from '@mantine/dates'
 import CustomFileInput from '../helpers/CustomFileInput'
+import ErrorMessage from '../ErrorMessage'
 
 interface CreateContestFormProps {
   setshowContestCreationModal: React.Dispatch<React.SetStateAction<boolean>>
@@ -17,14 +18,17 @@ export default function CreateContestForm({
   const [votingDate, setVotingDate] = useState<Date | null>(null)
 
   const allowedImageFormats = ['jpeg', 'png', 'jpg']
-  const fileSchema = z.object({
-    name: z.string(),
-    size: z.number(),
-    type: z.string().refine((value) => {
-      const fileExtension = value.split('/').pop()
-      return allowedImageFormats.includes(fileExtension)
-    }, 'Invalid image format'),
-  })
+  const fileSchema = z
+    .object({
+      name: z.string(),
+      size: z.number(),
+      type: z.string().refine((value) => {
+        const fileExtension = value.split('/').pop()
+        return allowedImageFormats.includes(fileExtension)
+      }, 'Invalid image format'),
+    })
+    .nullable()
+    .refine((value) => value !== null, { message: 'File is required' })
 
   const schema = z.object({
     cover_picture: fileSchema,
@@ -34,16 +38,14 @@ export default function CreateContestForm({
       .max(50, 'Title must be less than 50 characters'),
     description: z
       .string()
-      .min(10, 'Description must be at least 10 characters')
       .max(200, 'Description must be less than 200 characters')
       .optional(),
     prize: z
       .string()
-      .min(2, 'Prize must be at least 2 characters')
       .max(100, 'Prize must be less than 100 characters')
       .optional(),
-    uploadPhaseDate: z.date().optional(),
-    votingPhaseDate: z.date().optional(),
+    uploadPhaseDate: z.date().optional().nullable(),
+    votingPhaseDate: z.date().optional().nullable(),
   })
 
   const initialValues = {
@@ -55,6 +57,10 @@ export default function CreateContestForm({
     uploadPhaseDate: uploadDate,
     votingPhaseDate: votingDate,
   }
+
+  useEffect(() => {
+    setdateOptions(dateOptions)
+  }, [dateOptions])
 
   const handleSubmit = (values: typeof initialValues) => {
     console.log(values)
@@ -90,7 +96,7 @@ export default function CreateContestForm({
       <div className='fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50 rounded-lg'>
         <div
           ref={modalRef}
-          className='w-2/3  bg-white text-gray-800 rounded-lg shadow-xl p-8 overflow-y-auto '
+          className='w-2/3 max-h-screen bg-white text-gray-800 rounded-lg shadow-xl p-8 overflow-y-auto '
         >
           <Formik
             initialValues={initialValues}
@@ -99,60 +105,82 @@ export default function CreateContestForm({
           >
             {({ setFieldValue, errors }) => (
               <div className='flex items-center justify-center'>
-                <Form>
-                  <div>
-                    <label htmlFor='title'>Title</label>
+                {/* {console.log('errors', errors)} */}
+                <Form className=''>
+                  <a className='font-bold text-xl mb-2'>
+                    New <a className='text-orange-500'> Contest</a>
+                  </a>
+                  <div className='mt-2'>
+                    <label className='text-lg font-medium' htmlFor='title'>
+                      Title
+                    </label>
                     <br />
                     <Field
                       type='text'
                       id='title'
                       name='title'
-                      className='border border-black-500'
+                      className='border border-orange-500 focus:border-orange-700 px-4 py-2 rounded-lg w-full'
                     />
-                    {errors.title && <div>{errors.title}</div>}
+                    {errors.title && <ErrorMessage error={errors.title} />}
                   </div>
-                  <div>
-                    <label htmlFor='description'>Description</label>
+                  <div className='mt-2'>
+                    <label
+                      className='text-lg font-medium'
+                      htmlFor='description'
+                    >
+                      Description
+                    </label>
                     <br />
                     <Field
                       as='textarea'
                       type='text'
                       id='description'
                       name='description'
-                      className='border border-black-500'
-                      rows={2}
+                      className='border border-orange-500 focus:border-orange-700 px-4 py-2 rounded-md resize-none w-full'
+                      rows={6}
                     />
-                    {errors.description && <div>{errors.description}</div>}
+
+                    {errors.description && (
+                      <ErrorMessage error={errors.description} />
+                    )}
                   </div>
-                  <div>
-                    <label htmlFor='image'>Upload Image</label>
+                  <div className='mt-2'>
+                    <label className='text-lg font-medium' htmlFor='image'>
+                      Upload Image
+                    </label>
                     <br />
                     <CustomFileInput
-                      label='Cover Picture'
+                      label=''
                       name='cover_picture'
                       errors={errors}
                     />
                   </div>
-                  <div className=''>
-                    <label htmlFor='prize'>Prize</label>
+                  <div className='mt-2'>
+                    <label className='text-lg font-medium' htmlFor='prize'>
+                      Prize
+                    </label>
                     <br />
                     <Field
                       type='text'
                       id='prize'
                       name='prize'
-                      className='border border-black-500'
+                      className='border border-orange-500 focus:border-orange-700 px-4 py-2 rounded-md w-full'
                     />
-                    {errors.prize && <div>{String(errors.prize)}</div>}
+
+                    {errors.prize && <ErrorMessage error={errors.prize} />}
                   </div>
 
-                  <div>
-                    <label>Choose Dates Option:</label>
+                  <div className='mt-2'>
+                    <label className='text-lg font-medium'>
+                      Choose Dates Option:
+                    </label>
                     <div>
                       <label>
                         <br />
                         <Field
                           type='radio'
                           name='datesOption'
+                          className='border border-orange-500 focus:border-orange-700 px-4 py-2 rounded-md'
                           checked={dateOptions === 'manual'}
                           onChange={() => {
                             setdateOptions('manual')
@@ -177,7 +205,7 @@ export default function CreateContestForm({
 
                   {dateOptions === 'automated' && (
                     <>
-                      <div>
+                      <div className='mt-2'>
                         <label htmlFor='uploadPhase'>Upload Phase</label>
                         <DateInput
                           id='uploadPhaseDate'
@@ -185,13 +213,14 @@ export default function CreateContestForm({
                             setuUploadDate(date)
                             setFieldValue('uploadPhaseDate', date)
                           }}
-                          label='Date input'
-                          placeholder='Date input'
+                          // label='Date input'
+                          // placeholder='Date input'
                           maw={400}
                           mx='auto'
+                          className='mt-2'
                         />
                       </div>
-                      <div>
+                      <div className='mt-2'>
                         <label htmlFor='votingPhase'>Voting Phase</label>
                         <DateInput
                           id='votingPhaseDate'
@@ -199,10 +228,9 @@ export default function CreateContestForm({
                             setVotingDate(date)
                             setFieldValue('votingPhaseDate', date)
                           }}
-                          label='Date input'
-                          placeholder='Date input'
                           maw={400}
                           mx='auto'
+                          className='mt-2'
                         />
                       </div>
                     </>

@@ -1,4 +1,5 @@
 import { useField } from 'formik'
+import ErrorMessage from '../ErrorMessage'
 
 export default function CustomFileInput({ errors, label, ...props }) {
   const [, , helpers] = useField(props.name)
@@ -7,9 +8,7 @@ export default function CustomFileInput({ errors, label, ...props }) {
     const file = event.currentTarget.files[0]
     helpers.setValue(file)
   }
-
-  console.log('errors?.cover_picture', errors?.cover_picture)
-
+  console.log('errors', errors)
   return (
     <div>
       <label htmlFor={props.id}>{label}</label>
@@ -18,11 +17,15 @@ export default function CustomFileInput({ errors, label, ...props }) {
         name={props.name}
         type='file'
         onChange={handleChange}
-        className='border border-black-500'
+        className='border border-black-500 w-full'
       />
-      {errors?.cover_picture && (
-        <div>{String(errors?.cover_picture?.type)}</div>
-      )}
+
+      {errors?.cover_picture &&
+        (errors.cover_picture.type ? (
+          <ErrorMessage error={String(errors.cover_picture.type)} />
+        ) : (
+          <ErrorMessage error={String(errors.cover_picture)} />
+        ))}
     </div>
   )
 }
