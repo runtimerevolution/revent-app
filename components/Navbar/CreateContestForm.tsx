@@ -101,7 +101,7 @@ export default function CreateContestForm({
           >
             {({ setFieldValue, errors }) => (
               <div className='flex items-center justify-center'>
-                <Form className=''>
+                <Form>
                   <a className='font-bold text-xl mb-2'>
                     New <a className='text-orange-500'> Contest</a>
                   </a>
@@ -191,8 +191,8 @@ export default function CreateContestForm({
                           name='datesOption'
                           checked={dateOptions === 'automated'}
                           onChange={() => {
-                            setFieldValue('dateOptions', 'automated')
                             setdateOptions('automated')
+                            setFieldValue('dateOptions', 'automated')
                           }}
                         />
                         Automated Dates
