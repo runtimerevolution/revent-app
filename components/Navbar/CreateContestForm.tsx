@@ -13,7 +13,7 @@ interface CreateContestFormProps {
 export default function CreateContestForm({
   setshowContestCreationModal,
 }: CreateContestFormProps) {
-  const [dateOptions, setdateOptions] = useState('manual')
+  const [dateOptions, setdateOptions] = useState('')
   const [uploadDate, setuUploadDate] = useState<Date | null>(null)
   const [votingDate, setVotingDate] = useState<Date | null>(null)
 
@@ -57,10 +57,6 @@ export default function CreateContestForm({
     uploadPhaseDate: uploadDate,
     votingPhaseDate: votingDate,
   }
-
-  useEffect(() => {
-    setdateOptions(dateOptions)
-  }, [dateOptions])
 
   const handleSubmit = (values: typeof initialValues) => {
     console.log(values)
