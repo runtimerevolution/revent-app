@@ -1,19 +1,25 @@
 import Contest from '../components/Contest'
-import { getContestList } from '../services/reventService'
 import React, { useState } from 'react'
 import ContestFilter from '../components/ContestFilter'
 import {
-  Contest as ContestType,
   IFilter,
+  Contest as ContestType,
 } from '../components/helpers/interfaces'
+import { useQuery } from '@apollo/client'
+import { GET_CONTESTS } from '../lib/graphql'
+import { getContestList } from '../services/reventService'
 
 export interface HomeProps {
   contestList: ContestType[]
 }
 export default function Home({ contestList }: HomeProps) {
+  const { loading, error, data } = useQuery(GET_CONTESTS)
+
   const [statusFilter, setStatusFilter] = useState<IFilter>('Open')
 
   const [open, setOpen] = useState<boolean>(false)
+
+  // let contestList = data?.contests
 
   const filteredContestList =
     statusFilter === 'All'
@@ -32,10 +38,14 @@ export default function Home({ contestList }: HomeProps) {
           />
         </div>
         <main className='min-h-screen py-8 px-20 flex-1 flex flex-col'>
+          {loading && <p>Loading</p>}
+          {error && <p>Error while retrieving the contests</p>}
           <div className='grid grid-cols-4 gap-4'>
-            {filteredContestList.map((contest) => (
-              <Contest contest={contest} />
-            ))}
+            {!loading &&
+              !error &&
+              filteredContestList.map((contest) => (
+                <Contest contest={contest} />
+              ))}
           </div>
         </main>
       </div>
