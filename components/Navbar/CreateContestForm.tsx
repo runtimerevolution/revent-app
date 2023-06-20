@@ -53,7 +53,7 @@ export default function CreateContestForm({
     description: '',
     cover_picture: null,
     prize: '',
-    datesOption: dateOptions,
+    datesOption: '',
     uploadPhaseDate: uploadDate,
     votingPhaseDate: votingDate,
   }
@@ -105,7 +105,6 @@ export default function CreateContestForm({
           >
             {({ setFieldValue, errors }) => (
               <div className='flex items-center justify-center'>
-                {/* {console.log('errors', errors)} */}
                 <Form className=''>
                   <a className='font-bold text-xl mb-2'>
                     New <a className='text-orange-500'> Contest</a>
@@ -184,6 +183,7 @@ export default function CreateContestForm({
                           checked={dateOptions === 'manual'}
                           onChange={() => {
                             setdateOptions('manual')
+                            setFieldValue('dateOptions', 'manual')
                           }}
                         />
                         Manual Dates
@@ -195,6 +195,7 @@ export default function CreateContestForm({
                           name='datesOption'
                           checked={dateOptions === 'automated'}
                           onChange={() => {
+                            setFieldValue('dateOptions', 'automated')
                             setdateOptions('automated')
                           }}
                         />
@@ -213,8 +214,6 @@ export default function CreateContestForm({
                             setuUploadDate(date)
                             setFieldValue('uploadPhaseDate', date)
                           }}
-                          // label='Date input'
-                          // placeholder='Date input'
                           maw={400}
                           mx='auto'
                           className='mt-2'

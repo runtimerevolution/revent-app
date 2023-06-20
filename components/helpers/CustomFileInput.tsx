@@ -8,7 +8,7 @@ export default function CustomFileInput({ errors, label, ...props }) {
     const file = event.currentTarget.files[0]
     helpers.setValue(file)
   }
-  console.log('errors', errors)
+
   return (
     <div>
       <label htmlFor={props.id}>{label}</label>
