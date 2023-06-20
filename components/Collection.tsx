@@ -1,33 +1,15 @@
 import React from 'react'
-
-export interface User {
-  name_first: string
-  name_last: string
-}
-export interface Picture {
-  picture_path: string
-}
-export interface Collection {
-  user: User
-  pictures: Picture[]
-}
-export interface CollectionProps {
-  collection: Collection
-}
+import { CollectionProps } from './helpers/interfaces'
 
 export default function Collection({ collection }: CollectionProps) {
+  const cover_picture_path =
+    collection.pictures.length > 0
+      ? collection.pictures[0].picture_path.toString()
+      : '/images/collection.jpeg'
   return (
     <>
       <div className='max-w-sm rounded overflow-hidden shadow-lg'>
-        <img
-          className='w-full'
-          src={
-            collection.pictures.length > 0
-              ? collection.pictures[0].picture_path.toString()
-              : '/images/collection.jpeg'
-          }
-          alt=''
-        />
+        <img className='w-full' src={cover_picture_path} alt='' />
 
         <div className='px-6 py-4 text-center'>
           <div className='font-bold text-xl mb-2'>

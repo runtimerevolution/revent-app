@@ -5,7 +5,7 @@ import {
   getNotificationsList,
   getUserLocal,
 } from '../../services/reventService'
-import Notification from '../Notifications/Notification'
+import Notification from '../Notification/Notification'
 import UserMenu from './UserMenu'
 
 export default function Navbar() {

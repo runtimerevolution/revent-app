@@ -15,6 +15,8 @@ export interface HomeProps {
 export default function Home({ contestList }: HomeProps) {
   const { loading, error, data } = useQuery(GET_CONTESTS)
 
+  console.log('data', data)
+
   const [statusFilter, setStatusFilter] = useState<IFilter>('Open')
 
   const [open, setOpen] = useState<boolean>(false)
@@ -38,6 +40,8 @@ export default function Home({ contestList }: HomeProps) {
           />
         </div>
         <main className='min-h-screen py-8 px-20 flex-1 flex flex-col'>
+          {loading && <p>Loading</p>}
+          {error && <p>Error while retrieving the contests</p>}
           <div className='grid grid-cols-4 gap-4'>
             {filteredContestList.map((contest) => (
               <Contest contest={contest} />
