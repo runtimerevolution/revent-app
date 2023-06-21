@@ -438,6 +438,13 @@ export async function getContestList() {
   //   return fetchEndpoint('contests/', GET)
 }
 
+export async function getContestById(id) {
+  const contests = await getContestList()
+  const contest = contests.find((contest) => contest.id === id)
+
+  return contest
+}
+
 export async function getNotificationsList(): Promise<Notification[]> {
   const notifications = [
     {

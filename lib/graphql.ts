@@ -11,6 +11,25 @@ export const GET_USERS = gql`
 export const GET_CONTESTS = gql`
   query contests {
     contests {
+      id
+      title
+      active
+      description
+      prize
+      upload_phase_end
+      upload_phase_start
+      voting_phase_end
+      cover_picture {
+        picture_path
+      }
+    }
+  }
+`
+
+export const GET_CONTEST = gql`
+  query GetContest($id: Int!) {
+    contests(id: $id) {
+      id
       title
       active
       description

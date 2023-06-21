@@ -19,12 +19,12 @@ export default function Home({ contestList }: HomeProps) {
 
   const [open, setOpen] = useState<boolean>(false)
 
-  // let contestList = data?.contests
+  let contestListing = data?.contests
 
-  const filteredContestList =
-    statusFilter === 'All'
-      ? contestList
-      : contestList.filter((contest) => contest.status === statusFilter)
+  // const filteredContestList =
+  //   statusFilter === 'All'
+  //     ? contestList
+  //     : contestList.filter((contest) => contest.status === statusFilter)
 
   return (
     <div className='p-8 bg-gray-100'>
@@ -43,9 +43,7 @@ export default function Home({ contestList }: HomeProps) {
           <div className='grid grid-cols-4 gap-4'>
             {!loading &&
               !error &&
-              filteredContestList.map((contest) => (
-                <Contest contest={contest} />
-              ))}
+              contestListing.map((contest) => <Contest contest={contest} />)}
           </div>
         </main>
       </div>
