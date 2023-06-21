@@ -2,13 +2,17 @@ import React from 'react'
 
 export type IFilter = 'All' | 'Open' | 'Voting' | 'Closed'
 
+export interface PicturePath {
+  picture_path: string
+}
 export interface Contest {
   id: number
-  name: string
   description: string
-  dateStart: string
-  dateEnd: string
-  status: IFilter
+  title?: string
+  upload_phase_end?: string
+  cover_picture?: PicturePath
+  status?: string
+  name?: string
 }
 
 export interface Notification {
@@ -26,14 +30,20 @@ export interface NotificationsList {
 export interface Picture {
   picture_path: string
 }
-export interface Collection {
-  id: number
-  name: string
-  picture: Picture[]
-  user: string
+
+export interface User {
+  name_first: string
+  name_last: string
 }
-export interface CollectionsProps {
-  collectionList: Collection[]
+export interface Picture {
+  picture_path: string
+}
+export interface Collection {
+  user: User
+  pictures: Picture[]
+}
+export interface CollectionProps {
+  collection: Collection
 }
 
 export interface MyPhoto {
@@ -47,12 +57,4 @@ export interface ContestFilterProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
   statusFilter: IFilter
   setStatusFilter: React.Dispatch<React.SetStateAction<IFilter>>
-}
-
-export interface CollectionProps {
-  collection: Collection
-}
-
-export interface NavbarProps {
-  notifications: Notification[]
 }
