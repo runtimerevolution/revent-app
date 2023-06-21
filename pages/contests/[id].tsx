@@ -1,10 +1,9 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { getContestById } from '../../services/reventService'
 import { GET_CONTEST } from '../../lib/graphql'
 import { useQuery } from '@apollo/client'
 
-export default function DetailPage(contest) {
+export default function DetailPage() {
   const router = useRouter()
   const { id } = router.query
 
@@ -19,8 +18,13 @@ export default function DetailPage(contest) {
     variables: { id: contestID },
   })
 
-  const contestDetail = data?.contests
+  const contestDetail = data?.contests[0]
   console.log('contestDetail', contestDetail)
+
+  console.log(
+    'contestDetail?.cover_picture?.picture_path',
+    contestDetail?.cover_picture?.picture_path
+  )
 
   return (
     <>
@@ -37,22 +41,4 @@ export default function DetailPage(contest) {
       </div>
     </>
   )
-}
-
-export async function getServerSideProps({ params }) {
-  const id = parseInt(params.id, 10)
-
-  const contest = await getContestById(id)
-
-  if (!contest) {
-    return {
-      notFound: true,
-    }
-  }
-
-  return {
-    props: {
-      contest,
-    },
-  }
 }

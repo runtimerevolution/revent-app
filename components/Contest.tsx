@@ -6,8 +6,6 @@ interface ContestProps {
 }
 
 export default function Contest({ contest }: ContestProps) {
-  console.log('contest', typeof contest.id)
-
   return (
     <Link href={`/contests/${contest.id}`}>
       <div
