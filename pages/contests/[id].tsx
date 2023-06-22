@@ -14,6 +14,7 @@ export default function DetailPage() {
 
   const contestDetail = data?.contests[0]
 
+  // To be replaced with the ContestSubmission Pictures
   const imageList = [
     { id: 1, picture_path: '/images/contest.jpeg' },
     { id: 2, picture_path: '/images/contest.jpeg' },
