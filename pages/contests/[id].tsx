@@ -35,7 +35,7 @@ export default function DetailPage() {
                 <img
                   src={contestDetail?.cover_picture?.picture_path}
                   alt='Imagem'
-                  className='w-60 h-auto'
+                  className='object-fill h-64 w-96'
                 />
               </div>
               <p className='text-center mt-4 text-2xl font-bold'>

@@ -79,7 +79,7 @@ export default function Navbar() {
     router.pathname === '/collections' ? 'text-orange-500' : 'text-gray-700'
 
   const contestsTextColor =
-    router.pathname === '/contests' ? 'text-orange-500' : 'text-gray-700'
+    router.pathname === '/' ? 'text-orange-500' : 'text-gray-700'
 
   const collectionsBackgroundColor =
     router.pathname === '/collections'
@@ -87,9 +87,7 @@ export default function Navbar() {
       : 'hover:bg-gray-700'
 
   const contestsBackgroundColor =
-    router.pathname === '/contests'
-      ? 'hover:bg-orange-700'
-      : 'hover:bg-gray-700'
+    router.pathname === '/' ? 'hover:bg-orange-700' : 'hover:bg-gray-700'
 
   const [showNotifications, setShowNotifications] = useState<boolean>(false)
   const [showUserMenu, setShowUserMenu] = useState<boolean>(false)
