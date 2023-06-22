@@ -1,20 +1,23 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { GET_CONTEST } from '../../lib/graphql'
+import { GET_COLLECTION } from '../../lib/graphql'
 import { useQuery } from '@apollo/client'
 
-export default function ContestDetailPage() {
+export default function CollectionDetailPage() {
   const router = useRouter()
   const { id } = router.query
-  const contestID = parseInt(id as string, 10)
+  const collectionID = parseInt(id as string, 10)
+  console.log('id COLLECTION', id)
 
-  const { loading, error, data } = useQuery(GET_CONTEST, {
-    variables: { id: contestID },
+  const { loading, error, data } = useQuery(GET_COLLECTION, {
+    variables: { id: collectionID },
   })
 
-  const contestDetail = data?.contests[0]
+  // console.log('data', data?.collections)
 
-  // To be replaced with the ContestSubmission Pictures
+  const collectionDetail = data?.collections[0]
+
+  // To be replaced with Collection Pictures
   const imageList = [
     { id: 1, picture_path: '/images/contest.jpeg' },
     { id: 2, picture_path: '/images/contest.jpeg' },
@@ -23,26 +26,31 @@ export default function ContestDetailPage() {
     { id: 5, picture_path: '/images/contest.jpeg' },
   ]
 
+  console.log(
+    'collectionDetail?.pictures?.[0]?.picture_path',
+    collectionDetail?.pictures?.[0]?.picture_path
+  )
+
   return (
     <>
       {loading && <p>Loading</p>}
-      {error && <p>Error while retrieving the contest</p>}
+      {error && <p>Error while retrieving the collection</p>}
       {!loading && !error && (
         <>
           <div className='w-full flex justify-center  h-full bg-gray-200'>
             <div className='bg-white p-8 rounded-lg shadow-lg'>
               <div className='flex justify-center items-center'>
                 <img
-                  src={contestDetail?.cover_picture?.picture_path}
+                  src={collectionDetail?.pictures?.[0]?.picture_path}
                   alt='Imagem'
                   className='object-fill h-64 w-96'
                 />
               </div>
               <p className='text-center mt-4 text-2xl font-bold'>
-                {contestDetail?.title}
+                {collectionDetail?.id}
               </p>
               <p className='text-center mt-2 text-lg'>
-                {contestDetail?.description}
+                {collectionDetail?.name}
               </p>
               <div className='mt-6'>
                 <div className='flex flex-wrap mt-2 -mx-2'>

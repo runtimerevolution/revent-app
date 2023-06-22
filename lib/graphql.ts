@@ -44,9 +44,30 @@ export const GET_CONTEST = gql`
   }
 `
 
+export const GET_COLLECTION = gql`
+  query GetCollection($id: Int!) {
+    collections(id: $id) {
+      id
+      user {
+        email
+        name_last
+        name_first
+        profile_picture {
+          picture_path
+        }
+      }
+      pictures {
+        picture_path
+      }
+      name
+    }
+  }
+`
+
 export const GET_COLLECTIONS = gql`
   query collections {
     collections {
+      id
       user {
         email
         name_last
