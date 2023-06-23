@@ -44,7 +44,7 @@ export const GET_CONTEST = gql`
   }
 `
 
-export const GET_COLLECTION = gql`
+export const GET_COLLECTION_DETAIL = gql`
   query GetCollection($id: Int!) {
     collections(id: $id) {
       id
@@ -64,7 +64,7 @@ export const GET_COLLECTION = gql`
   }
 `
 
-export const GET_COLLECTIONS = gql`
+export const GET_COLLECTION_LIST = gql`
   query collections {
     collections {
       id

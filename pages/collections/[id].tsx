@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { GET_COLLECTION } from '../../lib/graphql'
+import { GET_COLLECTION_DETAIL } from '../../lib/graphql'
 import { useQuery } from '@apollo/client'
 
 export default function CollectionDetailPage() {
@@ -9,7 +9,7 @@ export default function CollectionDetailPage() {
   const collectionID = parseInt(id as string, 10)
   console.log('id COLLECTION', id)
 
-  const { loading, error, data } = useQuery(GET_COLLECTION, {
+  const { loading, error, data } = useQuery(GET_COLLECTION_DETAIL, {
     variables: { id: collectionID },
   })
 
