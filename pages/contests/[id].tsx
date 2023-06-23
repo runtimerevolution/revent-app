@@ -36,7 +36,7 @@ export default function DetailPage() {
       {errorDetail && <p>Error while retrieving the contest</p>}
       {!loadingDetail && !errorDetail && (
         <>
-          <div className='w-full flex justify-center  h-full bg-gray-200'>
+          <div className='w-full  justify-center h-full bg-gray-200'>
             <div className='bg-white p-8 rounded-lg shadow-lg'>
               <div className='flex justify-center items-center'>
                 <img
@@ -51,20 +51,19 @@ export default function DetailPage() {
               <p className='text-center mt-2 text-lg'>
                 {contestDetail?.description}
               </p>
-              <div className='mt-6'>
-                <div className='flex flex-wrap mt-2 -mx-2'>
+              <div className='mt-6 h-screen'>
+                <div className='mt-2 flex flex-wrap'>
                   {submissionList?.map((image) => (
                     <div
                       key={image.id}
-                      className='w-1/4 px-2 flex flex-col items-center mt-2'
+                      className='w-1/4 mt-2 flex flex-col items-center mx-2'
                     >
-                      {/* {console.log('image', image)} */}
                       <img
                         src={image.picture.picture_path}
                         alt={`Image ${image.id}`}
                         className='w-full h-auto'
                       />
-                      <p>
+                      <p className='mt-2 text-center'>
                         User: {image.picture.user.name_first}{' '}
                         {image.picture.user.name_last}
                       </p>
