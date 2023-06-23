@@ -1,33 +1,40 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { GET_CONTEST } from '../../lib/graphql'
 import { useQuery } from '@apollo/client'
+import { GET_CONTEST_DETAIL, GET_CONTEST_SUBMISSIONS } from '../../lib/graphql'
 
 export default function DetailPage() {
   const router = useRouter()
   const { id } = router.query
   const contestID = parseInt(id as string, 10)
 
-  const { loading, error, data } = useQuery(GET_CONTEST, {
+  const {
+    loading: loadingDetail,
+    error: errorDetail,
+    data: contestData,
+  } = useQuery(GET_CONTEST_DETAIL, {
     variables: { id: contestID },
   })
 
-  const contestDetail = data?.contests[0]
+  const contestDetail = contestData?.contests[0]
 
-  // To be replaced with the ContestSubmission Pictures
-  const imageList = [
-    { id: 1, picture_path: '/images/contest.jpeg' },
-    { id: 2, picture_path: '/images/contest.jpeg' },
-    { id: 3, picture_path: '/images/contest.jpeg' },
-    { id: 4, picture_path: '/images/contest.jpeg' },
-    { id: 5, picture_path: '/images/contest.jpeg' },
-  ]
+  const {
+    loading: loadingSubmission,
+    error: errorSubmission,
+    data: submissionData,
+  } = useQuery(GET_CONTEST_SUBMISSIONS, {
+    variables: { id: contestID },
+  })
+
+  console.log('submissionData', submissionData?.contest_submissions)
+
+  const submissionList = submissionData?.contest_submissions
 
   return (
     <>
-      {loading && <p>Loading</p>}
-      {error && <p>Error while retrieving the contest</p>}
-      {!loading && !error && (
+      {loadingDetail && <p>Loading</p>}
+      {errorDetail && <p>Error while retrieving the contest</p>}
+      {!loadingDetail && !errorDetail && (
         <>
           <div className='w-full flex justify-center  h-full bg-gray-200'>
             <div className='bg-white p-8 rounded-lg shadow-lg'>
@@ -46,17 +53,21 @@ export default function DetailPage() {
               </p>
               <div className='mt-6'>
                 <div className='flex flex-wrap mt-2 -mx-2'>
-                  {imageList.map((image) => (
+                  {submissionList?.map((image) => (
                     <div
                       key={image.id}
                       className='w-1/4 px-2 flex flex-col items-center mt-2'
                     >
+                      {/* {console.log('image', image)} */}
                       <img
-                        src={image.picture_path}
+                        src={image.picture.picture_path}
                         alt={`Image ${image.id}`}
                         className='w-full h-auto'
                       />
-                      <p className='mt-2 text-center'>{`Image ${image.id} Title`}</p>
+                      <p>
+                        User: {image.picture.user.name_first}{' '}
+                        {image.picture.user.name_last}
+                      </p>
                     </div>
                   ))}
                 </div>
