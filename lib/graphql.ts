@@ -48,18 +48,20 @@ export const GET_COLLECTION_DETAIL = gql`
   query GetCollection($id: Int!) {
     collections(id: $id) {
       id
-      user {
-        email
-        name_last
-        name_first
-        profile_picture {
-          picture_path
-        }
-      }
+      name
       pictures {
         picture_path
+        user {
+          email
+          name_first
+          name_last
+        }
+        likes {
+          email
+          name_first
+          name_last
+        }
       }
-      name
     }
   }
 `
@@ -100,6 +102,91 @@ export const GET_COLLECTION_LIST = gql`
     }
   }
 `
+
+export const GET_COLLECTION_PICTURES = gql`
+  query GetCollection($id: Int!) {
+    collections(id: $id) {
+      id
+      user {
+        email
+        name_last
+        name_first
+        profile_picture {
+          picture_path
+        }
+      }
+      pictures {
+        picture_path
+      }
+      name
+    }
+  }
+`
+
+export const GET_PICTURE_COMMENTS = gql`
+  query GetPictureComments($picture_path: String) {
+    picture_comments(picture_path: $picture_path) {
+      text
+      user {
+        email
+        name_first
+        name_last
+      }
+      picture {
+        likes {
+          email
+        }
+        picture_path
+        user {
+          email
+          name_first
+          name_last
+        }
+      }
+    }
+  }
+`
+
+// query MyQuery {
+//   picture_comments(picture_path: "") {
+//     text
+//     user {
+//       email
+//       name_first
+//       name_last
+//     }
+//     picture {
+//       likes {
+//         email
+//       }
+//       picture_path
+//       user {
+//         email
+//         name_first
+//         name_last
+//       }
+//     }
+//   }
+// }
+
+// query MyQuery {
+//   collections(id: 1) {
+//     name
+//     pictures {
+//       picture_path
+//       user {
+//         email
+//         name_first
+//         name_last
+//       }
+//       likes {
+//         email
+//         name_first
+//         name_last
+//       }
+//     }
+//   }
+// }
 
 // query MyQuery {
 //   collections(name: "") {
