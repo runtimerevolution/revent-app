@@ -26,8 +26,6 @@ export default function DetailPage() {
     variables: { id: contestID },
   })
 
-  console.log('submissionData', submissionData?.contest_submissions)
-
   const submissionList = submissionData?.contest_submissions
 
   return (
@@ -53,22 +51,31 @@ export default function DetailPage() {
               </p>
               <div className='mt-6 h-screen'>
                 <div className='mt-2 flex flex-wrap'>
-                  {submissionList?.map((image) => (
-                    <div
-                      key={image.id}
-                      className='w-1/4 mt-2 flex flex-col items-center mx-2'
-                    >
-                      <img
-                        src={image.picture.picture_path}
-                        alt={`Image ${image.id}`}
-                        className='w-full h-auto'
-                      />
-                      <p className='mt-2 text-center'>
-                        User: {image.picture.user.name_first}{' '}
-                        {image.picture.user.name_last}
-                      </p>
-                    </div>
-                  ))}
+                  {loadingSubmission && <p>Loading</p>}
+                  {errorSubmission && (
+                    <p>Error while retrieving the contest submissions</p>
+                  )}
+
+                  {!loadingSubmission && !errorSubmission && (
+                    <>
+                      {submissionList?.map((image) => (
+                        <div
+                          key={image.id}
+                          className='w-1/4 mt-2 flex flex-col items-center mx-2'
+                        >
+                          <img
+                            src={image.picture.picture_path}
+                            alt={`Image ${image.id}`}
+                            className='w-full h-auto max-h-60'
+                          />
+                          <p className='mt-2 text-center'>
+                            User: {image.picture.user.name_first}{' '}
+                            {image.picture.user.name_last}
+                          </p>
+                        </div>
+                      ))}
+                    </>
+                  )}
                 </div>
               </div>
             </div>

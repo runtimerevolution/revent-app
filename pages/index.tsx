@@ -19,7 +19,7 @@ export default function Home({ contestList }: HomeProps) {
 
   const [open, setOpen] = useState<boolean>(false)
 
-  let contestListing = data?.contests
+  const contestListing = data?.contests
 
   // const filteredContestList =
   //   statusFilter === 'All'
