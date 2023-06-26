@@ -23,8 +23,6 @@ export default function CustomFileInput({
 }: CustomFileInputProps) {
   const [, , helpers] = useField(props.name)
 
-  console.log('props', props)
-
   const handleChange = (event) => {
     const file = event.currentTarget.files[0]
     helpers.setValue(file)
