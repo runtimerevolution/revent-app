@@ -7,11 +7,13 @@ export default function CollectionDetailPage() {
   const router = useRouter()
   const { id } = router.query
   const collectionID = parseInt(id as string, 10)
-  console.log('id COLLECTION', id)
+  // console.log('id COLLECTION', id)
 
   const { loading, error, data } = useQuery(GET_COLLECTION_DETAIL, {
     variables: { id: collectionID },
   })
+
+  console.log('data', data)
 
   // console.log('data', data?.collections)
 
@@ -26,10 +28,10 @@ export default function CollectionDetailPage() {
     { id: 5, picture_path: '/images/contest.jpeg' },
   ]
 
-  console.log(
-    'collectionDetail?.pictures?.[0]?.picture_path',
-    collectionDetail?.pictures?.[0]?.picture_path
-  )
+  // console.log(
+  //   'collectionDetail?.pictures?.[0]?.picture_path',
+  //   collectionDetail?.pictures?.[0]?.picture_path
+  // )
 
   return (
     <>

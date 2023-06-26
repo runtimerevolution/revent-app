@@ -6,14 +6,14 @@ import {
   Contest as ContestType,
 } from '../components/helpers/interfaces'
 import { useQuery } from '@apollo/client'
-import { GET_CONTESTS } from '../lib/graphql'
 import { getContestList } from '../services/reventService'
+import { GET_CONTEST_LIST } from '../lib/graphql'
 
 export interface HomeProps {
   contestList: ContestType[]
 }
 export default function Home({ contestList }: HomeProps) {
-  const { loading, error, data } = useQuery(GET_CONTESTS)
+  const { loading, error, data } = useQuery(GET_CONTEST_LIST)
 
   const [statusFilter, setStatusFilter] = useState<IFilter>('Open')
 
