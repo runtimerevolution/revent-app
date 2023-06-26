@@ -1,8 +1,29 @@
 import { useField } from 'formik'
 import ErrorMessage from '../ErrorMessage'
 
-export default function CustomFileInput({ errors, label, ...props }) {
+interface Error {
+  title?: string
+  description?: string
+  prize?: string
+  cover_picture?: any
+  datesOption?: string
+  uploadPhaseDate?: any
+  votingPhaseDate?: any
+}
+interface CustomFileInputProps {
+  errors: Error
+  label: string
+  name: string
+}
+
+export default function CustomFileInput({
+  errors,
+  label,
+  ...props
+}: CustomFileInputProps) {
   const [, , helpers] = useField(props.name)
+
+  console.log('props', props)
 
   const handleChange = (event) => {
     const file = event.currentTarget.files[0]
@@ -11,9 +32,8 @@ export default function CustomFileInput({ errors, label, ...props }) {
 
   return (
     <div>
-      <label htmlFor={props.id}>{label}</label>
+      <label>{label}</label>
       <input
-        id={props.id}
         name={props.name}
         type='file'
         onChange={handleChange}

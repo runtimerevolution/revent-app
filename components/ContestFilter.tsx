@@ -27,7 +27,7 @@ export default function ContestFilter({
   const [showContestCreationModal, setshowContestCreationModal] =
     useState<boolean>(false)
 
-  const handleOpenCreateContestForm = () => {
+  const toggleCreateContestForm = () => {
     setshowContestCreationModal(
       (showContestCreationModal) => !showContestCreationModal
     )
@@ -45,7 +45,7 @@ export default function ContestFilter({
 
         <button
           className='text-gray-700 bg-orange-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
-          onClick={handleOpenCreateContestForm}
+          onClick={toggleCreateContestForm}
         >
           <Image
             src='/images/plussign.svg'
