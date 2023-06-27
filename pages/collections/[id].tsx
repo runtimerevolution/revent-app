@@ -18,6 +18,11 @@ export default function CollectionDetailPage() {
 
   const pictureList = data?.collections[0].pictures
 
+  const pictureCover =
+    collectionDetail?.pictures?.[0]?.picture_path !== undefined
+      ? collectionDetail?.pictures?.[0]?.picture_path
+      : '/images/placeholder.svg'
+
   return (
     <>
       {loading && <p>Loading</p>}
@@ -28,7 +33,7 @@ export default function CollectionDetailPage() {
             <div className='bg-white p-8 rounded-lg shadow-lg'>
               <div className='flex justify-center items-center'>
                 <img
-                  src={collectionDetail?.pictures?.[0]?.picture_path}
+                  src={pictureCover}
                   alt='Imagem'
                   className='object-fill h-64 w-96'
                 />
