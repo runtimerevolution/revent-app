@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client'
+import Image from 'next/image'
 import React from 'react'
 import { GET_PICTURE_COMMENTS } from '../../lib/graphql'
 
@@ -11,15 +12,20 @@ export default function PictureComment({ image }) {
     variables: { picture_path: image?.picture_path },
   })
 
-  console.log('commentData?.picture_comments', commentData?.picture_comments)
-
   return (
     <>
       {!loadingComments && !errorComments && (
         <>
-          {commentData?.picture_comments?.map((comment) => (
-            <p>{comment.text}</p>
-          ))}
+          <div className='flex items-center'>
+            <Image
+              src='/images/comment.svg'
+              alt='comment'
+              width={40}
+              height={40}
+              className='mr-2'
+            />
+            <p>{commentData?.picture_comments?.length}</p>
+          </div>
         </>
       )}
     </>

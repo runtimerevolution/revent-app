@@ -1,8 +1,9 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { GET_COLLECTION_DETAIL, GET_PICTURE_COMMENTS } from '../../lib/graphql'
+import { GET_COLLECTION_DETAIL } from '../../lib/graphql'
 import { useQuery } from '@apollo/client'
 import PictureComment from '../../components/helpers/PictureComment'
+import Image from 'next/image'
 
 export default function CollectionDetailPage() {
   const router = useRouter()
@@ -57,7 +58,17 @@ export default function CollectionDetailPage() {
                             alt={`Image ${image.id}`}
                             className='w-full h-auto max-h-60'
                           />
-                          <p>Likes: {image.likes.length}</p>
+
+                          <div className='flex items-center'>
+                            <Image
+                              src='/images/like.svg'
+                              alt='like'
+                              width={40}
+                              height={40}
+                              className='mr-2'
+                            />
+                            <p>{image.likes.length}</p>
+                          </div>
                           <PictureComment image={image} />
                         </div>
                       ))}
