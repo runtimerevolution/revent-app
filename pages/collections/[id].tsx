@@ -4,11 +4,13 @@ import { GET_COLLECTION_DETAIL } from '../../lib/graphql'
 import { useQuery } from '@apollo/client'
 import PictureComment from '../../components/helpers/PictureComment'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function CollectionDetailPage() {
   const router = useRouter()
   const { id } = router.query
   const collectionID = parseInt(id as string, 10)
+  console.log('${collectionID}/', collectionID)
 
   const { loading, error, data } = useQuery(GET_COLLECTION_DETAIL, {
     variables: { id: collectionID },
@@ -54,10 +56,16 @@ export default function CollectionDetailPage() {
                   {!loading && !error && (
                     <>
                       {pictureList?.map((image) => (
-                        <div
-                          key={image.id}
+                        <Link
+                          // <Link href={`/collections/${collection.id}`}>
+                          // href={`/collections/detail/${collectionID}/${image.picture_path}`}
+                          href={`/collections/detail/${collectionID}/`}
                           className='w-1/4 mt-2 flex flex-col items-center mx-2'
                         >
+                          {/* <div
+                            key={image.id}
+                            className='w-1/4 mt-2 flex flex-col items-center mx-2'
+                          > */}
                           <img
                             src={image.picture_path}
                             alt={`Image ${image.id}`}
@@ -75,7 +83,8 @@ export default function CollectionDetailPage() {
                             <p>{image.likes.length}</p>
                           </div>
                           <PictureComment image={image} />
-                        </div>
+                          {/* </div> */}
+                        </Link>
                       ))}
                     </>
                   )}
