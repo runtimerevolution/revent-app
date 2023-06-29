@@ -2,8 +2,9 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
 import { GET_CONTEST_DETAIL, GET_CONTEST_SUBMISSIONS } from '../../lib/graphql'
+import { useState, useEffect } from 'react'
 
-export default function DetailPage() {
+export default function ContestDetailPage() {
   const router = useRouter()
   const { id } = router.query
   const contestID = parseInt(id as string, 10)
@@ -28,6 +29,30 @@ export default function DetailPage() {
 
   const submissionList = submissionData?.contest_submissions
 
+  const [selectedImage, setSelectedImage] = useState(null)
+
+  const handleImageClick = (image) => {
+    setSelectedImage(image)
+  }
+
+  const closeImageModal = () => {
+    setSelectedImage(null)
+  }
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (event.target.classList.contains('modal-overlay')) {
+        closeImageModal()
+      }
+    }
+
+    document.addEventListener('click', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [])
+
   return (
     <>
       {loadingDetail && <p>Loading</p>}
@@ -49,7 +74,7 @@ export default function DetailPage() {
               <p className='text-center mt-2 text-lg'>
                 {contestDetail?.description}
               </p>
-              <div className='mt-6 h-screen'>
+              <div className='mt-6'>
                 <div className='mt-2 flex flex-wrap'>
                   {loadingSubmission && <p>Loading</p>}
                   {errorSubmission && (
@@ -67,16 +92,41 @@ export default function DetailPage() {
                             src={image.picture.picture_path}
                             alt={`Image ${image.id}`}
                             className='w-full h-auto max-h-60'
+                            onClick={() => handleImageClick(image)}
                           />
                           <p className='mt-2 text-center'>
                             User: {image.picture.user.name_first}{' '}
                             {image.picture.user.name_last}
                           </p>
+                          <div className=' flex items-center justify-center'>
+                            <button
+                              className='mt-2 text-gray-700 bg-gray-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
+                              type='submit'
+                            >
+                              Vote
+                            </button>
+                          </div>
                         </div>
                       ))}
                     </>
                   )}
                 </div>
+                {selectedImage && (
+                  <div
+                    className='fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50 '
+                    onClick={closeImageModal}
+                  >
+                    <div className='modal-container'>
+                      <div className='modal-content bg-white p-4'>
+                        <img
+                          src={selectedImage.picture.picture_path}
+                          alt={`Image ${selectedImage.id}`}
+                          className='w-auto max-h-80'
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
