@@ -6,7 +6,5 @@ export default function CollectionPictureDetail() {
   const { id } = router.query
   console.log('id', id)
 
-  console.log('ola')
-
   return <div>CollectionPictureDetail</div>
 }

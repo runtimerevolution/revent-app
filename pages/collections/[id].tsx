@@ -58,8 +58,8 @@ export default function CollectionDetailPage() {
                       {pictureList?.map((image) => (
                         <Link
                           // <Link href={`/collections/${collection.id}`}>
-                          // href={`/collections/detail/${collectionID}/${image.picture_path}`}
-                          href={`/collections/detail/${collectionID}/`}
+                          href={`/collections/detail/${collectionID}/${image.picture_path}`}
+                          // href={`/collections/detail/${collectionID}/`}
                           className='w-1/4 mt-2 flex flex-col items-center mx-2'
                         >
                           {/* <div
