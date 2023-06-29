@@ -3,11 +3,15 @@ import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
 import { GET_CONTEST_DETAIL, GET_CONTEST_SUBMISSIONS } from '../../lib/graphql'
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
+import SubmissionForm from '../../components/Submissions/SubmissionForm'
 
 export default function ContestDetailPage() {
   const router = useRouter()
   const { id } = router.query
   const contestID = parseInt(id as string, 10)
+
+  const [showAddPhotoForm, setShowAddPhotoForm] = useState<boolean>(false)
 
   const {
     loading: loadingDetail,
@@ -53,14 +57,35 @@ export default function ContestDetailPage() {
     }
   }, [])
 
+  const toggleCreateSubmissionForm = () => {
+    setShowAddPhotoForm((showContestCreationModal) => !showContestCreationModal)
+  }
+
   return (
     <>
       {loadingDetail && <p>Loading</p>}
       {errorDetail && <p>Error while retrieving the contest</p>}
       {!loadingDetail && !errorDetail && (
         <>
-          <div className='w-full  justify-center h-full bg-gray-200'>
+          <div className='w-full justify-center h-full '>
+            <button
+              className='text-gray-700 bg-orange-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
+              onClick={toggleCreateSubmissionForm}
+            >
+              <Image
+                src='/images/plussign.svg'
+                alt='plus'
+                width={15}
+                height={15}
+                className='rounded-full'
+              />
+            </button>
             <div className='bg-white p-8 rounded-lg shadow-lg'>
+              {showAddPhotoForm && (
+                <>
+                  <SubmissionForm />
+                </>
+              )}
               <div className='flex justify-center items-center'>
                 <img
                   src={contestDetail?.cover_picture?.picture_path}

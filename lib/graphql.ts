@@ -80,6 +80,33 @@ export const GET_COLLECTIONS = gql`
   }
 `
 
+export const ADD_PHOTO = gql`
+  mutation ADD_PHOTO($contestSubmission: ContestSubmissionInput!) {
+    create_contestSubmission(input: $contestSubmission) {
+      ... on ContestSubmissionType {
+        contest {
+          id
+        }
+        picture {
+          picture_path
+          user {
+            email
+          }
+        }
+        submission_date
+      }
+      ... on OperationInfo {
+        __typename
+        messages {
+          field
+          kind
+          message
+        }
+      }
+    }
+  }
+`
+
 // query MyQuery {
 //   collections(name: "") {
 //     user {
