@@ -27,6 +27,7 @@ export default function ContestDetailPage() {
     loading: loadingSubmission,
     error: errorSubmission,
     data: submissionData,
+    refetch: refetchContest,
   } = useQuery(GET_CONTEST_SUBMISSIONS, {
     variables: { id: contestID },
   })
@@ -49,9 +50,7 @@ export default function ContestDetailPage() {
         closeImageModal()
       }
     }
-
     document.addEventListener('click', handleClickOutside)
-
     return () => {
       document.removeEventListener('click', handleClickOutside)
     }
@@ -83,7 +82,10 @@ export default function ContestDetailPage() {
             <div className='bg-white p-8 rounded-lg shadow-lg'>
               {showAddPhotoForm && (
                 <>
-                  <SubmissionForm />
+                  <SubmissionForm
+                    contestID={contestID}
+                    setShowAddPhotoForm={setShowAddPhotoForm}
+                  />
                 </>
               )}
               <div className='flex justify-center items-center'>
@@ -111,7 +113,7 @@ export default function ContestDetailPage() {
                       {submissionList?.map((image) => (
                         <div
                           key={image.id}
-                          className='w-1/4 mt-2 flex flex-col items-center mx-2'
+                          className='w-1/5 mt-2 flex flex-col items-center mx-2'
                         >
                           <img
                             src={image.picture.picture_path}

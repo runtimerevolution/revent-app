@@ -95,14 +95,6 @@ export const ADD_PHOTO = gql`
         }
         submission_date
       }
-      ... on OperationInfo {
-        __typename
-        messages {
-          field
-          kind
-          message
-        }
-      }
     }
   }
 `

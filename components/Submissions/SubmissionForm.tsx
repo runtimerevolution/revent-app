@@ -1,7 +1,9 @@
 import React from 'react'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { Formik, Form, Field } from 'formik'
 import { useMutation } from '@apollo/client'
-import { ADD_PHOTO } from '../../lib/graphql'
+import { ADD_PHOTO, GET_CONTEST_DETAIL } from '../../lib/graphql'
+import { useRef } from 'react'
+import { useEffect } from 'react'
 
 interface ContestSubmissionInput {
   contest: number
@@ -10,66 +12,131 @@ interface ContestSubmissionInput {
   votes?: string[]
 }
 
-export default function SubmissionForm() {
-  const [createContestSubmission] = useMutation(ADD_PHOTO)
+export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
+  const modalRef = useRef(null)
+
+  const handleModalClose = () => {
+    setShowAddPhotoForm(false)
+  }
+
+  const handleClickOutsideModal = (event) => {
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
+      handleModalClose()
+    }
+  }
+
+  const [createContestSubmission] = useMutation(ADD_PHOTO, {
+    refetchQueries: [
+      {
+        query: GET_CONTEST_DETAIL,
+        variables: { id: parseInt(contestID) },
+      },
+    ],
+  })
 
   const handleSubmit = async (values) => {
     const { contest, picture, submission_date } = values
 
     try {
       const contestSubmission: ContestSubmissionInput = {
-        contest: parseInt(contest),
+        contest,
         picture,
         submission_date,
-        // votes,
       }
+      console.log('contestSubmission', contestSubmission)
 
       const response = await createContestSubmission({
         variables: { contestSubmission },
       })
-      console.log(response.data.create_contestSubmission)
     } catch (error) {
       console.error(error)
     }
+    setShowAddPhotoForm(false)
   }
 
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutsideModal)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutsideModal)
+    }
+  }, [])
+
   return (
-    <Formik
-      initialValues={{
-        contest: '',
-        picture: '',
-        submission_date: '',
-        votes: [],
-      }}
-      // validate={(values) => {
-      //   const errors = {}
-      //   console.log('errors', errors)
-      //   return errors
-      // }}
-      onSubmit={handleSubmit}
-    >
-      {({ isSubmitting }) => (
-        <Form>
-          <div>
-            <label htmlFor='contest'>Contest ID:</label>
-            <Field type='number' id='contest' name='contest' />
-          </div>
+    <div className='fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50 rounded-lg'>
+      <div
+        ref={modalRef}
+        className='w-2/3 max-h-screen bg-white text-gray-800 rounded-lg shadow-xl p-8 overflow-y-auto '
+      >
+        <Formik
+          initialValues={{
+            contest: '',
+            picture: '',
+            submission_date: '',
+            // votes: [],
+          }}
+          // validate={(values) => {
+          //   const errors = {}
+          //   console.log('errors', errors)
+          //   return errors
+          // }}
+          onSubmit={handleSubmit}
+        >
+          {({ isSubmitting }) => (
+            <div className='flex items-center justify-center'>
+              <Form>
+                <div>
+                  <label className='text-lg font-medium' htmlFor='contest'>
+                    Contest ID:
+                  </label>
+                  <Field
+                    className='border border-orange-500 focus:border-orange-700 px-4 py-2 rounded-lg w-full'
+                    type='number'
+                    id='contest'
+                    name='contest'
+                  />
+                </div>
 
-          <div>
-            <label htmlFor='picture'>Picture Path:</label>
-            <Field type='text' id='picture' name='picture' />
-          </div>
+                <div>
+                  <label className='text-lg font-medium' htmlFor='picture'>
+                    Picture Path:
+                  </label>
+                  <Field
+                    className='border border-orange-500 focus:border-orange-700 px-4 py-2 rounded-lg w-full'
+                    type='text'
+                    id='picture'
+                    name='picture'
+                  />
+                </div>
 
-          <div>
-            <label htmlFor='submission_date'>Submission Date:</label>
-            <Field type='date' id='submission_date' name='submission_date' />
-          </div>
+                <div>
+                  <label
+                    className='text-lg font-medium'
+                    htmlFor='submission_date'
+                  >
+                    Submission Date:
+                  </label>
+                  <Field
+                    className='border border-orange-500 focus:border-orange-700 px-4 py-2 rounded-lg w-full'
+                    type='date'
+                    id='submission_date'
+                    name='submission_date'
+                  />
+                </div>
 
-          <button type='submit' disabled={isSubmitting}>
-            Submit Contest Submission
-          </button>
-        </Form>
-      )}
-    </Formik>
+                <div className='flex items-center justify-center'>
+                  <button
+                    className='mt-2 text-gray-700 bg-gray-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
+                    type='submit'
+                    disabled={isSubmitting}
+                  >
+                    Submit Contest Submission
+                  </button>
+                </div>
+              </Form>
+            </div>
+          )}
+        </Formik>
+      </div>
+    </div>
   )
 }
