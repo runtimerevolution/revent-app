@@ -8,7 +8,7 @@ import { useEffect } from 'react'
 interface ContestSubmissionInput {
   contest: number
   picture: string
-  submission_date: string
+  submission_date?: string
   votes?: string[]
 }
 
@@ -35,19 +35,19 @@ export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
   })
 
   const handleSubmit = async (values) => {
-    const { contest, picture, submission_date } = values
+    const { picture } = values
 
     try {
       const contestSubmission: ContestSubmissionInput = {
-        contest,
+        contest: contestID,
         picture,
-        submission_date,
       }
-      console.log('contestSubmission', contestSubmission)
+      // console.log('contestSubmission', contestSubmission)
 
       const response = await createContestSubmission({
         variables: { contestSubmission },
       })
+      console.log(response.data.create_contestSubmission)
     } catch (error) {
       console.error(error)
     }
@@ -69,10 +69,7 @@ export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
       >
         <Formik
           initialValues={{
-            contest: '',
             picture: '',
-            submission_date: '',
-            // votes: [],
           }}
           // validate={(values) => {
           //   const errors = {}
@@ -85,18 +82,6 @@ export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
             <div className='flex items-center justify-center'>
               <Form>
                 <div>
-                  <label className='text-lg font-medium' htmlFor='contest'>
-                    Contest ID:
-                  </label>
-                  <Field
-                    className='border border-orange-500 focus:border-orange-700 px-4 py-2 rounded-lg w-full'
-                    type='number'
-                    id='contest'
-                    name='contest'
-                  />
-                </div>
-
-                <div>
                   <label className='text-lg font-medium' htmlFor='picture'>
                     Picture Path:
                   </label>
@@ -105,21 +90,6 @@ export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
                     type='text'
                     id='picture'
                     name='picture'
-                  />
-                </div>
-
-                <div>
-                  <label
-                    className='text-lg font-medium'
-                    htmlFor='submission_date'
-                  >
-                    Submission Date:
-                  </label>
-                  <Field
-                    className='border border-orange-500 focus:border-orange-700 px-4 py-2 rounded-lg w-full'
-                    type='date'
-                    id='submission_date'
-                    name='submission_date'
                   />
                 </div>
 
