@@ -8,7 +8,7 @@ export const GET_USERS = gql`
   }
 `
 
-export const GET_CONTESTS = gql`
+export const GET_CONTEST_LIST = gql`
   query contests {
     contests {
       id
@@ -26,7 +26,7 @@ export const GET_CONTESTS = gql`
   }
 `
 
-export const GET_CONTEST = gql`
+export const GET_CONTEST_DETAIL = gql`
   query GetContest($id: Int!) {
     contests(id: $id) {
       id

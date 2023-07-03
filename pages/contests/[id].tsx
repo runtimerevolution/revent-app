@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
-import { GET_CONTEST, GET_CONTEST_SUBMISSIONS } from '../../lib/graphql'
+import { GET_CONTEST_DETAIL, GET_CONTEST_SUBMISSIONS } from '../../lib/graphql'
 import { useState, useEffect } from 'react'
 import Submissions from '../../components/Submissions'
 
@@ -14,7 +14,7 @@ export default function ContestDetailPage() {
     loading: loadingDetail,
     error: errorDetail,
     data: contestData,
-  } = useQuery(GET_CONTEST, {
+  } = useQuery(GET_CONTEST_DETAIL, {
     variables: { id: contestID },
   })
 
