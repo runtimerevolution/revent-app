@@ -8,9 +8,10 @@ export const GET_USERS = gql`
   }
 `
 
-export const GET_CONTESTS = gql`
+export const GET_CONTEST_LIST = gql`
   query contests {
     contests {
+      id
       title
       active
       description
@@ -20,6 +21,41 @@ export const GET_CONTESTS = gql`
       voting_phase_end
       cover_picture {
         picture_path
+      }
+    }
+  }
+`
+
+export const GET_CONTEST_DETAIL = gql`
+  query GetContest($id: Int!) {
+    contests(id: $id) {
+      id
+      title
+      active
+      description
+      prize
+      upload_phase_end
+      upload_phase_start
+      voting_phase_end
+      cover_picture {
+        picture_path
+      }
+    }
+  }
+`
+
+export const GET_CONTEST_SUBMISSIONS = gql`
+  query GetContestSubmissions($id: Int!) {
+    contest_submissions(contest: $id) {
+      id
+      submission_date
+      picture {
+        picture_path
+        user {
+          email
+          name_first
+          name_last
+        }
       }
     }
   }
