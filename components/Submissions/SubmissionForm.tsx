@@ -4,6 +4,7 @@ import { useMutation } from '@apollo/client'
 import { ADD_PHOTO, GET_CONTEST_DETAIL } from '../../lib/graphql'
 import { useRef } from 'react'
 import { useEffect } from 'react'
+import CustomFileInput from '../helpers/CustomFileInput'
 
 interface ContestSubmissionInput {
   contest: number
@@ -42,7 +43,7 @@ export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
         contest: contestID,
         picture,
       }
-      // console.log('contestSubmission', contestSubmission)
+      console.log('contestSubmission', contestSubmission)
 
       const response = await createContestSubmission({
         variables: { contestSubmission },
@@ -78,7 +79,7 @@ export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
           // }}
           onSubmit={handleSubmit}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting, errors }) => (
             <div className='flex items-center justify-center'>
               <Form>
                 <div>
@@ -88,6 +89,7 @@ export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
                   <Field
                     className='border border-orange-500 focus:border-orange-700 px-4 py-2 rounded-lg w-full'
                     type='text'
+                    // type='file'
                     id='picture'
                     name='picture'
                   />
