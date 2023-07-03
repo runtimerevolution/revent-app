@@ -3,7 +3,6 @@ import React from 'react'
 import { CollectionProps } from './helpers/interfaces'
 
 export default function Collection({ collection }: CollectionProps) {
-  console.log('collection', collection)
   const cover_picture_path =
     collection.pictures.length > 0
       ? collection.pictures[0].picture_path.toString()
@@ -19,7 +18,6 @@ export default function Collection({ collection }: CollectionProps) {
               {collection.user.name_first} {''}
               {collection.user.name_last}
             </div>
-            {/* <p className='text-gray-700 text-base'>{collection.user}</p> */}
           </div>
         </div>
       </Link>
