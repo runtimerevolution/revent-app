@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
 import { GET_CONTEST_DETAIL, GET_CONTEST_SUBMISSIONS } from '../../lib/graphql'
 import { useState, useEffect } from 'react'
-import Submissions from '../../components/Submissions'
+import Submission from '../../components/Submission'
 
 export default function ContestDetailPage() {
   const router = useRouter()
@@ -81,7 +81,7 @@ export default function ContestDetailPage() {
                   {!loadingSubmission && !errorSubmission && (
                     <>
                       {submissionList?.map((image) => (
-                        <Submissions
+                        <Submission
                           image={image}
                           setSelectedImage={setSelectedImage}
                         />

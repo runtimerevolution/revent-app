@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Submissions({ image, setSelectedImage }) {
+export default function Submission({ image, setSelectedImage }) {
   const handleImageClick = (image) => {
     setSelectedImage(image)
   }
