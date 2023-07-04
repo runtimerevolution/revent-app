@@ -68,16 +68,17 @@ export default function ContestDetailPage() {
         <>
           <div className='w-full justify-center h-full '>
             <button
-              className='text-gray-700 bg-orange-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
+              className='m-4 text-gray-700 bg-orange-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
               onClick={toggleCreateSubmissionForm}
             >
-              <Image
+              Add New Picture
+              {/* <Image
                 src='/images/plussign.svg'
                 alt='plus'
                 width={15}
                 height={15}
                 className='rounded-full'
-              />
+              /> */}
             </button>
             <div className='bg-white p-8 rounded-lg shadow-lg'>
               {showAddPhotoForm && (

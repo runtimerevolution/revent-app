@@ -4,13 +4,18 @@ import { useMutation } from '@apollo/client'
 import { ADD_PHOTO, GET_CONTEST_DETAIL } from '../../lib/graphql'
 import { useRef } from 'react'
 import { useEffect } from 'react'
-import CustomFileInput from '../helpers/CustomFileInput'
 
 interface ContestSubmissionInput {
   contest: number
   picture: string
   submission_date?: string
   votes?: string[]
+}
+
+interface PictureInput {
+  user: string
+  picture_path: string
+  likes?: string[]
 }
 
 export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {

@@ -99,22 +99,26 @@ export const ADD_PHOTO = gql`
   }
 `
 
-// query MyQuery {
-//   collections(name: "") {
-//     user {
-//       email
-//       name_last
-//       name_first
-//     }
-//     name
-//   }
-// }
-// export const CREATE_USER = gql`
-//   mutation CreateUser($input: CreateUserInput!) {
-//     createUser(input: $input) {
-//       id
-//       name
-//       email
-//     }
-//   }
-// `
+export const CREATE_PHOTO = gql`
+  mutation CREATE_PHOTO($picture: PictureInput!) {
+    create_picture(input: $picture) {
+      ... on PictureType {
+        user {
+          email
+        }
+        picture_path
+        likes {
+          email
+        }
+      }
+      ... on OperationInfo {
+        __typename
+        messages {
+          field
+          kind
+          message
+        }
+      }
+    }
+  }
+`
