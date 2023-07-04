@@ -13,7 +13,6 @@ export const GET_CONTEST_LIST = gql`
     contests {
       id
       title
-      active
       description
       prize
       upload_phase_end
@@ -22,6 +21,7 @@ export const GET_CONTEST_LIST = gql`
       cover_picture {
         picture_path
       }
+      status
     }
   }
 `
@@ -31,7 +31,6 @@ export const GET_CONTEST_DETAIL = gql`
     contests(id: $id) {
       id
       title
-      active
       description
       prize
       upload_phase_end

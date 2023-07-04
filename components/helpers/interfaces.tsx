@@ -1,6 +1,6 @@
 import React from 'react'
 
-export type IFilter = 'All' | 'Open' | 'Voting' | 'Closed'
+export type IFilter = 'All' | 'open' | 'voting' | 'closed' | 'schedule'
 
 export interface PicturePath {
   picture_path: string

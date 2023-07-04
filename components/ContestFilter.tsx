@@ -22,7 +22,7 @@ export default function ContestFilter({
     return 'text-gray-700 bg-gray-700'
   }
 
-  const filterList = ['Open', 'All', 'Voting', 'Closed']
+  const filterList = ['open', 'All', 'voting', 'closed', 'schedule']
 
   const [showContestCreationModal, setshowContestCreationModal] =
     useState<boolean>(false)
