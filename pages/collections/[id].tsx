@@ -2,8 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { GET_COLLECTION_DETAIL } from '../../lib/graphql'
 import { useQuery } from '@apollo/client'
-import PictureComment from '../../components/helpers/PictureComment'
-import Image from 'next/image'
+import CollectionPictureList from '../../components/CollectionPictureList'
 
 export default function CollectionDetailPage() {
   const router = useRouter()
@@ -46,39 +45,9 @@ export default function CollectionDetailPage() {
               </p>
               <div className='mt-6 h-screen'>
                 <div className='mt-2 flex flex-wrap'>
-                  {loading && <p>Loading</p>}
-                  {error && (
-                    <p>Error while retrieving the contest submissions</p>
-                  )}
-
-                  {!loading && !error && (
-                    <>
-                      {pictureList?.map((image) => (
-                        <div
-                          key={image.id}
-                          className='w-1/4 mt-2 flex flex-col items-center mx-2'
-                        >
-                          <img
-                            src={image.picture_path}
-                            alt={`Image ${image.id}`}
-                            className='w-full h-auto max-h-60'
-                          />
-
-                          <div className='flex items-center'>
-                            <Image
-                              src='/images/like.svg'
-                              alt='like'
-                              width={40}
-                              height={40}
-                              className='mr-2'
-                            />
-                            <p>{image.likes.length}</p>
-                          </div>
-                          <PictureComment image={image} />
-                        </div>
-                      ))}
-                    </>
-                  )}
+                  {pictureList?.map((image) => (
+                    <CollectionPictureList image={image} />
+                  ))}
                 </div>
               </div>
             </div>
