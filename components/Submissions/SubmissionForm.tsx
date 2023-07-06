@@ -4,6 +4,9 @@ import { useMutation } from '@apollo/client'
 import { ADD_PHOTO, GET_CONTEST_DETAIL } from '../../lib/graphql'
 import { useRef } from 'react'
 import { useEffect } from 'react'
+import { z } from 'zod'
+import { toFormikValidationSchema } from 'zod-formik-adapter'
+import ErrorMessage from '../ErrorMessage'
 
 interface ContestSubmissionInput {
   contest: number
@@ -19,6 +22,9 @@ interface PictureInput {
 }
 
 export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
+  const schema = z.object({
+    picture: z.string(),
+  })
   const modalRef = useRef(null)
 
   const handleModalClose = () => {
@@ -39,6 +45,10 @@ export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
       },
     ],
   })
+
+  const initialValues = {
+    picture: '',
+  }
 
   const handleSubmit = async (values) => {
     const { picture } = values
@@ -74,14 +84,8 @@ export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
         className='w-2/3 max-h-screen bg-white text-gray-800 rounded-lg shadow-xl p-8 overflow-y-auto '
       >
         <Formik
-          initialValues={{
-            picture: '',
-          }}
-          // validate={(values) => {
-          //   const errors = {}
-          //   console.log('errors', errors)
-          //   return errors
-          // }}
+          initialValues={initialValues}
+          validationSchema={toFormikValidationSchema(schema)}
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, errors }) => (
@@ -98,6 +102,7 @@ export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
                     id='picture'
                     name='picture'
                   />
+                  {errors.picture && <ErrorMessage error={errors.picture} />}
                 </div>
 
                 <div className='flex items-center justify-center'>

@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
 import { GET_CONTEST_DETAIL, GET_CONTEST_SUBMISSIONS } from '../../lib/graphql'
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
 import SubmissionForm from '../../components/Submissions/SubmissionForm'
 
 export default function ContestDetailPage() {
@@ -72,13 +71,6 @@ export default function ContestDetailPage() {
               onClick={toggleCreateSubmissionForm}
             >
               Add New Picture
-              {/* <Image
-                src='/images/plussign.svg'
-                alt='plus'
-                width={15}
-                height={15}
-                className='rounded-full'
-              /> */}
             </button>
             <div className='bg-white p-8 rounded-lg shadow-lg'>
               {showAddPhotoForm && (
