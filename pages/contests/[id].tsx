@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/client'
 import { GET_CONTEST_DETAIL, GET_CONTEST_SUBMISSIONS } from '../../lib/graphql'
 import { useState, useEffect } from 'react'
 import SubmissionForm from '../../components/Submissions/SubmissionForm'
+import Submission from '../../components/Submission'
 
 export default function ContestDetailPage() {
   const router = useRouter()
