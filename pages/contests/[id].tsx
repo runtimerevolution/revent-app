@@ -3,15 +3,12 @@ import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
 import { GET_CONTEST_DETAIL, GET_CONTEST_SUBMISSIONS } from '../../lib/graphql'
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
-import SubmissionForm from '../../components/Submissions/SubmissionForm'
+import Submission from '../../components/Submission'
 
 export default function ContestDetailPage() {
   const router = useRouter()
   const { id } = router.query
   const contestID = parseInt(id as string, 10)
-
-  const [showAddPhotoForm, setShowAddPhotoForm] = useState<boolean>(false)
 
   const {
     loading: loadingDetail,
@@ -27,7 +24,6 @@ export default function ContestDetailPage() {
     loading: loadingSubmission,
     error: errorSubmission,
     data: submissionData,
-    refetch: refetchContest,
   } = useQuery(GET_CONTEST_SUBMISSIONS, {
     variables: { id: contestID },
   })
@@ -35,10 +31,6 @@ export default function ContestDetailPage() {
   const submissionList = submissionData?.contest_submissions
 
   const [selectedImage, setSelectedImage] = useState(null)
-
-  const handleImageClick = (image) => {
-    setSelectedImage(image)
-  }
 
   const closeImageModal = () => {
     setSelectedImage(null)
@@ -50,15 +42,13 @@ export default function ContestDetailPage() {
         closeImageModal()
       }
     }
+
     document.addEventListener('click', handleClickOutside)
+
     return () => {
       document.removeEventListener('click', handleClickOutside)
     }
   }, [])
-
-  const toggleCreateSubmissionForm = () => {
-    setShowAddPhotoForm((showContestCreationModal) => !showContestCreationModal)
-  }
 
   return (
     <>
@@ -66,29 +56,8 @@ export default function ContestDetailPage() {
       {errorDetail && <p>Error while retrieving the contest</p>}
       {!loadingDetail && !errorDetail && (
         <>
-          <div className='w-full justify-center h-full '>
-            <button
-              className='m-4 text-gray-700 bg-orange-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
-              onClick={toggleCreateSubmissionForm}
-            >
-              Add New Picture
-              {/* <Image
-                src='/images/plussign.svg'
-                alt='plus'
-                width={15}
-                height={15}
-                className='rounded-full'
-              /> */}
-            </button>
+          <div className='w-full  justify-center h-full bg-gray-200'>
             <div className='bg-white p-8 rounded-lg shadow-lg'>
-              {showAddPhotoForm && (
-                <>
-                  <SubmissionForm
-                    contestID={contestID}
-                    setShowAddPhotoForm={setShowAddPhotoForm}
-                  />
-                </>
-              )}
               <div className='flex justify-center items-center'>
                 <img
                   src={contestDetail?.cover_picture?.picture_path}
@@ -112,29 +81,10 @@ export default function ContestDetailPage() {
                   {!loadingSubmission && !errorSubmission && (
                     <>
                       {submissionList?.map((image) => (
-                        <div
-                          key={image.id}
-                          className='w-1/5 mt-2 flex flex-col items-center mx-2'
-                        >
-                          <img
-                            src={image.picture.picture_path}
-                            alt={`Image ${image.id}`}
-                            className='w-full h-auto max-h-60'
-                            onClick={() => handleImageClick(image)}
-                          />
-                          <p className='mt-2 text-center'>
-                            User: {image.picture.user.name_first}{' '}
-                            {image.picture.user.name_last}
-                          </p>
-                          <div className=' flex items-center justify-center'>
-                            <button
-                              className='mt-2 text-gray-700 bg-gray-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
-                              type='submit'
-                            >
-                              Vote
-                            </button>
-                          </div>
-                        </div>
+                        <Submission
+                          image={image}
+                          setSelectedImage={setSelectedImage}
+                        />
                       ))}
                     </>
                   )}
