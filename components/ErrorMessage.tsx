@@ -1,5 +1,10 @@
+import { FormikErrors } from 'formik'
 import React from 'react'
 
-export default function ErrorMessage({ error }) {
-  return <p className='text-orange-500'>{error}</p>
+interface ErrorMessageProps {
+  error: string | string[] | FormikErrors<any> | FormikErrors<any>[]
+}
+
+export default function ErrorMessage({ error }: ErrorMessageProps) {
+  return <p className='text-orange-500'>{error.toString()}</p>
 }

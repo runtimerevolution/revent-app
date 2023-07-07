@@ -15,12 +15,6 @@ interface ContestSubmissionInput {
   votes?: string[]
 }
 
-interface PictureInput {
-  user: string
-  picture_path: string
-  likes?: string[]
-}
-
 export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
   const schema = z.object({
     picture: z.string(),
@@ -63,7 +57,6 @@ export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
       const response = await createContestSubmission({
         variables: { contestSubmission },
       })
-      console.log(response.data.create_contestSubmission)
     } catch (error) {
       console.error(error)
     }

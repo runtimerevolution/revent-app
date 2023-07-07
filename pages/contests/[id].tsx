@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client'
 import { GET_CONTEST_DETAIL, GET_CONTEST_SUBMISSIONS } from '../../lib/graphql'
 import { useState, useEffect } from 'react'
 import SubmissionForm from '../../components/Submissions/SubmissionForm'
-import Submission from '../../components/Submission'
+import SubmissionPicture from '../../components/Submissions/SubmissionPicture'
 
 export default function ContestDetailPage() {
   const router = useRouter()
@@ -36,10 +36,6 @@ export default function ContestDetailPage() {
 
   const [selectedImage, setSelectedImage] = useState(null)
 
-  const handleImageClick = (image) => {
-    setSelectedImage(image)
-  }
-
   const closeImageModal = () => {
     setSelectedImage(null)
   }
@@ -56,10 +52,9 @@ export default function ContestDetailPage() {
     }
   }, [])
 
-  const toggleCreateSubmissionForm = () => {
+  const toggleAddPhotoForm = () => {
     setShowAddPhotoForm((showContestCreationModal) => !showContestCreationModal)
   }
-
   return (
     <>
       {loadingDetail && <p>Loading</p>}
@@ -69,7 +64,7 @@ export default function ContestDetailPage() {
           <div className='w-full justify-center h-full '>
             <button
               className='m-4 text-gray-700 bg-orange-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
-              onClick={toggleCreateSubmissionForm}
+              onClick={toggleAddPhotoForm}
             >
               Add New Picture
             </button>
@@ -105,29 +100,10 @@ export default function ContestDetailPage() {
                   {!loadingSubmission && !errorSubmission && (
                     <>
                       {submissionList?.map((image) => (
-                        <div
-                          key={image.id}
-                          className='w-1/5 mt-2 flex flex-col items-center mx-2'
-                        >
-                          <img
-                            src={image.picture.picture_path}
-                            alt={`Image ${image.id}`}
-                            className='w-full h-auto max-h-60'
-                            onClick={() => handleImageClick(image)}
-                          />
-                          <p className='mt-2 text-center'>
-                            User: {image.picture.user.name_first}{' '}
-                            {image.picture.user.name_last}
-                          </p>
-                          <div className=' flex items-center justify-center'>
-                            <button
-                              className='mt-2 text-gray-700 bg-gray-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
-                              type='submit'
-                            >
-                              Vote
-                            </button>
-                          </div>
-                        </div>
+                        <SubmissionPicture
+                          image={image}
+                          setSelectedImage={setSelectedImage}
+                        />
                       ))}
                     </>
                   )}
