@@ -1,15 +1,22 @@
 import Image from 'next/image'
 import React from 'react'
+import { User } from './helpers/interfaces'
 import PictureComment from './helpers/PictureComment'
 
-export default function CollectionPictureList({ image }) {
+interface Image {
+  likes?: User[]
+  picture_path: string
+  user: User
+}
+
+interface imageProps {
+  image: Image
+}
+
+export default function CollectionPicture({ image }: imageProps) {
   return (
-    <div key={image.id} className='w-1/4 mt-2 flex flex-col items-center mx-2'>
-      <img
-        src={image.picture_path}
-        alt={`Image ${image.id}`}
-        className='w-full h-auto max-h-60'
-      />
+    <div className='w-1/4 mt-2 flex flex-col items-center mx-2'>
+      <img src={image.picture_path} className='w-full h-auto max-h-60' />
 
       <div className='flex items-center'>
         <Image

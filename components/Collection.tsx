@@ -7,6 +7,7 @@ export default function Collection({ collection }: CollectionProps) {
     collection.pictures.length > 0
       ? collection.pictures[0].picture_path.toString()
       : '/images/collection.jpeg'
+
   return (
     <>
       <Link href={`/collections/${collection.id}`}>

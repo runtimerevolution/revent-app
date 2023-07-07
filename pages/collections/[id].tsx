@@ -2,7 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { GET_COLLECTION_DETAIL } from '../../lib/graphql'
 import { useQuery } from '@apollo/client'
-import CollectionPictureList from '../../components/CollectionPictureList'
+import CollectionPicture from '../../components/CollectionPicture'
 
 export default function CollectionDetailPage() {
   const router = useRouter()
@@ -46,7 +46,7 @@ export default function CollectionDetailPage() {
               <div className='mt-6 h-screen'>
                 <div className='mt-2 flex flex-wrap'>
                   {pictureList?.map((image) => (
-                    <CollectionPictureList image={image} />
+                    <CollectionPicture image={image} />
                   ))}
                 </div>
               </div>
