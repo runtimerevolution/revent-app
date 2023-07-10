@@ -119,7 +119,50 @@ export const ADD_PHOTO = gql`
     }
   }
 `
-
+// ContestInput
+// title: str
+// description: str
+// cover_picture: str
+// prize: str
+// automated_dates: bool
+// upload_phase_start: strawberry.auto
+// upload_phase_end: strawberry.auto
+// voting_phase_end: strawberry.auto
+// winners: List[str]
+// created_by: str
+export const CREATE_CONTEST = gql`
+  mutation CREATE_CONTEST($contest: ContestInput!) {
+    create_contest(input: $contest) {
+      ... on ContestType {
+        id
+        title
+        description
+        created_by {
+          email
+        }
+        cover_picture {
+          picture_path
+        }
+        prize
+        automated_dates
+        upload_phase_start
+        upload_phase_end
+        voting_phase_end
+        winners {
+          email
+        }
+      }
+      ... on OperationInfo {
+        __typename
+        messages {
+          field
+          kind
+          message
+        }
+      }
+    }
+  }
+`
 export const GET_COLLECTION_PICTURES = gql`
   query GetCollection($id: Int!) {
     collections(id: $id) {
