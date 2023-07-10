@@ -34,7 +34,7 @@ export interface Picture {
 export interface User {
   name_first: string
   name_last: string
-  email?: string
+  email: string
 }
 export interface Picture {
   picture_path: string
