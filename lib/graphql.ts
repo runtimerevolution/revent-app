@@ -42,6 +42,28 @@ export const GET_CONTEST_DETAIL = gql`
   }
 `
 
+export const GET_COLLECTION_DETAIL = gql`
+  query GetCollection($id: Int!) {
+    collections(id: $id) {
+      id
+      name
+      pictures {
+        picture_path
+        user {
+          email
+          name_first
+          name_last
+        }
+        likes {
+          email
+          name_first
+          name_last
+        }
+      }
+    }
+  }
+`
+
 export const GET_CONTEST_SUBMISSIONS = gql`
   query GetContestSubmissions($id: Int!) {
     contest_submissions(contest: $id) {
@@ -59,9 +81,10 @@ export const GET_CONTEST_SUBMISSIONS = gql`
   }
 `
 
-export const GET_COLLECTIONS = gql`
+export const GET_COLLECTION_LIST = gql`
   query collections {
     collections {
+      id
       user {
         email
         name_last
@@ -97,6 +120,26 @@ export const ADD_PHOTO = gql`
   }
 `
 
+export const GET_COLLECTION_PICTURES = gql`
+  query GetCollection($id: Int!) {
+    collections(id: $id) {
+      id
+      user {
+        email
+        name_last
+        name_first
+        profile_picture {
+          picture_path
+        }
+      }
+      pictures {
+        picture_path
+      }
+      name
+    }
+  }
+`
+
 export const CREATE_PHOTO = gql`
   mutation CREATE_PHOTO($picture: PictureInput!) {
     create_picture(input: $picture) {
@@ -115,6 +158,29 @@ export const CREATE_PHOTO = gql`
           field
           kind
           message
+        }
+      }
+    }
+  }
+`
+export const GET_PICTURE_COMMENTS = gql`
+  query GetPictureComments($picture_path: String) {
+    picture_comments(picture_path: $picture_path) {
+      text
+      user {
+        email
+        name_first
+        name_last
+      }
+      picture {
+        likes {
+          email
+        }
+        picture_path
+        user {
+          email
+          name_first
+          name_last
         }
       }
     }
