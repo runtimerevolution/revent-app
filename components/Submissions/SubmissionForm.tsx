@@ -15,7 +15,15 @@ interface ContestSubmissionInput {
   votes?: string[]
 }
 
-export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
+interface SubmissionFormProps {
+  contestID: number
+  setShowAddPhotoForm: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export default function SubmissionForm({
+  contestID,
+  setShowAddPhotoForm,
+}: SubmissionFormProps) {
   const schema = z.object({
     picture: z.string(),
   })
@@ -35,7 +43,7 @@ export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
     refetchQueries: [
       {
         query: GET_CONTEST_DETAIL,
-        variables: { id: parseInt(contestID) },
+        variables: { id: contestID },
       },
     ],
   })
@@ -52,7 +60,6 @@ export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
         contest: contestID,
         picture,
       }
-      console.log('contestSubmission', contestSubmission)
 
       const response = await createContestSubmission({
         variables: { contestSubmission },
