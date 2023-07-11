@@ -48,7 +48,6 @@ export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
         contest: contestID,
         picture,
       }
-      console.log('contestSubmission', contestSubmission)
 
       const response = await createContestSubmission({
         variables: { contestSubmission },
