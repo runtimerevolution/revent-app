@@ -21,6 +21,7 @@ export const GET_CONTEST_LIST = gql`
       cover_picture {
         picture_path
       }
+      status
     }
   }
 `
@@ -101,6 +102,25 @@ export const GET_COLLECTION_LIST = gql`
   }
 `
 
+export const ADD_PHOTO = gql`
+  mutation ADD_PHOTO($contestSubmission: ContestSubmissionInput!) {
+    create_contestSubmission(input: $contestSubmission) {
+      ... on ContestSubmissionType {
+        contest {
+          id
+        }
+        picture {
+          picture_path
+          user {
+            email
+          }
+        }
+        submission_date
+      }
+    }
+  }
+`
+
 export const GET_COLLECTION_PICTURES = gql`
   query GetCollection($id: Int!) {
     collections(id: $id) {
@@ -117,6 +137,30 @@ export const GET_COLLECTION_PICTURES = gql`
         picture_path
       }
       name
+    }
+  }
+`
+
+export const CREATE_PHOTO = gql`
+  mutation CREATE_PHOTO($picture: PictureInput!) {
+    create_picture(input: $picture) {
+      ... on PictureType {
+        user {
+          email
+        }
+        picture_path
+        likes {
+          email
+        }
+      }
+      ... on OperationInfo {
+        __typename
+        messages {
+          field
+          kind
+          message
+        }
+      }
     }
   }
 `
