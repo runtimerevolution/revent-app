@@ -32,6 +32,10 @@ export default function ContestDetailPage() {
 
   const [selectedImage, setSelectedImage] = useState(null)
 
+  const handleImageClick = (image) => {
+    setSelectedImage(image)
+  }
+
   const closeImageModal = () => {
     setSelectedImage(null)
   }

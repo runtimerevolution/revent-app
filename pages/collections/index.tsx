@@ -1,9 +1,9 @@
 import { useQuery } from '@apollo/client'
 import Collection from '../../components/Collection'
-import { GET_COLLECTIONS } from '../../lib/graphql'
+import { GET_COLLECTION_LIST } from '../../lib/graphql'
 
 export default function Collections() {
-  const { loading, error, data } = useQuery(GET_COLLECTIONS)
+  const { loading, error, data } = useQuery(GET_COLLECTION_LIST)
 
   return (
     <div className='p-8 bg-gray-100'>
