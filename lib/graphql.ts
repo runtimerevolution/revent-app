@@ -21,6 +21,7 @@ export const GET_CONTEST_LIST = gql`
       cover_picture {
         picture_path
       }
+      status
     }
   }
 `
