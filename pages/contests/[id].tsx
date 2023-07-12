@@ -3,12 +3,15 @@ import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
 import { GET_CONTEST_DETAIL, GET_CONTEST_SUBMISSIONS } from '../../lib/graphql'
 import { useState, useEffect } from 'react'
-import Submission from '../../components/Submission'
+import SubmissionForm from '../../components/Submissions/SubmissionForm'
+import SubmissionPicture from '../../components/Submissions/SubmissionPicture'
 
 export default function ContestDetailPage() {
   const router = useRouter()
   const { id } = router.query
   const contestID = parseInt(id as string, 10)
+
+  const [showAddPhotoForm, setShowAddPhotoForm] = useState<boolean>(false)
 
   const {
     loading: loadingDetail,
@@ -24,6 +27,7 @@ export default function ContestDetailPage() {
     loading: loadingSubmission,
     error: errorSubmission,
     data: submissionData,
+    refetch: refetchContest,
   } = useQuery(GET_CONTEST_SUBMISSIONS, {
     variables: { id: contestID },
   })
@@ -46,22 +50,37 @@ export default function ContestDetailPage() {
         closeImageModal()
       }
     }
-
     document.addEventListener('click', handleClickOutside)
-
     return () => {
       document.removeEventListener('click', handleClickOutside)
     }
   }, [])
 
+  const toggleAddPhotoForm = () => {
+    setShowAddPhotoForm((showContestCreationModal) => !showContestCreationModal)
+  }
   return (
     <>
       {loadingDetail && <p>Loading</p>}
       {errorDetail && <p>Error while retrieving the contest</p>}
       {!loadingDetail && !errorDetail && (
         <>
-          <div className='w-full  justify-center h-full bg-gray-200'>
+          <div className='w-full justify-center h-full '>
+            <button
+              className='m-4 text-gray-700 bg-orange-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
+              onClick={toggleAddPhotoForm}
+            >
+              Add New Picture
+            </button>
             <div className='bg-white p-8 rounded-lg shadow-lg'>
+              {showAddPhotoForm && (
+                <>
+                  <SubmissionForm
+                    contestID={contestID}
+                    setShowAddPhotoForm={setShowAddPhotoForm}
+                  />
+                </>
+              )}
               <div className='flex justify-center items-center'>
                 <img
                   src={contestDetail?.cover_picture?.picture_path}
@@ -85,7 +104,7 @@ export default function ContestDetailPage() {
                   {!loadingSubmission && !errorSubmission && (
                     <>
                       {submissionList?.map((image) => (
-                        <Submission
+                        <SubmissionPicture
                           image={image}
                           setSelectedImage={setSelectedImage}
                         />

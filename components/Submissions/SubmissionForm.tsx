@@ -4,6 +4,9 @@ import { useMutation } from '@apollo/client'
 import { ADD_PHOTO, GET_CONTEST_DETAIL } from '../../lib/graphql'
 import { useRef } from 'react'
 import { useEffect } from 'react'
+import { z } from 'zod'
+import { toFormikValidationSchema } from 'zod-formik-adapter'
+import ErrorMessage from '../ErrorMessage'
 
 interface ContestSubmissionInput {
   contest: number
@@ -12,13 +15,18 @@ interface ContestSubmissionInput {
   votes?: string[]
 }
 
-interface PictureInput {
-  user: string
-  picture_path: string
-  likes?: string[]
+interface SubmissionFormProps {
+  contestID: number
+  setShowAddPhotoForm: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
+export default function SubmissionForm({
+  contestID,
+  setShowAddPhotoForm,
+}: SubmissionFormProps) {
+  const schema = z.object({
+    picture: z.string(),
+  })
   const modalRef = useRef(null)
 
   const handleModalClose = () => {
@@ -35,10 +43,14 @@ export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
     refetchQueries: [
       {
         query: GET_CONTEST_DETAIL,
-        variables: { id: parseInt(contestID) },
+        variables: { id: contestID },
       },
     ],
   })
+
+  const initialValues = {
+    picture: '',
+  }
 
   const handleSubmit = async (values) => {
     const { picture } = values
@@ -52,7 +64,6 @@ export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
       const response = await createContestSubmission({
         variables: { contestSubmission },
       })
-      console.log(response.data.create_contestSubmission)
     } catch (error) {
       console.error(error)
     }
@@ -73,14 +84,8 @@ export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
         className='w-2/3 max-h-screen bg-white text-gray-800 rounded-lg shadow-xl p-8 overflow-y-auto '
       >
         <Formik
-          initialValues={{
-            picture: '',
-          }}
-          // validate={(values) => {
-          //   const errors = {}
-          //   console.log('errors', errors)
-          //   return errors
-          // }}
+          initialValues={initialValues}
+          validationSchema={toFormikValidationSchema(schema)}
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, errors }) => (
@@ -97,6 +102,7 @@ export default function SubmissionForm({ contestID, setShowAddPhotoForm }) {
                     id='picture'
                     name='picture'
                   />
+                  {errors.picture && <ErrorMessage error={errors.picture} />}
                 </div>
 
                 <div className='flex items-center justify-center'>

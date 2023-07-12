@@ -164,7 +164,6 @@ export const CREATE_PHOTO = gql`
     }
   }
 `
-
 export const GET_PICTURE_COMMENTS = gql`
   query GetPictureComments($picture_path: String) {
     picture_comments(picture_path: $picture_path) {
