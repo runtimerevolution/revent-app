@@ -5,7 +5,7 @@ export interface ContestProps {
   contest: Contest
 }
 
-export default function Contest({ contest }: ContestProps) {
+export default function ContestDetail({ contest }: ContestProps) {
   return (
     <Link href={`/contests/${contest.id}`}>
       <div

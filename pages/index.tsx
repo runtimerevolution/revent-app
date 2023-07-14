@@ -8,6 +8,7 @@ import {
 import { useQuery } from '@apollo/client'
 import { getContestList } from '../services/reventService'
 import { GET_CONTEST_LIST } from '../lib/graphql'
+import ContestDetail from '../components/Contest'
 
 export interface HomeProps {
   contestList: ContestType[]
@@ -44,7 +45,7 @@ export default function Home({ contestList }: HomeProps) {
             {!loading &&
               !error &&
               filteredContestList.map((contest) => (
-                <Contest contest={contest} />
+                <ContestDetail contest={contest} />
               ))}
           </div>
         </main>
