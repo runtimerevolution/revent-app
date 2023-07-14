@@ -1,7 +1,7 @@
 import { Contest } from './helpers/interfaces'
 import Link from 'next/link'
 
-interface ContestProps {
+export interface ContestProps {
   contest: Contest
 }
 
