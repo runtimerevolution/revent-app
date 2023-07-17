@@ -1,7 +1,7 @@
 import React from 'react'
 import Profile from '../profile'
 import '@testing-library/jest-dom'
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 
 test('renders example component', async () => {
   // const { getByText } = render(<Profile />)
