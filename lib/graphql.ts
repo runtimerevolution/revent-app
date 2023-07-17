@@ -132,7 +132,7 @@ export const CREATE_CONTEST = gql`
           email
         }
         cover_picture {
-          picture_path
+          id
         }
         prize
         automated_dates
@@ -154,6 +154,7 @@ export const CREATE_CONTEST = gql`
     }
   }
 `
+
 export const GET_COLLECTION_PICTURES = gql`
   query GetCollection($id: Int!) {
     collections(id: $id) {
@@ -174,8 +175,8 @@ export const GET_COLLECTION_PICTURES = gql`
   }
 `
 
-export const CREATE_PHOTO = gql`
-  mutation CREATE_PHOTO($picture: PictureInput!) {
+export const CREATE_PICTURE = gql`
+  mutation CREATE_PICTURE($picture: PictureInput!) {
     create_picture(input: $picture) {
       ... on PictureType {
         user {

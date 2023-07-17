@@ -4,10 +4,6 @@ import '@testing-library/jest-dom'
 import { render, screen, waitFor } from '@testing-library/react'
 
 test('renders example component', async () => {
-  // const { getByText } = render(<Profile />)
-  //   const linkElement = getByText(/example/i)
-  //   expect(linkElement).toBeInTheDocument()
-
   render(<Profile />)
   const textElement = screen.getByText('profile')
   expect(textElement).toBeInTheDocument()

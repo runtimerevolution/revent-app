@@ -5,7 +5,7 @@ import { toFormikValidationSchema } from 'zod-formik-adapter'
 import { DateInput } from '@mantine/dates'
 import ErrorMessage from '../ErrorMessage'
 import { useMutation } from '@apollo/client'
-import { CREATE_CONTEST } from '../../lib/graphql'
+import { CREATE_CONTEST, CREATE_PICTURE } from '../../lib/graphql'
 
 interface CreateContestFormProps {
   setshowContestCreationModal: React.Dispatch<React.SetStateAction<boolean>>
@@ -14,7 +14,7 @@ interface CreateContestFormProps {
 interface ContestInput {
   title: string
   description: string
-  cover_picture: string
+  cover_picture: number
   prize: string
   automated_dates?: boolean
   upload_phase_start?: string
@@ -24,10 +24,17 @@ interface ContestInput {
   created_by: string
 }
 
+interface PictureInput {
+  user: string
+  picture_path: string
+  likes?: string[]
+}
+
 export default function CreateContestForm({
   setshowContestCreationModal,
 }: CreateContestFormProps) {
   const [createContest] = useMutation(CREATE_CONTEST)
+  const [createPicture] = useMutation(CREATE_PICTURE)
   const [dateOptions, setdateOptions] = useState('')
   const [uploadDate, setuUploadDate] = useState<Date | null>(null)
   const [votingDate, setVotingDate] = useState<Date | null>(null)
@@ -36,9 +43,11 @@ export default function CreateContestForm({
 
   useEffect(() => {
     setAutomatedDates(automatedDates)
+    console.log('automatedDates', automatedDates)
   }, [automatedDates])
 
   const allowedImageFormats = ['jpeg', 'png', 'jpg']
+  // To be used when the upload picture feature is done
   const fileSchema = z
     .object({
       name: z.string(),
@@ -52,6 +61,7 @@ export default function CreateContestForm({
     .refine((value) => value !== null, { message: 'File is required' })
 
   const schema = z.object({
+    // To be used when the upload picture feature is done
     // cover_picture: fileSchema,
     title: z
       .string()
@@ -75,21 +85,13 @@ export default function CreateContestForm({
     cover_picture: null,
     prize: '',
     datesOption: '',
-    // upload_phase_date: uploadDate,
-    // voting_phase_date: votingDate,
     upload_phase_end: uploadDate,
     voting_phase_end: votingDate,
-    automated_dates: false,
+    automated_dates: automatedDates,
   }
 
-  // const handleSubmit = (values: typeof initialValues) => {
-  //   console.log('entrrou')
-  //   console.log(values)
-  //   setshowContestCreationModal(false)
-  // }
-
-  const handleSubmit = async (values) => {
-    console.log(values)
+  const handleSubmit = async (contestValues) => {
+    // console.log('contestValues', contestValues)
     const {
       title,
       description,
@@ -99,8 +101,27 @@ export default function CreateContestForm({
       upload_phase_end,
       voting_phase_end,
       automated_dates,
-      // dateOptions,
-    } = values
+    } = contestValues
+
+    const pictureData = {
+      user: 'test@test.com',
+      picture_path: cover_picture,
+    }
+
+    console.log('pictureData', pictureData)
+
+    try {
+      const picture: PictureInput = {
+        user: 'test@test.com',
+        picture_path,
+      }
+
+      const response = await createPicture({
+        variables: { picture },
+      })
+    } catch (error) {
+      console.error(error)
+    }
 
     try {
       const contest: ContestInput = {
@@ -111,10 +132,9 @@ export default function CreateContestForm({
         upload_phase_start,
         upload_phase_end,
         voting_phase_end,
-        automated_dates: false,
+        automated_dates,
         // To be replaced when authentication exists
         created_by: 'test@test.com',
-        // dateOptions,
       }
 
       const response = await createContest({
@@ -148,6 +168,7 @@ export default function CreateContestForm({
   useEffect(() => {
     setVotingDate(null)
     setuUploadDate(null)
+    setAutomatedDates(automatedDates)
   }, [dateOptions])
 
   return (
@@ -207,6 +228,7 @@ export default function CreateContestForm({
                       Upload Image
                     </label>
                     <br />
+                    {/* To be used when the upload picture feature is done */}
                     {/* <CustomFileInput
                       label=''
                       name='cover_picture'
@@ -250,6 +272,7 @@ export default function CreateContestForm({
                           onChange={() => {
                             setdateOptions('manual')
                             setFieldValue('dateOptions', 'manual')
+                            setAutomatedDates(false)
                           }}
                         />
                         Manual Dates
@@ -263,6 +286,7 @@ export default function CreateContestForm({
                           onChange={() => {
                             setdateOptions('automated')
                             setFieldValue('dateOptions', 'automated')
+                            setAutomatedDates(true)
                           }}
                         />
                         Automated Dates
