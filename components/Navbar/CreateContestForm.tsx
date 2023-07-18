@@ -24,12 +24,6 @@ interface ContestInput {
   created_by: string
 }
 
-interface PictureInput {
-  user: string
-  picture_path: string
-  likes?: string[]
-}
-
 export default function CreateContestForm({
   setshowContestCreationModal,
 }: CreateContestFormProps) {
@@ -69,8 +63,7 @@ export default function CreateContestForm({
       .max(50, 'Title must be less than 50 characters'),
     description: z
       .string()
-      .max(200, 'Description must be less than 200 characters')
-      .optional(),
+      .max(200, 'Description must be less than 200 characters'),
     prize: z
       .string()
       .max(100, 'Prize must be less than 100 characters')
@@ -91,7 +84,6 @@ export default function CreateContestForm({
   }
 
   const handleSubmit = async (contestValues) => {
-    // console.log('contestValues', contestValues)
     const {
       title,
       description,
@@ -103,43 +95,44 @@ export default function CreateContestForm({
       automated_dates,
     } = contestValues
 
-    const pictureData = {
-      user: 'test@test.com',
-      picture_path: cover_picture,
-    }
-
-    console.log('pictureData', pictureData)
-
     try {
-      const picture: PictureInput = {
+      const picture = {
         user: 'test@test.com',
-        picture_path,
+        picture_path: cover_picture,
       }
 
-      const response = await createPicture({
+      const createdPicture = await createPicture({
         variables: { picture },
       })
-    } catch (error) {
-      console.error(error)
-    }
+      console.log('createdPicture.data', createdPicture.data?.create_picture.id)
 
-    try {
-      const contest: ContestInput = {
-        title,
-        description,
-        cover_picture,
-        prize,
-        upload_phase_start,
-        upload_phase_end,
-        voting_phase_end,
-        automated_dates,
-        // To be replaced when authentication exists
-        created_by: 'test@test.com',
+      contestValues.cover_picture = {
+        id: createdPicture.data.create_picture.id,
       }
 
-      const response = await createContest({
-        variables: { contest },
-      })
+      try {
+        const contest: ContestInput = {
+          title,
+          description,
+          cover_picture,
+          prize,
+          upload_phase_start,
+          upload_phase_end,
+          voting_phase_end,
+          automated_dates,
+          // To be replaced when authentication exists
+          created_by: 'test@test.com',
+        }
+
+        console.log('contest', contest)
+        contest.cover_picture = createdPicture.data.create_picture.id
+
+        const createdContest = await createContest({
+          variables: { contest },
+        })
+      } catch (error) {
+        console.error(error)
+      }
     } catch (error) {
       console.error(error)
     }

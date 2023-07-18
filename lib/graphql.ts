@@ -179,6 +179,7 @@ export const CREATE_PICTURE = gql`
   mutation CREATE_PICTURE($picture: PictureInput!) {
     create_picture(input: $picture) {
       ... on PictureType {
+        id
         user {
           email
         }
