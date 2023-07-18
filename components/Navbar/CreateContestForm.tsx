@@ -109,28 +109,29 @@ export default function CreateContestForm({
       contestValues.cover_picture = {
         id: createdPicture.data.create_picture.id,
       }
+      if (createdPicture.data.create_picture.id) {
+        try {
+          const contest: ContestInput = {
+            title,
+            description,
+            cover_picture,
+            prize,
+            upload_phase_start,
+            upload_phase_end,
+            voting_phase_end,
+            automated_dates,
+            // To be replaced when authentication exists
+            created_by: 'test@test.com',
+          }
 
-      try {
-        const contest: ContestInput = {
-          title,
-          description,
-          cover_picture,
-          prize,
-          upload_phase_start,
-          upload_phase_end,
-          voting_phase_end,
-          automated_dates,
-          // To be replaced when authentication exists
-          created_by: 'test@test.com',
+          contest.cover_picture = createdPicture.data.create_picture.id
+
+          const createdContest = await createContest({
+            variables: { contest },
+          })
+        } catch (error) {
+          console.error(error)
         }
-
-        contest.cover_picture = createdPicture.data.create_picture.id
-
-        const createdContest = await createContest({
-          variables: { contest },
-        })
-      } catch (error) {
-        console.error(error)
       }
     } catch (error) {
       console.error(error)
