@@ -57,6 +57,7 @@ export default function CreateContestForm({
   const schema = z.object({
     // To be used when the upload picture feature is done
     // cover_picture: fileSchema,
+    cover_picture: z.string(),
     title: z
       .string()
       .min(2, 'Title must be at least 2 characters')
@@ -104,7 +105,6 @@ export default function CreateContestForm({
       const createdPicture = await createPicture({
         variables: { picture },
       })
-      console.log('createdPicture.data', createdPicture.data?.create_picture.id)
 
       contestValues.cover_picture = {
         id: createdPicture.data.create_picture.id,
@@ -124,7 +124,6 @@ export default function CreateContestForm({
           created_by: 'test@test.com',
         }
 
-        console.log('contest', contest)
         contest.cover_picture = createdPicture.data.create_picture.id
 
         const createdContest = await createContest({
@@ -235,6 +234,9 @@ export default function CreateContestForm({
                       name='cover_picture'
                     />
                   </div>
+                  {errors.cover_picture && (
+                    <ErrorMessage error={errors.cover_picture} />
+                  )}
                   <div className='mt-2'>
                     <label className='text-lg font-medium' htmlFor='prize'>
                       Prize
