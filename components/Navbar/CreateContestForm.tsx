@@ -35,11 +35,6 @@ export default function CreateContestForm({
 
   const [automatedDates, setAutomatedDates] = useState<boolean>(false)
 
-  useEffect(() => {
-    setAutomatedDates(automatedDates)
-    console.log('automatedDates', automatedDates)
-  }, [automatedDates])
-
   const allowedImageFormats = ['jpeg', 'png', 'jpg']
   // To be used when the upload picture feature is done
   const fileSchema = z
@@ -106,32 +101,23 @@ export default function CreateContestForm({
         variables: { picture },
       })
 
-      contestValues.cover_picture = {
-        id: createdPicture.data.create_picture.id,
-      }
       if (createdPicture.data.create_picture.id) {
-        try {
-          const contest: ContestInput = {
-            title,
-            description,
-            cover_picture,
-            prize,
-            upload_phase_start,
-            upload_phase_end,
-            voting_phase_end,
-            automated_dates,
-            // To be replaced when authentication exists
-            created_by: 'test@test.com',
-          }
-
-          contest.cover_picture = createdPicture.data.create_picture.id
-
-          const createdContest = await createContest({
-            variables: { contest },
-          })
-        } catch (error) {
-          console.error(error)
+        const contest: ContestInput = {
+          title,
+          description,
+          cover_picture: createdPicture.data.create_picture.id,
+          prize,
+          upload_phase_start,
+          upload_phase_end,
+          voting_phase_end,
+          automated_dates,
+          // To be replaced when authentication exists
+          created_by: 'test@test.com',
         }
+
+        const createdContest = await createContest({
+          variables: { contest },
+        })
       }
     } catch (error) {
       console.error(error)

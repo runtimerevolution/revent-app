@@ -1,11 +1,11 @@
 import { Contest } from './helpers/interfaces'
 import Link from 'next/link'
 
-export interface ContestProps {
+interface ContestCardProps {
   contest: Contest
 }
 
-export default function ContestCard({ contest }: ContestProps) {
+export default function ContestCard({ contest }: ContestCardProps) {
   return (
     <Link href={`/contests/${contest.id}`}>
       <div
