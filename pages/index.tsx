@@ -1,18 +1,11 @@
-import Contest from '../components/Contest'
 import React, { useState } from 'react'
 import ContestFilter from '../components/ContestFilter'
-import {
-  IFilter,
-  Contest as ContestType,
-} from '../components/helpers/interfaces'
+import { IFilter } from '../components/helpers/interfaces'
 import { useQuery } from '@apollo/client'
-import { getContestList } from '../services/reventService'
 import { GET_CONTEST_LIST } from '../lib/graphql'
+import ContestCard from '../components/ContestCard'
 
-export interface HomeProps {
-  contestList: ContestType[]
-}
-export default function Home({ contestList }: HomeProps) {
+export default function Home() {
   const { loading, error, data } = useQuery(GET_CONTEST_LIST)
 
   const [statusFilter, setStatusFilter] = useState<IFilter>('open')
@@ -44,27 +37,11 @@ export default function Home({ contestList }: HomeProps) {
             {!loading &&
               !error &&
               filteredContestList.map((contest) => (
-                <Contest contest={contest} />
+                <ContestCard contest={contest} />
               ))}
           </div>
         </main>
       </div>
     </div>
   )
-}
-
-export async function getServerSideProps() {
-  let contestList = []
-
-  try {
-    contestList = await getContestList()
-  } catch (err) {
-    console.log('Error', err)
-  }
-
-  return {
-    props: {
-      contestList,
-    },
-  }
 }
