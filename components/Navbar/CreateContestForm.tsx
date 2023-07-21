@@ -115,7 +115,7 @@ export default function CreateContestForm({
           created_by: 'test@test.com',
         }
 
-        const createdContest = await createContest({
+        await createContest({
           variables: { contest },
         })
       }

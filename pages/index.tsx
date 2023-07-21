@@ -9,48 +9,22 @@ export default function Home() {
   const { loading, error, data } = useQuery(GET_CONTEST_LIST)
 
   const [statusFilter, setStatusFilter] = useState<IFilter>('open')
-
-  const [isSearch, setIsSearch] = useState<boolean>(false)
-
+  const [isSearching, setIsSearching] = useState<boolean>(false)
   const [searchData, setSearchData] = useState([])
-
   const [open, setOpen] = useState<boolean>(false)
 
   const contestListing = data?.contests
 
   let filteredContestList = []
 
-  // console.log('searchData', searchData)
-
-  if (!isSearch) {
+  if (!isSearching) {
     filteredContestList =
       statusFilter === 'All'
         ? contestListing
         : contestListing?.filter((contest) => contest.status === statusFilter)
-  } else if (isSearch) {
+  } else if (isSearching) {
     filteredContestList = searchData
-    // statusFilter === 'All'
-    //   ? searchData
-    //   : searchData?.filter((contest) => contest.status === statusFilter)
-    console.log(
-      'filteredContestList } else if (searchData) {',
-      filteredContestList
-    )
   }
-
-  console.log('isSearch', isSearch)
-
-  // console.log('filteredContestList', filteredContestList)
-  // console.log('searchData', searchData)
-
-  // let searchFilteredContestList
-
-  // if (searchData) {
-  //   searchFilteredContestList =
-  //     statusFilter === 'All'
-  //       ? searchData
-  //       : searchData?.filter((contest) => contest.status === statusFilter)
-  // }
 
   return (
     <div className='p-8 bg-gray-100'>
@@ -62,7 +36,7 @@ export default function Home() {
             setOpen={setOpen}
             statusFilter={statusFilter}
             setStatusFilter={setStatusFilter}
-            setIsSearch={setIsSearch}
+            setIsSearching={setIsSearching}
           />
         </div>
         <main className='min-h-screen py-8 px-20 flex-1 flex flex-col'>

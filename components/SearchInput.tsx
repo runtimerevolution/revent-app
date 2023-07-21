@@ -3,20 +3,13 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { SEARCH_QUERY } from '../lib/graphql'
 
-const SearchInput = ({ setSearchData, setIsSearch }) => {
+const SearchInput = ({ setSearchData, setIsSearching }) => {
   const [query, setQuery] = useState<string>('')
-
-  const [searchTerm, setSearchTerm] = useState('')
-  const [searchContests, { loading, data }] = useLazyQuery(SEARCH_QUERY)
-
-  // const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setQuery(event.target.value)
-  // }
+  const [searchContests, { data }] = useLazyQuery(SEARCH_QUERY)
 
   const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
     setQuery(value)
-    setSearchTerm(value)
     searchContests({ variables: { search: value } })
   }
 
@@ -26,13 +19,11 @@ const SearchInput = ({ setSearchData, setIsSearch }) => {
 
   useEffect(() => {
     if (query) {
-      setIsSearch(true)
+      setIsSearching(true)
     } else if (!query) {
-      setIsSearch(false)
+      setIsSearching(false)
     }
   }, [query])
-
-  // console.log('data', data)
 
   return (
     <input
