@@ -10,6 +10,8 @@ export default function ContestFilter({
   setOpen,
   statusFilter,
   setStatusFilter,
+  setSearchData,
+  setIsSearch,
 }: ContestFilterProps) {
   const filterMapping: { [key: string]: IFilter } = {
     All: 'All',
@@ -65,7 +67,7 @@ export default function ContestFilter({
             className='rounded-full'
           />
         </button>
-        <SearchInput />
+        <SearchInput setSearchData={setSearchData} setIsSearch={setIsSearch} />
       </div>
       {showContestCreationModal && (
         <CreateContestForm

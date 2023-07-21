@@ -59,4 +59,6 @@ export interface ContestFilterProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
   statusFilter: IFilter
   setStatusFilter: React.Dispatch<React.SetStateAction<IFilter>>
+  setSearchData?: React.Dispatch<React.SetStateAction<any>>
+  setIsSearch?: React.Dispatch<React.SetStateAction<boolean>>
 }
