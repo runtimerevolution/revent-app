@@ -1,11 +1,11 @@
 import { Contest } from './helpers/interfaces'
 import Link from 'next/link'
 
-interface ContestProps {
+interface ContestCardProps {
   contest: Contest
 }
 
-export default function Contest({ contest }: ContestProps) {
+export default function ContestCard({ contest }: ContestCardProps) {
   return (
     <Link href={`/contests/${contest.id}`}>
       <div
@@ -27,7 +27,7 @@ export default function Contest({ contest }: ContestProps) {
             {contest.status}
           </h3>
           <p className='text-gray-600 text-sm'>
-            {contest.upload_phase_end.slice(0, 10)}
+            {contest.upload_phase_end?.slice(0, 10)}
           </p>
         </div>
       </div>

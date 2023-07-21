@@ -3,21 +3,40 @@ import { Formik, Field, Form } from 'formik'
 import { z } from 'zod'
 import { toFormikValidationSchema } from 'zod-formik-adapter'
 import { DateInput } from '@mantine/dates'
-import CustomFileInput from '../helpers/CustomFileInput'
 import ErrorMessage from '../ErrorMessage'
+import { useMutation } from '@apollo/client'
+import { CREATE_CONTEST, CREATE_PICTURE } from '../../lib/graphql'
 
 interface CreateContestFormProps {
   setshowContestCreationModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+interface ContestInput {
+  title: string
+  description: string
+  cover_picture: number
+  prize: string
+  automated_dates?: boolean
+  upload_phase_start?: string
+  upload_phase_end?: string
+  voting_phase_end?: string
+  winners?: string[]
+  created_by: string
+}
+
 export default function CreateContestForm({
   setshowContestCreationModal,
 }: CreateContestFormProps) {
+  const [createContest] = useMutation(CREATE_CONTEST)
+  const [createPicture] = useMutation(CREATE_PICTURE)
   const [dateOptions, setdateOptions] = useState('')
   const [uploadDate, setuUploadDate] = useState<Date | null>(null)
   const [votingDate, setVotingDate] = useState<Date | null>(null)
 
+  const [automatedDates, setAutomatedDates] = useState<boolean>(false)
+
   const allowedImageFormats = ['jpeg', 'png', 'jpg']
+  // To be used when the upload picture feature is done
   const fileSchema = z
     .object({
       name: z.string(),
@@ -31,21 +50,22 @@ export default function CreateContestForm({
     .refine((value) => value !== null, { message: 'File is required' })
 
   const schema = z.object({
-    cover_picture: fileSchema,
+    // To be used when the upload picture feature is done
+    // cover_picture: fileSchema,
+    cover_picture: z.string(),
     title: z
       .string()
       .min(2, 'Title must be at least 2 characters')
       .max(50, 'Title must be less than 50 characters'),
     description: z
       .string()
-      .max(200, 'Description must be less than 200 characters')
-      .optional(),
+      .max(200, 'Description must be less than 200 characters'),
     prize: z
       .string()
       .max(100, 'Prize must be less than 100 characters')
       .optional(),
-    uploadPhaseDate: z.date().optional().nullable(),
-    votingPhaseDate: z.date().optional().nullable(),
+    upload_phase_date: z.date().optional().nullable(),
+    voting_phase_date: z.date().optional().nullable(),
   })
 
   const initialValues = {
@@ -54,12 +74,54 @@ export default function CreateContestForm({
     cover_picture: null,
     prize: '',
     datesOption: '',
-    uploadPhaseDate: uploadDate,
-    votingPhaseDate: votingDate,
+    upload_phase_end: uploadDate,
+    voting_phase_end: votingDate,
+    automated_dates: automatedDates,
   }
 
-  const handleSubmit = (values: typeof initialValues) => {
-    console.log(values)
+  const handleSubmit = async (contestValues) => {
+    const {
+      title,
+      description,
+      cover_picture,
+      prize,
+      upload_phase_start,
+      upload_phase_end,
+      voting_phase_end,
+      automated_dates,
+    } = contestValues
+
+    try {
+      const picture = {
+        user: 'test@test.com',
+        picture_path: cover_picture,
+      }
+
+      const createdPicture = await createPicture({
+        variables: { picture },
+      })
+
+      if (createdPicture.data.create_picture.id) {
+        const contest: ContestInput = {
+          title,
+          description,
+          cover_picture: createdPicture.data.create_picture.id,
+          prize,
+          upload_phase_start,
+          upload_phase_end,
+          voting_phase_end,
+          automated_dates,
+          // To be replaced when authentication exists
+          created_by: 'test@test.com',
+        }
+
+        const createdContest = await createContest({
+          variables: { contest },
+        })
+      }
+    } catch (error) {
+      console.error(error)
+    }
     setshowContestCreationModal(false)
   }
 
@@ -85,6 +147,7 @@ export default function CreateContestForm({
   useEffect(() => {
     setVotingDate(null)
     setuUploadDate(null)
+    setAutomatedDates(automatedDates)
   }, [dateOptions])
 
   return (
@@ -144,12 +207,23 @@ export default function CreateContestForm({
                       Upload Image
                     </label>
                     <br />
-                    <CustomFileInput
+                    {/* To be used when the upload picture feature is done */}
+                    {/* <CustomFileInput
                       label=''
                       name='cover_picture'
                       errors={errors}
+                    /> */}
+                    <Field
+                      className='border border-orange-500 focus:border-orange-700 px-4 py-2 rounded-lg w-full'
+                      type='text'
+                      // type='file'
+                      id='cover_picture'
+                      name='cover_picture'
                     />
                   </div>
+                  {errors.cover_picture && (
+                    <ErrorMessage error={errors.cover_picture} />
+                  )}
                   <div className='mt-2'>
                     <label className='text-lg font-medium' htmlFor='prize'>
                       Prize
@@ -180,6 +254,7 @@ export default function CreateContestForm({
                           onChange={() => {
                             setdateOptions('manual')
                             setFieldValue('dateOptions', 'manual')
+                            setAutomatedDates(false)
                           }}
                         />
                         Manual Dates
@@ -193,6 +268,7 @@ export default function CreateContestForm({
                           onChange={() => {
                             setdateOptions('automated')
                             setFieldValue('dateOptions', 'automated')
+                            setAutomatedDates(true)
                           }}
                         />
                         Automated Dates
@@ -205,10 +281,10 @@ export default function CreateContestForm({
                       <div className='mt-2'>
                         <label htmlFor='uploadPhase'>Upload Phase</label>
                         <DateInput
-                          id='uploadPhaseDate'
+                          id='upload_phase_end'
                           onChange={(date) => {
                             setuUploadDate(date)
-                            setFieldValue('uploadPhaseDate', date)
+                            setFieldValue('upload_phase_end', date)
                           }}
                           maw={400}
                           mx='auto'
@@ -218,10 +294,10 @@ export default function CreateContestForm({
                       <div className='mt-2'>
                         <label htmlFor='votingPhase'>Voting Phase</label>
                         <DateInput
-                          id='votingPhaseDate'
+                          id='voting_phase_end'
                           onChange={(date) => {
                             setVotingDate(date)
-                            setFieldValue('votingPhaseDate', date)
+                            setFieldValue('voting_phase_end', date)
                           }}
                           maw={400}
                           mx='auto'
@@ -231,7 +307,7 @@ export default function CreateContestForm({
                     </>
                   )}
 
-                  <div className=' flex items-center justify-center'>
+                  <div className='flex items-center justify-center'>
                     <button
                       className='mt-2 text-gray-700 bg-gray-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
                       type='submit'
