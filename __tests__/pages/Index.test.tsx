@@ -1,5 +1,3 @@
-// Home.test.js
-
 import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
 import { MockedProvider } from '@apollo/client/testing'
