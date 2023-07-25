@@ -204,9 +204,17 @@ export const SEARCH_QUERY = gql`
   query SearchQuery($search: String!) {
     contest_search(search: $search) {
       id
-      title
-      description
       prize
+      status
+      title
+      upload_phase_end
+      upload_phase_start
+      voting_phase_end
+      description
+      cover_picture {
+        id
+        picture_path
+      }
     }
   }
 `

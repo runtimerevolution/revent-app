@@ -23,7 +23,10 @@ export default function Home() {
         ? contestListing
         : contestListing?.filter((contest) => contest.status === statusFilter)
   } else if (isSearching) {
-    filteredContestList = searchData
+    filteredContestList =
+      statusFilter === 'All'
+        ? searchData
+        : searchData?.filter((contest) => contest.status === statusFilter)
   }
 
   return (
