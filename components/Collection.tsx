@@ -8,6 +8,7 @@ export default function Collection({ collection }: CollectionProps) {
     collection.pictures.length > 0
       ? collection.pictures[0].picture_path.toString()
       : '/images/collection.jpeg'
+
   return (
     <>
       <Link href={`/collections/${collection.id}`}>
@@ -19,7 +20,6 @@ export default function Collection({ collection }: CollectionProps) {
               {collection.user.name_first} {''}
               {collection.user.name_last}
             </div>
-            {/* <p className='text-gray-700 text-base'>{collection.user}</p> */}
           </div>
         </div>
       </Link>
