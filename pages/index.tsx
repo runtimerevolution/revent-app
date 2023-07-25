@@ -8,8 +8,6 @@ import ContestCard from '../components/ContestCard'
 export default function Home() {
   const { loading, error, data } = useQuery(GET_CONTEST_LIST)
 
-  console.log('data', data)
-
   const [statusFilter, setStatusFilter] = useState<IFilter>('open')
   const [isSearching, setIsSearching] = useState<boolean>(false)
   const [searchData, setSearchData] = useState([])
@@ -42,8 +40,8 @@ export default function Home() {
           />
         </div>
         <main className='min-h-screen py-8 px-20 flex-1 flex flex-col'>
-          {/* {loading && <p>Loading</p>}
-          {error && <p>Error while retrieving the contests</p>} */}
+          {loading && <p>Loading</p>}
+          {error && <p>Error while retrieving the contests</p>}
           <div className='grid grid-cols-4 gap-4'>
             {!loading &&
               !error &&
