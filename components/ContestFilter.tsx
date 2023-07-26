@@ -1,9 +1,18 @@
 import Image from 'next/image'
 import React from 'react'
 import { useState } from 'react'
-import { ContestFilterProps, IFilter } from './helpers/interfaces'
+import { IFilter } from './helpers/interfaces'
 import CreateContestForm from './Navbar/CreateContestForm'
 import SearchInput from './SearchInput'
+
+interface ContestFilterProps {
+  open: boolean
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  statusFilter: IFilter
+  setStatusFilter: React.Dispatch<React.SetStateAction<IFilter>>
+  setSearchData?: React.Dispatch<React.SetStateAction<any>>
+  setIsSearching?: React.Dispatch<React.SetStateAction<boolean>>
+}
 
 export default function ContestFilter({
   open,
