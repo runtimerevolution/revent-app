@@ -199,6 +199,26 @@ export const CREATE_PICTURE = gql`
     }
   }
 `
+
+export const SEARCH_QUERY = gql`
+  query SearchQuery($search: String!) {
+    contest_search(search: $search) {
+      id
+      prize
+      status
+      title
+      upload_phase_end
+      upload_phase_start
+      voting_phase_end
+      description
+      cover_picture {
+        id
+        picture_path
+      }
+    }
+  }
+`
+
 export const GET_PICTURE_COMMENTS = gql`
   query GetPictureComments($picture_path: String) {
     picture_comments(picture_path: $picture_path) {

@@ -54,9 +54,3 @@ export interface MyPhoto {
   pictures: Picture[]
   user: string
 }
-export interface ContestFilterProps {
-  open: boolean
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>
-  statusFilter: IFilter
-  setStatusFilter: React.Dispatch<React.SetStateAction<IFilter>>
-}

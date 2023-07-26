@@ -1,11 +1,30 @@
+import { useLazyQuery } from '@apollo/client'
+import { useEffect } from 'react'
 import { useState } from 'react'
+import { SEARCH_QUERY } from '../lib/graphql'
 
-const SearchInput = () => {
+const SearchInput = ({ setSearchData, setIsSearching }) => {
   const [query, setQuery] = useState<string>('')
+  const [searchContests, { data }] = useLazyQuery(SEARCH_QUERY)
 
   const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value)
+    const { value } = event.target
+    setQuery(value)
+    searchContests({ variables: { search: value } })
   }
+
+  useEffect(() => {
+    setSearchData(data?.contest_search)
+  }, [data])
+
+  useEffect(() => {
+    if (query) {
+      setIsSearching(true)
+    } else if (!query) {
+      setIsSearching(false)
+    }
+  }, [query])
+
   return (
     <input
       type='text'
