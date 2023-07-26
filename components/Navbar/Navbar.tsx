@@ -129,7 +129,7 @@ export default function Navbar() {
                   Photo Contests
                 </a>
                 <a
-                  onClick={() => handleNavigation('/collections')}
+                  onClick={() => handleNavigation('/#')}
                   className={`${collectionsTextColor} ${collectionsBackgroundColor} hover:text-white px-3 py-2 rounded-md font-medium cursor-pointer`}
                 >
                   Collections
