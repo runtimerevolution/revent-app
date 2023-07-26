@@ -29,6 +29,59 @@ export default function Home() {
         : searchData?.filter((contest) => contest.status === statusFilter)
   }
 
+  const ContestList = ({ filteredContestList }) => {
+    const openContests = filteredContestList?.filter(
+      (contest) => contest.status === 'open'
+    )
+    const votingContests = filteredContestList?.filter(
+      (contest) => contest.status === 'voting'
+    )
+    const closedContests = filteredContestList?.filter(
+      (contest) => contest.status === 'closed'
+    )
+
+    return (
+      <div>
+        <div className='grid grid-cols-4 gap-4'>
+          {openContests && (
+            <>
+              <p>Open Contests</p>
+              {openContests?.map((contest) => (
+                <ContestCard key={contest.id} contest={contest} />
+              ))}
+            </>
+          )}
+        </div>
+
+        <hr />
+
+        <div className='grid grid-cols-4 gap-4'>
+          {votingContests && (
+            <>
+              <p>Voting Contests</p>
+              {votingContests?.map((contest) => (
+                <ContestCard key={contest.id} contest={contest} />
+              ))}
+            </>
+          )}
+        </div>
+
+        <hr />
+
+        <div className='grid grid-cols-4 gap-4'>
+          {closedContests && (
+            <>
+              <p>Closed Contests</p>
+              {closedContests?.map((contest) => (
+                <ContestCard key={contest.id} contest={contest} />
+              ))}
+            </>
+          )}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className='p-8 bg-gray-100'>
       <div className='px-8'>
@@ -45,13 +98,8 @@ export default function Home() {
         <main className='min-h-screen py-8 px-20 flex-1 flex flex-col'>
           {loading && <p>Loading</p>}
           {error && <p>Error while retrieving the contests</p>}
-          <div className='grid grid-cols-4 gap-4'>
-            {!loading &&
-              !error &&
-              filteredContestList?.map((contest) => (
-                <ContestCard contest={contest} />
-              ))}
-          </div>
+
+          <ContestList filteredContestList={filteredContestList} />
         </main>
       </div>
     </div>
