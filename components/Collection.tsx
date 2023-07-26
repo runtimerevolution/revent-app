@@ -3,7 +3,6 @@ import React from 'react'
 import { CollectionProps } from './helpers/interfaces'
 
 export default function Collection({ collection }: CollectionProps) {
-  console.log('collection', collection)
   const cover_picture_path =
     collection.pictures.length > 0
       ? collection.pictures[0].picture_path.toString()
