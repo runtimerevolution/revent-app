@@ -40,7 +40,7 @@ export interface Picture {
   picture_path: string
 }
 export interface Collection {
-  id?: number
+  id: number
   user: User
   pictures: Picture[]
 }
