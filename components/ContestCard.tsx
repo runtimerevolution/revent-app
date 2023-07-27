@@ -6,30 +6,34 @@ interface ContestCardProps {
 }
 
 export default function ContestCard({ contest }: ContestCardProps) {
+  console.log('contest', contest)
   return (
     <Link href={`/contests/${contest.id}`}>
       <div
         key={contest.id}
-        className='bg-white rounded-lg overflow-hidden shadow-md'
+        className='bg-white rounded-lg overflow-hidden shadow-m h-full w-full'
         style={{
-          gridRowEnd: `span ${Math.ceil(Math.random() * 2)}`,
+          backgroundImage: `url(${contest.cover_picture?.picture_path})`,
+          backgroundSize: 'cover',
+          height: '15em',
         }}
       >
         <img
-          src={contest.cover_picture?.picture_path}
-          className='h-3/6 w-full h-54 object-cover'
+          src='/images/camera.svg'
+          className='bg-gray-200 rounded-full ml-2 mt-2 brightness-50'
         />
-        <div className='px-4 py-3'>
-          <h3 className='text-gray-900 font-medium text-lg mb-2'>
-            {contest.title}
-          </h3>
-          <h3 className='text-gray-900 font-medium text-lg mb-2'>
-            {contest.status}
-          </h3>
-          <p className='text-gray-600 text-sm'>
+
+        <h3 className='text-gray-100 font-medium text-lg mt-10'>
+          {contest.title}
+        </h3>
+        {/* <h3 className='text-gray-100 font-medium text-lg mb-2'>
             {contest.upload_phase_end?.slice(0, 10)}
-          </p>
-        </div>
+          </h3> */}
+        <h3 className='text-gray-100 text-sm mt-24 flex justify-end'>
+          {contest?.status == 'voting' && <h3>Vote</h3>}
+          {/* {contest.upload_phase_end?.slice(0, 10)} */}
+        </h3>
+        {/* </div> */}
       </div>
     </Link>
   )
