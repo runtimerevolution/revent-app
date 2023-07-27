@@ -4,6 +4,7 @@ import { IFilter } from '../components/helpers/interfaces'
 import { useQuery } from '@apollo/client'
 import { GET_CONTEST_LIST } from '../lib/graphql'
 import ContestCard from '../components/ContestCard'
+import ContestList from '../components/ContestList'
 
 export default function Home() {
   const { loading, error, data } = useQuery(GET_CONTEST_LIST)
@@ -27,59 +28,6 @@ export default function Home() {
       statusFilter === 'All'
         ? searchData
         : searchData?.filter((contest) => contest.status === statusFilter)
-  }
-
-  const ContestList = ({ filteredContestList }) => {
-    const openContests = filteredContestList?.filter(
-      (contest) => contest.status === 'open'
-    )
-    const votingContests = filteredContestList?.filter(
-      (contest) => contest.status === 'voting'
-    )
-    const closedContests = filteredContestList?.filter(
-      (contest) => contest.status === 'closed'
-    )
-
-    return (
-      <div>
-        <div className='grid grid-cols-4 gap-4'>
-          {openContests && (
-            <>
-              <p>Open Contests</p>
-              {openContests?.map((contest) => (
-                <ContestCard key={contest.id} contest={contest} />
-              ))}
-            </>
-          )}
-        </div>
-
-        <hr />
-
-        <div className='grid grid-cols-4 gap-4'>
-          {votingContests && (
-            <>
-              <p>Voting Contests</p>
-              {votingContests?.map((contest) => (
-                <ContestCard key={contest.id} contest={contest} />
-              ))}
-            </>
-          )}
-        </div>
-
-        <hr />
-
-        <div className='grid grid-cols-4 gap-4'>
-          {closedContests && (
-            <>
-              <p>Closed Contests</p>
-              {closedContests?.map((contest) => (
-                <ContestCard key={contest.id} contest={contest} />
-              ))}
-            </>
-          )}
-        </div>
-      </div>
-    )
   }
 
   return (
