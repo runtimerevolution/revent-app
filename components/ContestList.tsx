@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 import ContestCard from './ContestCard'
 
@@ -12,45 +13,82 @@ export default function ContestList({ filteredContestList }) {
     (contest) => contest.status === 'closed'
   )
 
-  console.log('votingContests.length', !votingContests?.length)
   return (
     <div>
-      <div className='grid grid-cols-4 gap-4'>
-        {openContests?.length > 0 && (
-          <>
-            <p>Open Contests</p>
+      {openContests?.length > 0 && (
+        <>
+          <div className='mt-2 w-full'>
+            <div className='flex items-center justify-center'>
+              <a className='flex items-center'>
+                <Image
+                  src='/images/opencontests.svg'
+                  alt='plus'
+                  width={20}
+                  height={20}
+                  className='rounded-full'
+                />
+                <span className='ml-2'>Open Contests</span>
+              </a>
+            </div>
+            <hr />
+          </div>
+          <div className='grid grid-cols-4 gap-4 mt-4'>
             {openContests?.map((contest) => (
               <ContestCard key={contest.id} contest={contest} />
             ))}
-          </>
-        )}
-      </div>
+          </div>
+        </>
+      )}
 
-      <hr />
-
-      <div className='grid grid-cols-4 gap-4'>
-        {votingContests?.length > 0 && (
-          <>
-            <p>Voting Contests</p>
+      {votingContests?.length > 0 && (
+        <>
+          <div className='mt-2 w-full'>
+            <div className='flex items-center justify-center'>
+              <a className='flex items-center'>
+                <Image
+                  src='/images/heart.svg'
+                  alt='plus'
+                  width={20}
+                  height={20}
+                  className='rounded-full'
+                />
+                <span className='ml-2'>Voting Contests</span>
+              </a>
+            </div>
+            <hr />
+          </div>
+          <div className='grid grid-cols-4 gap-4 mt-4'>
             {votingContests?.map((contest) => (
               <ContestCard key={contest.id} contest={contest} />
             ))}
-          </>
-        )}
-      </div>
+          </div>
+        </>
+      )}
 
-      <hr />
-
-      <div className='grid grid-cols-4 gap-4'>
-        {closedContests?.length > 0 && (
-          <>
-            <p>Closed Contests</p>
+      {closedContests?.length > 0 && (
+        <>
+          <div className='mt-2 w-full'>
+            <div className='flex items-center justify-center'>
+              <a className='flex items-center'>
+                <Image
+                  src='/images/lock.svg'
+                  alt='plus'
+                  width={20}
+                  height={20}
+                  className='rounded-full'
+                />
+                <span className='ml-2'>Closed Contests</span>
+              </a>
+            </div>
+            <hr />
+          </div>
+          <div className='grid grid-cols-4 gap-4 mt-4'>
             {closedContests?.map((contest) => (
               <ContestCard key={contest.id} contest={contest} />
             ))}
-          </>
-        )}
-      </div>
+          </div>
+        </>
+      )}
     </div>
   )
 }
