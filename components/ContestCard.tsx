@@ -8,11 +8,16 @@ interface ContestCardProps {
 
 export default function ContestCard({ contest }: ContestCardProps) {
   const endDateString = contest.upload_phase_end?.slice(0, 10)
+  const startDateString = contest.upload_phase_start?.slice(0, 10)
+
   const endDate = new Date(endDateString)
+  const startDate = new Date(startDateString)
 
   const currentDate = new Date()
   const timeDifference = endDate.getTime() - currentDate.getTime()
   const daysLeft = Math.ceil(timeDifference / (1000 * 60 * 60 * 24))
+
+  const month = startDate.toLocaleString('en-US', { month: 'long' })
 
   const pictureCover = contest.cover_picture?.picture_path
     ? contest.cover_picture?.picture_path
@@ -33,16 +38,19 @@ export default function ContestCard({ contest }: ContestCardProps) {
           className='bg-gray-200 rounded-full ml-2 mt-2 brightness-50'
         />
 
-        <h3 className='text-gray-100 font-medium text-lg mt-10'>
+        <h3 className='text-gray-100 font-medium text-lg mt-10 ml-2'>
+          {month}
+        </h3>
+        <h3 className='text-gray-100 font-medium text-lg ml-2'>
           {contest.title}
         </h3>
         {/* <h3 className='text-gray-100 font-medium text-lg mb-2'>
             {contest.upload_phase_end?.slice(0, 10)}
           </h3> */}
-        <h3 className='text-gray-100 text-sm mt-24 flex justify-end'>
+        <div className='text-gray-100 text-sm flex justify-end mb-5'>
           {contest?.status == 'open' && (
-            <div className='grid grid-cols-2 gap-4'>
-              <div className='flex items-center justify-start'>
+            <div className='grid grid-cols-2 gap-4 mt-10 ml-2'>
+              <div className='flex items-center justify-start mb-5'>
                 <Image
                   src='/images/clock.svg'
                   alt='plus'
@@ -63,7 +71,7 @@ export default function ContestCard({ contest }: ContestCardProps) {
             <h3 className='font-bold mb-2 mr-2'>Vote</h3>
           )}
           {/* {contest.upload_phase_end?.slice(0, 10)} */}
-        </h3>
+        </div>
         {/* </div> */}
       </div>
     </Link>

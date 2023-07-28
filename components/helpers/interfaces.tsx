@@ -10,6 +10,7 @@ export interface Contest {
   description: string
   title?: string
   upload_phase_end?: string
+  upload_phase_start?: string
   cover_picture?: PicturePath
   status?: string
   name?: string
