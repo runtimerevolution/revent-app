@@ -18,3 +18,31 @@ a {
 * {
   box-sizing: border-box;
 }
+
+/* custom-styles.css */
+
+.custom-link {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  color: #000;
+  width: 100%;
+}
+
+.custom-link::before,
+.custom-link::after {
+  content: '';
+  display: inline-block;
+  width: 100%;
+  height: 1px;
+  background-color: #dcdcdc;
+  vertical-align: middle;
+}
+
+.custom-link::before {
+  margin-right: 0.5em;
+}
+
+.custom-link::after {
+  margin-left: 0.5em;
+}

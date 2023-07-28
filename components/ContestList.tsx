@@ -19,7 +19,7 @@ export default function ContestList({ filteredContestList }) {
         <>
           <div className='mt-2 w-full'>
             <div className='flex items-center justify-center'>
-              <a className='flex items-center'>
+              <a className='flex items-center  custom-link'>
                 <Image
                   src='/images/opencontests.svg'
                   alt='plus'
@@ -27,10 +27,10 @@ export default function ContestList({ filteredContestList }) {
                   height={20}
                   className='rounded-full'
                 />
-                <span className='ml-2'>Open Contests</span>
+                <a className='ml-2'>Open Contests</a>
               </a>
             </div>
-            <hr />
+            {/* <hr /> */}
           </div>
           <div className='grid grid-cols-4 gap-4 mt-4'>
             {openContests?.map((contest) => (
@@ -44,7 +44,7 @@ export default function ContestList({ filteredContestList }) {
         <>
           <div className='mt-2 w-full'>
             <div className='flex items-center justify-center'>
-              <a className='flex items-center'>
+              <a className='flex items-center  custom-link'>
                 <Image
                   src='/images/heart.svg'
                   alt='plus'
@@ -55,7 +55,6 @@ export default function ContestList({ filteredContestList }) {
                 <span className='ml-2'>Voting Contests</span>
               </a>
             </div>
-            <hr />
           </div>
           <div className='grid grid-cols-4 gap-4 mt-4'>
             {votingContests?.map((contest) => (
@@ -69,7 +68,7 @@ export default function ContestList({ filteredContestList }) {
         <>
           <div className='mt-2 w-full'>
             <div className='flex items-center justify-center'>
-              <a className='flex items-center'>
+              <a className='flex items-center  custom-link'>
                 <Image
                   src='/images/lock.svg'
                   alt='plus'
@@ -80,7 +79,6 @@ export default function ContestList({ filteredContestList }) {
                 <span className='ml-2'>Closed Contests</span>
               </a>
             </div>
-            <hr />
           </div>
           <div className='grid grid-cols-4 gap-4 mt-4'>
             {closedContests?.map((contest) => (

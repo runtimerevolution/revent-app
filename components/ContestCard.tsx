@@ -30,7 +30,9 @@ export default function ContestCard({ contest }: ContestCardProps) {
             {contest.upload_phase_end?.slice(0, 10)}
           </h3> */}
         <h3 className='text-gray-100 text-sm mt-24 flex justify-end'>
-          {contest?.status == 'voting' && <h3>Vote</h3>}
+          {contest?.status == 'voting' && (
+            <h3 className='font-bold text-xl mb-2 mr-2'>Vote</h3>
+          )}
           {/* {contest.upload_phase_end?.slice(0, 10)} */}
         </h3>
         {/* </div> */}
