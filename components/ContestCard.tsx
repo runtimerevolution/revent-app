@@ -33,10 +33,22 @@ export default function ContestCard({ contest }: ContestCardProps) {
           height: '15em',
         }}
       >
-        <img
-          src='/images/camera.svg'
-          className='bg-gray-200 rounded-full ml-2 mt-2 brightness-50'
-        />
+        {contest?.status == 'open' && (
+          <>
+            <img
+              src='/images/camera.svg'
+              className='bg-gray-200 rounded-full ml-2 mt-2 brightness-50'
+            />
+          </>
+        )}
+        {contest?.status == 'voting' && (
+          <>
+            <img
+              src='/images/heart.svg'
+              className='bg-gray-200 rounded-full ml-2 mt-2 brightness-50'
+            />
+          </>
+        )}
 
         <h3 className='text-gray-100 font-medium text-lg mt-10 ml-2'>
           {month}
@@ -63,12 +75,26 @@ export default function ContestCard({ contest }: ContestCardProps) {
                 </h3>
               </div>
               <div className='flex items-center justify-end'>
-                <h3 className='font-bold text-xl mr-2 '>Join</h3>
+                <h3 className='font-bold text-xl mr-2 mb-2 '>Join</h3>
               </div>
             </div>
           )}
           {contest?.status == 'voting' && (
-            <h3 className='font-bold mb-2 mr-2'>Vote</h3>
+            <div className='grid grid-cols-2 gap-4 mt-10 ml-2'>
+              <div className='flex items-center justify-start mb-5'>
+                <Image
+                  src='/images/clock.svg'
+                  alt='plus'
+                  width={20}
+                  height={20}
+                  className='rounded-full'
+                />
+                <h3 className='font-bold text-md mr-10'>Voting Phase</h3>
+              </div>
+              <div className='flex items-center justify-end'>
+                <h3 className='font-bold text-xl mr-2 mb-2'>Vote</h3>
+              </div>
+            </div>
           )}
           {/* {contest.upload_phase_end?.slice(0, 10)} */}
         </div>
