@@ -40,9 +40,9 @@ a {
 }
 
 .custom-link::before {
-  margin-right: 0.5em;
+  margin-right: 1.2em;
 }
 
 .custom-link::after {
-  margin-left: 0.5em;
+  margin-left: 0.2em;
 }
