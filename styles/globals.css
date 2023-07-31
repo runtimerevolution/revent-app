@@ -19,9 +19,7 @@ a {
   box-sizing: border-box;
 }
 
-/* custom-styles.css */
-
-.custom-link {
+.contest-divider {
   display: inline-flex;
   align-items: center;
   position: relative;
@@ -29,8 +27,8 @@ a {
   width: 100%;
 }
 
-.custom-link::before,
-.custom-link::after {
+.contest-divider::before,
+.contest-divider::after {
   content: '';
   display: inline-block;
   width: 100%;
@@ -39,10 +37,10 @@ a {
   vertical-align: middle;
 }
 
-.custom-link::before {
+.contest-divider::before {
   margin-right: 1.2em;
 }
 
-.custom-link::after {
+.contest-divider::after {
   margin-left: 0.2em;
 }

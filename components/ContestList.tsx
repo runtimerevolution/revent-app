@@ -18,7 +18,7 @@ export default function ContestList({ filteredContestList }) {
       {openContests?.length > 0 && (
         <>
           <div className='mt-2'>
-            <a className='flex items-center custom-link'>
+            <a className='flex items-center contest-divider'>
               <Image
                 src='/images/opencontests.svg'
                 alt='plus'
@@ -40,7 +40,7 @@ export default function ContestList({ filteredContestList }) {
       {votingContests?.length > 0 && (
         <>
           <div className='mt-2'>
-            <a className='flex items-center custom-link'>
+            <a className='flex items-center contest-divider'>
               <Image
                 src='/images/heart.svg'
                 alt='plus'
@@ -62,7 +62,7 @@ export default function ContestList({ filteredContestList }) {
       {closedContests?.length > 0 && (
         <>
           <div className='mt-2'>
-            <a className='flex items-center custom-link'>
+            <a className='flex items-center contest-divider'>
               <Image
                 src='/images/lock.svg'
                 alt='plus'
