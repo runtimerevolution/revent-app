@@ -49,6 +49,14 @@ export default function ContestCard({ contest }: ContestCardProps) {
             />
           </>
         )}
+        {contest?.status == 'closed' && (
+          <>
+            <img
+              src='/images/lock.svg'
+              className='bg-gray-200 rounded-full ml-2 mt-2 brightness-50'
+            />
+          </>
+        )}
 
         <h3 className='text-gray-100 font-medium text-lg mt-10 ml-2'>
           {month}
@@ -56,9 +64,6 @@ export default function ContestCard({ contest }: ContestCardProps) {
         <h3 className='text-gray-100 font-medium text-lg ml-2'>
           {contest.title}
         </h3>
-        {/* <h3 className='text-gray-100 font-medium text-lg mb-2'>
-            {contest.upload_phase_end?.slice(0, 10)}
-          </h3> */}
         <div className='text-gray-100 text-sm flex justify-end mb-5'>
           {contest?.status == 'open' && (
             <div className='grid grid-cols-2 gap-4 mt-10 ml-2'>
@@ -71,7 +76,7 @@ export default function ContestCard({ contest }: ContestCardProps) {
                   className='rounded-full'
                 />
                 <h3 className='font-bold text-md mr-10'>
-                  End is {daysLeft} days
+                  End in {daysLeft} days
                 </h3>
               </div>
               <div className='flex items-center justify-end'>
@@ -96,9 +101,24 @@ export default function ContestCard({ contest }: ContestCardProps) {
               </div>
             </div>
           )}
-          {/* {contest.upload_phase_end?.slice(0, 10)} */}
+          {contest?.status == 'closed' && (
+            <div className='grid grid-cols-2 gap-4 mt-10 ml-2'>
+              <div className='flex items-center justify-start mb-5'>
+                <Image
+                  src='/images/lock.svg'
+                  alt='plus'
+                  width={20}
+                  height={20}
+                  className='rounded-full'
+                />
+                <h3 className='font-bold text-md mr-10'>Contest Closed</h3>
+              </div>
+              <div className='flex items-center justify-end'>
+                <h3 className='font-bold text-xl mr-2 mb-2'>View</h3>
+              </div>
+            </div>
+          )}
         </div>
-        {/* </div> */}
       </div>
     </Link>
   )

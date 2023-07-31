@@ -3,7 +3,6 @@ import ContestFilter from '../components/ContestFilter'
 import { IFilter } from '../components/helpers/interfaces'
 import { useQuery } from '@apollo/client'
 import { GET_CONTEST_LIST } from '../lib/graphql'
-import ContestCard from '../components/ContestCard'
 import ContestList from '../components/ContestList'
 
 export default function Home() {
