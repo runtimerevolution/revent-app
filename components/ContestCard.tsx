@@ -105,7 +105,7 @@ export default function ContestCard({ contest }: ContestCardProps) {
             <div className='grid grid-cols-2 gap-4 mt-10 ml-2'>
               <div className='flex items-center justify-start mb-5'>
                 <Image
-                  src='/images/lock.svg'
+                  src='/images/lock_small.svg'
                   alt='plus'
                   width={20}
                   height={20}
