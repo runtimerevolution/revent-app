@@ -56,11 +56,10 @@ export default function ContestDetailPage() {
     setShowAddPhotoForm((showContestCreationModal) => !showContestCreationModal)
   }
 
-  console.log('contestDetail', contestDetail)
   const startDateString = contestDetail?.upload_phase_start?.slice(0, 10)
   const startDate = new Date(startDateString)
   const month = startDate.toLocaleString('en-US', { month: 'long' })
-  console.log('month', month)
+
   return (
     <>
       {loadingDetail && <p>Loading</p>}
@@ -97,34 +96,48 @@ export default function ContestDetailPage() {
                 }}
               >
                 <div className='absolute top-0 left-0 w-full h-full bg-black opacity-50 rounded-lg' />
-                <a className='absolute top-10 left-20 text-white z-10'>
-                  {month}
-                </a>
-                {contestDetail.status == 'open' && (
-                  <>
-                    <a>Open</a>
-                  </>
-                )}
-                {contestDetail.status == 'voting' && (
-                  <>
-                    <a>Voting</a>
-                  </>
-                )}
-                {contestDetail.status == 'closed' && (
-                  <>
-                    <div className='bg-gray-200 rounded-full flex items-center'>
+                <div className='absolute top-10 left-20 text-white z-10 brightness-75'>
+                  <a className=''>{month}</a>
+                  {contestDetail.status == 'open' && (
+                    <div className='bg-green-500 rounded-full flex items-left absolute left-0'>
                       <img
-                        src='/images/lock.svg'
-                        className=' brightness-50'
-                        style={{ width: '20px', height: '20px' }} // Optional: Set width and height for the image
+                        src='/images/curved_camera.svg'
+                        className='brightness-50'
+                        style={{
+                          width: '20px',
+                          height: '25px',
+                        }}
                       />
-                      <a className='text-center text-white bg-gray-200 rounded-lg w-40 ml-2'>
-                        Concurso Encerrado
+                      <a className='text-center text-white rounded-lg w-36 text-md '>
+                        Open Contest
                       </a>
                     </div>
-                  </>
-                )}
-
+                  )}
+                  {contestDetail.status == 'voting' && (
+                    <div className='bg-yellow-500 rounded-full flex items-left absolute left-0'>
+                      <img
+                        src='/images/clock.svg'
+                        className='brightness-50'
+                        style={{ width: '20px', height: '25px' }}
+                      />
+                      <a className='text-center text-white rounded-lg w-36 text-md '>
+                        Voting Phase
+                      </a>
+                    </div>
+                  )}
+                  {contestDetail.status == 'closed' && (
+                    <div className='bg-gray-200 rounded-full flex items-left absolute left-0'>
+                      <img
+                        src='/images/lock_small.svg'
+                        className='brightness-50'
+                        style={{ width: '20px', height: '25px' }}
+                      />
+                      <a className='text-center text-white rounded-lg w-36 text-md '>
+                        Contest Closed
+                      </a>
+                    </div>
+                  )}
+                </div>
                 <p className='text-center text-white mt-4 text-3xl font-bold z-10'>
                   {contestDetail?.title}
                 </p>
