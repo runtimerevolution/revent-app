@@ -55,19 +55,30 @@ export default function ContestDetailPage() {
   const toggleAddPhotoForm = () => {
     setShowAddPhotoForm((showContestCreationModal) => !showContestCreationModal)
   }
+
+  console.log('contestDetail', contestDetail)
+  const startDateString = contestDetail?.upload_phase_start?.slice(0, 10)
+  const startDate = new Date(startDateString)
+  const month = startDate.toLocaleString('en-US', { month: 'long' })
+  console.log('month', month)
   return (
     <>
       {loadingDetail && <p>Loading</p>}
       {errorDetail && <p>Error while retrieving the contest</p>}
       {!loadingDetail && !errorDetail && (
         <>
-          <div className='w-full justify-center h-full '>
-            <button
-              className='m-4 text-gray-700 bg-orange-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
-              onClick={toggleAddPhotoForm}
-            >
-              Add New Picture
-            </button>
+          <div className='w-full justify-center h-full'>
+            {contestDetail?.status == 'open' && (
+              <>
+                <button
+                  className='m-4 text-gray-700 bg-orange-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
+                  onClick={toggleAddPhotoForm}
+                >
+                  Add New Picture
+                </button>
+              </>
+            )}
+
             <div className='bg-white p-8 rounded-lg shadow-lg'>
               {showAddPhotoForm && (
                 <>
@@ -77,19 +88,51 @@ export default function ContestDetailPage() {
                   />
                 </>
               )}
-              <div className='flex justify-center items-center'>
-                <img
-                  src={contestDetail?.cover_picture?.picture_path}
-                  alt='Imagem'
-                  className='object-fill h-64 w-96'
-                />
+              <div
+                className='flex flex-col justify-center items-center relative rounded-lg'
+                style={{
+                  backgroundImage: `url(${contestDetail?.cover_picture?.picture_path})`,
+                  backgroundSize: 'cover',
+                  height: '15em',
+                }}
+              >
+                <div className='absolute top-0 left-0 w-full h-full bg-black opacity-50 rounded-lg' />
+                <a className='absolute top-10 left-20 text-white z-10'>
+                  {month}
+                </a>
+                {contestDetail.status == 'open' && (
+                  <>
+                    <a>Open</a>
+                  </>
+                )}
+                {contestDetail.status == 'voting' && (
+                  <>
+                    <a>Voting</a>
+                  </>
+                )}
+                {contestDetail.status == 'closed' && (
+                  <>
+                    <div className='bg-gray-200 rounded-full flex items-center'>
+                      <img
+                        src='/images/lock.svg'
+                        className=' brightness-50'
+                        style={{ width: '20px', height: '20px' }} // Optional: Set width and height for the image
+                      />
+                      <a className='text-center text-white bg-gray-200 rounded-lg w-40 ml-2'>
+                        Concurso Encerrado
+                      </a>
+                    </div>
+                  </>
+                )}
+
+                <p className='text-center text-white mt-4 text-3xl font-bold z-10'>
+                  {contestDetail?.title}
+                </p>
+                <p className='text-center text-white mt-4 text-md font-bold z-20'>
+                  {contestDetail?.description}
+                </p>
               </div>
-              <p className='text-center mt-4 text-2xl font-bold'>
-                {contestDetail?.title}
-              </p>
-              <p className='text-center mt-2 text-lg'>
-                {contestDetail?.description}
-              </p>
+
               <div className='mt-6'>
                 <div className='mt-2 flex flex-wrap'>
                   {loadingSubmission && <p>Loading</p>}
