@@ -1,7 +1,8 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import ContestCard from '../../components/ContestCard'
+
+import ContestCardClosed from '../../components/ContestCardClosed'
 
 test('checks if specific text appears on the ContestCard', () => {
   const contest = {
@@ -18,7 +19,7 @@ test('checks if specific text appears on the ContestCard', () => {
     status: 'closed',
   }
 
-  const { getByText } = render(<ContestCard contest={contest} />)
+  const { getByText } = render(<ContestCardClosed contest={contest} />)
 
   const title = getByText('Becky Schneider')
   expect(title).toBeInTheDocument()

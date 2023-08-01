@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import React from 'react'
-import ContestCard from './ContestCard'
+import ContestCardClosed from './ContestCardClosed'
+import ContestCardOpen from './ContestCardOpen'
+import ContestCardVoting from './ContestCardVoting'
 
 export default function ContestList({ filteredContestList }) {
   const openContests = filteredContestList?.filter(
@@ -31,7 +33,7 @@ export default function ContestList({ filteredContestList }) {
           </div>
           <div className='grid grid-cols-4 gap-4 mt-4'>
             {openContests?.map((contest) => (
-              <ContestCard key={contest.id} contest={contest} />
+              <ContestCardOpen key={contest.id} contest={contest} />
             ))}
           </div>
         </>
@@ -53,7 +55,7 @@ export default function ContestList({ filteredContestList }) {
           </div>
           <div className='grid grid-cols-4 gap-4 mt-4'>
             {votingContests?.map((contest) => (
-              <ContestCard key={contest.id} contest={contest} />
+              <ContestCardVoting key={contest.id} contest={contest} />
             ))}
           </div>
         </>
@@ -75,7 +77,7 @@ export default function ContestList({ filteredContestList }) {
           </div>
           <div className='grid grid-cols-4 gap-4 mt-4'>
             {closedContests?.map((contest) => (
-              <ContestCard key={contest.id} contest={contest} />
+              <ContestCardClosed key={contest.id} contest={contest} />
             ))}
           </div>
         </>

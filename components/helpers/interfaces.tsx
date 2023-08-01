@@ -16,6 +16,10 @@ export interface Contest {
   name?: string
 }
 
+export interface ContestCardProps {
+  contest: Contest
+}
+
 export interface Notification {
   user: string
   opened: boolean
