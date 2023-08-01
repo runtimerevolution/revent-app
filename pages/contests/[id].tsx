@@ -96,13 +96,13 @@ export default function ContestDetailPage() {
                 }}
               >
                 <div className='absolute top-0 left-0 w-full h-full bg-black opacity-50 rounded-lg' />
-                <div className='absolute top-10 left-20 text-white z-10 brightness-75'>
+                <div className='absolute top-10 left-20 text-white z-10 '>
                   <a className=''>{month}</a>
                   {contestDetail.status == 'open' && (
                     <div className='bg-green-500 rounded-full flex items-left absolute left-0'>
                       <img
                         src='/images/curved_camera.svg'
-                        className='brightness-50'
+                        className='brightness-100 ml-1'
                         style={{
                           width: '20px',
                           height: '25px',
@@ -117,7 +117,7 @@ export default function ContestDetailPage() {
                     <div className='bg-yellow-500 rounded-full flex items-left absolute left-0'>
                       <img
                         src='/images/clock.svg'
-                        className='brightness-50'
+                        className='brightness-100 ml-1'
                         style={{ width: '20px', height: '25px' }}
                       />
                       <a className='text-center text-white rounded-lg w-36 text-md '>
@@ -126,13 +126,13 @@ export default function ContestDetailPage() {
                     </div>
                   )}
                   {contestDetail.status == 'closed' && (
-                    <div className='bg-gray-200 rounded-full flex items-left absolute left-0'>
+                    <div className='bg-gray-400 text-white rounded-full flex items-left absolute left-0 bg-opacity-70'>
                       <img
                         src='/images/lock_small.svg'
-                        className='brightness-50'
+                        className='brightness-100 ml-1'
                         style={{ width: '20px', height: '25px' }}
                       />
-                      <a className='text-center text-white rounded-lg w-36 text-md '>
+                      <a className='text-center text-white rounded-lg w-36 text-md'>
                         Contest Closed
                       </a>
                     </div>
