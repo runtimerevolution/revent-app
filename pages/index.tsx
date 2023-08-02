@@ -3,7 +3,7 @@ import ContestFilter from '../components/ContestFilter'
 import { IFilter } from '../components/helpers/interfaces'
 import { useQuery } from '@apollo/client'
 import { GET_CONTEST_LIST } from '../lib/graphql'
-import ContestCard from '../components/ContestCard'
+import ContestList from '../components/ContestList'
 
 export default function Home() {
   const { loading, error, data } = useQuery(GET_CONTEST_LIST)
@@ -45,13 +45,8 @@ export default function Home() {
         <main className='min-h-screen py-8 px-20 flex-1 flex flex-col'>
           {loading && <p>Loading</p>}
           {error && <p>Error while retrieving the contests</p>}
-          <div className='grid grid-cols-4 gap-4'>
-            {!loading &&
-              !error &&
-              filteredContestList?.map((contest) => (
-                <ContestCard contest={contest} />
-              ))}
-          </div>
+
+          <ContestList filteredContestList={filteredContestList} />
         </main>
       </div>
     </div>
