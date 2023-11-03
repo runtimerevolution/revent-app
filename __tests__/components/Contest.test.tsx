@@ -14,7 +14,7 @@ test('checks if specific text appears on the ContestCard', () => {
     upload_phase_start: '2023-06-05T10:43:02.430645+00:00',
     voting_phase_end: '1977-12-22T06:09:35+00:00',
     cover_picture: {
-      picture_path: 'https://www.jquery-az.com/html/images/banana.jpg',
+      file: 'https://www.jquery-az.com/html/images/banana.jpg',
     },
     status: 'closed',
   }

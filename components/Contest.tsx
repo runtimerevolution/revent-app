@@ -16,7 +16,7 @@ export default function Contest({ contest }: ContestProps) {
         }}
       >
         <img
-          src={contest.cover_picture.picture_path}
+          src={contest.cover_picture.file}
           className='h-3/6 w-full h-54 object-cover'
         />
         <div className='px-4 py-3'>

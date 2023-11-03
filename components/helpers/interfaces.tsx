@@ -3,7 +3,7 @@ import React from 'react'
 export type IFilter = 'All' | 'open' | 'voting' | 'closed' | 'schedule'
 
 export interface PicturePath {
-  picture_path: string
+  file: string
 }
 export interface Contest {
   id: number
@@ -33,7 +33,7 @@ export interface NotificationsList {
   displayedNotifications: Notification[]
 }
 export interface Picture {
-  picture_path: string
+  file: string
 }
 
 export interface User {
@@ -42,7 +42,7 @@ export interface User {
   email: string
 }
 export interface Picture {
-  picture_path: string
+  file: string
 }
 export interface Collection {
   id: number

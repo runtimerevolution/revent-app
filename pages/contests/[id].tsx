@@ -18,7 +18,7 @@ export default function ContestDetailPage() {
     error: errorDetail,
     data: contestData,
   } = useQuery(GET_CONTEST_DETAIL, {
-    variables: { id: contestID },
+    variables: { filters: { id: contestID } },
   })
 
   const contestDetail = contestData?.contests[0]
@@ -29,7 +29,7 @@ export default function ContestDetailPage() {
     data: submissionData,
     refetch: refetchContest,
   } = useQuery(GET_CONTEST_SUBMISSIONS, {
-    variables: { id: contestID },
+    variables: { filters: { id: contestID } },
   })
 
   const submissionList = submissionData?.contest_submissions
@@ -79,7 +79,7 @@ export default function ContestDetailPage() {
               )}
               <div className='flex justify-center items-center'>
                 <img
-                  src={contestDetail?.cover_picture?.picture_path}
+                  src={contestDetail?.cover_picture?.file}
                   alt='Imagem'
                   className='object-fill h-64 w-96'
                 />
@@ -116,7 +116,7 @@ export default function ContestDetailPage() {
                     <div className='modal-container'>
                       <div className='modal-content bg-white p-4'>
                         <img
-                          src={selectedImage.picture.picture_path}
+                          src={selectedImage.picture.file}
                           alt={`Image ${selectedImage.id}`}
                           className='w-auto max-h-80'
                         />

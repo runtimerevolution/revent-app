@@ -43,7 +43,7 @@ export default function SubmissionForm({
     refetchQueries: [
       {
         query: GET_CONTEST_DETAIL,
-        variables: { id: contestID },
+        variables: { filters: { id: contestID } },
       },
     ],
   })

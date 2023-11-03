@@ -16,8 +16,8 @@ export default function BaseContestCard({
 
   const month = startDate.toLocaleString('en-US', { month: 'long' })
 
-  const pictureCover = contest.cover_picture?.picture_path
-    ? contest.cover_picture?.picture_path
+  const pictureCover = contest.cover_picture?.file
+    ? contest.cover_picture?.file
     : '/images/placeholder.svg'
 
   return (
