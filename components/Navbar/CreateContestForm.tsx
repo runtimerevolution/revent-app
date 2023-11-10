@@ -6,6 +6,7 @@ import { DateInput } from '@mantine/dates'
 import ErrorMessage from '../ErrorMessage'
 import { useMutation } from '@apollo/client'
 import { CREATE_CONTEST, CREATE_PICTURE } from '../../lib/graphql'
+import CustomFileInput from '../helpers/CustomFileInput'
 
 interface CreateContestFormProps {
   setshowContestCreationModal: React.Dispatch<React.SetStateAction<boolean>>
@@ -35,12 +36,13 @@ export default function CreateContestForm({
 
   const [automatedDates, setAutomatedDates] = useState<boolean>(false)
 
-  const allowedImageFormats = ['jpeg', 'png', 'jpg']
-  // To be used when the upload picture feature is done
+  const maxImageSize = 8000000
+  const allowedImageFormats = ['jpeg', 'png', 'jpg', 'webp']
+
   const fileSchema = z
     .object({
       name: z.string(),
-      size: z.number(),
+      size: z.number().max(maxImageSize, "Max image size is 8MB."),
       type: z.string().refine((value) => {
         const fileExtension = value.split('/').pop()
         return allowedImageFormats.includes(fileExtension)
@@ -50,9 +52,7 @@ export default function CreateContestForm({
     .refine((value) => value !== null, { message: 'File is required' })
 
   const schema = z.object({
-    // To be used when the upload picture feature is done
-    // cover_picture: fileSchema,
-    cover_picture: z.string(),
+    cover_picture: fileSchema,
     title: z
       .string()
       .min(2, 'Title must be at least 2 characters')
@@ -207,18 +207,10 @@ export default function CreateContestForm({
                       Upload Image
                     </label>
                     <br />
-                    {/* To be used when the upload picture feature is done */}
-                    {/* <CustomFileInput
+                    <CustomFileInput
                       label=''
                       name='cover_picture'
                       errors={errors}
-                    /> */}
-                    <Field
-                      className='border border-orange-500 focus:border-orange-700 px-4 py-2 rounded-lg w-full'
-                      type='text'
-                      // type='file'
-                      id='cover_picture'
-                      name='cover_picture'
                     />
                   </div>
                   {errors.cover_picture && (
