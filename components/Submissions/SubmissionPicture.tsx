@@ -2,7 +2,7 @@ import React from 'react'
 import { User } from '../helpers/interfaces'
 
 interface Picture {
-  picture_path: string
+  file: string
   user: User
   submissionDate: string
 }
@@ -28,7 +28,7 @@ export default function SubmissionPicture({
   return (
     <div key={image.id} className='w-1/5 mt-2 flex flex-col items-center mx-2'>
       <img
-        src={image.picture.picture_path}
+        src={image.picture.file}
         alt={`Image ${image.id}`}
         className='w-full h-auto max-h-60'
         onClick={() => handleImageClick(image)}

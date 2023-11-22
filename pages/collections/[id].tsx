@@ -10,7 +10,7 @@ export default function CollectionDetailPage() {
   const collectionID = parseInt(id as string, 10)
 
   const { loading, error, data } = useQuery(GET_COLLECTION_DETAIL, {
-    variables: { id: collectionID },
+    variables: { filters: { id: collectionID } },
   })
 
   const collectionDetail = data?.collections[0]
@@ -18,8 +18,8 @@ export default function CollectionDetailPage() {
   const pictureList = data?.collections[0].pictures
 
   const pictureCover =
-    collectionDetail?.pictures?.[0]?.picture_path !== undefined
-      ? collectionDetail?.pictures?.[0]?.picture_path
+    collectionDetail?.pictures?.[0]?.file !== undefined
+      ? collectionDetail?.pictures?.[0]?.file
       : '/images/placeholder.svg'
 
   return (

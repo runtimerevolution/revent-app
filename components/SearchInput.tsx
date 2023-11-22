@@ -10,7 +10,7 @@ const SearchInput = ({ setSearchData, setIsSearching }) => {
   const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
     setQuery(value)
-    searchContests({ variables: { search: value } })
+    searchContests({ variables: { filters: { search: value } } })
   }
 
   useEffect(() => {
