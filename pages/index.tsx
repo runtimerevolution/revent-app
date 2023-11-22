@@ -8,7 +8,7 @@ import ContestList from '../components/ContestList'
 export default function Home() {
   const { loading, error, data } = useQuery(GET_CONTEST_LIST)
 
-  const [statusFilter, setStatusFilter] = useState<IFilter>('open')
+  const [statusFilter, setStatusFilter] = useState<IFilter>('All')
   const [isSearching, setIsSearching] = useState<boolean>(false)
   const [searchData, setSearchData] = useState([])
   const [open, setOpen] = useState<boolean>(false)

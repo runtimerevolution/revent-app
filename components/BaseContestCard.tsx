@@ -10,6 +10,7 @@ export default function BaseContestCard({
   contest,
   children,
 }: BaseContestCardProps) {
+  const awsEnv = process.env.NEXT_PUBLIC_AWS_S3_ENDPOINT_URL
   const startDateString = contest.upload_phase_start?.slice(0, 10)
 
   const startDate = new Date(startDateString)
@@ -18,7 +19,7 @@ export default function BaseContestCard({
 
   const pictureCover = contest.cover_picture?.file
     ? contest.cover_picture?.file
-    : '/images/placeholder.svg'
+    : 'images/placeholder.svg'
 
   return (
     <Link href={`/contests/${contest.id}`}>
@@ -27,7 +28,7 @@ export default function BaseContestCard({
           key={contest.id}
           className='relative rounded-lg overflow-hidden shadow-m h-full w-full'
           style={{
-            backgroundImage: `url(${pictureCover})`,
+            backgroundImage: `url(${awsEnv + pictureCover})`,
             backgroundSize: 'cover',
             height: '15em',
           }}

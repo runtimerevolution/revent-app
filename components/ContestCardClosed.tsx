@@ -19,7 +19,7 @@ export default function ContestCardClosed({ contest }: ContestCardProps) {
             height={20}
             className='rounded-full'
           />
-          <h3 className='font-bold text-white text-md mr-10'>Contest Closed</h3>
+          <h3 className='font-bold text-white text-md mr-10 ml-1'>Contest Closed</h3>
         </div>
         <div className='flex items-center justify-end'>
           <h3 className='font-bold text-white text-xl mr-2 mb-2'>View</h3>
