@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import { useState, useEffect, useRef, useContext } from 'react'
-import {
-  getNotificationsList,
-  getUserLocal,
-} from '../../services/reventService'
+import { useState, useEffect, useRef } from 'react'
+import { getNotificationsList } from '../../services/reventService'
 import Notification from '../Notification/Notification'
 import UserMenu from './UserMenu'
-import { SessionContext, googleLoginLink } from '../../constants'
-import { getUserSession } from '../../hooks/auth'
+import {
+  useGoogleAuthLink,
+  useGoogleAuthToken,
+  useProfile,
+} from '../../hooks/auth'
 
 export default function Navbar() {
   const router = useRouter()
@@ -19,18 +19,45 @@ export default function Navbar() {
 
   const [notifications, setNotifications] = useState([])
   const [displayedNotifications, setDisplayedNotifications] = useState([])
-  const [user, setUser] = useState(null)
-
-  const { session, setSession } = useContext(SessionContext)
 
   const containerRef = useRef<HTMLDivElement>()
+
+  const { data: profile, refetch: fetchProfile } = useProfile()
+  const { data: googleAuth, refetch: fetchGoogleAuth } = useGoogleAuthLink()
+  const { mutate, isSuccess } = useGoogleAuthToken()
+
   useEffect(() => {
-    async function fetchUser() {
-      const user = await getUserLocal()
-      setUser(user)
+    if (googleAuth) {
+      window.location.replace(googleAuth.authorizationUrl)
     }
-    fetchUser()
-  }, [user])
+  }, [googleAuth])
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(document.location.search)
+
+    const code = searchParams.get('code')
+    const state = searchParams.get('state')
+
+    if (code && state) {
+      mutate({ code, state })
+    }
+  }, [mutate])
+
+  useEffect(() => {
+    if (isSuccess) {
+      fetchProfile()
+    }
+  }, [isSuccess, fetchProfile])
+
+  useEffect(() => {
+    if (googleAuth) {
+      window.location.replace(googleAuth.authorizationUrl)
+    }
+  }, [googleAuth])
+
+  const handleGoogleLogin = () => {
+    fetchGoogleAuth()
+  }
 
   useEffect(() => {
     async function fetchNotificationsData() {
@@ -47,18 +74,17 @@ export default function Navbar() {
     fetchNotificationsData()
   }, [])
 
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search)
-    const code = urlParams.get('code')
-    const fetchData = async () => {
-      if (code && session === null) {
-        const response = await getUserSession(code)
-        setSession(response)
-      }
-    }
-    console.log(session)
-    fetchData()
-  }, [session])
+  // useEffect(() => {
+  //   const urlParams = new URLSearchParams(window.location.search)
+  //   const code = urlParams.get('code')
+  //   const fetchData = async () => {
+  //     if (session === null && code) {
+  //       const response = await getUserSession(code)
+  //       setSession(response)
+  //     }
+  //   }
+  //   fetchData()
+  // }, [session])
 
   const handleScroll = () => {
     const scrollableDiv = containerRef.current
@@ -154,11 +180,17 @@ export default function Navbar() {
             </div>
           </div>
           <div className='relative flex items-center '>
-            {session === null ? (
-              <button className='text-base1416 text-white bg-[#F78445] font-bold rounded-lg px-[10px] py-[15px] gap-[10px]'>
-                <a href='https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http://localhost:3000/&prompt=consent&response_type=code&client_id=14094610511-362m95isko8e8pr7gl5btbgvrf9402vk.apps.googleusercontent.com&scope=openid%20email%20profile&access_type=offline'>
-                  Login
-                </a>
+            {/* {profile ? (
+              <h1>Hello {profile.firstName}!</h1>
+            ) : (
+              <button onClick={handleGoogleLogin}>Login with Google</button>
+            )} */}
+            {!profile ? (
+              <button
+                onClick={handleGoogleLogin}
+                className='text-base1416 text-white bg-[#F78445] font-bold rounded-lg px-[10px] py-[15px] gap-[10px]'
+              >
+                Login
               </button>
             ) : (
               <>

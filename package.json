@@ -27,11 +27,13 @@
     "dayjs": "^1.11.8",
     "formik": "^2.4.1",
     "graphql": "^15.8.0",
+    "humps": "^2.0.1",
     "isomorphic-fetch": "^3.0.0",
     "jotai": "^2.5.1",
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-query": "^3.39.3",
     "zod": "^3.21.4",
     "zod-formik-adapter": "^1.2.0"
   },
