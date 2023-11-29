@@ -6,7 +6,7 @@ export type { OAuthCredential, OAuthUrl }
 
 export const TOKEN_KEY = 'token'
 
-const BASE_URL = 'http://127.0.0.1:8000'
+const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 
 export const client = axios.create({
   baseURL: BASE_URL,
@@ -32,7 +32,7 @@ client.interceptors.request.use((config) => {
 export const getGoogleAuthLink = async () => {
   const response = await client.get<OAuthUrl>('/auth/o/google-oauth2/', {
     params: {
-      redirect_uri: 'http://127.0.0.1:3000',
+      redirect_uri: process.env.NEXT_PUBLIC_FRONTEND_URL,
     },
     withCredentials: true,
   })
