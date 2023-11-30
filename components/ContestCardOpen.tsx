@@ -19,7 +19,7 @@ export default function ContestCardOpen({ contest }: ContestCardProps) {
         src='/images/camera.svg'
         className='bg-gray-200 rounded-full ml-2 mt-2 brightness-50'
       />
-      <div className='grid grid-cols-2 gap-4 mt-10 ml-2'>
+      <div className='grid grid-cols-2 gap-4 mt-16 px-2 w-full'>
         <div className='flex items-center justify-start'>
           <Image
             src='/images/clock.svg'
@@ -30,20 +30,20 @@ export default function ContestCardOpen({ contest }: ContestCardProps) {
           />
           {showDays ?
             (
-              <h3 className='font-bold text-white text-md mr-10 ml-1'>
+              <h3 className='font-inter text-white text-sm/[18px] mr-10 pl-1.5'>
                 End in {daysLeft} days
               </h3>
             ) : (
-              <h3 className='font-bold text-white text-md mr-10 ml-1'>
+              <h3 className='font-inter text-white text-sm/[18px] mr-10 pl-1.5'>
                 Open
               </h3>
             )
           }
         </div>
         <div className='flex items-center justify-end'>
-          <h3 className='font-bold text-white text-xl mr-2 mb-2 '>Join</h3>
+          <h3 className='font-inter text-white text-base/[20px] mr-2 mb-2 '>Join</h3>
         </div>
       </div>
-    </BaseContestCard>
+    </BaseContestCard >
   )
 }

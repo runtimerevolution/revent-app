@@ -34,16 +34,16 @@ export default function BaseContestCard({
           }}
         >
           <div className='absolute inset-0 bg-black opacity-40 rounded-lg'></div>
-          <div className='absolute inset-0 flex flex-col justify-start items-start'>
+          <div className='absolute inset-0 flex flex-col justify-start items-start h-fix'>
             {children[0]}
-            <h3 className='text-white font-medium text-lg mt-10 ml-2'>
+            <h3 className='text-inter text-[#F3F3F4] font-medium text-sm/[18px] mt-10 ml-2 opacity-50'>
               {month}
             </h3>
-            <h3 className='text-white font-medium text-lg ml-2'>
+            <h3 className='text-inter text-white font-medium text-base/[20px] ml-2'>
               {contest.title}
             </h3>
             {children[1]}
-            <div className='text-white text-sm flex justify-end mb-5'></div>
+            <div className='text-inter text-white text-sm flex justify-end mb-5 h-80'></div>
           </div>
         </div>
       </>
