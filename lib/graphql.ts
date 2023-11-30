@@ -39,6 +39,7 @@ export const GET_CONTEST_DETAIL = gql`
       cover_picture {
         file
       }
+      status
     }
   }
 `

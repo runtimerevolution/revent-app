@@ -11,6 +11,8 @@ export default function ContestDetailPage() {
   const { id } = router.query
   const contestID = parseInt(id as string, 10)
 
+  const awsEnv = process.env.NEXT_PUBLIC_AWS_S3_ENDPOINT_URL
+
   const [showAddPhotoForm, setShowAddPhotoForm] = useState<boolean>(false)
 
   const {
@@ -29,12 +31,13 @@ export default function ContestDetailPage() {
     data: submissionData,
     refetch: refetchContest,
   } = useQuery(GET_CONTEST_SUBMISSIONS, {
-    variables: { filters: { id: contestID } },
+    variables: { filters: { contest: { id: contestID } } },
   })
 
   const submissionList = submissionData?.contest_submissions
 
   const [selectedImage, setSelectedImage] = useState(null)
+  let numberSubmissions = 0
 
   const closeImageModal = () => {
     setSelectedImage(null)
@@ -79,7 +82,7 @@ export default function ContestDetailPage() {
               )}
               <div className='flex justify-center items-center'>
                 <img
-                  src={contestDetail?.cover_picture?.file}
+                  src={awsEnv + contestDetail?.cover_picture?.file}
                   alt='Imagem'
                   className='object-fill h-64 w-96'
                 />
@@ -91,7 +94,7 @@ export default function ContestDetailPage() {
                 {contestDetail?.description}
               </p>
               <div className='mt-6'>
-                <div className='mt-2 flex flex-wrap'>
+                <div className='grid grid-cols-4 gap-4 mt-4'>
                   {loadingSubmission && <p>Loading</p>}
                   {errorSubmission && (
                     <p>Error while retrieving the contest submissions</p>
@@ -99,12 +102,31 @@ export default function ContestDetailPage() {
 
                   {!loadingSubmission && !errorSubmission && (
                     <>
-                      {submissionList?.map((image) => (
-                        <SubmissionPicture
-                          image={image}
-                          setSelectedImage={setSelectedImage}
-                        />
-                      ))}
+                      {submissionList?.map((image) => {
+                        if ((numberSubmissions % 4 + Math.floor(numberSubmissions / 4)) % 2 == 1) {
+                          numberSubmissions = numberSubmissions + 1
+                          return (
+                            <div key={image.id} className='row-span-6'>
+                              <SubmissionPicture
+                                image={image}
+                                setSelectedImage={setSelectedImage}
+                                contestStatus={contestDetail?.status}
+                              />
+                            </div>
+                          )
+                        } else {
+                          numberSubmissions = numberSubmissions + 1
+                          return (
+                            <div key={image.id} className='row-span-5'>
+                              <SubmissionPicture
+                                image={image}
+                                setSelectedImage={setSelectedImage}
+                                contestStatus={contestDetail?.status}
+                              />
+                            </div>
+                          )
+                        }
+                      })}
                     </>
                   )}
                 </div>
@@ -116,7 +138,7 @@ export default function ContestDetailPage() {
                     <div className='modal-container'>
                       <div className='modal-content bg-white p-4'>
                         <img
-                          src={selectedImage.picture.file}
+                          src={awsEnv + selectedImage.picture.file}
                           alt={`Image ${selectedImage.id}`}
                           className='w-auto max-h-80'
                         />
