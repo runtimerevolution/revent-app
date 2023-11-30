@@ -19,10 +19,10 @@ export default function ContestCardVoting({ contest }: ContestCardProps) {
             height={20}
             className='rounded-full'
           />
-          <h3 className='font-inter text-white text-sm/[18px] mr-10 pl-1.5'>Voting Phase</h3>
+          <h3 className='font-inter text-white text-sm mr-10 pl-1.5'>Voting Phase</h3>
         </div>
         <div className='flex items-center justify-end'>
-          <h3 className='font-inter text-white text-base/[20px] mr-2 mb-2'>Vote</h3>
+          <h3 className='font-inter text-white text-base mr-2 mb-2'>Vote</h3>
         </div>
       </div>
     </BaseContestCard>
