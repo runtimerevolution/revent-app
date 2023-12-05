@@ -49,12 +49,6 @@ export default function Navbar() {
     }
   }, [isSuccess, fetchProfile])
 
-  useEffect(() => {
-    if (googleAuth) {
-      window.location.replace(googleAuth.authorizationUrl)
-    }
-  }, [googleAuth])
-
   const handleGoogleLogin = () => {
     fetchGoogleAuth()
   }

@@ -19,7 +19,7 @@ export const GET_CONTEST_LIST = gql`
       upload_phase_start
       voting_phase_end
       cover_picture {
-        picture_path
+        file
       }
       status
     }
