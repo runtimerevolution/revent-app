@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
-import { getNotificationsList } from '../../services/reventService'
+import { getNotificationsList } from 'services/reventService'
 import Notification from '../Notification/Notification'
 import UserMenu from './UserMenu'
 import {

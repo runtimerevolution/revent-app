@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import React from 'react'
 import Image from 'next/image'
-import { TOKEN_KEY } from '../../api'
+import { TOKEN_KEY } from 'api'
 
 interface UserMenuProps {
   setShowUserMenu: React.Dispatch<React.SetStateAction<boolean>>

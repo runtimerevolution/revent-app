@@ -28,26 +28,3 @@ client.interceptors.request.use((config) => {
   console.log(config)
   return config
 })
-
-export const getGoogleAuthLink = async () => {
-  const response = await client.get<OAuthUrl>('/auth/o/google-oauth2/', {
-    params: {
-      redirect_uri: process.env.NEXT_PUBLIC_FRONTEND_URL,
-    },
-    withCredentials: true,
-  })
-  return response.data
-}
-
-export const getGoogleAuthToken = async (credential: OAuthCredential) => {
-  const response = await client.post('/auth/o/google-oauth2/', credential, {
-    headers: { 'content-type': 'application/x-www-form-urlencoded' },
-    withCredentials: true,
-  })
-  return response.data
-}
-
-export const getProfile = async () => {
-  const response = await client.get<Profile>('/auth/users/me/')
-  return response.data
-}

@@ -1,11 +1,29 @@
 import { useMutation, useQuery } from 'react-query'
-import {
-  OAuthCredential,
-  TOKEN_KEY,
-  getGoogleAuthLink,
-  getGoogleAuthToken,
-  getProfile,
-} from '../../api'
+import { TOKEN_KEY, client } from 'api'
+import { OAuthCredential, OAuthUrl, Profile } from 'api/type'
+
+export const getGoogleAuthLink = async () => {
+  const response = await client.get<OAuthUrl>('/auth/o/google-oauth2/', {
+    params: {
+      redirect_uri: process.env.NEXT_PUBLIC_FRONTEND_URL,
+    },
+    withCredentials: true,
+  })
+  return response.data
+}
+
+export const getGoogleAuthToken = async (credential: OAuthCredential) => {
+  const response = await client.post('/auth/o/google-oauth2/', credential, {
+    headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    withCredentials: true,
+  })
+  return response.data
+}
+
+export const getProfile = async () => {
+  const response = await client.get<Profile>('/auth/users/me/')
+  return response.data
+}
 
 const useGoogleAuthLink = () =>
   useQuery({
