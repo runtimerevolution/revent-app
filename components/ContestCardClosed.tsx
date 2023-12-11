@@ -10,7 +10,7 @@ export default function ContestCardClosed({ contest }: ContestCardProps) {
         src='/images/lock.svg'
         className='bg-gray-200 rounded-full ml-2 mt-2 brightness-50'
       />
-      <div className='grid grid-cols-2 gap-4 mt-10 ml-2'>
+      <div className='grid grid-cols-2 gap-4 mt-16 px-2 w-full'>
         <div className='flex items-center justify-start mb-5'>
           <Image
             src='/images/lock_small.svg'
@@ -19,10 +19,10 @@ export default function ContestCardClosed({ contest }: ContestCardProps) {
             height={20}
             className='rounded-full'
           />
-          <h3 className='font-bold text-white text-md mr-10'>Contest Closed</h3>
+          <h3 className='font-inter text-white text-sm mr-10 pl-1.5'>Contest Closed</h3>
         </div>
         <div className='flex items-center justify-end'>
-          <h3 className='font-bold text-white text-xl mr-2 mb-2'>View</h3>
+          <h3 className='font-inter text-white text-base mr-2 mb-2'>View</h3>
         </div>
       </div>
     </BaseContestCard>
