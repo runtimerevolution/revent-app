@@ -1,5 +1,6 @@
 import React from 'react'
 import { User } from '../helpers/interfaces'
+import { useState } from 'react'
 
 interface Picture {
   file: string
@@ -25,32 +26,34 @@ export default function SubmissionPicture({
   contestStatus,
 }: SubmissionPictureProps) {
   const awsEnv = process.env.NEXT_PUBLIC_AWS_S3_ENDPOINT_URL
+  const [ratio, setRatio] = useState("width")
+  var imageComponentID = 'image-' + String(image.id)
 
   const handleImageClick = (image) => {
     setSelectedImage(image)
   }
   return (
-    <div className='items-center mx-2 max-w-10 h-full'>
-      <img
-        src='/images/zoomin.svg'
-        className='absolute rounded-full top-2 right-2 z-10'
-      />
-      <img
-        src={awsEnv + image.picture.file}
-        alt={`Image ${image.id}`}
-        className={'w-full mb-0 ' + (contestStatus == 'voting' ? 'h-5/6' : 'h-full')}
-        onClick={() => handleImageClick(image)}
-      />
-      {contestStatus == 'voting' &&
-        <div className='flex items-center justify-center h-1/6 z-0'>
-          <button
-            className='mt-2 text-gray-700 bg-[#00B05C] text-white px-3 py-2 rounded-b-md font-inter cursor-pointer w-full mt-0'
-            type='submit'
-          >
-            Vote
-          </button>
+    <div key={image.id} className={ratio == 'width' ? 'row-span-5' : 'row-span-6'}>
+      <div className='relative items-center mx-2 max-w-10 h-full' onClick={() => handleImageClick(image)}>
+        <div className='absolute top-2 right-2 z-10'>
+          <div className='w-8 rounded-full'>
+            <img
+              src='/images/zoomin.svg'
+            />
+          </div>
         </div>
-      }
+        <img
+          id={imageComponentID}
+          src={awsEnv + image.picture.file}
+          alt={`Image ${image.id}`}
+          className={'relative top-0 w-full mb-0 h-full'}
+          onLoad={(e) => {
+            if (e.target.naturalHeight > e.target.naturalWidth) {
+              setRatio("height")
+            }
+          }}
+        />
+      </div>
     </div>
   )
 }
