@@ -72,6 +72,7 @@ export const GET_CONTEST_SUBMISSIONS = gql`
       id
       submission_date
       picture {
+        id
         file
         user {
           id
