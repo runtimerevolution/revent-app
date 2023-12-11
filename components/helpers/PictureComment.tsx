@@ -9,7 +9,7 @@ export default function PictureComment({ image }) {
     error: errorComments,
     data: commentData,
   } = useQuery(GET_PICTURE_COMMENTS, {
-    variables: { picture_path: image?.picture_path },
+    variables: { filters: { picture: { id: image?.id } } },
   })
 
   return (

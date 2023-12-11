@@ -8,7 +8,7 @@ export default function Submission({ image, setSelectedImage }) {
   return (
     <div key={image.id} className='w-1/4 mt-2 flex flex-col items-center mx-2'>
       <img
-        src={image.picture.picture_path}
+        src={image.picture.file}
         alt={`Image ${image.id}`}
         className='w-full h-auto max-h-60'
         onClick={() => handleImageClick(image)}

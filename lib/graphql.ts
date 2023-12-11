@@ -1,9 +1,9 @@
 import { gql } from '@apollo/client'
 
 export const GET_USERS = gql`
-  query users($email: String) {
-    users(email: $email) {
-      email
+  query users($id: String) {
+    users(id: $id) {
+      id
     }
   }
 `
@@ -27,8 +27,8 @@ export const GET_CONTEST_LIST = gql`
 `
 
 export const GET_CONTEST_DETAIL = gql`
-  query GetContest($id: Int!) {
-    contests(id: $id) {
+  query GetContest($filters: ContestFilter!) {
+    contests(filters: $filters) {
       id
       title
       description
@@ -37,26 +37,26 @@ export const GET_CONTEST_DETAIL = gql`
       upload_phase_start
       voting_phase_end
       cover_picture {
-        picture_path
+        file
       }
     }
   }
 `
 
 export const GET_COLLECTION_DETAIL = gql`
-  query GetCollection($id: Int!) {
-    collections(id: $id) {
+  query GetCollection($filters: CollectionFilter!) {
+    collections(filters: $filters) {
       id
       name
       pictures {
-        picture_path
+        file
         user {
-          email
+          id
           name_first
           name_last
         }
         likes {
-          email
+          id
           name_first
           name_last
         }
@@ -66,14 +66,14 @@ export const GET_COLLECTION_DETAIL = gql`
 `
 
 export const GET_CONTEST_SUBMISSIONS = gql`
-  query GetContestSubmissions($id: Int!) {
-    contest_submissions(contest: $id) {
+  query GetContestSubmissions($filters: ContestSubmissionFilter!) {
+    contest_submissions(filters: $filters) {
       id
       submission_date
       picture {
-        picture_path
+        file
         user {
-          email
+          id
           name_first
           name_last
         }
@@ -87,15 +87,15 @@ export const GET_COLLECTION_LIST = gql`
     collections {
       id
       user {
-        email
+        id
         name_last
         name_first
         profile_picture {
-          picture_path
+          file
         }
       }
       pictures {
-        picture_path
+        file
       }
       name
     }
@@ -110,9 +110,9 @@ export const ADD_PHOTO = gql`
           id
         }
         picture {
-          picture_path
+          file
           user {
-            email
+            id
           }
         }
         submission_date
@@ -129,7 +129,7 @@ export const CREATE_CONTEST = gql`
         title
         description
         created_by {
-          email
+          id
         }
         cover_picture {
           id
@@ -140,7 +140,7 @@ export const CREATE_CONTEST = gql`
         upload_phase_end
         voting_phase_end
         winners {
-          email
+          id
         }
       }
       ... on OperationInfo {
@@ -156,19 +156,19 @@ export const CREATE_CONTEST = gql`
 `
 
 export const GET_COLLECTION_PICTURES = gql`
-  query GetCollection($id: Int!) {
-    collections(id: $id) {
+  query GetCollection($filters: CollectionFilter!) {
+    collections(filters: $filters) {
       id
       user {
-        email
+        id
         name_last
         name_first
         profile_picture {
-          picture_path
+          file
         }
       }
       pictures {
-        picture_path
+        file
       }
       name
     }
@@ -181,11 +181,11 @@ export const CREATE_PICTURE = gql`
       ... on PictureType {
         id
         user {
-          email
+          id
         }
-        picture_path
+        file
         likes {
-          email
+          id
         }
       }
       ... on OperationInfo {
@@ -201,8 +201,8 @@ export const CREATE_PICTURE = gql`
 `
 
 export const SEARCH_QUERY = gql`
-  query SearchQuery($search: String!) {
-    contest_search(search: $search) {
+  query SearchQuery($filters: CollectionFilter!) {
+    contests(filters: $filters) {
       id
       prize
       status
@@ -213,28 +213,28 @@ export const SEARCH_QUERY = gql`
       description
       cover_picture {
         id
-        picture_path
+        file
       }
     }
   }
 `
 
 export const GET_PICTURE_COMMENTS = gql`
-  query GetPictureComments($picture_path: String) {
-    picture_comments(picture_path: $picture_path) {
+  query GetPictureComments($filters: PictureCommentFilter!) {
+    picture_comments(filters: $filters) {
       text
       user {
-        email
+        id
         name_first
         name_last
       }
       picture {
         likes {
-          email
+          id
         }
-        picture_path
+        file
         user {
-          email
+          id
           name_first
           name_last
         }

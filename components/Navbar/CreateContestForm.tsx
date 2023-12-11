@@ -94,7 +94,7 @@ export default function CreateContestForm({
     try {
       const picture = {
         user: 'test@test.com',
-        picture_path: cover_picture,
+        file: cover_picture,
       }
 
       const createdPicture = await createPicture({

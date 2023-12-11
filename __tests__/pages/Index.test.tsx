@@ -19,7 +19,7 @@ const mockData = {
       voting_phase_end: null,
       cover_picture: {
         __typename: 'PictureType',
-        picture_path: 'https://picsum.photos/536/354',
+        file: 'https://picsum.photos/536/354',
       },
       status: 'open',
     },
@@ -34,7 +34,7 @@ const mockData = {
       voting_phase_end: null,
       cover_picture: {
         __typename: 'PictureType',
-        picture_path: 'https://picsum.photos/seed/picsum/200/300',
+        file: 'https://picsum.photos/seed/picsum/200/300',
       },
       status: 'open',
     },
@@ -49,7 +49,7 @@ const mockData = {
       voting_phase_end: null,
       cover_picture: {
         __typename: 'PictureType',
-        picture_path: 'https://www.jquery-az.com/html/images/banana.jpg',
+        file: 'https://www.jquery-az.com/html/images/banana.jpg',
       },
       status: 'open',
     },
@@ -72,7 +72,7 @@ const mocks = [
 const searchMock = {
   request: {
     query: SEARCH_QUERY,
-    variables: { search: 'Contest1' },
+    variables: { filters: { search: 'Contest1' } },
   },
   result: {
     data: { contests: [mockData.contests[0]] },

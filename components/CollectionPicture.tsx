@@ -4,8 +4,9 @@ import { User } from './helpers/interfaces'
 import PictureComment from './helpers/PictureComment'
 
 interface Image {
+  id: string
   likes?: User[]
-  picture_path: string
+  file: string
   user: User
 }
 
@@ -16,7 +17,7 @@ interface imageProps {
 export default function CollectionPicture({ image }: imageProps) {
   return (
     <div className='w-1/4 mt-2 flex flex-col items-center mx-2'>
-      <img src={image.picture_path} className='w-full h-auto max-h-60' />
+      <img src={image.file} className='w-full h-auto max-h-60' />
 
       <div className='flex items-center'>
         <Image

@@ -45,15 +45,6 @@ export default function ContestFilter({
 
   const filterList = ['Open', 'All', 'Voting', 'Closed', 'Schedule']
 
-  const [showContestCreationModal, setshowContestCreationModal] =
-    useState<boolean>(false)
-
-  const toggleCreateContestForm = () => {
-    setshowContestCreationModal(
-      (showContestCreationModal) => !showContestCreationModal
-    )
-  }
-
   return (
     <>
       <div className='flex-row'>
@@ -63,29 +54,11 @@ export default function ContestFilter({
         >
           Filters
         </button>
-
-        <button
-          className='text-gray-700 bg-orange-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
-          onClick={toggleCreateContestForm}
-        >
-          <Image
-            src='/images/plussign.svg'
-            alt='plus'
-            width={15}
-            height={15}
-            className='rounded-full'
-          />
-        </button>
         <SearchInput
           setSearchData={setSearchData}
           setIsSearching={setIsSearching}
         />
       </div>
-      {showContestCreationModal && (
-        <CreateContestForm
-          setshowContestCreationModal={setshowContestCreationModal}
-        />
-      )}
       {open && (
         <>
           {filterList.map((filter: string) => (
