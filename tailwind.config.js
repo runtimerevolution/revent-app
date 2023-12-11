@@ -11,8 +11,8 @@ module.exports = {
         base: ['16px', '20px'],
       },
       colors: {
-        'light-grey': '#F3F3F4',
         'light-orange': '#FFAC53A1',
+        'light-grey': '#F3F3F4',
         'forest-green': '#00B05C',
       },
     },
