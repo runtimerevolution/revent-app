@@ -4,11 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { getNotificationsList } from 'services/reventService'
 import Notification from '../Notification/Notification'
 import UserMenu from './UserMenu'
-import {
-  useGoogleAuthLink,
-  useGoogleAuthToken,
-  useProfile,
-} from '../../hooks/auth'
+import { useGoogleAuthLink, useGoogleAuthToken, useProfile } from 'hooks/auth'
 
 export default function Navbar() {
   const router = useRouter()
@@ -67,18 +63,6 @@ export default function Navbar() {
 
     fetchNotificationsData()
   }, [])
-
-  // useEffect(() => {
-  //   const urlParams = new URLSearchParams(window.location.search)
-  //   const code = urlParams.get('code')
-  //   const fetchData = async () => {
-  //     if (session === null && code) {
-  //       const response = await getUserSession(code)
-  //       setSession(response)
-  //     }
-  //   }
-  //   fetchData()
-  // }, [session])
 
   const handleScroll = () => {
     const scrollableDiv = containerRef.current
@@ -174,11 +158,6 @@ export default function Navbar() {
             </div>
           </div>
           <div className='relative flex items-center '>
-            {/* {profile ? (
-              <h1>Hello {profile.firstName}!</h1>
-            ) : (
-              <button onClick={handleGoogleLogin}>Login with Google</button>
-            )} */}
             {!profile ? (
               <button
                 onClick={handleGoogleLogin}
