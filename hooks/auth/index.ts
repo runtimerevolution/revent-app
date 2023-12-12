@@ -25,6 +25,11 @@ export const getProfile = async () => {
   return response.data
 }
 
+export const logoutUser = async () => {
+  const response = await client.post('/auth/token/logout/')
+  return response.data
+}
+
 const useGoogleAuthLink = () =>
   useQuery({
     queryKey: ['google_oauth'],
@@ -48,4 +53,14 @@ const useProfile = () =>
     queryKey: ['profile'],
     queryFn: getProfile,
   })
-export { useGoogleAuthLink, useGoogleAuthToken, useProfile }
+
+const useLogout = () =>
+  useMutation({
+    mutationKey: ['logout'],
+    mutationFn: logoutUser,
+    onSuccess: () => {
+      localStorage.removeItem(TOKEN_KEY)
+    },
+  })
+
+export { useGoogleAuthLink, useGoogleAuthToken, useProfile, useLogout }

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import React from 'react'
 import Image from 'next/image'
-import { TOKEN_KEY } from 'api'
+import { useLogout } from 'hooks/auth'
 
 interface UserMenuProps {
   setShowUserMenu: React.Dispatch<React.SetStateAction<boolean>>
@@ -13,9 +13,11 @@ export default function UserMenu({ setShowUserMenu }: UserMenuProps) {
     router.push(path)
   }
 
+  const { mutate } = useLogout()
+
   const logout = async (e) => {
+    mutate()
     e.preventDefault()
-    localStorage.removeItem(TOKEN_KEY)
     handleNavigation('/')
     window.location.reload()
   }
