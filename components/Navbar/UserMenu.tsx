@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import React from 'react'
 import Image from 'next/image'
+import { useLogout } from 'hooks/auth'
 
 interface UserMenuProps {
   setShowUserMenu: React.Dispatch<React.SetStateAction<boolean>>
@@ -10,6 +11,15 @@ export default function UserMenu({ setShowUserMenu }: UserMenuProps) {
   const handleNavigation = (path: string) => {
     setShowUserMenu(false)
     router.push(path)
+  }
+
+  const { mutate } = useLogout()
+
+  const logout = async (e) => {
+    mutate()
+    e.preventDefault()
+    handleNavigation('/')
+    window.location.reload()
   }
   return (
     <div className='w-48 absolute right-0 mt-2 bg-white text-gray-800 rounded-lg shadow-lg p-4 max-h-60 overflow-y-auto'>
@@ -54,10 +64,7 @@ export default function UserMenu({ setShowUserMenu }: UserMenuProps) {
           />
           <span>Settings</span>
         </button>
-        <button
-          onClick={() => handleNavigation('/#')}
-          className='flex items-center mt-2'
-        >
+        <button onClick={logout} className='flex items-center mt-2'>
           <Image
             src='/images/signout.svg'
             alt='profile'
