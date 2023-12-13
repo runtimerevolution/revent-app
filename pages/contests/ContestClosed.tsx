@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 import SubmissionPicture from '../../components/Submissions/SubmissionPicture'
 import ImageModal from '../../components/contest/ImageModal'
 
-export default function ContestVoting({ contest }) {
+export default function ContestClosed({ contest }) {
     const awsEnv = process.env.NEXT_PUBLIC_AWS_S3_ENDPOINT_URL
 
     const {
