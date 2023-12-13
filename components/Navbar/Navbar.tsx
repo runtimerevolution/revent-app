@@ -1,12 +1,10 @@
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
-import {
-  getNotificationsList,
-  getUserLocal,
-} from '../../services/reventService'
+import { getNotificationsList } from 'services/reventService'
 import Notification from '../Notification/Notification'
 import UserMenu from './UserMenu'
+import { useGoogleAuthLink, useGoogleAuthToken, useProfile } from 'hooks/auth'
 
 export default function Navbar() {
   const router = useRouter()
@@ -17,17 +15,39 @@ export default function Navbar() {
 
   const [notifications, setNotifications] = useState([])
   const [displayedNotifications, setDisplayedNotifications] = useState([])
-  const [user, setUser] = useState(null)
 
   const containerRef = useRef<HTMLDivElement>()
 
+  const { data: profile, refetch: fetchProfile } = useProfile()
+  const { data: googleAuth, refetch: fetchGoogleAuth } = useGoogleAuthLink()
+  const { mutate, isSuccess } = useGoogleAuthToken()
+
   useEffect(() => {
-    async function fetchUser() {
-      const user = await getUserLocal()
-      setUser(user)
+    if (googleAuth) {
+      window.location.replace(googleAuth.authorizationUrl)
     }
-    fetchUser()
-  }, [user])
+  }, [googleAuth])
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(document.location.search)
+
+    const code = searchParams.get('code')
+    const state = searchParams.get('state')
+
+    if (code && state) {
+      mutate({ code, state })
+    }
+  }, [mutate])
+
+  useEffect(() => {
+    if (isSuccess) {
+      fetchProfile()
+    }
+  }, [isSuccess, fetchProfile])
+
+  const handleGoogleLogin = () => {
+    fetchGoogleAuth()
+  }
 
   useEffect(() => {
     async function fetchNotificationsData() {
@@ -137,43 +157,54 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          <div className='relative'>
-            <button
-              className='relative text-white focus:outline-none rounded-full p-2'
-              onClick={handleToggleNotifications}
-            >
-              <Image
-                src='/images/bell.svg'
-                alt='notifications'
-                width={40}
-                height={40}
-              />
-              {hasNotifications && (
-                <span className='absolute top-0 right-0 bg-orange-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs'></span>
-              )}
-            </button>
-            {hasNotifications && showNotifications && (
-              <div
-                ref={containerRef}
-                className='absolute right-0 mt-2 bg-white text-gray-800 rounded-lg shadow-lg p-4 max-h-60 overflow-y-auto'
+          <div className='relative flex items-center '>
+            {!profile ? (
+              <button
+                onClick={handleGoogleLogin}
+                className='text-base1416 text-white bg-[#F78445] font-bold rounded-lg px-[10px] py-[15px] gap-[10px]'
               >
-                {displayedNotifications?.map((notification) => (
-                  <Notification notification={notification} />
-                ))}
-              </div>
+                Login
+              </button>
+            ) : (
+              <>
+                <button
+                  className='relative text-white focus:outline-none rounded-full p-2'
+                  onClick={handleToggleNotifications}
+                >
+                  <Image
+                    src='/images/bell.svg'
+                    alt='notifications'
+                    width={40}
+                    height={40}
+                  />
+                  {hasNotifications && (
+                    <span className='absolute top-0 right-0 bg-orange-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs'></span>
+                  )}
+                </button>
+                {hasNotifications && showNotifications && (
+                  <div
+                    ref={containerRef}
+                    className='absolute right-0 mt-2 bg-white text-gray-800 rounded-lg shadow-lg p-4 max-h-60 overflow-y-auto'
+                  >
+                    {displayedNotifications?.map((notification) => (
+                      <Notification notification={notification} />
+                    ))}
+                  </div>
+                )}
+                <button
+                  className='relative text-white focus:outline-none rounded-full p-2'
+                  onClick={handleOpenUserMenu}
+                >
+                  <Image
+                    src='/images/profile.jpeg'
+                    alt='notifications'
+                    width={40}
+                    height={40}
+                    className='rounded-full'
+                  />
+                </button>
+              </>
             )}
-            <button
-              className='relative text-white focus:outline-none rounded-full p-2'
-              onClick={handleOpenUserMenu}
-            >
-              <Image
-                src='/images/profile.jpeg'
-                alt='notifications'
-                width={40}
-                height={40}
-                className='rounded-full'
-              />
-            </button>
             {showUserMenu && <UserMenu setShowUserMenu={setShowUserMenu} />}
           </div>
         </div>
