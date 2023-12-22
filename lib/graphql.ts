@@ -244,3 +244,24 @@ export const GET_PICTURE_COMMENTS = gql`
     }
   }
 `
+
+export const ADD_VOTE = gql`
+  mutation ADD_VOTE($contestSubmission: Int!, $user: String!) {
+    contest_submission_add_vote(
+      contestSubmission: $contestSubmission
+      user: $user
+    ) {
+      ... on AddVoteMutationResponse {
+        success
+        results {
+          submission_date
+          id
+          votes {
+            email
+          }
+        }
+        errors
+      }
+    }
+  }
+`

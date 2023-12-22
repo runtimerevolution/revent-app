@@ -136,7 +136,7 @@ export default function Navbar() {
                 />
               </div>
               <span className='text-gray-700 font-semibold text-xl tracking-tight'>
-                Cleek.
+                Revent.
               </span>
             </a>
 
