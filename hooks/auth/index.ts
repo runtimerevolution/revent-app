@@ -2,6 +2,8 @@ import { useMutation, useQuery } from 'react-query'
 import { TOKEN_KEY, client } from 'api'
 import { OAuthCredential, OAuthUrl, Profile } from 'api/type'
 
+export const USER_INFO = 'user'
+
 export const getGoogleAuthLink = async () => {
   const response = await client.get<OAuthUrl>('/auth/o/google-oauth2/', {
     params: {
@@ -52,6 +54,10 @@ const useProfile = () =>
   useQuery({
     queryKey: ['profile'],
     queryFn: getProfile,
+    onSuccess: (data) => {
+      const { id } = data
+      localStorage.setItem(USER_INFO, id)
+    },
   })
 
 const useLogout = () =>
@@ -60,6 +66,7 @@ const useLogout = () =>
     mutationFn: logoutUser,
     onSuccess: () => {
       localStorage.removeItem(TOKEN_KEY)
+      localStorage.removeItem(USER_INFO)
     },
   })
 
