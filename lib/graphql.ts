@@ -202,6 +202,38 @@ export const CREATE_PICTURE = gql`
   }
 `
 
+export const CREATE_CONTEST_SUBMISSION = gql`
+  mutation CREATE_CONTEST_SUBMISSION($submission: ContestSubmissionInput!) {
+    create_contest_submission(input: $submission) {
+      ... on CreatePictureMutationResponse {
+        success
+        results {
+          id
+          contest
+          picture
+        }
+        errors
+      }
+    }
+  }
+`
+
+export const UPDATE_CONTEST_SUBMISSION = gql`
+  mutation CREATE_CONTEST_SUBMISSION($submission: ContestSubmissionInputPartial!) {
+    update_contest_submission(input: $submission) {
+      ... on CreatePictureMutationResponse {
+        success
+        results {
+          id
+          contest
+          picture
+        }
+        errors
+      }
+    }
+  }
+`
+
 export const SEARCH_QUERY = gql`
   query SearchQuery($filters: CollectionFilter!) {
     contests(filters: $filters) {

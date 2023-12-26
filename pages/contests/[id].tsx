@@ -1,8 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
-import { GET_CONTEST_DETAIL, GET_CONTEST_SUBMISSIONS } from '../../lib/graphql'
-import { useState, useEffect } from 'react'
+import { GET_CONTEST_DETAIL } from 'lib/graphql'
 import ContestVoting from 'pages/contests/ContestVoting'
 import ContestOpen from 'pages/contests/ContestOpen'
 import ContestClosed from 'pages/contests/ContestClosed'
@@ -11,8 +10,6 @@ export default function ContestDetailPage() {
   const router = useRouter()
   const { id } = router.query
   const contestID = parseInt(id as string, 10)
-
-  const awsEnv = process.env.NEXT_PUBLIC_AWS_S3_ENDPOINT_URL
 
   const {
     loading: loadingDetail,
@@ -23,7 +20,6 @@ export default function ContestDetailPage() {
   })
 
   const contestDetail = contestData?.contests[0]
-  console.log(contestDetail)
 
   return (
     <>
