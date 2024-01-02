@@ -10,6 +10,7 @@ module.exports = {
         sm: ['14px', '18px'],
         base: ['16px', '20px'],
         base1416: ['14px', '16.94px'],
+        '2xl': '36px',
       },
       colors: {
         'light-orange': '#FFAC53A1',

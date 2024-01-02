@@ -1,13 +1,15 @@
 import { useRef, useState } from "react";
 import { CREATE_CONTEST_SUBMISSION, UPDATE_CONTEST_SUBMISSION } from 'lib/graphql'
 import { useMutation } from "@apollo/client";
+import { USER_INFO } from 'hooks/auth'
+import toast from 'react-hot-toast'
 
 
-export default function DragAndDrop(image: any, contest) {
+export default function DragAndDrop(submission: any, contest) {
     const [dragActive, setDragActive] = useState<boolean>(false);
     const inputRef = useRef<any>(null);
     const [file, setFile] = useState<any>(null);
-    const [imageUploaded, setImageUploaded] = useState<any>(image ? image?.picture.file : null)
+    const [imageUploaded, setImageUploaded] = useState<any>(submission ? submission?.picture.file : null)
 
     const [createContestSubmission] = useMutation(CREATE_CONTEST_SUBMISSION)
     const [updateContestSubmission] = useMutation(UPDATE_CONTEST_SUBMISSION)
@@ -49,7 +51,7 @@ export default function DragAndDrop(image: any, contest) {
         setDragActive(true);
     }
 
-    function removeFile(fileName: any) {
+    function removeFile() {
         setFile(null);
         setImageUploaded(null)
     }
@@ -62,19 +64,43 @@ export default function DragAndDrop(image: any, contest) {
     async function handleSubmit(e) {
         e.preventDefault()
         try {
-            if (image == null) {
-                var response = await createContestSubmission({
-                    variables: {},
+            if (submission == null) {
+                var { data } = await createContestSubmission({
+                    variables: {
+                        input: {
+                            contest: contest.id,
+                            picture: {
+                                user: localStorage.getItem(USER_INFO),
+                                file: file
+                            }
+                        }
+                    },
                 })
-                console.log("Create", response)
+                if (data['create_contest_submission']['results'] === null) {
+                    toast.error(data['create_contest_submission']['errors'])
+                } else {
+                    toast.success('Thank you for your submission')
+                }
             } else {
-                var response = await updateContestSubmission({
-                    variables: {},
+                var { data } = await updateContestSubmission({
+                    variables: {
+                        input: {
+                            id: submission?.id,
+                            picture: {
+                                user: localStorage.getItem(USER_INFO),
+                                file: file
+                            }
+                        }
+                    },
                 })
-                console.log("Update", response)
+                if (data['update_contest_submission']['results'] === null) {
+                    toast.error(data['update_contest_submission']['errors'])
+                } else {
+                    toast.success('Your submission was updated successfully.')
+                }
             }
         } catch (error) {
-            console.error(error)
+            toast.error('Failed to vote')
         }
     }
 
@@ -118,7 +144,7 @@ export default function DragAndDrop(image: any, contest) {
                             <span>{imageUploaded.name}</span>
                             <span
                                 className="text-grey cursor-pointer"
-                                onClick={() => removeFile(imageUploaded.name)}
+                                onClick={() => removeFile()}
                             >
                                 X
                             </span>

@@ -31,21 +31,21 @@ export default function ContestOpen({ contest }) {
             <div className={'w-full justify-center ' + (profile.isSuccess ? 'h-full' : 'h-screen')}>
                 <div className={'bg-white p-8 rounded-lg shadow-lg ' + (profile.isSuccess ? '' : 'h-screen')}>
                     <div className='flex justify-center items-center'>
-                        <div className='relative'>
+                        <div className='relative w-full'>
                             <img
                                 src={awsEnv + contest?.cover_picture?.file}
                                 alt='Imagem'
-                                className='object-fill h-64 w-96'
+                                className='object-fill h-64 w-full rounded-xl'
                             />
-                            <div className='absolute top-2 left-2'>
-                                <div>
+                            <div className='absolute top-6 left-16'>
+                                <div className='mb-2'>
                                     <p className='font-inter text-light-grey'>
                                         {month}
                                     </p>
                                 </div>
                                 <div className='flex bg-forest-green px-2 rounded-full'>
                                     <Image
-                                        src='/images/camera.svg'
+                                        src='/images/curved_camera.svg'
                                         alt='plus'
                                         width={20}
                                         height={20}
@@ -56,17 +56,23 @@ export default function ContestOpen({ contest }) {
                                     </p>
                                 </div>
                             </div>
+                            <div className='absolute top-0 left-0 h-full w-full grid grid-rows-2 content-center'>
+                                <div className='flex w-full'>
+                                    <p className='text-center text-2xl font-bold text-white -mt-2 self-end w-full'>
+                                        {contest?.title}
+                                    </p>
+                                </div>
+                                <div>
+                                    <p className='text-center mt-2 text-lg text-white'>
+                                        {contest?.description}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <p className='text-center mt-4 text-2xl font-bold'>
-                        {contest?.title}
-                    </p>
-                    <p className='text-center mt-2 text-lg'>
-                        {contest?.description}
-                    </p>
                     {profile.isSuccess && !loadingSubmission && !errorSubmission && (
                         <div className='mt-6'>
-                            <DragAndDrop image={submissionData[0]} />
+                            <DragAndDrop submission={submissionData[0]} contest={contest} />
                         </div>
                     )}
                 </div>
