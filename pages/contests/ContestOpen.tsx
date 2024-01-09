@@ -14,6 +14,7 @@ export default function ContestOpen({ contest }) {
         loading: loadingSubmission,
         error: errorSubmission,
         data: submissionData,
+        refetch: refetchContestSubmission
     } = useQuery(GET_CONTEST_SUBMISSIONS, {
         variables: {
             filters: {
@@ -72,7 +73,11 @@ export default function ContestOpen({ contest }) {
                     </div>
                     {profile.isSuccess && !loadingSubmission && !errorSubmission && (
                         <div className='mt-6'>
-                            <DragAndDrop submission={submissionData[0]} contest={contest} />
+                            <DragAndDrop
+                                submission={submissionData["contest_submissions"].length > 0 ? submissionData["contest_submissions"][0] : null}
+                                contest={contest}
+                                refetch={refetchContestSubmission}
+                            />
                         </div>
                     )}
                 </div>

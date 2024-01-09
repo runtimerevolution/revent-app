@@ -5,13 +5,15 @@ import { USER_INFO } from 'hooks/auth'
 import toast from 'react-hot-toast'
 
 
-export default function DragAndDrop(submission: any, contest) {
+export default function DragAndDrop({ submission, contest, refetch }) {
+    const awsEnv = process.env.NEXT_PUBLIC_AWS_S3_ENDPOINT_URL
+
     const [dragActive, setDragActive] = useState<boolean>(false);
     const inputRef = useRef<any>(null);
     const [file, setFile] = useState<any>(null);
-    const [imageUploaded, setImageUploaded] = useState<any>(submission ? submission?.picture.file : null)
+    const [imageUploaded, setImageUploaded] = useState<any>(submission ? (awsEnv + submission?.picture.file) : null)
 
-    const [createContestSubmission] = useMutation(CREATE_CONTEST_SUBMISSION)
+    const [createContestSubmission] = useMutation(CREATE_CONTEST_SUBMISSION,)
     const [updateContestSubmission] = useMutation(UPDATE_CONTEST_SUBMISSION)
 
 
@@ -71,7 +73,7 @@ export default function DragAndDrop(submission: any, contest) {
                             contest: contest.id,
                             picture: {
                                 user: localStorage.getItem(USER_INFO),
-                                file: file
+                                file: file,
                             }
                         }
                     },
@@ -80,6 +82,7 @@ export default function DragAndDrop(submission: any, contest) {
                     toast.error(data['create_contest_submission']['errors'])
                 } else {
                     toast.success('Thank you for your submission')
+                    refetch()
                 }
             } else {
                 var { data } = await updateContestSubmission({
@@ -88,7 +91,7 @@ export default function DragAndDrop(submission: any, contest) {
                             id: submission?.id,
                             picture: {
                                 user: localStorage.getItem(USER_INFO),
-                                file: file
+                                file: file,
                             }
                         }
                     },
@@ -97,10 +100,11 @@ export default function DragAndDrop(submission: any, contest) {
                     toast.error(data['update_contest_submission']['errors'])
                 } else {
                     toast.success('Your submission was updated successfully.')
+                    refetch()
                 }
             }
         } catch (error) {
-            toast.error('Failed to vote')
+            toast.error('Failed to submit your picture.')
         }
     }
 
