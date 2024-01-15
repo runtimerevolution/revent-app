@@ -13,8 +13,9 @@ const SearchInput = ({ setSearchData, setIsSearching }) => {
     searchContests({ variables: { filters: { search: value } } })
   }
 
+
   useEffect(() => {
-    setSearchData(data?.contest_search)
+    setSearchData(data?.contests)
   }, [data])
 
   useEffect(() => {

@@ -18,9 +18,11 @@ export const GET_CONTEST_LIST = gql`
       upload_phase_end
       upload_phase_start
       voting_phase_end
+      voting_draw_end
       cover_picture {
         file
       }
+      internal_status
       status
     }
   }
@@ -249,7 +251,7 @@ export const UPDATE_CONTEST_SUBMISSION = gql`
 `
 
 export const SEARCH_QUERY = gql`
-  query SearchQuery($filters: CollectionFilter!) {
+  query SearchQuery($filters: ContestFilter!) {
     contests(filters: $filters) {
       id
       prize

@@ -14,7 +14,10 @@ export default function ContestList({ filteredContestList }) {
   const closedContests = filteredContestList?.filter(
     (contest) => contest.status === 'closed'
   )
-
+  const drawContests = filteredContestList?.filter(
+    (contest) => contest.status === 'open'
+  )
+  console.log(openContests)
   return (
     <div>
       {openContests?.length > 0 && (
@@ -28,7 +31,7 @@ export default function ContestList({ filteredContestList }) {
                 height={20}
                 className='rounded-full'
               />
-              <a className='ml-1 w-72 text-gray-500'>Open Contests</a>
+              <a className='ml-2 w-72 text-gray-500'>Open Contests</a>
             </a>
           </div>
           <div className='grid grid-cols-4 gap-4 mt-4'>
@@ -72,7 +75,7 @@ export default function ContestList({ filteredContestList }) {
                 height={20}
                 className='rounded-full'
               />
-              <a className='ml-1 w-72 text-gray-500'>Closed Contests</a>
+              <a className='ml-2 w-72 text-gray-500'>Closed Contests</a>
             </a>
           </div>
           <div className='grid grid-cols-4 gap-4 mt-4'>
