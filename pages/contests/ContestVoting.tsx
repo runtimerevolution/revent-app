@@ -1,10 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
 import { useQuery } from '@apollo/client'
-import { GET_CONTEST_SUBMISSIONS } from '../../lib/graphql'
+import { GET_CONTEST_SUBMISSIONS } from 'lib/graphql'
 import { useState, useEffect } from 'react'
-import SubmissionPicture from '../../components/Submissions/SubmissionPicture'
-import ImageModal from '../../components/contest/ImageModal'
+import SubmissionPicture from 'components/Submissions/SubmissionPicture'
+import ImageModal from 'components/contest/ImageModal'
 
 export default function ContestVoting({ contest }) {
   const awsEnv = process.env.NEXT_PUBLIC_AWS_S3_ENDPOINT_URL
@@ -13,7 +13,6 @@ export default function ContestVoting({ contest }) {
     loading: loadingSubmission,
     error: errorSubmission,
     data: submissionData,
-    refetch: refetchContest,
   } = useQuery(GET_CONTEST_SUBMISSIONS, {
     variables: { filters: { contest: { id: contest.id } } },
   })
@@ -73,8 +72,8 @@ export default function ContestVoting({ contest }) {
 
   return (
     <>
-      <div className='w-full justify-center h-full '>
-        <div className='bg-white p-8 rounded-lg shadow-lg'>
+      <div className='w-full flex justify-center h-full bg-white p-8 rounded-lg shadow-lg'>
+        <div className='w-10/12'>
           <div className='flex justify-center items-center'>
             <div className='relative w-full'>
               <img

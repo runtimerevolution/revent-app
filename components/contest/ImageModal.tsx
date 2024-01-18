@@ -57,7 +57,7 @@ export default function ImageModal({
             >
               <img src='/images/chevronright.svg' />
             </div>
-            {contest?.status == 'voting' && (
+            {(contest?.status == 'voting' || contest?.internal_status == 'draw') && (
               <div className='absolute w-full'>
                 <div className='mt-16 grid grid-cols-6'>
                   <div className='col-start-2 col-span-4'>

@@ -19,6 +19,7 @@ export const GET_CONTEST_LIST = gql`
       upload_phase_start
       voting_phase_end
       voting_draw_end
+      voting_draw_end
       cover_picture {
         file
       }
@@ -42,6 +43,7 @@ export const GET_CONTEST_DETAIL = gql`
         file
       }
       status
+      internal_status
     }
   }
 `
