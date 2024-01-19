@@ -13,6 +13,7 @@ export default function ImageModal({
 }) {
   const awsEnv = process.env.NEXT_PUBLIC_AWS_S3_ENDPOINT_URL
   const [addVote] = useMutation(ADD_VOTE)
+  const user = localStorage.getItem(USER_INFO)
 
   const handleAddVote = async () => {
     try {
@@ -57,7 +58,7 @@ export default function ImageModal({
             >
               <img src='/images/chevronright.svg' />
             </div>
-            {(contest?.status == 'voting' || contest?.internal_status == 'draw') && (
+            {(contest?.status == 'voting' || contest?.internal_status == 'draw') && user && (
               <div className='absolute w-full'>
                 <div className='mt-16 grid grid-cols-6'>
                   <div className='col-start-2 col-span-4'>

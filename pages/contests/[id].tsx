@@ -21,7 +21,6 @@ export default function ContestDetailPage() {
   })
 
   const contestDetail = contestData?.contests[0]
-  console.log(contestDetail)
 
   return (
     <>
