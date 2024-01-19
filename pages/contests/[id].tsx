@@ -5,6 +5,7 @@ import { GET_CONTEST_DETAIL } from 'lib/graphql'
 import ContestVoting from 'pages/contests/ContestVoting'
 import ContestOpen from 'pages/contests/ContestOpen'
 import ContestClosed from 'pages/contests/ContestClosed'
+import ContestDraw from 'pages/contests/ContestDraw'
 
 export default function ContestDetailPage() {
   const router = useRouter()
@@ -25,19 +26,24 @@ export default function ContestDetailPage() {
     <>
       {loadingDetail && <p>Loading</p>}
       {errorDetail && <p>Error while retrieving the contest</p>}
-      {!loadingDetail && !errorDetail && contestDetail?.status == 'open' && (
+      {!loadingDetail && !errorDetail && contestDetail?.status == 'open' && contestDetail?.internal_status == 'open' && (
         <>
           <ContestOpen contest={contestDetail} />
         </>
       )}
-      {!loadingDetail && !errorDetail && contestDetail?.status == 'voting' && (
+      {!loadingDetail && !errorDetail && contestDetail?.status == 'voting' && contestDetail?.internal_status == 'open' && (
         <>
           <ContestVoting contest={contestDetail} />
         </>
       )}
-      {!loadingDetail && !errorDetail && contestDetail?.status == 'closed' && (
+      {!loadingDetail && !errorDetail && contestDetail?.status == 'closed' && contestDetail?.internal_status == 'closed' && (
         <>
           <ContestClosed contest={contestDetail} />
+        </>
+      )}
+      {!loadingDetail && !errorDetail && contestDetail?.internal_status == 'draw' && (
+        <>
+          <ContestDraw contest={contestDetail} />
         </>
       )}
     </>

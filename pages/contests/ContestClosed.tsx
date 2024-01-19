@@ -1,10 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
 import { useQuery } from '@apollo/client'
-import { GET_CONTEST_SUBMISSIONS } from '../../lib/graphql'
+import { GET_CONTEST_SUBMISSIONS } from 'lib/graphql'
 import { useState, useEffect } from 'react'
-import SubmissionPicture from '../../components/Submissions/SubmissionPicture'
-import ImageModal from '../../components/contest/ImageModal'
+import SubmissionPicture from 'components/Submissions/SubmissionPicture'
+import ImageModal from 'components/contest/ImageModal'
 
 export default function ContestClosed({ contest }) {
   const awsEnv = process.env.NEXT_PUBLIC_AWS_S3_ENDPOINT_URL
@@ -74,8 +74,8 @@ export default function ContestClosed({ contest }) {
 
   return (
     <>
-      <div className='w-full justify-center h-full '>
-        <div className='bg-white p-8 rounded-lg shadow-lg'>
+      <div className='w-full flex justify-center h-full bg-white p-8 rounded-lg shadow-lg'>
+        <div className='w-10/12'>
           <div className='flex justify-center items-center'>
             <div className='relative w-full'>
               <img
@@ -85,13 +85,11 @@ export default function ContestClosed({ contest }) {
               />
               <div className='absolute top-6 left-16'>
                 <div className='mb-2'>
-                  <p className='font-inter text-light-grey'>
-                    {month}
-                  </p>
+                  <p className='font-inter text-light-grey'>{month}</p>
                 </div>
-                <div className='flex bg-grey px-2 rounded-full'>
+                <div className='flex bg-dark-grey px-2 rounded-full'>
                   <Image
-                    src='/images/lock.svg'
+                    src='/images/curved_lock.svg'
                     alt='plus'
                     width={20}
                     height={20}
@@ -101,17 +99,17 @@ export default function ContestClosed({ contest }) {
                     {"Contest closed"}
                   </p>
                 </div>
-                <div className='absolute top-0 left-0 h-full w-full grid grid-rows-2 content-center'>
-                  <div className='flex w-full'>
-                    <p className='text-center text-2xl font-bold text-white -mt-2 self-end w-full'>
-                      {contest?.title}
-                    </p>
-                  </div>
-                  <div>
-                    <p className='text-center mt-2 text-lg text-white'>
-                      {contest?.description}
-                    </p>
-                  </div>
+              </div>
+              <div className='absolute top-0 left-0 h-full w-full grid grid-rows-2 content-center'>
+                <div className='flex w-full'>
+                  <p className='text-center text-2xl font-bold text-white -mt-2 self-end w-full'>
+                    {contest?.title}
+                  </p>
+                </div>
+                <div>
+                  <p className='text-center mt-2 text-lg text-white'>
+                    {contest?.description}
+                  </p>
                 </div>
               </div>
             </div>

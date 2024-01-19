@@ -22,6 +22,7 @@ const mockData = {
         file: 'https://picsum.photos/536/354',
       },
       status: 'open',
+      internal_status: 'open',
     },
     {
       __typename: 'ContestType',
@@ -37,6 +38,7 @@ const mockData = {
         file: 'https://picsum.photos/seed/picsum/200/300',
       },
       status: 'open',
+      internal_status: 'open',
     },
     {
       __typename: 'ContestType',
@@ -52,6 +54,7 @@ const mockData = {
         file: 'https://www.jquery-az.com/html/images/banana.jpg',
       },
       status: 'open',
+      internal_status: 'open',
     },
   ],
 }
