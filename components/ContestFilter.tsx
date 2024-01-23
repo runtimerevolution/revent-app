@@ -47,13 +47,15 @@ export default function ContestFilter({
 
   return (
     <>
-      <div className='flex-row'>
-        <button
-          className='text-gray-700 bg-gray-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2'
-          onClick={() => setOpen(!open)}
-        >
-          Filters
-        </button>
+      <div className='flex-row grid grid-cols-6'>
+        <div className='col-span-1 pr-2'>
+          <button
+            className='text-gray-700 bg-gray-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer w-full'
+            onClick={() => setOpen(!open)}
+          >
+            Filters
+          </button>
+        </div>
         <SearchInput
           setSearchData={setSearchData}
           setIsSearching={setIsSearching}

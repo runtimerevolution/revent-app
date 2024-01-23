@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <div className='p-8 bg-gray-100'>
       <div className='px-8'>
-        <div className='flex-row'>
+        <div className='flex-row px-20'>
           <ContestFilter
             setSearchData={setSearchData}
             open={open}
