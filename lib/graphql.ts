@@ -44,6 +44,9 @@ export const GET_CONTEST_DETAIL = gql`
       }
       status
       internal_status
+      winners {
+        id
+      }
     }
   }
 `
@@ -83,6 +86,9 @@ export const GET_CONTEST_SUBMISSIONS = gql`
           name_first
           name_last
         }
+      }
+      votes {
+        id
       }
     }
   }

@@ -111,15 +111,14 @@ export default function DragAndDrop({ submission, contest, refetch }) {
     return (
         <div className="flex justify-center h-screen">
             <form
-                className={`${dragActive ? "bg-blue-400" : "bg-blue-100"
-                    } relative w-2/3 h-1/2 rounded-lg  min-h-[10rem] text-center flex flex-col items-center justify-center`}
+                className={`${dragActive ? "bg-light-orange" : ""
+                    } relative w-full h-1/2 rounded-lg  min-h-[10rem] text-center flex flex-col items-center justify-center`}
                 onDragEnter={handleDragEnter}
                 onSubmit={handleSubmit}
                 onDrop={handleDrop}
                 onDragLeave={handleDragLeave}
                 onDragOver={handleDragOver}
             >
-                {/* this input element allows us to select files for upload. We make it hidden so we can activate it when the user clicks select files */}
                 <input
                     placeholder="fileInput"
                     className="hidden"
@@ -134,7 +133,7 @@ export default function DragAndDrop({ submission, contest, refetch }) {
                     <p>
                         Drag & Drop Image or{" "}
                         <span
-                            className="font-bold text-blue-600 cursor-pointer"
+                            className="font-bold text-orange cursor-pointer"
                             onClick={openFileExplorer}
                         >
                             <u>Select Image</u>
@@ -160,8 +159,8 @@ export default function DragAndDrop({ submission, contest, refetch }) {
                 </div>
                 {imageUploaded && (
                     <button
-                        className='absolute -bottom-32  text-gray-700 bg-forest-green border-white border-2
-                        text-white px-3 py-2 rounded-full font-inter cursor-pointer w-1/2'
+                        className='absolute -bottom-32 text-gray-700 bg-dark-orange border-white border-2
+                        text-white px-3 py-2 rounded-full font-inter cursor-pointer w-1/3'
                         type='submit'
                     >
                         SUBMIT

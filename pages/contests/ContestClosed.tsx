@@ -72,6 +72,12 @@ export default function ContestClosed({ contest }) {
   var date = new Date(contest?.upload_phase_start)
   var month = date ? date.toLocaleString('default', { month: 'long' }) : ""
 
+  const contest_info = {
+    status: contest?.status,
+    internal_status: contest?.internal_status,
+    winners: contest?.winners,
+  }
+
   return (
     <>
       <div className='w-full flex justify-center h-full bg-white p-8 rounded-lg shadow-lg'>
@@ -129,7 +135,7 @@ export default function ContestClosed({ contest }) {
                       <SubmissionPicture
                         image={image}
                         setSelectedImage={setSelectedImage}
-                        contestStatus={contest?.status}
+                        contestInfo={contest_info}
                       />
                     )
                   }
