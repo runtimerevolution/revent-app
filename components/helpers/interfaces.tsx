@@ -39,7 +39,7 @@ export interface Picture {
 export interface User {
   name_first: string
   name_last: string
-  email: string
+  id: string
 }
 export interface Picture {
   file: string

@@ -2,7 +2,6 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
 import { getNotificationsList } from 'services/reventService'
-import Notification from '../Notification/Notification'
 import UserMenu from './UserMenu'
 import { useGoogleAuthLink, useGoogleAuthToken, useProfile } from 'hooks/auth'
 
@@ -95,28 +94,14 @@ export default function Navbar() {
     }
   })
 
-  const collectionsTextColor =
-    router.pathname === '/collections' ? 'text-orange-500' : 'text-gray-700'
-
   const contestsTextColor =
     router.pathname === '/' ? 'text-orange-500' : 'text-gray-700'
-
-  const collectionsBackgroundColor =
-    router.pathname === '/collections'
-      ? 'hover:bg-orange-700'
-      : 'hover:bg-gray-700'
 
   const contestsBackgroundColor =
     router.pathname === '/' ? 'hover:bg-orange-700' : 'hover:bg-gray-700'
 
-  const [showNotifications, setShowNotifications] = useState<boolean>(false)
   const [showUserMenu, setShowUserMenu] = useState<boolean>(false)
 
-  const [hasNotifications, setHasNotifications] = useState<boolean>(true)
-
-  const handleToggleNotifications = () => {
-    setShowNotifications((showNotifications) => !showNotifications)
-  }
   const handleOpenUserMenu = () => {
     setShowUserMenu((showUserMenu) => !showUserMenu)
   }
@@ -124,7 +109,7 @@ export default function Navbar() {
   return (
     <nav className='bg-white-800 w-full'>
       <div className='max-w-12xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <div className='flex items-center justify-between h-16'>
+        <div className='flex relative items-center justify-between h-16'>
           <div className='flex items-center flex-shrink-0 text-white'>
             <a className='flex items-center' href='/'>
               <div className='w-10 h-10 mr-2'>
@@ -148,12 +133,6 @@ export default function Navbar() {
                 >
                   Photo Contests
                 </a>
-                <a
-                  onClick={() => handleNavigation('/#')}
-                  className={`${collectionsTextColor} ${collectionsBackgroundColor} hover:text-white px-3 py-2 rounded-md font-medium cursor-pointer`}
-                >
-                  Collections
-                </a>
               </div>
             </div>
           </div>
@@ -169,30 +148,6 @@ export default function Navbar() {
               <>
                 <button
                   className='relative text-white focus:outline-none rounded-full p-2'
-                  onClick={handleToggleNotifications}
-                >
-                  <Image
-                    src='/images/bell.svg'
-                    alt='notifications'
-                    width={40}
-                    height={40}
-                  />
-                  {hasNotifications && (
-                    <span className='absolute top-0 right-0 bg-orange-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs'></span>
-                  )}
-                </button>
-                {hasNotifications && showNotifications && (
-                  <div
-                    ref={containerRef}
-                    className='absolute right-0 mt-2 bg-white text-gray-800 rounded-lg shadow-lg p-4 max-h-60 overflow-y-auto'
-                  >
-                    {displayedNotifications?.map((notification) => (
-                      <Notification notification={notification} />
-                    ))}
-                  </div>
-                )}
-                <button
-                  className='relative text-white focus:outline-none rounded-full p-2'
                   onClick={handleOpenUserMenu}
                 >
                   <Image
@@ -205,8 +160,8 @@ export default function Navbar() {
                 </button>
               </>
             )}
-            {showUserMenu && <UserMenu setShowUserMenu={setShowUserMenu} />}
           </div>
+          {showUserMenu && <UserMenu setShowUserMenu={setShowUserMenu} showUserMenu={showUserMenu} />}
         </div>
       </div>
     </nav>

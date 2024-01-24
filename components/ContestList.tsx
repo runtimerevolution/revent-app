@@ -32,7 +32,7 @@ export default function ContestList({ filteredContestList }) {
                 height={20}
                 className='rounded-full color-gray-500'
               />
-              <a className='ml-2 w-72 text-gray-500'>Drawn Contests</a>
+              <a className='ml-2 w-72 text-gray-500'>Tied Contests</a>
             </a>
           </div>
           <div className='grid grid-cols-4 gap-4 mt-4'>

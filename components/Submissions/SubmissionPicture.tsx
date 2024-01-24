@@ -1,11 +1,13 @@
 import React from 'react'
 import { User } from '../helpers/interfaces'
 import { useState } from 'react'
+import { USER_INFO } from 'hooks/auth'
 
 interface Picture {
   file: string
   user: User
   submissionDate: string
+  votes: Array<string>
 }
 
 interface Image {
@@ -14,24 +16,33 @@ interface Image {
   picture: Picture
 }
 
+interface Contest {
+  status: string,
+  internal_status: string,
+  winners: Array<string>
+}
+
 interface SubmissionPictureProps {
   image: Image
   setSelectedImage: React.Dispatch<React.SetStateAction<Image>>
-  contestStatus: string
+  contestInfo: Contest
 }
 
 export default function SubmissionPicture({
   image,
   setSelectedImage,
-  contestStatus,
+  contestInfo,
 }: SubmissionPictureProps) {
   const awsEnv = process.env.NEXT_PUBLIC_AWS_S3_ENDPOINT_URL
   const [ratio, setRatio] = useState('width')
   const imageComponentID = 'image-' + String(image.id)
+  const user = localStorage.getItem(USER_INFO)
 
   const handleImageClick = (image) => {
     setSelectedImage(image)
   }
+  const winner = contestInfo.winners ? contestInfo.winners.findIndex((element) => element.id == image.picture.user.id) : -1
+  const vote = image.votes ? image.votes.findIndex((element) => element.id == user) : -1
   return (
     <div
       key={image.id}
@@ -57,7 +68,18 @@ export default function SubmissionPicture({
             }
           }}
         />
+        {(contestInfo?.status == "voting" || contestInfo?.internal_status == 'draw') && user && vote != -1 && (
+          <div className='absolute top-0 w-full h-full border-4 border-forest-green rounded-xl flex items-center justify-center'>
+            <img src='/images/check_circle.svg' className='h-2/3' />
+          </div>
+        )}
+
+        {contestInfo?.status == "closed" && winner != -1 && (
+          <div className='absolute top-0 w-full h-full border-4 border-yellow rounded-xl flex items-center justify-center'>
+            <img src='/images/winner_heart.svg' className='h-2/3' />
+          </div>
+        )}
       </div>
-    </div>
+    </div >
   )
 }

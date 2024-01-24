@@ -1,12 +1,13 @@
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useLogout } from 'hooks/auth'
 
 interface UserMenuProps {
   setShowUserMenu: React.Dispatch<React.SetStateAction<boolean>>
+  showUserMenu: boolean
 }
-export default function UserMenu({ setShowUserMenu }: UserMenuProps) {
+export default function UserMenu({ setShowUserMenu, showUserMenu }: UserMenuProps) {
   const router = useRouter()
   const handleNavigation = (path: string) => {
     setShowUserMenu(false)
@@ -14,6 +15,7 @@ export default function UserMenu({ setShowUserMenu }: UserMenuProps) {
   }
 
   const { mutate } = useLogout()
+  const [mouseOut, setMouseOut] = useState(false)
 
   const logout = async (e) => {
     mutate()
@@ -21,60 +23,39 @@ export default function UserMenu({ setShowUserMenu }: UserMenuProps) {
     handleNavigation('/')
     window.location.reload()
   }
-  return (
-    <div className='w-48 absolute right-0 mt-2 bg-white text-gray-800 rounded-lg shadow-lg p-4 max-h-60 overflow-y-auto'>
-      <ul>
-        <button
-          onClick={() => handleNavigation('/profile')}
-          className='flex items-center mt-2'
-        >
-          <Image
-            src='/images/profile.svg'
-            alt='profile'
-            width={40}
-            height={40}
-            className='mr-2'
-          />
-          <span>View Profile</span>
-        </button>
-        <button
-          onClick={() => handleNavigation('/myphotos')}
-          className='flex items-center mt-2'
-        >
-          <Image
-            src='/images/myphotos.svg'
-            alt='profile'
-            width={40}
-            height={40}
-            className='mr-2'
-          />
-          <span>My Photos</span>
-        </button>
 
-        <button
-          onClick={() => handleNavigation('/settings')}
-          className='flex items-center mt-2'
+  useEffect(() => {
+    if (!mouseOut) return;
+    function handleClick(event) {
+      setShowUserMenu(false);
+    }
+    window.addEventListener("click", handleClick);
+
+    return () => window.removeEventListener("click", handleClick);
+  }, [mouseOut]);
+
+  return (
+    <div className='absolute bottom-0 right-48'>
+      <div className='flex relative'>
+        <div
+          onMouseOut={() => setMouseOut(true)}
+          onMouseEnter={() => setMouseOut(false)}
+          className='w-48 absolute -top-16 bg-white text-gray-800 rounded-lg shadow-lg p-4 max-h-60'
         >
-          <Image
-            src='/images/settings.svg'
-            alt='profile'
-            width={40}
-            height={40}
-            className='mr-2'
-          />
-          <span>Settings</span>
-        </button>
-        <button onClick={logout} className='flex items-center mt-2'>
-          <Image
-            src='/images/signout.svg'
-            alt='profile'
-            width={40}
-            height={40}
-            className='mr-2'
-          />
-          <span>Sign Out</span>
-        </button>
-      </ul>
+          <ul>
+            <button onClick={logout} className='flex items-center mt-2'>
+              <Image
+                src='/images/signout.svg'
+                alt='profile'
+                width={40}
+                height={40}
+                className='mr-2'
+              />
+              <span>Sign Out</span>
+            </button>
+          </ul>
+        </div>
+      </div>
     </div>
   )
 }

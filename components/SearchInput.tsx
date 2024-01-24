@@ -30,7 +30,7 @@ const SearchInput = ({ setSearchData, setIsSearching }) => {
     <input
       type='text'
       placeholder='Search'
-      className='w-5/6 py-1 px-3 text-sm text-gray-700 rounded-full focus:outline-none focus:ring-2'
+      className='w-full py-2 px-3 text-sm text-gray-700 rounded-full focus:outline-none focus:ring-2 col-span-5'
       value={query}
       onChange={handleQueryChange}
     />
