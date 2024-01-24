@@ -112,7 +112,7 @@ export default function DragAndDrop({ submission, contest, refetch }) {
         <div className="flex justify-center h-screen">
             <form
                 className={`${dragActive ? "bg-light-orange" : ""
-                    } relative w-full h-1/2 rounded-lg  min-h-[10rem] text-center flex flex-col items-center justify-center`}
+                    } relative w-2/3 h-1/4 rounded-lg border-dashed border-4 border-grey bg-light-grey min-h-[10rem] text-center flex flex-col items-center justify-center`}
                 onDragEnter={handleDragEnter}
                 onSubmit={handleSubmit}
                 onDrop={handleDrop}
