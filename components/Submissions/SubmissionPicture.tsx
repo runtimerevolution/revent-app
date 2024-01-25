@@ -74,7 +74,7 @@ export default function SubmissionPicture({
           </div>
         )}
 
-        {contestInfo?.status == "closed" && winner != -1 && (
+        {contestInfo?.status == "closed" && contestInfo?.internal_status == 'closed' && winner != -1 && (
           <div className='absolute top-0 w-full h-full border-4 border-yellow rounded-xl flex items-center justify-center'>
             <img src='/images/winner_heart.svg' className='h-2/3' />
           </div>
