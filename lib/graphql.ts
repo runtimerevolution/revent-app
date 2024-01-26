@@ -268,11 +268,13 @@ export const SEARCH_QUERY = gql`
       upload_phase_end
       upload_phase_start
       voting_phase_end
+      voting_draw_end
       description
       cover_picture {
         id
         file
       }
+      internal_status
     }
   }
 `
