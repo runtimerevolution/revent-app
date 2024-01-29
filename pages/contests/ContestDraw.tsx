@@ -83,7 +83,7 @@ export default function ContestDraw({ contest }) {
 
     return (
         <>
-            <div className='w-full flex justify-center h-full bg-white p-8 rounded-lg shadow-lg'>
+            <div className='w-full flex justify-center h-full bg-white p-8 rounded-lg'>
                 <div className='w-10/12'>
                     <div className='flex justify-center items-center'>
                         <div className='relative w-full'>

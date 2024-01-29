@@ -29,7 +29,7 @@ export default function ContestOpen({ contest }) {
     var month = date ? date.toLocaleString('default', { month: 'long' }) : ""
     return (
         <>
-            <div className={'w-full flex justify-center bg-white p-8 rounded-lg shadow-lg' + (profile.isSuccess ? 'h-full' : 'h-screen')}>
+            <div className={'w-full flex justify-center bg-white p-8 rounded-lg' + (profile.isSuccess ? 'h-full' : 'h-screen')}>
                 <div className={'w-10/12 ' + (profile.isSuccess ? '' : 'h-screen')}>
                     <div className='flex justify-center items-center'>
                         <div className='relative w-full'>
