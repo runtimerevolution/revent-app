@@ -8,6 +8,7 @@ import ImageModal from 'components/contest/ImageModal'
 
 export default function ContestClosed({ contest }) {
   const awsEnv = process.env.NEXT_PUBLIC_AWS_S3_ENDPOINT_URL
+  let imageList = []
 
   const {
     loading: loadingSubmission,
@@ -15,15 +16,15 @@ export default function ContestClosed({ contest }) {
     data: submissionData,
     refetch: refetchContest,
   } = useQuery(GET_CONTEST_SUBMISSIONS, {
-    variables: { filters: { contest: { id: contest.id } } },
+    variables: {
+      filters: { contest: { id: contest.id } },
+    },
   })
 
   const submissionList = submissionData?.contest_submissions
 
   const [selectedImage, setSelectedImage] = useState(null)
   const [showNextImage, setShowNextImage] = useState(null)
-
-  let imageList = []
 
   const closeImageModal = () => {
     setSelectedImage(null)
