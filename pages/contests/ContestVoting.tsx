@@ -8,20 +8,26 @@ import ImageModal from 'components/contest/ImageModal'
 
 export default function ContestVoting({ contest }) {
   const awsEnv = process.env.NEXT_PUBLIC_AWS_S3_ENDPOINT_URL
+  let imageList = []
+  let order = []
 
   const {
     loading: loadingSubmission,
     error: errorSubmission,
     data: submissionData,
+    refetch: refetchSubmissions,
   } = useQuery(GET_CONTEST_SUBMISSIONS, {
-    variables: { filters: { contest: { id: contest.id } } },
+    variables: {
+      filters: { contest: { id: contest.id } },
+      order: order ? order : null,
+    },
   })
 
   const submissionList = submissionData?.contest_submissions
 
   const [selectedImage, setSelectedImage] = useState(null)
   const [showNextImage, setShowNextImage] = useState(null)
-  const imageList = []
+
 
   const closeImageModal = () => {
     setSelectedImage(null)
@@ -129,6 +135,7 @@ export default function ContestVoting({ contest }) {
                 <>
                   {submissionList?.map((image) => {
                     imageList.push(image)
+                    order.push(image.id)
                     return (
                       <SubmissionPicture
                         image={image}
@@ -147,6 +154,7 @@ export default function ContestVoting({ contest }) {
                 contest={contest}
                 previousImage={previousImage}
                 nextImage={nextImage}
+                refetch={refetchSubmissions}
               />
             )}
           </div>

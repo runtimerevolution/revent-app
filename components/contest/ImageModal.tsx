@@ -10,6 +10,7 @@ export default function ImageModal({
   contest,
   nextImage,
   previousImage,
+  refetch = null,
 }) {
   const awsEnv = process.env.NEXT_PUBLIC_AWS_S3_ENDPOINT_URL
   const [addVote] = useMutation(ADD_VOTE)
@@ -26,6 +27,7 @@ export default function ImageModal({
         toast.error(data['contest_submission_add_vote']['errors'])
       } else {
         toast.success('Thank you for your vote')
+        refetch()
       }
     } catch (error) {
       toast.error('Failed to vote')

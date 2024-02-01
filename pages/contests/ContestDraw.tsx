@@ -13,6 +13,7 @@ export default function ContestDraw({ contest }) {
         loading: loadingSubmission,
         error: errorSubmission,
         data: submissionData,
+        refetch: refetchSubmissions,
     } = useQuery(GET_CONTEST_SUBMISSIONS, {
         variables: {
             filters: {
@@ -152,6 +153,7 @@ export default function ContestDraw({ contest }) {
                                 contest={contest}
                                 previousImage={previousImage}
                                 nextImage={nextImage}
+                                refetch={refetchSubmissions}
                             />
                         )}
                     </div>
