@@ -74,8 +74,8 @@ export const GET_COLLECTION_DETAIL = gql`
 `
 
 export const GET_CONTEST_SUBMISSIONS = gql`
-  query GetContestSubmissions($filters: ContestSubmissionFilter!) {
-    contest_submissions(filters: $filters) {
+  query GetContestSubmissions($filters: ContestSubmissionFilter!, $order: [Int!]) {
+    contest_submissions(filters: $filters, order: $order) {
       id
       submission_date
       picture {
