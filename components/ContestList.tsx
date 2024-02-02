@@ -7,16 +7,18 @@ import ContestCardDraw from 'components/ContestCardDraw'
 
 export default function ContestList({ filteredContestList }) {
   const openContests = filteredContestList?.filter(
-    (contest) => (contest.status === 'open' && contest.internal_status === 'open')
+    (contest) => contest.status === 'open' && contest.internal_status === 'open'
   )
   const votingContests = filteredContestList?.filter(
-    (contest) => (contest.status === 'voting' && contest.internal_status === 'open')
+    (contest) =>
+      contest.status === 'voting' && contest.internal_status === 'open'
   )
   const closedContests = filteredContestList?.filter(
-    (contest) => (contest.status === 'closed' && contest.internal_status === 'closed')
+    (contest) =>
+      contest.status === 'closed' && contest.internal_status === 'closed'
   )
   const drawContests = filteredContestList?.filter(
-    (contest) => (contest.internal_status === 'draw' && contest.voting_draw_end)
+    (contest) => contest.internal_status === 'draw' && contest.voting_draw_end
   )
 
   return (
@@ -36,7 +38,7 @@ export default function ContestList({ filteredContestList }) {
             </a>
           </div>
           <div className='grid grid-cols-4 gap-4 mt-4'>
-            {drawContests?.map((contest) => (
+            {drawContests?.map((contest, keys) => (
               <ContestCardDraw key={contest.id} contest={contest} />
             ))}
           </div>
@@ -57,7 +59,7 @@ export default function ContestList({ filteredContestList }) {
             </a>
           </div>
           <div className='grid grid-cols-4 gap-4 mt-4'>
-            {openContests?.map((contest) => (
+            {openContests?.map((contest, key) => (
               <ContestCardOpen key={contest.id} contest={contest} />
             ))}
           </div>
@@ -79,7 +81,7 @@ export default function ContestList({ filteredContestList }) {
             </a>
           </div>
           <div className='grid grid-cols-4 gap-4 mt-4'>
-            {votingContests?.map((contest) => (
+            {votingContests?.map((contest, key) => (
               <ContestCardVoting key={contest.id} contest={contest} />
             ))}
           </div>
@@ -101,7 +103,7 @@ export default function ContestList({ filteredContestList }) {
             </a>
           </div>
           <div className='grid grid-cols-4 gap-4 mt-4'>
-            {closedContests?.map((contest) => (
+            {closedContests?.map((contest, key) => (
               <ContestCardClosed key={contest.id} contest={contest} />
             ))}
           </div>

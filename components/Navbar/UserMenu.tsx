@@ -7,7 +7,10 @@ interface UserMenuProps {
   setShowUserMenu: React.Dispatch<React.SetStateAction<boolean>>
   showUserMenu: boolean
 }
-export default function UserMenu({ setShowUserMenu, showUserMenu }: UserMenuProps) {
+export default function UserMenu({
+  setShowUserMenu,
+  showUserMenu,
+}: UserMenuProps) {
   const router = useRouter()
   const handleNavigation = (path: string) => {
     setShowUserMenu(false)
@@ -20,19 +23,17 @@ export default function UserMenu({ setShowUserMenu, showUserMenu }: UserMenuProp
   const logout = async (e) => {
     mutate()
     e.preventDefault()
-    handleNavigation('/')
-    window.location.reload()
   }
 
   useEffect(() => {
-    if (!mouseOut) return;
+    if (!mouseOut) return
     function handleClick(event) {
-      setShowUserMenu(false);
+      setShowUserMenu(false)
     }
-    window.addEventListener("click", handleClick);
+    window.addEventListener('click', handleClick)
 
-    return () => window.removeEventListener("click", handleClick);
-  }, [mouseOut]);
+    return () => window.removeEventListener('click', handleClick)
+  }, [mouseOut])
 
   return (
     <div className='absolute bottom-0 right-48'>

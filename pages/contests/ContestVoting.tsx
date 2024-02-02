@@ -14,7 +14,7 @@ export default function ContestVoting({ contest }) {
     error: errorSubmission,
     data: submissionData,
   } = useQuery(GET_CONTEST_SUBMISSIONS, {
-    variables: { filters: { contest: { id: contest.id } } },
+    variables: { filters: { contest: { id: contest?.id } } },
   })
 
   const submissionList = submissionData?.contest_submissions
@@ -127,10 +127,11 @@ export default function ContestVoting({ contest }) {
 
               {!loadingSubmission && !errorSubmission && (
                 <>
-                  {submissionList?.map((image) => {
+                  {submissionList?.map((image, key) => {
                     imageList.push(image)
                     return (
                       <SubmissionPicture
+                        key={key}
                         image={image}
                         setSelectedImage={setSelectedImage}
                         contestInfo={contest_info}

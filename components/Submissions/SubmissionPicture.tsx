@@ -14,12 +14,13 @@ interface Image {
   id: number
   submissionDate: string
   picture: Picture
+  votes: Array<User>
 }
 
 interface Contest {
-  status: string,
-  internal_status: string,
-  winners: Array<string>
+  status: string
+  internal_status: string
+  winners: Array<User>
 }
 
 interface SubmissionPictureProps {
@@ -41,8 +42,14 @@ export default function SubmissionPicture({
   const handleImageClick = (image) => {
     setSelectedImage(image)
   }
-  const winner = contestInfo.winners ? contestInfo.winners.findIndex((element) => element.id == image.picture.user.id) : -1
-  const vote = image.votes ? image.votes.findIndex((element) => element.id == user) : -1
+  const winner = contestInfo.winners
+    ? contestInfo.winners.findIndex(
+        (element) => element.id == image.picture.user.id
+      )
+    : -1
+  const vote = image.votes
+    ? image.votes.findIndex((element) => element.id == user)
+    : -1
   return (
     <div
       key={image.id}
@@ -63,23 +70,28 @@ export default function SubmissionPicture({
           alt={`Image ${image.id}`}
           className={'relative top-0 w-full mb-0 h-full rounded-xl'}
           onLoad={(e) => {
-            if (e.target.naturalHeight > e.target.naturalWidth) {
-              setRatio('height')
-            }
+            // if (e.target.naturalHeight > e.target.naturalWidth) {
+            setRatio('height')
+            // }
           }}
         />
-        {(contestInfo?.status == "voting" || contestInfo?.internal_status == 'draw') && user && vote != -1 && (
-          <div className='absolute top-0 w-full h-full border-4 border-forest-green rounded-xl flex items-center justify-center'>
-            <img src='/images/check_circle.svg' className='h-2/3' />
-          </div>
-        )}
+        {(contestInfo?.status == 'voting' ||
+          contestInfo?.internal_status == 'draw') &&
+          user &&
+          vote != -1 && (
+            <div className='absolute top-0 w-full h-full border-4 border-forest-green rounded-xl flex items-center justify-center'>
+              <img src='/images/check_circle.svg' className='h-2/3' />
+            </div>
+          )}
 
-        {contestInfo?.status == "closed" && contestInfo?.internal_status == 'closed' && winner != -1 && (
-          <div className='absolute top-0 w-full h-full border-4 border-yellow rounded-xl flex items-center justify-center'>
-            <img src='/images/winner_heart.svg' className='h-2/3' />
-          </div>
-        )}
+        {contestInfo?.status == 'closed' &&
+          contestInfo?.internal_status == 'closed' &&
+          winner != -1 && (
+            <div className='absolute top-0 w-full h-full border-4 border-yellow rounded-xl flex items-center justify-center'>
+              <img src='/images/winner_heart.svg' className='h-2/3' />
+            </div>
+          )}
       </div>
-    </div >
+    </div>
   )
 }

@@ -13,7 +13,7 @@ export default function Collections() {
           {error && <p>Error while retrieving the collections</p>}
 
           <div className='grid grid-cols-4 gap-4'>
-            {data?.collections.map((collection) => (
+            {data?.collections.map((collection, key) => (
               <Collection collection={collection} key={collection.id} />
             ))}
           </div>

@@ -15,7 +15,7 @@ export default function ContestClosed({ contest }) {
     data: submissionData,
     refetch: refetchContest,
   } = useQuery(GET_CONTEST_SUBMISSIONS, {
-    variables: { filters: { contest: { id: contest.id } } },
+    variables: { filters: { contest: { id: contest?.id } } },
   })
 
   const submissionList = submissionData?.contest_submissions
@@ -29,7 +29,7 @@ export default function ContestClosed({ contest }) {
     setSelectedImage(null)
   }
 
-  const imageIndex = (image) => image == selectedImage;
+  const imageIndex = (image) => image == selectedImage
 
   const previousImage = () => {
     var index = imageList.findIndex(imageIndex)
@@ -68,9 +68,8 @@ export default function ContestClosed({ contest }) {
     }
   }, [showNextImage])
 
-
   var date = new Date(contest?.upload_phase_start)
-  var month = date ? date.toLocaleString('default', { month: 'long' }) : ""
+  var month = date ? date.toLocaleString('default', { month: 'long' }) : ''
 
   const contest_info = {
     status: contest?.status,
@@ -102,7 +101,7 @@ export default function ContestClosed({ contest }) {
                     className='rounded-full'
                   />
                   <p className='text-center font-inter ml-1 text-white'>
-                    {"Contest closed"}
+                    {'Contest closed'}
                   </p>
                 </div>
               </div>
@@ -129,18 +128,17 @@ export default function ContestClosed({ contest }) {
 
               {!loadingSubmission && !errorSubmission && (
                 <>
-                  {submissionList?.map((image) => {
+                  {submissionList?.map((image, key) => {
                     imageList.push(image)
                     return (
                       <SubmissionPicture
+                        key={key}
                         image={image}
                         setSelectedImage={setSelectedImage}
                         contestInfo={contest_info}
                       />
                     )
-                  }
-
-                  )}
+                  })}
                 </>
               )}
             </div>

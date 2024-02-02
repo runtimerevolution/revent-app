@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from 'react-query'
 import { TOKEN_KEY, client } from 'api'
 import { OAuthCredential, OAuthUrl, Profile } from 'api/type'
+import router from 'next/router'
 
 export const USER_INFO = 'user'
 
@@ -60,6 +61,9 @@ const useProfile = () =>
     },
   })
 
+const handleNavigation = (path: string) => {
+  router.push(path)
+}
 const useLogout = () =>
   useMutation({
     mutationKey: ['logout'],
@@ -67,6 +71,8 @@ const useLogout = () =>
     onSuccess: () => {
       localStorage.removeItem(TOKEN_KEY)
       localStorage.removeItem(USER_INFO)
+      handleNavigation('/')
+      window.location.reload()
     },
   })
 
