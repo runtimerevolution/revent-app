@@ -28,7 +28,7 @@ const SearchInput = ({ setSearchData, setIsSearching }) => {
 
   return (
     <input
-      type='text'
+      type='search'
       placeholder='Search'
       className='w-full py-2 px-3 text-sm text-gray-700 rounded-full focus:outline-none focus:ring-2 col-span-5'
       value={query}
