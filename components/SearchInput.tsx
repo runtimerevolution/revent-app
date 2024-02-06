@@ -12,8 +12,6 @@ const SearchInput = ({ setSearchData, setIsSearching }) => {
     setQuery(value)
     searchContests({ variables: { filters: { search: value } } })
   }
-
-
   useEffect(() => {
     setSearchData(data?.contests)
   }, [data])
