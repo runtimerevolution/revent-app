@@ -82,6 +82,19 @@ export default function ImageModal({
                 </div>
               </div>
             )}
+            {(contest?.status == 'closed' || contest?.internal_status == 'closed') && user && (
+              <div className='absolute w-full'>
+                <div className='mt-16 grid grid-cols-6'>
+                  <div className='col-start-2 col-span-4'>
+                    <p
+                      className='bg-dark-orange border-white border-2 text-white px-3 py-2 rounded-full font-inter w-full flex justify-center'
+                    >
+                      {selectedImage.picture.user.name_first ? selectedImage.picture.user.name_first + " " + selectedImage.picture.user.name_last : selectedImage.picture.user.email}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
