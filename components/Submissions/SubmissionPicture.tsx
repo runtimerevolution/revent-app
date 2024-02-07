@@ -41,7 +41,7 @@ export default function SubmissionPicture({
   const handleImageClick = (image) => {
     setSelectedImage(image)
   }
-  const winner = contestInfo.winners ? contestInfo.winners.findIndex((element) => element.id == image.picture.user.id) : -1
+  const winner = contestInfo.winners.length == 1 ? contestInfo.winners.findIndex((element) => element.id == image.picture.user.id) : -1
   const vote = image.votes ? image.votes.findIndex((element) => element.id == user) : -1
   return (
     <div

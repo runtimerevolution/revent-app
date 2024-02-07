@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { useQuery } from '@apollo/client'
-import { GET_CONTEST_SUBMISSIONS } from 'lib/graphql'
+import { GET_CLOSED_CONTEST_SUBMISSIONS } from 'lib/graphql'
 import { useState, useEffect } from 'react'
 import SubmissionPicture from 'components/Submissions/SubmissionPicture'
 import ImageModal from 'components/contest/ImageModal'
@@ -15,7 +15,7 @@ export default function ContestClosed({ contest }) {
     error: errorSubmission,
     data: submissionData,
     refetch: refetchContest,
-  } = useQuery(GET_CONTEST_SUBMISSIONS, {
+  } = useQuery(GET_CLOSED_CONTEST_SUBMISSIONS, {
     variables: {
       filters: { contest: { id: contest.id } },
     },
