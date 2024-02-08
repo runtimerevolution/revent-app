@@ -116,7 +116,7 @@ export default function ContestDraw({ contest }) {
                                         className='rounded-full'
                                     />
                                     <p className='text-center font-inter ml-1 text-white'>
-                                        {'Voting phase'}
+                                        {'Tied Contest'}
                                     </p>
                                 </div>
                             </div>

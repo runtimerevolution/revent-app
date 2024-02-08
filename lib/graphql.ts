@@ -81,10 +81,27 @@ export const GET_CONTEST_SUBMISSIONS = gql`
       picture {
         id
         file
+      }
+      votes {
+        id
+      }
+    }
+  }
+`
+
+export const GET_CLOSED_CONTEST_SUBMISSIONS = gql`
+  query GetContestSubmissions($filters: ContestSubmissionFilter!, $order: [Int!]) {
+    contest_submissions(filters: $filters, order: $order) {
+      id
+      submission_date
+      picture {
+        id
+        file
         user {
           id
           name_first
           name_last
+          email
         }
       }
       votes {
