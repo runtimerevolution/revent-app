@@ -1,0 +1,15 @@
+{
+  "extends": "next",
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off",
+    "react/no-unused-prop-types": "warn",
+    "no-use-before-define": "warn",
+    "react/button-has-type": "warn",
+    "no-unused-vars": "warn",
+    "no-console": "warn",
+    "no-alert": "warn",
+    "react/prop-types": "off",
+    "@typescript-eslint/no-explicit-any": "off"
+  }
+}

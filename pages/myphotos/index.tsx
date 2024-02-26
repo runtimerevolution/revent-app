@@ -12,7 +12,7 @@ export default function MyPhotos({ myphotosList }: MyPhotosProps) {
       <div className='px-8'>
         <main className='min-h-screen py-8 px-20 flex-1 flex flex-col'>
           <div className='grid grid-cols-4 gap-4'>
-            {myphotosList.map((myphoto) => (
+            {myphotosList.map((myphoto, key) => (
               <MyPhoto myphoto={myphoto} key={myphoto.id} />
             ))}
           </div>

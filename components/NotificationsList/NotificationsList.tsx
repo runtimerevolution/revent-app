@@ -11,8 +11,8 @@ export default function NotificationsList({
 }: NotificationsListProps) {
   return (
     <>
-      {displayedNotifications.map((notification) => (
-        <Notification notification={notification} />
+      {displayedNotifications.map((notification, key) => (
+        <Notification key={key} notification={notification} />
       ))}
     </>
   )

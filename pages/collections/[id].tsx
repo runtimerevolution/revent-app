@@ -45,8 +45,8 @@ export default function CollectionDetailPage() {
               </p>
               <div className='mt-6 h-screen'>
                 <div className='mt-2 flex flex-wrap'>
-                  {pictureList?.map((image) => (
-                    <CollectionPicture image={image} />
+                  {pictureList?.map((image, key) => (
+                    <CollectionPicture key={key} image={image} />
                   ))}
                 </div>
               </div>

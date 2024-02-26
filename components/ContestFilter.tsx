@@ -63,8 +63,9 @@ export default function ContestFilter({
       </div>
       {open && (
         <>
-          {filterList.map((filter: string) => (
+          {filterList.map((filter: string, key) => (
             <button
+              key={key}
               className={`${selectedFilterCSS(
                 filter
               )} text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2`}

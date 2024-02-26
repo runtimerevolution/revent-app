@@ -1,11 +1,11 @@
 import { Notification } from '../components/helpers/interfaces'
-const { NEXT_PUBLIC_API_URL } = process.env
+const { NEXT_PUBLIC_BACKEND_URL } = process.env
 const GET = 'GET'
 const POST = 'POST'
 
 export async function fetchEndpoint(endpoint, method, ...args) {
   if (method == GET) {
-    const response = await fetch(NEXT_PUBLIC_API_URL + endpoint, {
+    const response = await fetch(NEXT_PUBLIC_BACKEND_URL + endpoint, {
       method: GET,
       headers: {
         'Content-Type': 'application/json',
@@ -13,7 +13,7 @@ export async function fetchEndpoint(endpoint, method, ...args) {
     })
   } else if (method == POST) {
     const body = args[0]
-    const response = await fetch(NEXT_PUBLIC_API_URL + endpoint, {
+    const response = await fetch(NEXT_PUBLIC_BACKEND_URL + endpoint, {
       method: POST,
       mode: 'cors',
       body,

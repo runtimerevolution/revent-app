@@ -29,7 +29,6 @@ export default function ContestVoting({ contest }) {
   const [selectedImage, setSelectedImage] = useState(null)
   const [showNextImage, setShowNextImage] = useState(null)
 
-
   const closeImageModal = () => {
     setSelectedImage(null)
   }
@@ -75,7 +74,10 @@ export default function ContestVoting({ contest }) {
   }, [showNextImage])
 
   useEffect(() => {
-    if (imageList.length == imageIDList.length && imageList.length != order.length) {
+    if (
+      imageList.length == imageIDList.length &&
+      imageList.length != order.length
+    ) {
       setOrder(imageIDList)
     }
   }, [imageList])
@@ -140,11 +142,12 @@ export default function ContestVoting({ contest }) {
 
               {!loadingSubmission && !errorSubmission && (
                 <>
-                  {submissionList?.map((image) => {
+                  {submissionList?.map((image, key) => {
                     imageList.push(image)
                     imageIDList.push(image.id)
                     return (
                       <SubmissionPicture
+                        key={key}
                         image={image}
                         setSelectedImage={setSelectedImage}
                         contestInfo={contest_info}
