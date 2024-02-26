@@ -17,7 +17,7 @@ export default function ContestClosed({ contest }) {
     refetch: refetchContest,
   } = useQuery(GET_CLOSED_CONTEST_SUBMISSIONS, {
     variables: {
-      filters: { contest: { id: contest.id } },
+      filters: { contest: { id: contest?.id } },
     },
   })
 

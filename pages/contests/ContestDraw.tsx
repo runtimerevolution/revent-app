@@ -18,7 +18,7 @@ export default function ContestDraw({ contest }) {
   } = useQuery(GET_CONTEST_SUBMISSIONS, {
     variables: {
       filters: {
-        contest: { id: contest.id },
+        contest: { id: contest?.id },
         draw: true,
       },
       order: order.length > 0 ? order : null,
@@ -145,11 +145,12 @@ export default function ContestDraw({ contest }) {
 
               {!loadingSubmission && !errorSubmission && (
                 <>
-                  {submissionList?.map((image) => {
+                  {submissionList?.map((image, key) => {
                     imageList.push(image)
-                    imageIDList.push(image.id)
+                    imageIDList.push(image?.id)
                     return (
                       <SubmissionPicture
+                        key={key}
                         image={image}
                         setSelectedImage={setSelectedImage}
                         contestInfo={contest_info}
