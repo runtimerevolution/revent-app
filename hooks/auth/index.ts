@@ -8,7 +8,8 @@ export const USER_INFO = 'user'
 export const getGoogleAuthLink = async () => {
   const response = await client.get<OAuthUrl>('/auth/o/google-oauth2/', {
     params: {
-      redirect_uri: process.env.NEXT_PUBLIC_FRONTEND_URL,
+      redirect_uri:
+        process.env.NEXT_PUBLIC_FRONTEND_URL || window.location.origin,
     },
     withCredentials: true,
   })

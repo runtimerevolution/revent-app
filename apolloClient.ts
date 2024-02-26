@@ -3,7 +3,7 @@ import { setContext } from '@apollo/client/link/context'
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs'
 
 const httpLink = createUploadLink({
-  uri: process.env.NEXT_PUBLIC_BACKEND_URL + 'graphql/',
+  uri: (process.env.NEXT_PUBLIC_BACKEND_URL || '/') + 'graphql/',
 })
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('token')
