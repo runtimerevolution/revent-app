@@ -11,12 +11,6 @@ export default function UserMenu({
   setShowUserMenu,
   showUserMenu,
 }: UserMenuProps) {
-  const router = useRouter()
-  const handleNavigation = (path: string) => {
-    setShowUserMenu(false)
-    router.push(path)
-  }
-
   const { mutate } = useLogout()
   const [mouseOut, setMouseOut] = useState(false)
 
@@ -41,7 +35,7 @@ export default function UserMenu({
         <div
           onMouseOut={() => setMouseOut(true)}
           onMouseEnter={() => setMouseOut(false)}
-          className='w-48 absolute -top-16 bg-white text-gray-800 rounded-lg shadow-lg p-4 max-h-60'
+          className='w-48 absolute -top-2 z-20 bg-white text-gray-800 rounded-lg shadow-lg p-4 max-h-60'
         >
           <ul>
             <button onClick={logout} className='flex items-center mt-2'>

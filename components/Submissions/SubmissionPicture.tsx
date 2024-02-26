@@ -53,7 +53,7 @@ export default function SubmissionPicture({
   return (
     <div
       key={image.id}
-      className={ratio == 'width' ? 'row-span-5' : 'row-span-6'}
+      className={ratio == 'width' ? 'row-span-3' : 'row-span-4'}
     >
       <div
         className='relative items-center mx-2 max-w-10 h-full'

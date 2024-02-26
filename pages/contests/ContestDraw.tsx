@@ -8,17 +8,20 @@ import ImageModal from 'components/contest/ImageModal'
 
 export default function ContestDraw({ contest }) {
   const awsEnv = process.env.NEXT_PUBLIC_AWS_S3_ENDPOINT_URL
+  const [order, setOrder] = useState([])
 
   const {
     loading: loadingSubmission,
     error: errorSubmission,
     data: submissionData,
+    refetch: refetchSubmissions,
   } = useQuery(GET_CONTEST_SUBMISSIONS, {
     variables: {
       filters: {
-        contest: { id: contest?.id },
+        contest: { id: contest.id },
         draw: true,
       },
+      order: order.length > 0 ? order : null,
     },
   })
 
@@ -27,6 +30,7 @@ export default function ContestDraw({ contest }) {
   const [selectedImage, setSelectedImage] = useState(null)
   const [showNextImage, setShowNextImage] = useState(null)
   const imageList = []
+  let imageIDList = []
 
   const closeImageModal = () => {
     setSelectedImage(null)
@@ -72,6 +76,15 @@ export default function ContestDraw({ contest }) {
     }
   }, [showNextImage])
 
+  useEffect(() => {
+    if (
+      imageList.length == imageIDList.length &&
+      imageList.length != order.length
+    ) {
+      setOrder(imageIDList)
+    }
+  }, [imageList])
+
   const date = new Date(contest?.upload_phase_start)
   const month = date ? date.toLocaleString('default', { month: 'long' }) : ''
 
@@ -83,7 +96,7 @@ export default function ContestDraw({ contest }) {
 
   return (
     <>
-      <div className='w-full flex justify-center h-full bg-white p-8 rounded-lg shadow-lg'>
+      <div className='w-full flex justify-center h-full bg-white p-8 rounded-lg'>
         <div className='w-10/12'>
           <div className='flex justify-center items-center'>
             <div className='relative w-full'>
@@ -105,7 +118,7 @@ export default function ContestDraw({ contest }) {
                     className='rounded-full'
                   />
                   <p className='text-center font-inter ml-1 text-white'>
-                    {'Voting phase'}
+                    {'Tied Contest'}
                   </p>
                 </div>
               </div>
@@ -132,11 +145,11 @@ export default function ContestDraw({ contest }) {
 
               {!loadingSubmission && !errorSubmission && (
                 <>
-                  {submissionList?.map((image, key) => {
+                  {submissionList?.map((image) => {
                     imageList.push(image)
+                    imageIDList.push(image.id)
                     return (
                       <SubmissionPicture
-                        key={key}
                         image={image}
                         setSelectedImage={setSelectedImage}
                         contestInfo={contest_info}
@@ -153,6 +166,7 @@ export default function ContestDraw({ contest }) {
                 contest={contest}
                 previousImage={previousImage}
                 nextImage={nextImage}
+                refetch={refetchSubmissions}
               />
             )}
           </div>

@@ -72,7 +72,7 @@ const useLogout = () =>
     onSuccess: () => {
       localStorage.removeItem(TOKEN_KEY)
       localStorage.removeItem(USER_INFO)
-      handleNavigation('/')
+      router.push('/')
       window.location.reload()
     },
   })

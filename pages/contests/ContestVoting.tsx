@@ -8,20 +8,26 @@ import ImageModal from 'components/contest/ImageModal'
 
 export default function ContestVoting({ contest }) {
   const awsEnv = process.env.NEXT_PUBLIC_AWS_S3_ENDPOINT_URL
+  let imageList = []
+  let imageIDList = []
+  const [order, setOrder] = useState([])
 
   const {
     loading: loadingSubmission,
     error: errorSubmission,
     data: submissionData,
+    refetch: refetchSubmissions,
   } = useQuery(GET_CONTEST_SUBMISSIONS, {
-    variables: { filters: { contest: { id: contest?.id } } },
+    variables: {
+      filters: { contest: { id: contest.id } },
+      order: order.length > 0 ? order : null,
+    },
   })
 
   const submissionList = submissionData?.contest_submissions
 
   const [selectedImage, setSelectedImage] = useState(null)
   const [showNextImage, setShowNextImage] = useState(null)
-  const imageList = []
 
   const closeImageModal = () => {
     setSelectedImage(null)
@@ -67,6 +73,15 @@ export default function ContestVoting({ contest }) {
     }
   }, [showNextImage])
 
+  useEffect(() => {
+    if (
+      imageList.length == imageIDList.length &&
+      imageList.length != order.length
+    ) {
+      setOrder(imageIDList)
+    }
+  }, [imageList])
+
   const date = new Date(contest?.upload_phase_start)
   const month = date ? date.toLocaleString('default', { month: 'long' }) : ''
 
@@ -78,7 +93,7 @@ export default function ContestVoting({ contest }) {
 
   return (
     <>
-      <div className='w-full flex justify-center h-full bg-white p-8 rounded-lg shadow-lg'>
+      <div className='w-full flex justify-center h-full bg-white p-8 rounded-lg'>
         <div className='w-10/12'>
           <div className='flex justify-center items-center'>
             <div className='relative w-full'>
@@ -129,6 +144,7 @@ export default function ContestVoting({ contest }) {
                 <>
                   {submissionList?.map((image, key) => {
                     imageList.push(image)
+                    imageIDList.push(image.id)
                     return (
                       <SubmissionPicture
                         key={key}
@@ -148,6 +164,7 @@ export default function ContestVoting({ contest }) {
                 contest={contest}
                 previousImage={previousImage}
                 nextImage={nextImage}
+                refetch={refetchSubmissions}
               />
             )}
           </div>
