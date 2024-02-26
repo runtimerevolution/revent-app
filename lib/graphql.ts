@@ -74,8 +74,24 @@ export const GET_COLLECTION_DETAIL = gql`
 `
 
 export const GET_CONTEST_SUBMISSIONS = gql`
-  query GetContestSubmissions($filters: ContestSubmissionFilter!) {
-    contest_submissions(filters: $filters) {
+  query GetContestSubmissions($filters: ContestSubmissionFilter!, $order: [Int!]) {
+    contest_submissions(filters: $filters, order: $order) {
+      id
+      submission_date
+      picture {
+        id
+        file
+      }
+      votes {
+        id
+      }
+    }
+  }
+`
+
+export const GET_CLOSED_CONTEST_SUBMISSIONS = gql`
+  query GetContestSubmissions($filters: ContestSubmissionFilter!, $order: [Int!]) {
+    contest_submissions(filters: $filters, order: $order) {
       id
       submission_date
       picture {
@@ -85,6 +101,7 @@ export const GET_CONTEST_SUBMISSIONS = gql`
           id
           name_first
           name_last
+          email
         }
       }
       votes {
@@ -268,11 +285,13 @@ export const SEARCH_QUERY = gql`
       upload_phase_end
       upload_phase_start
       voting_phase_end
+      voting_draw_end
       description
       cover_picture {
         id
         file
       }
+      internal_status
     }
   }
 `

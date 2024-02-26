@@ -17,7 +17,7 @@ export default function ContestOpen({ contest }) {
   } = useQuery(GET_CONTEST_SUBMISSIONS, {
     variables: {
       filters: {
-        contest: { id: contest?.id },
+        contest: { id: contest.id },
         picture: { user: { id: profile.data?.id } },
       },
     },
@@ -30,7 +30,7 @@ export default function ContestOpen({ contest }) {
     <>
       <div
         className={
-          'w-full flex justify-center bg-white p-8 rounded-lg shadow-lg' +
+          'w-full flex justify-center bg-white p-8 rounded-lg' +
           (profile.isSuccess ? 'h-full' : 'h-screen')
         }
       >
