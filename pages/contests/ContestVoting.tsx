@@ -19,7 +19,7 @@ export default function ContestVoting({ contest }) {
     refetch: refetchSubmissions,
   } = useQuery(GET_CONTEST_SUBMISSIONS, {
     variables: {
-      filters: { contest: { id: contest.id } },
+      filters: { contest: { id: contest?.id } },
       order: order.length > 0 ? order : null,
     },
   })

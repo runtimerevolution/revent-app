@@ -17,7 +17,7 @@ export default function ContestOpen({ contest }) {
   } = useQuery(GET_CONTEST_SUBMISSIONS, {
     variables: {
       filters: {
-        contest: { id: contest.id },
+        contest: { id: contest?.id },
         picture: { user: { id: profile.data?.id } },
       },
     },
