@@ -61,7 +61,7 @@ export default function SubmissionForm({
         picture,
       }
 
-      const response = await createContestSubmission({
+      await createContestSubmission({
         variables: { contestSubmission },
       })
     } catch (error) {

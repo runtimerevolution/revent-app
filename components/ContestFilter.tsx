@@ -1,8 +1,5 @@
-import Image from 'next/image'
 import React from 'react'
-import { useState } from 'react'
 import { IFilter } from './helpers/interfaces'
-import CreateContestForm from './Navbar/CreateContestForm'
 import SearchInput from './SearchInput'
 
 interface ContestFilterProps {
@@ -52,6 +49,7 @@ export default function ContestFilter({
           <button
             className='text-gray-700 bg-gray-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer w-full'
             onClick={() => setOpen(!open)}
+            type='button'
           >
             Filters
           </button>
@@ -70,6 +68,7 @@ export default function ContestFilter({
                 filter
               )} text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2`}
               onClick={() => handleStatusFilter(filter as IFilter)}
+              type='button'
             >
               {filter}
             </button>

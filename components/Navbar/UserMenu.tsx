@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useLogout } from 'hooks/auth'
@@ -38,7 +37,11 @@ export default function UserMenu({
           className='w-48 absolute -top-2 z-20 bg-white text-gray-800 rounded-lg shadow-lg p-4 max-h-60'
         >
           <ul>
-            <button onClick={logout} className='flex items-center mt-2'>
+            <button
+              onClick={logout}
+              className='flex items-center mt-2'
+              type='button'
+            >
               <Image
                 src='/images/signout.svg'
                 alt='profile'

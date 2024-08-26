@@ -7,6 +7,7 @@ import { useGoogleAuthLink, useGoogleAuthToken, useProfile } from 'hooks/auth'
 
 export default function Navbar() {
   const router = useRouter()
+  const [showUserMenu, setShowUserMenu] = useState<boolean>(false)
   const handleNavigation = (path: string) => {
     setShowUserMenu(false)
     router.push(path)
@@ -100,8 +101,6 @@ export default function Navbar() {
   const contestsBackgroundColor =
     router.pathname === '/' ? 'hover:bg-orange-700' : 'hover:bg-gray-700'
 
-  const [showUserMenu, setShowUserMenu] = useState<boolean>(false)
-
   const handleOpenUserMenu = () => {
     setShowUserMenu((showUserMenu) => !showUserMenu)
   }
@@ -141,6 +140,7 @@ export default function Navbar() {
               <button
                 onClick={handleGoogleLogin}
                 className='text-base1416 text-white bg-[#F78445] font-bold rounded-lg px-[10px] py-[15px] gap-[10px]'
+                type='button'
               >
                 Login
               </button>
@@ -149,6 +149,7 @@ export default function Navbar() {
                 <button
                   className='relative text-white focus:outline-none rounded-full p-2'
                   onClick={handleOpenUserMenu}
+                  type='button'
                 >
                   <Image
                     src='/images/profile.jpeg'
@@ -161,7 +162,12 @@ export default function Navbar() {
               </>
             )}
           </div>
-          {showUserMenu && <UserMenu setShowUserMenu={setShowUserMenu} showUserMenu={showUserMenu} />}
+          {showUserMenu && (
+            <UserMenu
+              setShowUserMenu={setShowUserMenu}
+              showUserMenu={showUserMenu}
+            />
+          )}
         </div>
       </div>
     </nav>

@@ -1,5 +1,3 @@
-import React from 'react'
-
 export type IFilter = 'All' | 'open' | 'voting' | 'closed' | 'schedule'
 
 export interface PicturePath {
@@ -20,6 +18,10 @@ export interface ContestCardProps {
   contest: Contest
 }
 
+export interface Picture {
+  file: string
+}
+
 export interface Notification {
   user: string
   opened: boolean
@@ -32,10 +34,6 @@ export interface Notification {
 export interface NotificationsList {
   displayedNotifications: Notification[]
 }
-export interface Picture {
-  file: string
-}
-
 export interface User {
   name_first: string
   name_last: string

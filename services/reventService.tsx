@@ -11,6 +11,7 @@ export async function fetchEndpoint(endpoint, method, ...args) {
         'Content-Type': 'application/json',
       },
     })
+    return response.json()
   } else if (method == POST) {
     const body = args[0]
     const response = await fetch(NEXT_PUBLIC_BACKEND_URL + endpoint, {

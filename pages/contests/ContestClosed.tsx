@@ -14,7 +14,6 @@ export default function ContestClosed({ contest }) {
     loading: loadingSubmission,
     error: errorSubmission,
     data: submissionData,
-    refetch: refetchContest,
   } = useQuery(GET_CLOSED_CONTEST_SUBMISSIONS, {
     variables: {
       filters: { contest: { id: contest?.id } },
@@ -67,7 +66,7 @@ export default function ContestClosed({ contest }) {
       setSelectedImage(showNextImage)
       setShowNextImage(null)
     }
-  }, [showNextImage])
+  }, [showNextImage, selectedImage])
 
   var date = new Date(contest?.upload_phase_start)
   var month = date ? date.toLocaleString('default', { month: 'long' }) : ''

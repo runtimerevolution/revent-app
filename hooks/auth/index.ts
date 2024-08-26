@@ -62,9 +62,6 @@ const useProfile = () =>
     },
   })
 
-const handleNavigation = (path: string) => {
-  router.push(path)
-}
 const useLogout = () =>
   useMutation({
     mutationKey: ['logout'],

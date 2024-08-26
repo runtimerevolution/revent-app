@@ -71,7 +71,7 @@ export default function ContestVoting({ contest }) {
       setSelectedImage(showNextImage)
       setShowNextImage(null)
     }
-  }, [showNextImage])
+  }, [showNextImage, selectedImage])
 
   useEffect(() => {
     if (
@@ -80,7 +80,7 @@ export default function ContestVoting({ contest }) {
     ) {
       setOrder(imageIDList)
     }
-  }, [imageList])
+  }, [imageList, imageIDList])
 
   const date = new Date(contest?.upload_phase_start)
   const month = date ? date.toLocaleString('default', { month: 'long' }) : ''

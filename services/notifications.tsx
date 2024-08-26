@@ -6,7 +6,7 @@ export async function getServerSideProps() {
   try {
     notifications = await getNotificationsList()
   } catch (err) {
-    console.log('Error', err)
+    console.error('Error', err)
   }
 
   return {

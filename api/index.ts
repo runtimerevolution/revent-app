@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { camelizeKeys } from 'humps'
-import { OAuthCredential, OAuthUrl, Profile } from './type'
+import { OAuthCredential, OAuthUrl } from './type'
 
 export type { OAuthCredential, OAuthUrl }
 

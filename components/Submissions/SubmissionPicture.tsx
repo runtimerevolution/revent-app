@@ -69,7 +69,7 @@ export default function SubmissionPicture({
           src={awsEnv + image.picture.file}
           alt={`Image ${image.id}`}
           className={'relative top-0 w-full mb-0 h-full rounded-xl'}
-          onLoad={(e) => {
+          onLoad={() => {
             // if (e.target.naturalHeight > e.target.naturalWidth) {
             setRatio('height')
             // }

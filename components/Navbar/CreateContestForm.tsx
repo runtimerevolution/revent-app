@@ -37,15 +37,14 @@ export default function CreateContestForm({
 
   const allowedImageFormats = ['jpeg', 'png', 'jpg']
   // To be used when the upload picture feature is done
-  const fileSchema = z
-    .object({
-      name: z.string(),
-      size: z.number(),
-      type: z.string().refine((value) => {
-        const fileExtension = value.split('/').pop()
-        return allowedImageFormats.includes(fileExtension)
-      }, 'Invalid image format'),
-    })
+  z.object({
+    name: z.string(),
+    size: z.number(),
+    type: z.string().refine((value) => {
+      const fileExtension = value.split('/').pop()
+      return allowedImageFormats.includes(fileExtension)
+    }, 'Invalid image format'),
+  })
     .nullable()
     .refine((value) => value !== null, { message: 'File is required' })
 
@@ -148,7 +147,7 @@ export default function CreateContestForm({
     setVotingDate(null)
     setuUploadDate(null)
     setAutomatedDates(automatedDates)
-  }, [dateOptions])
+  }, [dateOptions, automatedDates])
 
   return (
     <>

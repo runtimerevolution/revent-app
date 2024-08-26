@@ -38,7 +38,7 @@ export default function ContestList({ filteredContestList }) {
             </a>
           </div>
           <div className='grid grid-cols-4 gap-4 mt-4'>
-            {drawContests?.map((contest, keys) => (
+            {drawContests?.map((contest) => (
               <ContestCardDraw key={contest.id} contest={contest} />
             ))}
           </div>
@@ -59,7 +59,7 @@ export default function ContestList({ filteredContestList }) {
             </a>
           </div>
           <div className='grid grid-cols-4 gap-4 mt-4'>
-            {openContests?.map((contest, key) => (
+            {openContests?.map((contest) => (
               <ContestCardOpen key={contest.id} contest={contest} />
             ))}
           </div>
@@ -81,7 +81,7 @@ export default function ContestList({ filteredContestList }) {
             </a>
           </div>
           <div className='grid grid-cols-4 gap-4 mt-4'>
-            {votingContests?.map((contest, key) => (
+            {votingContests?.map((contest) => (
               <ContestCardVoting key={contest.id} contest={contest} />
             ))}
           </div>
@@ -103,7 +103,7 @@ export default function ContestList({ filteredContestList }) {
             </a>
           </div>
           <div className='grid grid-cols-4 gap-4 mt-4'>
-            {closedContests?.map((contest, key) => (
+            {closedContests?.map((contest) => (
               <ContestCardClosed key={contest.id} contest={contest} />
             ))}
           </div>

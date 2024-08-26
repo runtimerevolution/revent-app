@@ -7,9 +7,11 @@
     "no-use-before-define": "warn",
     "react/button-has-type": "warn",
     "no-unused-vars": "warn",
-    "no-console": "warn",
+    "no-console": ["error", { "allow": ["error"] }],
     "no-alert": "warn",
     "react/prop-types": "off",
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
+    "@next/next/no-img-element": "off",
+    "jsx-a11y/alt-text": "off"
   }
 }
