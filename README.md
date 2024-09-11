@@ -12,6 +12,9 @@ It works with the Photo contest API.
 - [Description](#description)
 - [Table of Contents](#table-of-contents)
 - [Setup](#setup)
+  - [Env](#env)
+  - [Node](#node)
+  - [Scripts](#scripts)
 
 ## Setup
 
@@ -22,6 +25,10 @@ Copy .env.local.sample to .env.local
 ```bash
 cp .env.local.sample .env.local
 ```
+
+### Pre-commit
+
+# TODO
 
 ### Node
 
