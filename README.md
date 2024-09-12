@@ -28,7 +28,17 @@ cp .env.local.sample .env.local
 
 ### Pre-commit
 
-# TODO
+Install pre-commit
+
+```bash
+brew install pre-commit
+```
+
+Install the project's pre-commit hooks
+
+```bash
+pre-commit install # or pre-commit install -f to overwrite existing hooks
+```
 
 ### Node
 
@@ -42,7 +52,7 @@ echo '[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
 echo '[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"' >> ~/.zshrc
 ```
 
-Install the projects node version
+Install the project's node version
 
 ```bash
 nvm install
