@@ -1,81 +1,68 @@
-import Image from 'next/image'
 import React from 'react'
-import { useState } from 'react'
-import { IFilter } from './helpers/interfaces'
-import CreateContestForm from './Navbar/CreateContestForm'
-import SearchInput from './SearchInput'
+import Image from 'next/image'
+
+import styles from './ContestFilter.module.css'
+import { Filter } from 'types'
+
+enum FilterToString {
+  all = `All Contests`,
+  open = 'Open',
+  voting = 'Voting',
+  closed = 'Closed',
+}
 
 interface ContestFilterProps {
-  open: boolean
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>
-  statusFilter: IFilter
-  setStatusFilter: React.Dispatch<React.SetStateAction<IFilter>>
-  setSearchData?: React.Dispatch<React.SetStateAction<any>>
-  setIsSearching?: React.Dispatch<React.SetStateAction<boolean>>
+  statusFilter: Filter
+  setStatusFilter: React.Dispatch<React.SetStateAction<Filter>>
 }
 
 export default function ContestFilter({
-  open,
-  setOpen,
   statusFilter,
   setStatusFilter,
-  setSearchData,
-  setIsSearching,
 }: ContestFilterProps) {
-  const filterMapping: { [key: string]: IFilter } = {
-    All: 'All',
-    Open: 'open',
-    Voting: 'voting',
-    Closed: 'closed',
-    Schedule: 'schedule',
-  }
-
-  const handleStatusFilter = (status: string) => {
-    const lowercaseStatus = filterMapping[status]
-    setStatusFilter(lowercaseStatus)
-  }
-
-  const selectedFilterCSS = (filter) => {
-    const lowercaseFilter = filterMapping[filter]
-    if (lowercaseFilter === statusFilter) {
-      return 'text-orange-500 bg-orange-700'
-    }
-    return 'text-gray-700 bg-gray-700'
-  }
-
-  const filterList = ['Open', 'All', 'Voting', 'Closed', 'Schedule']
-
   return (
     <>
-      <div className='flex-row grid grid-cols-6'>
-        <div className='col-span-1 pr-2'>
-          <button
-            className='text-gray-700 bg-gray-500 text-white px-3 py-2 rounded-2xl font-medium cursor-pointer w-full'
-            onClick={() => setOpen(!open)}
-          >
-            Filters
-          </button>
+      <div id='Header' className='flex justify-between'>
+        <div id='Title'>
+          <span className='text-[24px] text-[#444444] font-bold'>Photo </span>
+          <span className='text-[24px] text-[#F78445] font-bold'>Contests</span>
         </div>
-        <SearchInput
-          setSearchData={setSearchData}
-          setIsSearching={setIsSearching}
-        />
+        <div id='ActionsMenu'>
+          <div
+            id='SearchButton'
+            className='rounded-full bg-[#F3F3F4] w-11 h-11 flex justify-center '
+          >
+            <Image
+              src='/images/search.svg'
+              alt='Search icon'
+              width={20}
+              height={20}
+            />
+          </div>
+        </div>
       </div>
-      {open && (
-        <>
-          {filterList.map((filter: string, key) => (
-            <button
-              key={key}
-              className={`${selectedFilterCSS(
-                filter
-              )} text-white px-3 py-2 rounded-2xl font-medium cursor-pointer mr-2 mt-2`}
-              onClick={() => handleStatusFilter(filter as IFilter)}
-            >
-              {filter}
-            </button>
-          ))}
-        </>
-      )}
+
+      <div
+        id='Filters'
+        className={`${styles.filters} flex gap-2 overflow-x-scroll mt-6`}
+      >
+        {Object.entries(FilterToString).map(([filter, filterString], key) => (
+          <button
+            key={key}
+            className={`${
+              filter === statusFilter
+                ? 'bg-[#444444] text-[#FFFFFF]'
+                : 'bg-[#F3F3F4] text-[#777777]'
+            }  px-5 py-2 rounded-full font-normal whitespace-nowrap`}
+            onClick={() => {
+              setStatusFilter(filter as Filter)
+            }}
+            type='button'
+          >
+            {filterString}
+          </button>
+        ))}
+      </div>
     </>
   )
 }

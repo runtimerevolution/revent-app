@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { getNotificationsList } from 'services/reventService'
 import UserMenu from './UserMenu'
 import { useGoogleAuthLink, useGoogleAuthToken, useProfile } from 'hooks/auth'
+import Link from 'next/link'
 
 export default function Navbar() {
   const router = useRouter()
@@ -107,11 +108,11 @@ export default function Navbar() {
   }
 
   return (
-    <nav className='bg-white-800 w-full'>
+    <nav className='bg-white-800 w-full shadow-[0px_-14px_28px_0px_rgba(0,0,0,0.28)]'>
       <div className='max-w-12xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex relative items-center justify-between h-16'>
           <div className='flex items-center flex-shrink-0 text-white'>
-            <a className='flex items-center' href='/'>
+            <Link className='flex items-center' href='/'>
               <div className='w-10 h-10 mr-2'>
                 <Image
                   src='/images/logo.svg'
@@ -123,7 +124,7 @@ export default function Navbar() {
               <span className='text-gray-700 font-semibold text-xl tracking-tight'>
                 Revent.
               </span>
-            </a>
+            </Link>
 
             <div className='hidden md:block'>
               <div className='ml-10 flex items-center space-x-4'>
@@ -161,7 +162,12 @@ export default function Navbar() {
               </>
             )}
           </div>
-          {showUserMenu && <UserMenu setShowUserMenu={setShowUserMenu} showUserMenu={showUserMenu} />}
+          {showUserMenu && (
+            <UserMenu
+              setShowUserMenu={setShowUserMenu}
+              showUserMenu={showUserMenu}
+            />
+          )}
         </div>
       </div>
     </nav>

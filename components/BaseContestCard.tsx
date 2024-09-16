@@ -22,31 +22,26 @@ export default function BaseContestCard({
     : 'images/placeholder.svg'
 
   return (
-    <Link href={`/contests/${contest.id}`}>
-      <>
-        <div
-          key={contest.id}
-          className='relative rounded-lg overflow-hidden shadow-m h-full w-full'
-          style={{
-            backgroundImage: `url(${awsEnv + pictureCover})`,
-            backgroundSize: 'cover',
-            height: '15em',
-          }}
-        >
-          <div className='absolute inset-0 bg-black opacity-40 rounded-lg'></div>
-          <div className='absolute inset-0 flex flex-col justify-start items-start h-fix'>
-            {children[0]}
-            <h3 className='text-inter text-light-grey font-medium text-sm mt-10 ml-2 opacity-50'>
-              {month}
-            </h3>
-            <h3 className='text-inter text-white font-medium text-base ml-2'>
-              {contest.title}
-            </h3>
-            {children[1]}
-            <div className='text-inter text-white text-sm flex justify-end mb-5 h-80'></div>
-          </div>
-        </div>
-      </>
+    <Link
+      href={`/contests/${contest.id}`}
+      className='relative rounded-lg overflow-hidden shadow-m h-56 bg-cover'
+      // Tailwind CSS doesn't deal with external dynamic paths
+      style={{
+        backgroundImage: `url(${awsEnv + pictureCover})`,
+      }}
+    >
+      <div className='absolute inset-0 bg-black opacity-40 rounded-lg'></div>
+      <div className='absolute inset-0 flex flex-col justify-start items-start h-fix'>
+        {children[0]}
+        <h3 className='text-inter text-light-grey font-medium text-sm mt-10 ml-2 opacity-50'>
+          {month}
+        </h3>
+        <h3 className='text-inter text-white font-medium text-base ml-2'>
+          {contest.title}
+        </h3>
+        {children[1]}
+        <div className='text-inter text-white text-sm flex justify-end mb-5 h-80'></div>
+      </div>
     </Link>
   )
 }
