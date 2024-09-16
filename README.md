@@ -1,29 +1,72 @@
-# README
+# REVENT APP
 
-This README would normally document whatever steps are necessary to get your application up and running.
+**This README will get you started and guide you through the project**
 
-### What is this repository for?
+## Description
 
-- Quick summary
-- Version
-- [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+Photo contest APP is a Next.js app for the Runtime Revolution photo contest that takes place every month and aims to allow a fair and easy voting for all participants.
+It works with the Photo contest API.
 
-### How do I get set up?
+## Table of Contents
 
-- Summary of set up
-- Configuration
-- Dependencies
-- Database configuration
-- How to run tests
-- Deployment instructions
+- [Description](#description)
+- [Table of Contents](#table-of-contents)
+- [Setup](#setup)
+  - [Env](#env)
+  - [Node](#node)
+  - [Scripts](#scripts)
 
-### Contribution guidelines
+## Setup
 
-- Writing tests
-- Code review
-- Other guidelines
+### Env
 
-### Who do I talk to?
+Copy .env.local.sample to .env.local
 
-- Repo owner or admin
-- Other community or team contact
+```bash
+cp .env.local.sample .env.local
+```
+
+### Pre-commit
+
+Install pre-commit
+
+```bash
+brew install pre-commit
+```
+
+Install the project's pre-commit hooks
+
+```bash
+pre-commit install # or pre-commit install -f to overwrite existing hooks
+```
+
+### Node
+
+Install nvm
+
+```bash
+brew install nvm
+
+echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc
+echo '[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"' >> ~/.zshrc
+echo '[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"' >> ~/.zshrc
+```
+
+Install the project's node version
+
+```bash
+nvm install
+nvm use
+```
+
+### Scripts
+
+The basic npm scripts for a next.js app:
+
+```bash
+npm install # Install dependencies
+npm run dev # Run next.js in development mode
+npm run test # Run the tests
+npm run build # Generate production build
+npm run start # Run the app in production mode (requires build 1st)
+```
