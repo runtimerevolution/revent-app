@@ -1,5 +1,3 @@
-import React from 'react'
-
 export type IFilter = 'All' | 'open' | 'voting' | 'closed' | 'schedule'
 
 export interface PicturePath {

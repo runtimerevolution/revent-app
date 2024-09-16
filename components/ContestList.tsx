@@ -5,27 +5,27 @@ import ContestCardOpen from 'components/ContestCardOpen'
 import ContestCardVoting from 'components/ContestCardVoting'
 import ContestCardDraw from 'components/ContestCardDraw'
 
-export default function ContestList({ filteredContestList }) {
-  const openContests = filteredContestList?.filter(
+export default function ContestList({ contestList }) {
+  const openContests = contestList?.filter(
     (contest) => contest.status === 'open' && contest.internal_status === 'open'
   )
-  const votingContests = filteredContestList?.filter(
+  const votingContests = contestList?.filter(
     (contest) =>
       contest.status === 'voting' && contest.internal_status === 'open'
   )
-  const closedContests = filteredContestList?.filter(
+  const closedContests = contestList?.filter(
     (contest) =>
       contest.status === 'closed' && contest.internal_status === 'closed'
   )
-  const drawContests = filteredContestList?.filter(
+  const drawContests = contestList?.filter(
     (contest) => contest.internal_status === 'draw' && contest.voting_draw_end
   )
 
   return (
-    <div>
+    <>
       {drawContests?.length > 0 && (
         <>
-          <div className='mt-2'>
+          <div className='my-6'>
             <a className='flex items-center contest-divider'>
               <Image
                 src='/images/warning.svg'
@@ -34,11 +34,13 @@ export default function ContestList({ filteredContestList }) {
                 height={20}
                 className='rounded-full color-gray-500'
               />
-              <a className='ml-2 w-72 text-gray-500'>Tied Contests</a>
+              <div className='ml-2 mr-4 text-gray-500 whitespace-nowrap'>
+                Tied Contests
+              </div>
             </a>
           </div>
           <div className='grid grid-cols-4 gap-4 mt-4'>
-            {drawContests?.map((contest, keys) => (
+            {drawContests?.map((contest) => (
               <ContestCardDraw key={contest.id} contest={contest} />
             ))}
           </div>
@@ -46,7 +48,7 @@ export default function ContestList({ filteredContestList }) {
       )}
       {openContests?.length > 0 && (
         <>
-          <div className='mt-2'>
+          <div className='my-6'>
             <a className='flex items-center contest-divider'>
               <Image
                 src='/images/opencontests.svg'
@@ -55,11 +57,13 @@ export default function ContestList({ filteredContestList }) {
                 height={20}
                 className='rounded-full'
               />
-              <a className='ml-2 w-72 text-gray-500'>Open Contests</a>
+              <div className='ml-2 mr-4 text-gray-500 whitespace-nowrap'>
+                Open Contests
+              </div>
             </a>
           </div>
-          <div className='grid grid-cols-4 gap-4 mt-4'>
-            {openContests?.map((contest, key) => (
+          <div className='flex flex-col gap-6'>
+            {openContests?.map((contest) => (
               <ContestCardOpen key={contest.id} contest={contest} />
             ))}
           </div>
@@ -68,7 +72,7 @@ export default function ContestList({ filteredContestList }) {
 
       {votingContests?.length > 0 && (
         <>
-          <div className='mt-2'>
+          <div className='my-6'>
             <a className='flex items-center contest-divider'>
               <Image
                 src='/images/curved_heart.svg'
@@ -77,11 +81,13 @@ export default function ContestList({ filteredContestList }) {
                 height={20}
                 className='rounded-full'
               />
-              <a className='ml-1 w-72 text-gray-500'>Voting Phase</a>
+              <div className='ml-2 mr-4 text-gray-500 whitespace-nowrap'>
+                Voting Phase
+              </div>
             </a>
           </div>
           <div className='grid grid-cols-4 gap-4 mt-4'>
-            {votingContests?.map((contest, key) => (
+            {votingContests?.map((contest) => (
               <ContestCardVoting key={contest.id} contest={contest} />
             ))}
           </div>
@@ -90,7 +96,7 @@ export default function ContestList({ filteredContestList }) {
 
       {closedContests?.length > 0 && (
         <>
-          <div className='mt-2'>
+          <div className='my-6'>
             <a className='flex items-center contest-divider'>
               <Image
                 src='/images/curved_lock.svg'
@@ -99,16 +105,18 @@ export default function ContestList({ filteredContestList }) {
                 height={20}
                 className='rounded-full'
               />
-              <a className='ml-2 w-72 text-gray-500'>Closed Contests</a>
+              <div className='ml-2 mr-4 text-gray-500 whitespace-nowrap'>
+                Closed Contests
+              </div>
             </a>
           </div>
           <div className='grid grid-cols-4 gap-4 mt-4'>
-            {closedContests?.map((contest, key) => (
+            {closedContests?.map((contest) => (
               <ContestCardClosed key={contest.id} contest={contest} />
             ))}
           </div>
         </>
       )}
-    </div>
+    </>
   )
 }
