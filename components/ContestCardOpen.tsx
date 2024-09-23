@@ -16,10 +16,10 @@ export default function ContestCardOpen({ contest }: ContestCardProps) {
     <BaseContestCard contest={contest}>
       <img
         src='/images/camera.svg'
-        className='bg-gray-200 rounded-full ml-2 mt-2 brightness-50'
+        className='bg-gray-200 rounded-full ml-2 mt-2 brightness-50 md:ml-0 md:mt-1'
         alt='Camera icon'
       />
-      <div className='grid grid-cols-2 gap-4 mt-16 px-2 w-full'>
+      <div className='grid grid-cols-2 gap-4 mt-16 px-2 w-full md:mt-24'>
         <div className='flex items-center justify-start'>
           <Image
             src='/images/clock.svg'

@@ -39,7 +39,7 @@ export default function ContestList({ contestList }) {
               </div>
             </a>
           </div>
-          <div className='flex flex-col gap-6'>
+          <div className='flex flex-col gap-6 md:w-72'>
             {drawContests?.map((contest) => (
               <ContestCardDraw key={contest.id} contest={contest} />
             ))}
@@ -62,7 +62,7 @@ export default function ContestList({ contestList }) {
               </div>
             </a>
           </div>
-          <div className='flex flex-col gap-6'>
+          <div className='flex flex-col gap-6 md:w-72'>
             {openContests?.map((contest) => (
               <ContestCardOpen key={contest.id} contest={contest} />
             ))}
@@ -86,7 +86,7 @@ export default function ContestList({ contestList }) {
               </div>
             </a>
           </div>
-          <div className='flex flex-col gap-6'>
+          <div className='flex flex-col gap-6 md:w-72'>
             {votingContests?.map((contest) => (
               <ContestCardVoting key={contest.id} contest={contest} />
             ))}
@@ -110,7 +110,7 @@ export default function ContestList({ contestList }) {
               </div>
             </a>
           </div>
-          <div className='flex flex-col gap-6'>
+          <div className='flex flex-col gap-6 md:w-72'>
             {closedContests?.map((contest) => (
               <ContestCardClosed key={contest.id} contest={contest} />
             ))}
