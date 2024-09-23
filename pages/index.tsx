@@ -49,7 +49,7 @@ export default function Home() {
         statusFilter={statusFilter}
         setStatusFilter={setStatusFilter}
       />
-      <main className='flex flex-col'>
+      <main className='flex flex-col md:px-20'>
         {loading && <p>Loading</p>}
         {error && <p>Error while retrieving the contests</p>}
 

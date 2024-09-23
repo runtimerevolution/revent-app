@@ -24,7 +24,7 @@ export default function BaseContestCard({
   return (
     <Link
       href={`/contests/${contest.id}`}
-      className='relative rounded-lg overflow-hidden shadow-m h-56 md:h-80 bg-cover'
+      className='relative rounded-lg overflow-hidden shadow-m h-56 md:h-80 md:min-w-[216px] md:w-[calc((100%-72px)/4)] bg-cover'
       // Tailwind CSS doesn't deal with external dynamic paths
       style={{
         backgroundImage: `url(${awsEnv + pictureCover})`,
