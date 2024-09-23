@@ -23,7 +23,7 @@ export default function ContestFilter({
   return (
     <>
       <div id='Header' className='flex justify-between'>
-        <div id='Title'>
+        <div id='Title' className='md:hidden'>
           <span className='text-[24px] text-[#444444] font-bold'>Photo </span>
           <span className='text-[24px] text-[#F78445] font-bold'>Contests</span>
         </div>

@@ -8,6 +8,9 @@ import Link from 'next/link'
 
 export default function Navbar() {
   const router = useRouter()
+
+  const [showUserMenu, setShowUserMenu] = useState<boolean>(false)
+
   const handleNavigation = (path: string) => {
     setShowUserMenu(false)
     router.push(path)
@@ -101,8 +104,6 @@ export default function Navbar() {
   const contestsBackgroundColor =
     router.pathname === '/' ? 'hover:bg-orange-700' : 'hover:bg-gray-700'
 
-  const [showUserMenu, setShowUserMenu] = useState<boolean>(false)
-
   const handleOpenUserMenu = () => {
     setShowUserMenu((showUserMenu) => !showUserMenu)
   }
@@ -132,7 +133,9 @@ export default function Navbar() {
                   onClick={() => handleNavigation('/')}
                   className={`${contestsTextColor} ${contestsBackgroundColor} hover:text-white px-3 py-2 rounded-md font-medium cursor-pointer`}
                 >
-                  Photo Contests
+                  <span className='text-[16px] text-[#F78445] font-bold'>
+                    Photo Contests
+                  </span>
                 </a>
               </div>
             </div>
@@ -142,6 +145,7 @@ export default function Navbar() {
               <button
                 onClick={handleGoogleLogin}
                 className='text-base1416 text-white bg-[#F78445] font-bold rounded-lg px-[10px] py-[15px] gap-[10px]'
+                type='button'
               >
                 Login
               </button>
@@ -150,6 +154,7 @@ export default function Navbar() {
                 <button
                   className='relative text-white focus:outline-none rounded-full p-2'
                   onClick={handleOpenUserMenu}
+                  type='button'
                 >
                   <Image
                     src='/images/profile.jpeg'
