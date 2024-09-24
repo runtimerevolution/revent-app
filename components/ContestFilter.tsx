@@ -23,23 +23,11 @@ export default function ContestFilter({
   return (
     <>
       <div id='Header' className='flex justify-between'>
-        <div id='Title'>
+        <div id='Title' className='md:hidden'>
           <span className='text-[24px] text-[#444444] font-bold'>Photo </span>
           <span className='text-[24px] text-[#F78445] font-bold'>Contests</span>
         </div>
-        <div id='ActionsMenu'>
-          <div
-            id='SearchButton'
-            className='rounded-full bg-[#F3F3F4] w-11 h-11 flex justify-center '
-          >
-            <Image
-              src='/images/search.svg'
-              alt='Search icon'
-              width={20}
-              height={20}
-            />
-          </div>
-        </div>
+        <div id='ActionsMenu'></div>
       </div>
 
       <div
